@@ -52,3 +52,20 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Jojo is running on port ${PORT}`);
 });
+
+    res.json({
+      reply: completion.choices[0].message.content
+    });
+  } catch (error) {
+    console.error("JOJO ERROR:", error);
+    res.json({
+      reply: "عذرًا، حدث خطأ مؤقت في الاتصال. حاول مرة ثانية."
+    });
+  }
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Jojo is running on port ${PORT}`);
+});
