@@ -1,1 +1,97 @@
-let on=false;async function startVoiceChat(){if(on)return;on=true;document.getElementById('status').innerText='تستمع...';const S=window.SpeechRecognition||window.webkitSpeechRecognition;if(!S){speak('المتصفح لا يدعم المايك');return;}const r=new S();r.lang='ar-SA';r.onresult=async(e)=>{let t=e.results[0][0].transcript;document.getElementById('status').innerText='تفكر...';let x=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:t})});let d=await x.json();speak(d.reply)};r.start()}function speak(m){document.getElementById('status').innerText='تتحدث...';let u=new SpeechSynthesisUtterance(m);u.lang='ar-SA';u.onend=()=>{on=false;document.getElementById('status').innerText='جاهزة'};speechSynthesis.speak(u)}
+let active = false;
+
+const JOJO_INTRO =
+  "أهلًا وسهلًا بك، أنا جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف. كيف أقدر أخدمك اليوم؟";
+
+async function startVoiceChat() {
+  if (active) return;
+  active = true;
+
+  setState("جوجو تستمع الآن...", "listen");
+
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    speak("المتصفح لا يدعم الاستماع الصوتي. الرجاء استخدام متصفح كروم.");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = "ar-SA";
+  recognition.interimResults = false;
+  recognition.continuous = false;
+
+  recognition.onresult = async (event) => {
+    const userText = event.results[0][0].transcript;
+    setState("جوجو تفكر...", "think");
+
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: userText })
+      });
+
+      const data = await response.json();
+      speak(data.reply || "عذرًا، لم أتمكن من تجهيز الرد.");
+    } catch (err) {
+      speak("عذرًا، حدث خلل في الاتصال بالذكاء الاصطناعي.");
+    }
+  };
+
+  recognition.onerror = () => {
+    speak("ما سمعتك بوضوح، حاول مرة ثانية من فضلك.");
+  };
+
+  recognition.start();
+}
+
+function speak(text) {
+  setState("جوجو تتحدث...", "talk");
+
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = "ar-SA";
+  utterance.rate = 0.9;
+  utterance.pitch = 1.05;
+  utterance.volume = 1;
+
+  const voices = window.speechSynthesis.getVoices();
+  const arabicVoice =
+    voices.find(v => v.lang === "ar-SA") ||
+    voices.find(v => v.lang.startsWith("ar")) ||
+    voices.find(v => v.name.toLowerCase().includes("female"));
+
+  if (arabicVoice) utterance.voice = arabicVoice;
+
+  utterance.onend = () => {
+    active = false;
+    setState("جاهزة", "");
+  };
+
+  utterance.onerror = () => {
+    active = false;
+    setState("جاهزة", "");
+  };
+
+  window.speechSynthesis.speak(utterance);
+}
+
+function setState(text, mode) {
+  const status = document.getElementById("status");
+  const jojo = document.getElementById("jojo");
+
+  if (status) status.innerText = text;
+
+  if (jojo) {
+    jojo.className = "";
+    if (mode) jojo.classList.add(mode);
+  }
+}
+
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    speak(JOJO_INTRO);
+  }, 800);
+});
