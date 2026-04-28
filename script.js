@@ -1,77 +1,74 @@
-let listening = false;
+let active = false;
 
-const talkBtn = document.getElementById("talkBtn");
-const statusText = document.getElementById("status");
-const replyText = document.getElementById("reply");
+async function startVoiceChat() {
+  if (active) return;
+  active = true;
 
-talkBtn.addEventListener("click", startVoice);
-
-function speak(text) {
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = "ar-SA";
-  utterance.rate = 1;
-  speechSynthesis.speak(utterance);
-}
-
-async function startVoice() {
-  if (listening) return;
+  const status = document.getElementById("status");
+  if (status) status.innerText = "جوجو تستمع الآن...";
 
   const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    alert("المتصفح لا يدعم المايكروفون");
+    if (status) status.innerText = "المتصفح لا يدعم الميكروفون";
+    active = false;
     return;
   }
 
   const recognition = new SpeechRecognition();
   recognition.lang = "ar-SA";
   recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
-
-  listening = true;
-  statusText.innerText = "جوجو تستمع الآن...";
+  recognition.continuous = false;
 
   recognition.start();
 
   recognition.onresult = async function (event) {
-    const text = event.results[0][0].transcript;
+    const userText = event.results[0][0].transcript;
 
-    statusText.innerText = "سمعت: " + text;
+    if (status) status.innerText = "سمعت: " + userText;
 
     try {
-      const response = await fetch("/api/chat", {
+      const res = await fetch("/api/chat", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({
-          message: text
-        })
+        body: JSON.stringify({ message: userText })
       });
 
-      const data = await response.json();
+      const data = await res.json();
+      const reply = data.reply || "أعتذر، لم أتمكن من تجهيز الرد.";
 
-      replyText.innerText = data.reply;
+      speak(reply);
 
-      speak(data.reply);
-
-      statusText.innerText = "جاهزة";
+      if (status) status.innerText = "جاهزة";
     } catch (error) {
-      replyText.innerText = "اعتذر، حدث خطأ مؤقت";
-      speak("اعتذر، حدث خطأ مؤقت");
-      statusText.innerText = "جاهزة";
+      speak("أعتذر، حدث خطأ مؤقت.");
+      if (status) status.innerText = "جاهزة";
     }
 
-    listening = false;
+    active = false;
   };
 
   recognition.onerror = function () {
-    statusText.innerText = "جاهزة";
-    listening = false;
+    if (status) status.innerText = "تعذر تشغيل الميكروفون";
+    active = false;
   };
 
   recognition.onend = function () {
-    listening = false;
+    active = false;
   };
+}
+
+function speak(text) {
+  window.speechSynthesis.cancel();
+
+  const msg = new SpeechSynthesisUtterance(text);
+  msg.lang = "ar-SA";
+  msg.rate = 0.9;
+  msg.pitch = 1.05;
+  msg.volume = 1;
+
+  window.speechSynthesis.speak(msg);
 }
