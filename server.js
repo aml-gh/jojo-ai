@@ -5,6 +5,7 @@ import OpenAI from "openai";
 dotenv.config();
 
 const app = express();
+
 app.use(express.json());
 app.use(express.static("."));
 
@@ -12,9 +13,13 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY
 });
 
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: "." });
+});
+
 app.post("/api/chat", async (req, res) => {
   try {
-    const message = req.body.message || "";
+    const userMessage = req.body.message || "";
 
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
@@ -22,11 +27,11 @@ app.post("/api/chat", async (req, res) => {
         {
           role: "system",
           content:
-            "أنتِ جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف. تحدثي بأسلوب سعودي رسمي، مختصر، ودود، ومناسب للزوار والحجاج."
+            "أنتِ جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف. تحدثي بلهجة سعودية رسمية، بأسلوب راقٍ، مختصر، واضح، ومناسب للزوار والحجاج. لا تطيلي الرد."
         },
         {
           role: "user",
-          content: message
+          content: userMessage
         }
       ]
     });
@@ -35,14 +40,15 @@ app.post("/api/chat", async (req, res) => {
       reply: completion.choices[0].message.content
     });
   } catch (error) {
-    console.error(error);
+    console.error("JOJO ERROR:", error);
     res.json({
-      reply: "عذرًا، حدث خلل في الاتصال بالذكاء الاصطناعي."
+      reply: "عذرًا، حدث خطأ مؤقت في الاتصال. حاول مرة ثانية."
     });
   }
 });
 
-const port = process.env.PORT || 3000;
-app.listen(port, () => {
-  console.log("Jojo is running on port " + port);
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Jojo is running on port ${PORT}`);
 });
