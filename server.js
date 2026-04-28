@@ -5,7 +5,6 @@ import OpenAI from "openai";
 dotenv.config();
 
 const app = express();
-
 app.use(express.json());
 app.use(express.static("."));
 
@@ -27,7 +26,7 @@ app.post("/api/chat", async (req, res) => {
         {
           role: "system",
           content:
-            "أنتِ جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف. تحدثي بلهجة سعودية رسمية، بأسلوب راقٍ، مختصر، واضح، ومناسب للزوار والحجاج. لا تطيلي الرد."
+            "أنتِ جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف. تتحدثين بلهجة سعودية رسمية، لطيفة، ذكية، ومختصرة."
         },
         {
           role: "user",
@@ -39,10 +38,10 @@ app.post("/api/chat", async (req, res) => {
     res.json({
       reply: completion.choices[0].message.content
     });
+
   } catch (error) {
-    console.error("JOJO ERROR:", error);
     res.json({
-      reply: "عذرًا، حدث خطأ مؤقت في الاتصال. حاول مرة ثانية."
+      reply: "أعتذر، حدث خطأ مؤقت."
     });
   }
 });
@@ -50,22 +49,5 @@ app.post("/api/chat", async (req, res) => {
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
-  console.log(`Jojo is running on port ${PORT}`);
-});
-
-    res.json({
-      reply: completion.choices[0].message.content
-    });
-  } catch (error) {
-    console.error("JOJO ERROR:", error);
-    res.json({
-      reply: "عذرًا، حدث خطأ مؤقت في الاتصال. حاول مرة ثانية."
-    });
-  }
-});
-
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Jojo is running on port ${PORT}`);
+  console.log("Server running on port " + PORT);
 });
