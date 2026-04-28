@@ -1,6 +1,6 @@
 import express from "express";
 import dotenv from "dotenv";
-import OpenAI from "openai";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 dotenv.config();
 
@@ -8,36 +8,38 @@ const app = express();
 app.use(express.json());
 app.use(express.static("."));
 
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+
 app.post("/api/chat", async (req, res) => {
   try {
-    const openai = new OpenAI({
-      apiKey: process.env.OPENAI_API_KEY
+    const userMessage = req.body.message || "السلام عليكم";
+
+    const model = genAI.getGenerativeModel({
+      model: "gemini-1.5-flash"
     });
 
-    const userMessage = req.body.message || "";
-
-    const response = await openai.responses.create({
-      model: "gpt-4o-mini",
-      input: `
+    const prompt = `
 أنت جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف.
-تحدثي بلهجة سعودية رسمية، مختصرة، ذكية.
+تحدثي بلهجة سعودية رسمية، مهذبة، قصيرة، ذكية.
 
 سؤال المستخدم:
 ${userMessage}
-`
-    });
+`;
 
-    res.json({
-      reply: response.output_text
-    });
+    const result = await model.generateContent(prompt);
+    const reply = result.response.text();
+
+    res.json({ reply });
 
   } catch (error) {
     console.log(error);
 
     res.json({
-      reply: "خطأ حقيقي: " + error.message
+      reply: "أعتذر، تعذر الاتصال بخدمة Gemini."
     });
   }
 });
 
-app.listen(process.env.PORT || 3000);
+app.listen(process.env.PORT || 3000, () => {
+  console.log("Gemini server running");
+});
