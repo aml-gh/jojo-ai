@@ -5,12 +5,9 @@ import OpenAI from "openai";
 dotenv.config();
 
 const app = express();
+
 app.use(express.json());
 app.use(express.static("."));
-
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY
-});
 
 app.get("/", (req, res) => {
   res.sendFile("index.html", { root: "." });
@@ -18,30 +15,32 @@ app.get("/", (req, res) => {
 
 app.post("/api/chat", async (req, res) => {
   try {
-    const userMessage = req.body.message || "";
+    const openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY
+    });
 
-    const completion = await openai.chat.completions.create({
+    const userMessage = req.body.message || "السلام عليكم";
+
+    const response = await openai.responses.create({
       model: "gpt-4o-mini",
-      messages: [
-        {
-          role: "system",
-          content:
-            "أنتِ جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف. تتحدثين بلهجة سعودية رسمية، لطيفة، ذكية، ومختصرة."
-        },
-        {
-          role: "user",
-          content: userMessage
-        }
-      ]
+      input: `
+أنت جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف.
+ردي بلهجة سعودية رسمية، قصيرة، مهذبة.
+
+سؤال المستخدم:
+${userMessage}
+`
     });
 
     res.json({
-      reply: completion.choices[0].message.content
+      reply: response.output_text || "أهلاً وسهلاً بك، كيف أقدر أخدمك؟"
     });
 
   } catch (error) {
+    console.log(error);
+
     res.json({
-      reply: "أعتذر، حدث خطأ مؤقت."
+      reply: "أهلاً وسهلاً بك، كيف أقدر أخدمك اليوم؟"
     });
   }
 });
