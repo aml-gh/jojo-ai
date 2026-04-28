@@ -1,74 +1,64 @@
-let active = false;
+import express from "express";
+import dotenv from "dotenv";
+import OpenAI from "openai";
 
-async function startVoiceChat() {
-  if (active) return;
-  active = true;
+dotenv.config();
 
-  const status = document.getElementById("status");
-  if (status) status.innerText = "جوجو تستمع الآن...";
+const app = express();
+app.use(express.json());
+app.use(express.static("."));
 
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+app.get("/", (req, res) => {
+  res.sendFile("index.html", { root: "." });
+});
 
-  if (!SpeechRecognition) {
-    if (status) status.innerText = "المتصفح لا يدعم الميكروفون";
-    active = false;
-    return;
-  }
+app.post("/api/chat", async (req, res) => {
+  try {
+    const apiKey = process.env.OPENAI_API_KEY;
 
-  const recognition = new SpeechRecognition();
-  recognition.lang = "ar-SA";
-  recognition.interimResults = false;
-  recognition.continuous = false;
-
-  recognition.start();
-
-  recognition.onresult = async function (event) {
-    const userText = event.results[0][0].transcript;
-
-    if (status) status.innerText = "سمعت: " + userText;
-
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ message: userText })
+    if (!apiKey || !apiKey.startsWith("sk-")) {
+      return res.json({
+        reply: "مفتاح OpenAI غير موجود أو غير صحيح في Railway Variables."
       });
-
-      const data = await res.json();
-      const reply = data.reply || "أعتذر، لم أتمكن من تجهيز الرد.";
-
-      speak(reply);
-
-      if (status) status.innerText = "جاهزة";
-    } catch (error) {
-      speak("أعتذر، حدث خطأ مؤقت.");
-      if (status) status.innerText = "جاهزة";
     }
 
-    active = false;
-  };
+    const openai = new OpenAI({ apiKey });
 
-  recognition.onerror = function () {
-    if (status) status.innerText = "تعذر تشغيل الميكروفون";
-    active = false;
-  };
+    const userMessage = req.body.message || "السلام عليكم";
 
-  recognition.onend = function () {
-    active = false;
-  };
-}
+    const completion = await openai.chat.completions.create({
+      model: "gpt-4o-mini",
+      messages: [
+        {
+          role: "system",
+          content:
+            "أنتِ جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف. تحدثي بلهجة سعودية رسمية، بأسلوب راقٍ ومختصر وواضح."
+        },
+        {
+          role: "user",
+          content: userMessage
+        }
+      ]
+    });
 
-function speak(text) {
-  window.speechSynthesis.cancel();
+    res.json({
+      reply: completion.choices?.[0]?.message?.content || "لم يصل رد من الذكاء الاصطناعي."
+    });
 
-  const msg = new SpeechSynthesisUtterance(text);
-  msg.lang = "ar-SA";
-  msg.rate = 0.9;
-  msg.pitch = 1.05;
-  msg.volume = 1;
+  } catch (error) {
+    console.error("OPENAI_REAL_ERROR:", error);
 
-  window.speechSynthesis.speak(msg);
-}
+    res.json({
+      reply:
+        "خطأ OpenAI: " +
+        (error?.status ? "status " + error.status + " - " : "") +
+        (error?.message || "سبب غير معروف")
+    });
+  }
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log("Jojo server running on port " + PORT);
+});
