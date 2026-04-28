@@ -10,18 +10,13 @@ async function startVoiceChat() {
   const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
 
-  if (!SpeechRecognition) {
-    status.innerText = "المتصفح لا يدعم الميكروفون";
-    working = false;
-    return;
-  }
-
   const recognition = new SpeechRecognition();
   recognition.lang = "ar-SA";
   recognition.start();
 
   recognition.onresult = async function (event) {
     const text = event.results[0][0].transcript;
+
     status.innerText = "سمعت: " + text;
 
     try {
@@ -30,33 +25,40 @@ async function startVoiceChat() {
         headers: {
           "Content-Type": "application/json"
         },
-        body: JSON.stringify({ message: text })
+        body: JSON.stringify({
+          message: text
+        })
       });
 
       const data = await res.json();
-      speak(data.reply || "لم يصل رد من جوجو");
+
+      console.log(data);
+
+      if (data.reply) {
+        speak(data.reply);
+      } else {
+        speak("لم يصل رد");
+      }
 
       status.innerText = "جاهزة";
-    } catch (e) {
-      speak("حدث خطأ مؤقت");
+
+    } catch (error) {
+      console.log(error);
+      speak("حدث خطأ");
       status.innerText = "جاهزة";
     }
 
     working = false;
   };
-
-  recognition.onerror = function () {
-    status.innerText = "تعذر تشغيل الميكروفون";
-    working = false;
-  };
 }
 
 function speak(text) {
-  speechSynthesis.cancel();
+  window.speechSynthesis.cancel();
 
   const msg = new SpeechSynthesisUtterance(text);
   msg.lang = "ar-SA";
   msg.rate = 0.95;
+  msg.pitch = 1;
 
-  speechSynthesis.speak(msg);
+  window.speechSynthesis.speak(msg);
 }
