@@ -1,11 +1,16 @@
 /* =====================================================
-   جوجو AI - Frontend Script (مع ElevenLabs)
-   - الميكروفون يحول الكلام لنص
-   - الرد يأتي صوت طبيعي من ElevenLabs
+   جوجو AI - Frontend Script
+   مع ElevenLabs Conversational AI
+   تجربة محادثة فورية مثل ChatGPT Voice
    ===================================================== */
 
 (function () {
   'use strict';
+
+  // =====================================================
+  // إعدادات الـ Agent
+  // =====================================================
+  const AGENT_ID = 'agent_5301kqcwsvhxfa7aqn1sjewpd30z';
 
   // =====================================================
   // العناصر
@@ -23,101 +28,33 @@
   // الحالة
   // =====================================================
   const state = {
-    isListening: false,
-    isThinking: false,
-    isSpeaking: false,
-    history: [],
-    recognition: null,
-    currentAudio: null,
-    currentLang: 'ar-SA'
+    conversation: null,
+    isConnected: false,
+    isConnecting: false,
+    mode: 'idle' // idle | listening | speaking
   };
 
   // =====================================================
-  // اللغات
+  // التحقق من تحميل SDK
   // =====================================================
-  const LANG_CODES = {
-    ar: 'ar-SA', en: 'en-US', fr: 'fr-FR', es: 'es-ES',
-    de: 'de-DE', it: 'it-IT', tr: 'tr-TR', ru: 'ru-RU',
-    zh: 'zh-CN', ja: 'ja-JP', ko: 'ko-KR'
-  };
-
-  const UI_TEXTS = {
-    ar: {
-      ready: 'جاهزة',
-      listening: 'أستمع إليك...',
-      thinking: 'أفكر في الرد...',
-      speaking: 'أتحدث...',
-      buttonIdle: 'تحدث مع جوجو',
-      buttonRecording: 'جاري الاستماع... اضغط للإيقاف',
-      you: 'أنت',
-      jojo: 'جوجو',
-      welcome: 'أهلاً وسهلاً بك، يسعدني خدمتك. كيف أقدر أساعدك اليوم؟',
-      noSpeech: 'لم أسمع أي صوت، يُرجى المحاولة مجددًا',
-      micPermission: 'يُرجى السماح بالوصول إلى الميكروفون',
-      networkError: 'خطأ في الاتصال',
-      sendError: 'عذرًا، حدث خطأ. يُرجى المحاولة مجددًا.',
-      browserNotSupported: 'يُرجى استخدام Chrome أو Edge.'
-    },
-    en: {
-      ready: 'Ready',
-      listening: 'Listening...',
-      thinking: 'Thinking...',
-      speaking: 'Speaking...',
-      buttonIdle: 'Talk to Jojo',
-      buttonRecording: 'Listening... tap to stop',
-      you: 'You',
-      jojo: 'Jojo',
-      welcome: 'Welcome, it is my pleasure to assist you. How may I help you today?',
-      noSpeech: 'I did not hear anything, please try again',
-      micPermission: 'Please allow microphone access',
-      networkError: 'Network error',
-      sendError: 'Sorry, an error occurred. Please try again.',
-      browserNotSupported: 'Please use Chrome or Edge.'
+  function waitForSDK(callback, retries = 30) {
+    if (window.ElevenLabs && window.ElevenLabs.Conversation) {
+      callback();
+      return;
     }
-  };
-
-  // =====================================================
-  // كشف لغة النص
-  // =====================================================
-  function detectTextLanguage(text) {
-    if (!text) return 'ar';
-    if (/[\u0600-\u06FF]/.test(text)) return 'ar';
-    if (/[\u4E00-\u9FFF]/.test(text)) return 'zh';
-    if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) return 'ja';
-    if (/[\u0400-\u04FF]/.test(text)) return 'ru';
-
-    const lower = text.toLowerCase();
-    if (/\b(bonjour|merci|oui|comment)\b/.test(lower) ||
-        /[àâçéèêëîïôûùüÿœæ]/.test(lower)) return 'fr';
-    if (/\b(hola|gracias|cómo|qué)\b/.test(lower) ||
-        /[ñ¿¡]/.test(lower)) return 'es';
-    if (/\b(hallo|danke|guten)\b/.test(lower) ||
-        /[äöüß]/.test(lower)) return 'de';
-    if (/\b(merhaba|teşekkür)\b/.test(lower) ||
-        /[çğıöşü]/.test(lower)) return 'tr';
-
-    return 'en';
-  }
-
-  function getUIText(key) {
-    const lang = state.currentLang.startsWith('ar') ? 'ar' : 'en';
-    return UI_TEXTS[lang][key] || UI_TEXTS.en[key] || key;
-  }
-
-  // =====================================================
-  // التحقق من دعم المتصفح
-  // =====================================================
-  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-
-  if (!SpeechRecognition) {
-    showError(getUIText('browserNotSupported'));
-    talkButton.disabled = true;
+    if (retries <= 0) {
+      console.error('❌ فشل تحميل ElevenLabs SDK');
+      showError('عذرًا، فشل تحميل خدمة المحادثة. يُرجى تحديث الصفحة.');
+      return;
+    }
+    setTimeout(() => waitForSDK(callback, retries - 1), 200);
   }
 
   // =====================================================
   // تحديث الحالة المرئية
   // =====================================================
   function setStatus(mode, text) {
+    state.mode = mode;
     statusIndicator.className = 'status-indicator ' + mode;
     statusText.textContent = text;
     avatar.className = 'avatar';
@@ -128,16 +65,20 @@
     } else if (mode === 'speaking') {
       avatar.classList.add('speaking');
       voiceWaves.classList.add('active');
+    } else if (mode === 'thinking') {
+      avatar.classList.add('listening');
     }
   }
 
-  function setButtonRecording(recording) {
-    if (recording) {
+  function setButtonState(connected) {
+    if (connected) {
       talkButton.classList.add('recording');
-      buttonText.textContent = getUIText('buttonRecording');
+      buttonText.textContent = 'المحادثة جارية...';
+      stopButton.classList.add('visible');
     } else {
       talkButton.classList.remove('recording');
-      buttonText.textContent = getUIText('buttonIdle');
+      buttonText.textContent = 'تحدث مع جوجو';
+      stopButton.classList.remove('visible');
     }
   }
 
@@ -149,19 +90,27 @@
     if (welcome) welcome.remove();
   }
 
+  function detectTextLanguage(text) {
+    if (!text) return 'ar';
+    if (/[\u0600-\u06FF]/.test(text)) return 'ar';
+    return 'en';
+  }
+
   function addMessage(text, sender) {
+    if (!text) return;
     clearWelcomeMessage();
+
     const msg = document.createElement('div');
     msg.className = 'message ' + sender;
 
-    const textLang = detectTextLanguage(text);
-    const isRTL = textLang === 'ar';
+    const lang = detectTextLanguage(text);
+    const isRTL = lang === 'ar';
     msg.dir = isRTL ? 'rtl' : 'ltr';
     msg.style.textAlign = isRTL ? 'right' : 'left';
 
     const label = document.createElement('span');
     label.className = 'message-label';
-    label.textContent = sender === 'user' ? getUIText('you') : getUIText('jojo');
+    label.textContent = sender === 'user' ? 'أنت' : 'جوجو';
 
     const content = document.createElement('p');
     content.textContent = text;
@@ -177,265 +126,152 @@
   }
 
   // =====================================================
-  // التعرف على الكلام
+  // طلب إذن الميكروفون
   // =====================================================
-  function initRecognition(lang) {
-    if (!SpeechRecognition) return null;
-
-    const recognition = new SpeechRecognition();
-    recognition.lang = lang || state.currentLang;
-    recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.maxAlternatives = 1;
-
-    recognition.onstart = function () {
-      state.isListening = true;
-      setButtonRecording(true);
-      setStatus('listening', getUIText('listening'));
-    };
-
-    recognition.onresult = function (event) {
-      const transcript = event.results[0][0].transcript.trim();
-      console.log('📝 تم التعرف:', transcript);
-
-      if (transcript) {
-        const detectedLang = detectTextLanguage(transcript);
-        state.currentLang = LANG_CODES[detectedLang] || 'ar-SA';
-        addMessage(transcript, 'user');
-        sendToServer(transcript);
-      } else {
-        setStatus('', getUIText('ready'));
-      }
-    };
-
-    recognition.onerror = function (event) {
-      console.error('❌ خطأ التعرف:', event.error);
-      state.isListening = false;
-      setButtonRecording(false);
-
-      if (event.error === 'aborted') {
-        setStatus('', getUIText('ready'));
-        return;
-      }
-
-      let msg = getUIText('noSpeech');
-      if (event.error === 'not-allowed' || event.error === 'permission-denied') {
-        msg = getUIText('micPermission');
-      } else if (event.error === 'network') {
-        msg = getUIText('networkError');
-      }
-
-      setStatus('', getUIText('ready'));
-      showError(msg);
-    };
-
-    recognition.onend = function () {
-      state.isListening = false;
-      setButtonRecording(false);
-      if (!state.isThinking && !state.isSpeaking) {
-        setStatus('', getUIText('ready'));
-      }
-    };
-
-    return recognition;
+  async function requestMicrophone() {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      // إغلاق المسار مباشرة - SDK راح يفتحه بنفسه
+      stream.getTracks().forEach(track => track.stop());
+      return true;
+    } catch (err) {
+      console.error('❌ فشل الوصول للميكروفون:', err);
+      showError('يُرجى السماح بالوصول إلى الميكروفون للتحدث مع جوجو');
+      return false;
+    }
   }
 
   // =====================================================
-  // إرسال للسيرفر
+  // بدء المحادثة
   // =====================================================
-  async function sendToServer(message) {
-    state.isThinking = true;
-    setStatus('thinking', getUIText('thinking'));
+  async function startConversation() {
+    if (state.isConnecting || state.isConnected) return;
+
+    state.isConnecting = true;
+    setStatus('thinking', 'جاري الاتصال...');
+    buttonText.textContent = 'جاري الاتصال...';
+
+    // طلب الميكروفون أولاً
+    const hasMic = await requestMicrophone();
+    if (!hasMic) {
+      state.isConnecting = false;
+      setStatus('', 'جاهزة');
+      buttonText.textContent = 'تحدث مع جوجو';
+      return;
+    }
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: message, history: state.history })
+      const Conversation = window.ElevenLabs.Conversation;
+
+      state.conversation = await Conversation.startSession({
+        agentId: AGENT_ID,
+
+        onConnect: function () {
+          console.log('✅ تم الاتصال بجوجو');
+          state.isConnected = true;
+          state.isConnecting = false;
+          setButtonState(true);
+          setStatus('listening', 'متصلة - تحدث الآن');
+        },
+
+        onDisconnect: function () {
+          console.log('🔌 تم قطع الاتصال');
+          state.isConnected = false;
+          state.isConnecting = false;
+          setButtonState(false);
+          setStatus('', 'جاهزة');
+        },
+
+        onMessage: function (message) {
+          console.log('💬 رسالة:', message);
+          if (message && message.message) {
+            const sender = message.source === 'user' ? 'user' : 'jojo';
+            addMessage(message.message, sender);
+          }
+        },
+
+        onError: function (error) {
+          console.error('❌ خطأ:', error);
+          state.isConnected = false;
+          state.isConnecting = false;
+          setButtonState(false);
+          setStatus('', 'جاهزة');
+          showError('حدث خطأ في الاتصال. يُرجى المحاولة مجددًا.');
+        },
+
+        onModeChange: function (mode) {
+          console.log('🔄 الوضع:', mode);
+          // mode يكون: 'speaking' أو 'listening'
+          if (mode && mode.mode === 'speaking') {
+            setStatus('speaking', 'تتحدث جوجو...');
+          } else if (mode && mode.mode === 'listening') {
+            setStatus('listening', 'أستمع إليك...');
+          }
+        },
+
+        onStatusChange: function (status) {
+          console.log('📡 الحالة:', status);
+        }
       });
 
-      const data = await response.json();
-      const reply = data.reply || 'عذرًا، لم أتمكن من الرد.';
-      const replyLang = data.replyLang || detectTextLanguage(reply);
-      state.currentLang = LANG_CODES[replyLang] || state.currentLang;
-
-      state.history.push({ role: 'user', content: message });
-      state.history.push({ role: 'assistant', content: reply });
-      if (state.history.length > 12) {
-        state.history = state.history.slice(-12);
-      }
-
-      addMessage(reply, 'jojo');
-      state.isThinking = false;
-
-      // قراءة الرد بصوت ElevenLabs
-      await speakWithElevenLabs(reply);
-
     } catch (err) {
-      console.error('❌ خطأ الإرسال:', err);
-      state.isThinking = false;
-      setStatus('', getUIText('ready'));
-      showError(getUIText('sendError'));
+      console.error('❌ فشل بدء المحادثة:', err);
+      state.isConnected = false;
+      state.isConnecting = false;
+      setButtonState(false);
+      setStatus('', 'جاهزة');
+      showError('عذرًا، تعذر بدء المحادثة. يُرجى المحاولة مرة أخرى.');
     }
   }
 
   // =====================================================
-  // 🔊 قراءة الرد بصوت ElevenLabs
+  // إنهاء المحادثة
   // =====================================================
-  async function speakWithElevenLabs(text) {
-    if (!text) {
-      setStatus('', getUIText('ready'));
-      return;
-    }
-
-    // إيقاف أي صوت سابق
-    stopSpeaking();
-
-    state.isSpeaking = true;
-    setStatus('speaking', getUIText('speaking'));
-    stopButton.classList.add('visible');
-
-    try {
-      console.log('🔊 طلب الصوت من ElevenLabs...');
-
-      const response = await fetch('/api/tts', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ text: text })
-      });
-
-      if (!response.ok) {
-        throw new Error('فشل الحصول على الصوت');
-      }
-
-      // تحويل الرد لـ Blob ثم URL
-      const audioBlob = await response.blob();
-      const audioUrl = URL.createObjectURL(audioBlob);
-
-      const audio = new Audio(audioUrl);
-      state.currentAudio = audio;
-
-      audio.onended = function () {
-        state.isSpeaking = false;
-        setStatus('', getUIText('ready'));
-        stopButton.classList.remove('visible');
-        URL.revokeObjectURL(audioUrl);
-        state.currentAudio = null;
-      };
-
-      audio.onerror = function (e) {
-        console.error('⚠️ خطأ تشغيل الصوت:', e);
-        state.isSpeaking = false;
-        setStatus('', getUIText('ready'));
-        stopButton.classList.remove('visible');
-        URL.revokeObjectURL(audioUrl);
-      };
-
-      await audio.play();
-      console.log('✅ يتم تشغيل الصوت');
-
-    } catch (err) {
-      console.error('❌ خطأ ElevenLabs:', err);
-      state.isSpeaking = false;
-      setStatus('', getUIText('ready'));
-      stopButton.classList.remove('visible');
-
-      // كحل احتياطي، نستخدم صوت المتصفح
-      fallbackToSpeechSynthesis(text);
-    }
-  }
-
-  // =====================================================
-  // صوت احتياطي (إذا فشل ElevenLabs)
-  // =====================================================
-  function fallbackToSpeechSynthesis(text) {
-    if (!('speechSynthesis' in window)) return;
-
-    console.log('🔄 استخدام صوت المتصفح كاحتياطي');
-    window.speechSynthesis.cancel();
-
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = state.currentLang;
-    utterance.rate = 0.95;
-    utterance.pitch = 1.05;
-
-    utterance.onstart = function () {
-      state.isSpeaking = true;
-      setStatus('speaking', getUIText('speaking'));
-      stopButton.classList.add('visible');
-    };
-
-    utterance.onend = function () {
-      state.isSpeaking = false;
-      setStatus('', getUIText('ready'));
-      stopButton.classList.remove('visible');
-    };
-
-    setTimeout(() => window.speechSynthesis.speak(utterance), 100);
-  }
-
-  // =====================================================
-  // إيقاف الصوت
-  // =====================================================
-  function stopSpeaking() {
-    if (state.currentAudio) {
-      state.currentAudio.pause();
-      state.currentAudio.currentTime = 0;
-      state.currentAudio = null;
-    }
-    if (window.speechSynthesis) {
-      window.speechSynthesis.cancel();
-    }
-    state.isSpeaking = false;
-    setStatus('', getUIText('ready'));
-    stopButton.classList.remove('visible');
-  }
-
-  // =====================================================
-  // الأحداث
-  // =====================================================
-  function startVoiceChat() {
-    if (state.isSpeaking) {
-      stopSpeaking();
-      return;
-    }
-
-    if (state.isListening) {
-      if (state.recognition) state.recognition.stop();
-      return;
-    }
-
-    if (state.isThinking) return;
-
-    state.recognition = initRecognition(state.currentLang);
-
-    if (state.recognition) {
+  async function endConversation() {
+    if (state.conversation) {
       try {
-        state.recognition.start();
+        await state.conversation.endSession();
       } catch (err) {
-        console.error('❌ فشل بدء التعرف:', err);
-        showError(getUIText('noSpeech'));
+        console.error('خطأ عند الإنهاء:', err);
       }
+      state.conversation = null;
+    }
+    state.isConnected = false;
+    state.isConnecting = false;
+    setButtonState(false);
+    setStatus('', 'جاهزة');
+  }
+
+  // =====================================================
+  // معالج زر التحدث
+  // =====================================================
+  function handleTalkButton() {
+    if (state.isConnected) {
+      endConversation();
+    } else {
+      startConversation();
     }
   }
 
+  // =====================================================
   // ربط الأحداث
-  talkButton.addEventListener('click', startVoiceChat);
-  stopButton.addEventListener('click', stopSpeaking);
+  // =====================================================
+  waitForSDK(function () {
+    console.log('✅ ElevenLabs SDK جاهز');
+    talkButton.addEventListener('click', handleTalkButton);
+    stopButton.addEventListener('click', endConversation);
+  });
 
-  // ترحيب عند أول ضغطة
-  let firstClick = true;
-  talkButton.addEventListener('click', function () {
-    if (firstClick) {
-      firstClick = false;
-      if (state.recognition && state.isListening) {
-        state.recognition.abort();
+  // إنهاء المحادثة عند إغلاق الصفحة
+  window.addEventListener('beforeunload', function () {
+    if (state.conversation) {
+      try {
+        state.conversation.endSession();
+      } catch (e) {
+        // تجاهل
       }
-      const greeting = UI_TEXTS.ar.welcome;
-      addMessage(greeting, 'jojo');
-      speakWithElevenLabs(greeting);
     }
-  }, { once: true });
+  });
 
-  console.log('✅ جوجو AI جاهزة (مع ElevenLabs)');
+  console.log('✅ جوجو AI جاهزة (Conversational AI)');
 })();
