@@ -1,9 +1,8 @@
 /* =====================================================
-   جوجو AI - Frontend Script
-   - تشغيل الميكروفون
-   - تحويل الكلام إلى نص (Web Speech API)
-   - إرسال للسيرفر واستقبال الرد
-   - قراءة الرد صوتيًا بالعربية
+   جوجو AI - Frontend Script (متعدد اللغات)
+   - يكتشف لغة المستخدم تلقائيًا
+   - الميكروفون يدعم لغات متعددة
+   - الصوت يقرأ بنفس لغة الرد
    ===================================================== */
 
 (function () {
@@ -30,8 +29,102 @@
     isSpeaking: false,
     history: [],
     recognition: null,
-    currentUtterance: null
+    currentUtterance: null,
+    currentLang: 'ar-SA' // اللغة الحالية للتعرف
   };
+
+  // =====================================================
+  // اللغات المدعومة وأكوادها
+  // =====================================================
+  const LANG_CODES = {
+    ar: 'ar-SA',
+    en: 'en-US',
+    fr: 'fr-FR',
+    es: 'es-ES',
+    de: 'de-DE',
+    it: 'it-IT',
+    tr: 'tr-TR',
+    ru: 'ru-RU',
+    zh: 'zh-CN',
+    ja: 'ja-JP',
+    ko: 'ko-KR',
+    he: 'he-IL',
+    th: 'th-TH'
+  };
+
+  // نصوص الواجهة بكل لغة
+  const UI_TEXTS = {
+    ar: {
+      ready: 'جاهزة',
+      listening: 'أستمع إليك...',
+      thinking: 'أفكر في الرد...',
+      speaking: 'أتحدث...',
+      buttonIdle: 'تحدث مع جوجو',
+      buttonRecording: 'جاري الاستماع... اضغط للإيقاف',
+      you: 'أنت',
+      jojo: 'جوجو',
+      welcome: 'أهلاً وسهلاً بك، يسعدني خدمتك. كيف أقدر أساعدك اليوم؟',
+      noSpeech: 'لم أسمع أي صوت، يُرجى المحاولة مجددًا',
+      micPermission: 'يُرجى السماح بالوصول إلى الميكروفون',
+      networkError: 'خطأ في الاتصال بخدمة التعرف على الصوت',
+      sendError: 'عذرًا، حدث خطأ في الاتصال. يُرجى المحاولة مجددًا.',
+      browserNotSupported: 'عذرًا، المتصفح لا يدعم التعرف على الصوت. يُرجى استخدام Chrome أو Edge.'
+    },
+    en: {
+      ready: 'Ready',
+      listening: 'Listening...',
+      thinking: 'Thinking...',
+      speaking: 'Speaking...',
+      buttonIdle: 'Talk to Jojo',
+      buttonRecording: 'Listening... tap to stop',
+      you: 'You',
+      jojo: 'Jojo',
+      welcome: 'Welcome, it is my pleasure to assist you. How may I help you today?',
+      noSpeech: 'I did not hear anything, please try again',
+      micPermission: 'Please allow microphone access',
+      networkError: 'Network error with speech recognition',
+      sendError: 'Sorry, a connection error occurred. Please try again.',
+      browserNotSupported: 'Sorry, your browser does not support speech recognition. Please use Chrome or Edge.'
+    }
+  };
+
+  // =====================================================
+  // كشف لغة النص (نسخة مبسّطة من السيرفر)
+  // =====================================================
+  function detectTextLanguage(text) {
+    if (!text) return 'ar';
+
+    if (/[\u0600-\u06FF]/.test(text)) return 'ar';
+    if (/[\u4E00-\u9FFF]/.test(text)) return 'zh';
+    if (/[\u3040-\u309F\u30A0-\u30FF]/.test(text)) return 'ja';
+    if (/[\uAC00-\uD7AF]/.test(text)) return 'ko';
+    if (/[\u0400-\u04FF]/.test(text)) return 'ru';
+    if (/[\u0590-\u05FF]/.test(text)) return 'he';
+    if (/[\u0E00-\u0E7F]/.test(text)) return 'th';
+
+    const lower = text.toLowerCase();
+
+    if (/\b(bonjour|merci|oui|comment|allez|vous|je|suis)\b/.test(lower) ||
+        /[àâçéèêëîïôûùüÿœæ]/.test(lower)) return 'fr';
+
+    if (/\b(hola|gracias|cómo|qué|sí|buenos|buenas|adiós)\b/.test(lower) ||
+        /[ñ¿¡]/.test(lower)) return 'es';
+
+    if (/\b(hallo|danke|guten|tag|wie|was|ich|bin)\b/.test(lower) ||
+        /[äöüß]/.test(lower)) return 'de';
+
+    if (/\b(ciao|grazie|come|cosa|sì|buongiorno|prego)\b/.test(lower)) return 'it';
+
+    if (/\b(merhaba|teşekkür|nasıl|evet|hayır|günaydın)\b/.test(lower) ||
+        /[çğıöşü]/.test(lower)) return 'tr';
+
+    return 'en';
+  }
+
+  function getUIText(key) {
+    const lang = state.currentLang.startsWith('ar') ? 'ar' : 'en';
+    return UI_TEXTS[lang][key] || UI_TEXTS.en[key] || key;
+  }
 
   // =====================================================
   // التحقق من دعم المتصفح
@@ -40,12 +133,8 @@
   const speechSynthesisSupported = 'speechSynthesis' in window;
 
   if (!SpeechRecognition) {
-    showError('عذرًا، المتصفح لا يدعم التعرف على الصوت. يُرجى استخدام Chrome أو Edge.');
+    showError(getUIText('browserNotSupported'));
     talkButton.disabled = true;
-  }
-
-  if (!speechSynthesisSupported) {
-    console.warn('⚠️ تشغيل الصوت غير مدعوم في هذا المتصفح');
   }
 
   // =====================================================
@@ -68,15 +157,15 @@
   function setButtonRecording(recording) {
     if (recording) {
       talkButton.classList.add('recording');
-      buttonText.textContent = 'جاري الاستماع... اضغط للإيقاف';
+      buttonText.textContent = getUIText('buttonRecording');
     } else {
       talkButton.classList.remove('recording');
-      buttonText.textContent = 'تحدث مع جوجو';
+      buttonText.textContent = getUIText('buttonIdle');
     }
   }
 
   // =====================================================
-  // عرض الرسائل في صندوق المحادثة
+  // عرض الرسائل
   // =====================================================
   function clearWelcomeMessage() {
     const welcome = chatDisplay.querySelector('.welcome-message');
@@ -88,9 +177,15 @@
     const msg = document.createElement('div');
     msg.className = 'message ' + sender;
 
+    // اتجاه الرسالة حسب اللغة
+    const textLang = detectTextLanguage(text);
+    const isRTL = ['ar', 'he'].includes(textLang);
+    msg.dir = isRTL ? 'rtl' : 'ltr';
+    msg.style.textAlign = isRTL ? 'right' : 'left';
+
     const label = document.createElement('span');
     label.className = 'message-label';
-    label.textContent = sender === 'user' ? 'أنت' : 'جوجو';
+    label.textContent = sender === 'user' ? getUIText('you') : getUIText('jojo');
 
     const content = document.createElement('p');
     content.textContent = text;
@@ -108,11 +203,11 @@
   // =====================================================
   // التعرف على الكلام
   // =====================================================
-  function initRecognition() {
+  function initRecognition(lang) {
     if (!SpeechRecognition) return null;
 
     const recognition = new SpeechRecognition();
-    recognition.lang = 'ar-SA';
+    recognition.lang = lang || state.currentLang;
     recognition.continuous = false;
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
@@ -120,7 +215,7 @@
     recognition.onstart = function () {
       state.isListening = true;
       setButtonRecording(true);
-      setStatus('listening', 'أستمع إليك...');
+      setStatus('listening', getUIText('listening'));
     };
 
     recognition.onresult = function (event) {
@@ -128,32 +223,38 @@
       console.log('📝 تم التعرف:', transcript);
 
       if (transcript) {
+        // كشف لغة النص واستخدامها للتحديثات التالية
+        const detectedLang = detectTextLanguage(transcript);
+        const newLangCode = LANG_CODES[detectedLang] || 'ar-SA';
+        state.currentLang = newLangCode;
+
         addMessage(transcript, 'user');
         sendToServer(transcript);
       } else {
-        setStatus('', 'جاهزة');
+        setStatus('', getUIText('ready'));
       }
     };
 
     recognition.onerror = function (event) {
-      console.error('❌ خطأ في التعرف على الصوت:', event.error);
+      console.error('❌ خطأ في التعرف:', event.error);
       state.isListening = false;
       setButtonRecording(false);
 
-      let msg = 'حدث خطأ في الميكروفون';
-      if (event.error === 'no-speech') {
-        msg = 'لم أسمع أي صوت، يُرجى المحاولة مجددًا';
-      } else if (event.error === 'not-allowed' || event.error === 'permission-denied') {
-        msg = 'يُرجى السماح بالوصول إلى الميكروفون';
-      } else if (event.error === 'network') {
-        msg = 'خطأ في الاتصال بخدمة التعرف على الصوت';
-      } else if (event.error === 'aborted') {
-        // المستخدم أوقفها بنفسه - لا نعرض خطأ
-        setStatus('', 'جاهزة');
+      if (event.error === 'aborted') {
+        setStatus('', getUIText('ready'));
         return;
       }
 
-      setStatus('', 'جاهزة');
+      let msg = getUIText('noSpeech');
+      if (event.error === 'no-speech') {
+        msg = getUIText('noSpeech');
+      } else if (event.error === 'not-allowed' || event.error === 'permission-denied') {
+        msg = getUIText('micPermission');
+      } else if (event.error === 'network') {
+        msg = getUIText('networkError');
+      }
+
+      setStatus('', getUIText('ready'));
       showError(msg);
     };
 
@@ -161,7 +262,7 @@
       state.isListening = false;
       setButtonRecording(false);
       if (!state.isThinking && !state.isSpeaking) {
-        setStatus('', 'جاهزة');
+        setStatus('', getUIText('ready'));
       }
     };
 
@@ -173,7 +274,7 @@
   // =====================================================
   async function sendToServer(message) {
     state.isThinking = true;
-    setStatus('thinking', 'أفكر في الرد...');
+    setStatus('thinking', getUIText('thinking'));
 
     try {
       const response = await fetch('/api/chat', {
@@ -187,6 +288,11 @@
 
       const data = await response.json();
       const reply = data.reply || 'عذرًا، لم أتمكن من الرد.';
+      const replyLang = data.replyLang || detectTextLanguage(reply);
+
+      // تحديث اللغة الحالية بناءً على لغة الرد
+      const newLangCode = LANG_CODES[replyLang] || state.currentLang;
+      state.currentLang = newLangCode;
 
       // حفظ في السجل
       state.history.push({ role: 'user', content: message });
@@ -197,58 +303,65 @@
 
       addMessage(reply, 'jojo');
       state.isThinking = false;
-      speak(reply);
+      speak(reply, newLangCode);
 
     } catch (err) {
       console.error('❌ خطأ في الإرسال:', err);
       state.isThinking = false;
-      setStatus('', 'جاهزة');
-      showError('عذرًا، حدث خطأ في الاتصال. يُرجى المحاولة مجددًا.');
+      setStatus('', getUIText('ready'));
+      showError(getUIText('sendError'));
     }
   }
 
   // =====================================================
-  // قراءة الرد صوتيًا
+  // قراءة الرد صوتيًا بالغة المناسبة
   // =====================================================
-  function getArabicVoice() {
+  function getBestVoiceForLang(langCode) {
     const voices = window.speechSynthesis.getVoices();
-    // البحث عن أفضل صوت عربي
-    const preferred = voices.find(v => v.lang === 'ar-SA') ||
-                      voices.find(v => v.lang === 'ar-XA') ||
-                      voices.find(v => v.lang === 'ar-EG') ||
-                      voices.find(v => v.lang && v.lang.startsWith('ar'));
-    return preferred || null;
+    if (!voices.length) return null;
+
+    const langPrefix = langCode.split('-')[0];
+
+    // البحث عن صوت يطابق اللغة الكاملة
+    let voice = voices.find(v => v.lang === langCode);
+    if (voice) return voice;
+
+    // البحث عن صوت يبدأ بنفس اللغة
+    voice = voices.find(v => v.lang && v.lang.startsWith(langPrefix));
+    if (voice) return voice;
+
+    return null;
   }
 
-  function speak(text) {
+  function speak(text, langCode) {
     if (!speechSynthesisSupported || !text) {
-      setStatus('', 'جاهزة');
+      setStatus('', getUIText('ready'));
       return;
     }
 
-    // إلغاء أي قراءة سابقة
     window.speechSynthesis.cancel();
 
     const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'ar-SA';
+    utterance.lang = langCode || state.currentLang;
     utterance.rate = 0.95;
     utterance.pitch = 1.05;
     utterance.volume = 1.0;
 
-    const arabicVoice = getArabicVoice();
-    if (arabicVoice) {
-      utterance.voice = arabicVoice;
+    const voice = getBestVoiceForLang(utterance.lang);
+    if (voice) {
+      utterance.voice = voice;
+      console.log(`🔊 صوت: ${voice.name} (${voice.lang})`);
     }
 
     utterance.onstart = function () {
       state.isSpeaking = true;
-      setStatus('speaking', 'أتحدث...');
+      setStatus('speaking', getUIText('speaking'));
       stopButton.classList.add('visible');
     };
 
     utterance.onend = function () {
       state.isSpeaking = false;
-      setStatus('', 'جاهزة');
+      setStatus('', getUIText('ready'));
       stopButton.classList.remove('visible');
       state.currentUtterance = null;
     };
@@ -256,13 +369,12 @@
     utterance.onerror = function (e) {
       console.warn('⚠️ خطأ في النطق:', e.error);
       state.isSpeaking = false;
-      setStatus('', 'جاهزة');
+      setStatus('', getUIText('ready'));
       stopButton.classList.remove('visible');
     };
 
     state.currentUtterance = utterance;
 
-    // بعض المتصفحات تحتاج تأخير بسيط
     setTimeout(() => {
       window.speechSynthesis.speak(utterance);
     }, 100);
@@ -272,34 +384,27 @@
   // الأحداث
   // =====================================================
   function startVoiceChat() {
-    // إذا كانت تتحدث، أوقفها أولاً
     if (state.isSpeaking) {
       stopSpeaking();
       return;
     }
 
-    // إذا كانت تستمع، أوقفها
     if (state.isListening) {
-      if (state.recognition) {
-        state.recognition.stop();
-      }
+      if (state.recognition) state.recognition.stop();
       return;
     }
 
-    // إذا كانت تفكر، انتظر
     if (state.isThinking) return;
 
-    // ابدأ الاستماع
-    if (!state.recognition) {
-      state.recognition = initRecognition();
-    }
+    // إنشاء recognition جديد بكل ضغطة عشان نضمن استخدام اللغة الحالية
+    state.recognition = initRecognition(state.currentLang);
 
     if (state.recognition) {
       try {
         state.recognition.start();
       } catch (err) {
         console.error('❌ فشل بدء التعرف:', err);
-        showError('يُرجى المحاولة مرة أخرى');
+        showError(getUIText('noSpeech'));
       }
     }
   }
@@ -309,7 +414,7 @@
       window.speechSynthesis.cancel();
     }
     state.isSpeaking = false;
-    setStatus('', 'جاهزة');
+    setStatus('', getUIText('ready'));
     stopButton.classList.remove('visible');
   }
 
@@ -317,38 +422,27 @@
   talkButton.addEventListener('click', startVoiceChat);
   stopButton.addEventListener('click', stopSpeaking);
 
-  // تحميل الأصوات (بعض المتصفحات تحتاج لذلك)
+  // تحميل الأصوات
   if (speechSynthesisSupported) {
     window.speechSynthesis.onvoiceschanged = function () {
-      // تحميل الأصوات
       window.speechSynthesis.getVoices();
     };
-    // محاولة تحميل مبكرة
     window.speechSynthesis.getVoices();
   }
 
-  // ترحيب صوتي عند أول تفاعل (اختياري - يحتاج تفاعل المستخدم)
-  let welcomedOnce = false;
-  function welcomeUser() {
-    if (welcomedOnce) return;
-    welcomedOnce = true;
-    const greeting = 'أهلاً وسهلاً بك، يسعدني خدمتك. كيف أقدر أساعدك اليوم؟';
-    addMessage(greeting, 'jojo');
-    speak(greeting);
-  }
-
-  // ترحيب عند أول ضغطة (لأن المتصفحات تتطلب تفاعل المستخدم)
+  // ترحيب عند أول ضغطة
   let firstClick = true;
   talkButton.addEventListener('click', function () {
     if (firstClick) {
       firstClick = false;
-      // إيقاف الاستماع الذي بدأ، وعرض الترحيب أولاً
       if (state.recognition && state.isListening) {
         state.recognition.abort();
       }
-      welcomeUser();
+      const greeting = UI_TEXTS.ar.welcome;
+      addMessage(greeting, 'jojo');
+      speak(greeting, 'ar-SA');
     }
   }, { once: true });
 
-  console.log('✅ جوجو AI جاهزة');
+  console.log('✅ جوجو AI جاهزة (متعددة اللغات)');
 })();
