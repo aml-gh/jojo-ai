@@ -1647,3 +1647,148 @@ elevenlabs-convai {
     transition-duration: 0.01ms !important;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   بطاقة المحادثة + Widget الـ ElevenLabs
+═══════════════════════════════════════════════════════════ */
+
+.voice-section {
+  grid-column: 1 / -1;
+  margin-top: 8px;
+}
+
+.voice-card {
+  text-align: center;
+  background:
+    linear-gradient(135deg, rgba(232, 192, 80, 0.15) 0%, rgba(22, 60, 45, 0.5) 100%);
+  border: 2px solid var(--border-gold);
+  position: relative;
+  overflow: hidden;
+}
+
+.voice-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--gold-300), transparent);
+  animation: voice-shimmer 3s ease-in-out infinite;
+}
+
+@keyframes voice-shimmer {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+.voice-card .card-header {
+  justify-content: center;
+}
+
+.voice-card-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 24px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.widget-zone {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 22px;
+  background:
+    linear-gradient(135deg, rgba(232, 192, 80, 0.12), rgba(22, 145, 106, 0.08));
+  border: 1px dashed var(--border-gold);
+  border-radius: var(--r-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.widget-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-align: right;
+}
+
+.widget-icon-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-200), var(--gold-500));
+  color: var(--green-900);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 6px 20px rgba(232, 192, 80, 0.4);
+  animation: widget-icon-pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes widget-icon-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 6px 20px rgba(232, 192, 80, 0.4); }
+  50% { transform: scale(1.08); box-shadow: 0 8px 28px rgba(232, 192, 80, 0.6); }
+}
+
+.widget-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.widget-sub {
+  font-size: 13px;
+  color: var(--gold-300);
+  font-weight: 500;
+}
+
+.widget-arrow {
+  color: var(--gold-300);
+  animation: arrow-bounce 1.8s ease-in-out infinite;
+}
+
+@keyframes arrow-bounce {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+/* Widget الـ ElevenLabs - تنسيق مكانه */
+elevenlabs-convai {
+  z-index: 9999;
+  /* Widget يظهر تلقائيًا في زاوية الصفحة */
+}
+
+/* تأثير توهج للفت الانتباه عند تشغيل الموقع */
+elevenlabs-convai {
+  animation: widget-attention 3s ease-in-out 2s 3;
+}
+
+@keyframes widget-attention {
+  0%, 100% { filter: drop-shadow(0 0 10px rgba(232, 192, 80, 0.3)); }
+  50% { filter: drop-shadow(0 0 30px rgba(232, 192, 80, 0.8)) drop-shadow(0 0 50px rgba(232, 192, 80, 0.4)); }
+}
+
+/* للجوال - widget في الأسفل */
+@media (max-width: 768px) {
+  .widget-zone {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .widget-info {
+    flex-direction: column;
+  }
+
+  .voice-card-desc {
+    font-size: 13px;
+  }
+}
