@@ -33,20 +33,16 @@
   ═══════════════════════════════════ -->
   <section id="splash" class="splash">
 
-    <!-- شعاع دوار -->
     <div class="splash-rays" aria-hidden="true"></div>
 
-    <!-- حلقات نابضة -->
     <div class="splash-rings" aria-hidden="true">
       <span class="ring r1"></span>
       <span class="ring r2"></span>
       <span class="ring r3"></span>
     </div>
 
-    <!-- المحتوى المركزي -->
     <div class="splash-content">
 
-      <!-- الشعار -->
       <div class="splash-logo">
         <div class="logo-circle">
           <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -64,7 +60,6 @@
         <div class="logo-glow"></div>
       </div>
 
-      <!-- النصوص -->
       <div class="splash-text">
         <p class="splash-label">
           <span class="label-line"></span>
@@ -82,7 +77,6 @@
         <p class="splash-sub">سفيرة التحول الحضري ومساعدتك الذكية</p>
       </div>
 
-      <!-- زر البدء -->
       <button id="startButton" class="splash-button" type="button" aria-label="ابدأ التجربة">
         <span class="btn-bg"></span>
         <span class="btn-shimmer"></span>
@@ -94,7 +88,6 @@
         </span>
       </button>
 
-      <!-- شارة AI -->
       <div class="splash-badge">
         <span class="badge-dot"></span>
         <span>مدعوم بالذكاء الاصطناعي المتقدم</span>
@@ -109,7 +102,6 @@
   ═══════════════════════════════════ -->
   <main id="main" class="main hidden">
 
-    <!-- الشريط العلوي -->
     <header class="top-bar">
       <div class="brand">
         <div class="brand-icon">
@@ -125,10 +117,8 @@
       </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
     <div class="content">
 
-      <!-- البطاقة العلوية - جوجو -->
       <section class="hero-card">
         <div class="hero-left">
           <div class="hero-eyebrow">
@@ -143,7 +133,6 @@
         </div>
 
         <div class="hero-right">
-          <!-- الأفاتار الفاخر -->
           <div class="avatar-stage">
             <div class="avatar-rings" aria-hidden="true">
               <span></span>
@@ -168,7 +157,6 @@
         </div>
       </section>
 
-      <!-- بطاقة اللغات -->
       <section class="card languages-card">
         <div class="card-header">
           <div class="card-icon">
@@ -205,7 +193,6 @@
         </div>
       </section>
 
-      <!-- بطاقة الأسئلة -->
       <section class="card questions-card">
         <div class="card-header">
           <div class="card-icon">
@@ -251,31 +238,51 @@
         </div>
       </section>
 
-      <!-- زر التحدث المباشر مع جوجو -->
-      <section class="voice-cta">
-        <button id="voiceButton" class="voice-button" type="button" aria-label="تحدث مع جوجو مباشرة">
-          <span class="vb-bg"></span>
-          <span class="vb-rings">
-            <span></span>
-            <span></span>
-          </span>
-          <span class="vb-content">
-            <span class="vb-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+      <!-- بطاقة المحادثة المباشرة - Widget مدمج -->
+      <section class="voice-section">
+        <div class="card voice-card">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                 <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
                 <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
                 <line x1="12" y1="19" x2="12" y2="22"/>
               </svg>
-            </span>
-            <span class="vb-text">تحدث مع جوجو مباشرة</span>
-          </span>
-        </button>
-        <p class="voice-hint">محادثة فورية بصوت طبيعي • تدعم 7 لغات</p>
+            </div>
+            <h3>تحدث مع جوجو مباشرة</h3>
+          </div>
+
+          <p class="voice-card-desc">
+            اضغطي على الزر بالأسفل لبدء محادثة فورية بصوت طبيعي. جوجو تدعم 7 لغات وتجاوبك على كل أسئلتك عن الطائف وموسم الحج.
+          </p>
+
+          <!-- منطقة Widget -->
+          <div class="widget-zone">
+            <div class="widget-info">
+              <div class="widget-icon-circle">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
+                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  <line x1="12" y1="19" x2="12" y2="22"/>
+                </svg>
+              </div>
+              <div>
+                <p class="widget-title">المحادثة الصوتية</p>
+                <p class="widget-sub">اضغطي على الأيقونة الدائرية ↓</p>
+              </div>
+            </div>
+            <div class="widget-arrow">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <line x1="12" y1="5" x2="12" y2="19"/>
+                <polyline points="19 12 12 19 5 12"/>
+              </svg>
+            </div>
+          </div>
+        </div>
       </section>
 
-    </div><!-- /content -->
+    </div>
 
-    <!-- التذييل -->
     <footer class="bottom-info">
       <p>جميع الحقوق محفوظة © أمانة محافظة الطائف</p>
     </footer>
@@ -295,14 +302,13 @@
     </button>
   </div>
 
-  <!-- Toast للإشعارات -->
   <div id="toast" class="toast" aria-live="polite"></div>
 
-</div><!-- /app -->
+</div>
 
-<!-- ═══════════════════════════════════
-     ElevenLabs Conversational AI Widget (الرسمي)
-═══════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════════
+     ElevenLabs Widget الرسمي (مضمون 100%)
+═══════════════════════════════════════════════════════════ -->
 <elevenlabs-convai agent-id="agent_5301kqcwsvhxfa7aqn1sjewpd30z"></elevenlabs-convai>
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
