@@ -1630,3 +1630,20 @@ elevenlabs-convai * {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   Widget الـ ElevenLabs - تنسيق فقط (مو إخفاء)
+═══════════════════════════════════════════════════════════ */
+
+elevenlabs-convai {
+  z-index: 9999;
+}
+
+/* تقليل الحركات للمستخدمين اللي يفضلون ذلك */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
