@@ -1,5 +1,5 @@
 // =====================================================
-// جوجو AI - Server (نسخة محسّنة بنماذج متعددة)
+// جوجو AI - Server (نسخة نهائية مع openrouter/free)
 // سفيرة التحول الحضري بأمانة محافظة الطائف
 // =====================================================
 
@@ -65,18 +65,19 @@ const JOJO_SYSTEM_PROMPT = `أنتِ "جوجو"، سفيرة التحول الح
 "أهلاً وسهلاً بك، يسعدني خدمتك. كيف أقدر أساعدك اليوم؟"`;
 
 // =====================================================
-// قائمة النماذج بالترتيب (الأعلى جودة أولاً، ثم احتياطي)
+// النموذج الرئيسي: openrouter/free
+// هذا router ذكي يختار أي نموذج مجاني متاح تلقائيًا
+// إذا فشل ننتقل لنماذج محددة كاحتياطي
 // =====================================================
-const MODELS = [
-  'deepseek/deepseek-chat-v3.1:free',
-  'meta-llama/llama-3.3-70b-instruct:free',
-  'google/gemini-2.0-flash-exp:free',
-  'mistralai/mistral-small-3.2-24b-instruct:free',
-  'qwen/qwen-2.5-72b-instruct:free'
+const PRIMARY_MODEL = 'openrouter/free';
+const FALLBACK_MODELS = [
+  'meta-llama/llama-3.3-70b-instruct',
+  'mistralai/mistral-small-3.1-24b-instruct',
+  'google/gemma-3-27b-it'
 ];
 
 // =====================================================
-// دالة استدعاء نموذج واحد
+// دالة استدعاء نموذج
 // =====================================================
 async function callModel(model, messages, apiKey, siteUrl) {
   const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
@@ -108,7 +109,7 @@ async function callModel(model, messages, apiKey, siteUrl) {
     throw new Error(`[${model}] رد فارغ`);
   }
 
-  return reply;
+  return { reply, modelUsed: data?.model || model };
 }
 
 // =====================================================
@@ -145,23 +146,32 @@ app.post('/api/chat', async (req, res) => {
 
     console.log('📨 رسالة جديدة:', message);
 
-    // محاولة كل نموذج بالترتيب
+    // المحاولة الأولى: openrouter/free (router ذكي)
+    try {
+      console.log(`🔄 محاولة: ${PRIMARY_MODEL}`);
+      const result = await callModel(PRIMARY_MODEL, messages, apiKey, siteUrl);
+      console.log(`✅ نجح. النموذج المستخدم: ${result.modelUsed}`);
+      console.log(`💬 الرد: ${result.reply.substring(0, 80)}...`);
+      return res.json({ reply: result.reply, model: result.modelUsed });
+    } catch (err) {
+      console.warn(`⚠️ فشل ${PRIMARY_MODEL}:`, err.message);
+    }
+
+    // المحاولات الاحتياطية
     let lastError = null;
-    for (const model of MODELS) {
+    for (const model of FALLBACK_MODELS) {
       try {
-        console.log(`🔄 محاولة النموذج: ${model}`);
-        const reply = await callModel(model, messages, apiKey, siteUrl);
-        console.log(`✅ نجح النموذج: ${model}`);
-        console.log(`💬 الرد: ${reply.substring(0, 80)}...`);
-        return res.json({ reply, model });
+        console.log(`🔄 محاولة احتياطية: ${model}`);
+        const result = await callModel(model, messages, apiKey, siteUrl);
+        console.log(`✅ نجح: ${result.modelUsed}`);
+        return res.json({ reply: result.reply, model: result.modelUsed });
       } catch (err) {
         console.warn(`⚠️ فشل ${model}:`, err.message);
         lastError = err;
-        // كمّل للنموذج التالي
       }
     }
 
-    // كل النماذج فشلت
+    // كل المحاولات فشلت
     console.error('❌ كل النماذج فشلت. آخر خطأ:', lastError?.message);
     return res.status(500).json({
       error: 'فشل كل النماذج',
@@ -186,7 +196,8 @@ app.get('/api/health', (req, res) => {
     status: 'ok',
     service: 'Jojo AI',
     hasApiKey: !!process.env.OPENROUTER_API_KEY,
-    models: MODELS.length,
+    primaryModel: PRIMARY_MODEL,
+    fallbackCount: FALLBACK_MODELS.length,
     timestamp: new Date().toISOString()
   });
 });
@@ -202,12 +213,18 @@ app.get('/api/test-models', async (req, res) => {
 
   const siteUrl = process.env.SITE_URL || 'https://jojo-ai.up.railway.app';
   const testMessages = [{ role: 'user', content: 'قل: مرحبا' }];
+  const allModels = [PRIMARY_MODEL, ...FALLBACK_MODELS];
   const results = [];
 
-  for (const model of MODELS) {
+  for (const model of allModels) {
     try {
-      const reply = await callModel(model, testMessages, apiKey, siteUrl);
-      results.push({ model, status: 'ok', reply: reply.substring(0, 50) });
+      const result = await callModel(model, testMessages, apiKey, siteUrl);
+      results.push({
+        model,
+        status: 'ok',
+        actualModel: result.modelUsed,
+        reply: result.reply.substring(0, 60)
+      });
     } catch (err) {
       results.push({ model, status: 'failed', error: err.message });
     }
@@ -230,6 +247,7 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log('═══════════════════════════════════════════');
   console.log(`🌟 جوجو AI تعمل على المنفذ ${PORT}`);
   console.log(`🔑 OpenRouter API Key: ${process.env.OPENROUTER_API_KEY ? '✅ موجود' : '❌ مفقود'}`);
-  console.log(`🤖 عدد النماذج المتاحة: ${MODELS.length}`);
+  console.log(`🤖 النموذج الرئيسي: ${PRIMARY_MODEL}`);
+  console.log(`🔄 نماذج احتياطية: ${FALLBACK_MODELS.length}`);
   console.log('═══════════════════════════════════════════');
 });
