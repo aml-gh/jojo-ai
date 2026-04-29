@@ -1,277 +1,78 @@
 /* =====================================================
    جوجو AI - Frontend Script
-   مع ElevenLabs Conversational AI
-   تجربة محادثة فورية مثل ChatGPT Voice
+   يربط زر "تحدث مع جوجو" بـ ElevenLabs Widget
    ===================================================== */
 
 (function () {
   'use strict';
 
-  // =====================================================
-  // إعدادات الـ Agent
-  // =====================================================
-  const AGENT_ID = 'agent_5301kqcwsvhxfa7aqn1sjewpd30z';
+  const openButton = document.getElementById('openWidgetButton');
+
+  if (!openButton) {
+    console.error('❌ زر التحدث غير موجود');
+    return;
+  }
 
   // =====================================================
-  // العناصر
+  // فتح widget ElevenLabs
   // =====================================================
-  const talkButton = document.getElementById('talkButton');
-  const stopButton = document.getElementById('stopButton');
-  const buttonText = document.getElementById('buttonText');
-  const statusText = document.getElementById('statusText');
-  const statusIndicator = document.getElementById('statusIndicator');
-  const chatDisplay = document.getElementById('chatDisplay');
-  const avatar = document.getElementById('avatar');
-  const voiceWaves = document.getElementById('voiceWaves');
+  function openWidget() {
+    // البحث عن widget element
+    const widget = document.querySelector('elevenlabs-convai');
 
-  // =====================================================
-  // الحالة
-  // =====================================================
-  const state = {
-    conversation: null,
-    isConnected: false,
-    isConnecting: false,
-    mode: 'idle' // idle | listening | speaking
-  };
-
-  // =====================================================
-  // التحقق من تحميل SDK
-  // =====================================================
-  function waitForSDK(callback, retries = 30) {
-    if (window.ElevenLabs && window.ElevenLabs.Conversation) {
-      callback();
+    if (!widget) {
+      console.warn('⏳ Widget لم يتحمل بعد');
+      alert('يُرجى الانتظار قليلاً حتى يتم تحميل خدمة المحادثة...');
       return;
     }
-    if (retries <= 0) {
-      console.error('❌ فشل تحميل ElevenLabs SDK');
-      showError('عذرًا، فشل تحميل خدمة المحادثة. يُرجى تحديث الصفحة.');
-      return;
-    }
-    setTimeout(() => waitForSDK(callback, retries - 1), 200);
-  }
 
-  // =====================================================
-  // تحديث الحالة المرئية
-  // =====================================================
-  function setStatus(mode, text) {
-    state.mode = mode;
-    statusIndicator.className = 'status-indicator ' + mode;
-    statusText.textContent = text;
-    avatar.className = 'avatar';
-    voiceWaves.classList.remove('active');
-
-    if (mode === 'listening') {
-      avatar.classList.add('listening');
-    } else if (mode === 'speaking') {
-      avatar.classList.add('speaking');
-      voiceWaves.classList.add('active');
-    } else if (mode === 'thinking') {
-      avatar.classList.add('listening');
-    }
-  }
-
-  function setButtonState(connected) {
-    if (connected) {
-      talkButton.classList.add('recording');
-      buttonText.textContent = 'المحادثة جارية...';
-      stopButton.classList.add('visible');
-    } else {
-      talkButton.classList.remove('recording');
-      buttonText.textContent = 'تحدث مع جوجو';
-      stopButton.classList.remove('visible');
-    }
-  }
-
-  // =====================================================
-  // عرض الرسائل
-  // =====================================================
-  function clearWelcomeMessage() {
-    const welcome = chatDisplay.querySelector('.welcome-message');
-    if (welcome) welcome.remove();
-  }
-
-  function detectTextLanguage(text) {
-    if (!text) return 'ar';
-    if (/[\u0600-\u06FF]/.test(text)) return 'ar';
-    return 'en';
-  }
-
-  function addMessage(text, sender) {
-    if (!text) return;
-    clearWelcomeMessage();
-
-    const msg = document.createElement('div');
-    msg.className = 'message ' + sender;
-
-    const lang = detectTextLanguage(text);
-    const isRTL = lang === 'ar';
-    msg.dir = isRTL ? 'rtl' : 'ltr';
-    msg.style.textAlign = isRTL ? 'right' : 'left';
-
-    const label = document.createElement('span');
-    label.className = 'message-label';
-    label.textContent = sender === 'user' ? 'أنت' : 'جوجو';
-
-    const content = document.createElement('p');
-    content.textContent = text;
-
-    msg.appendChild(label);
-    msg.appendChild(content);
-    chatDisplay.appendChild(msg);
-    chatDisplay.scrollTop = chatDisplay.scrollHeight;
-  }
-
-  function showError(text) {
-    addMessage(text, 'jojo');
-  }
-
-  // =====================================================
-  // طلب إذن الميكروفون
-  // =====================================================
-  async function requestMicrophone() {
+    // Widget الـ ElevenLabs يحتوي على Shadow DOM
+    // نحاول العثور على زر التشغيل والضغط عليه
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      // إغلاق المسار مباشرة - SDK راح يفتحه بنفسه
-      stream.getTracks().forEach(track => track.stop());
-      return true;
-    } catch (err) {
-      console.error('❌ فشل الوصول للميكروفون:', err);
-      showError('يُرجى السماح بالوصول إلى الميكروفون للتحدث مع جوجو');
-      return false;
-    }
-  }
+      // البحث في shadow DOM
+      const shadowRoot = widget.shadowRoot;
 
-  // =====================================================
-  // بدء المحادثة
-  // =====================================================
-  async function startConversation() {
-    if (state.isConnecting || state.isConnected) return;
-
-    state.isConnecting = true;
-    setStatus('thinking', 'جاري الاتصال...');
-    buttonText.textContent = 'جاري الاتصال...';
-
-    // طلب الميكروفون أولاً
-    const hasMic = await requestMicrophone();
-    if (!hasMic) {
-      state.isConnecting = false;
-      setStatus('', 'جاهزة');
-      buttonText.textContent = 'تحدث مع جوجو';
-      return;
-    }
-
-    try {
-      const Conversation = window.ElevenLabs.Conversation;
-
-      state.conversation = await Conversation.startSession({
-        agentId: AGENT_ID,
-
-        onConnect: function () {
-          console.log('✅ تم الاتصال بجوجو');
-          state.isConnected = true;
-          state.isConnecting = false;
-          setButtonState(true);
-          setStatus('listening', 'متصلة - تحدث الآن');
-        },
-
-        onDisconnect: function () {
-          console.log('🔌 تم قطع الاتصال');
-          state.isConnected = false;
-          state.isConnecting = false;
-          setButtonState(false);
-          setStatus('', 'جاهزة');
-        },
-
-        onMessage: function (message) {
-          console.log('💬 رسالة:', message);
-          if (message && message.message) {
-            const sender = message.source === 'user' ? 'user' : 'jojo';
-            addMessage(message.message, sender);
-          }
-        },
-
-        onError: function (error) {
-          console.error('❌ خطأ:', error);
-          state.isConnected = false;
-          state.isConnecting = false;
-          setButtonState(false);
-          setStatus('', 'جاهزة');
-          showError('حدث خطأ في الاتصال. يُرجى المحاولة مجددًا.');
-        },
-
-        onModeChange: function (mode) {
-          console.log('🔄 الوضع:', mode);
-          // mode يكون: 'speaking' أو 'listening'
-          if (mode && mode.mode === 'speaking') {
-            setStatus('speaking', 'تتحدث جوجو...');
-          } else if (mode && mode.mode === 'listening') {
-            setStatus('listening', 'أستمع إليك...');
-          }
-        },
-
-        onStatusChange: function (status) {
-          console.log('📡 الحالة:', status);
+      if (shadowRoot) {
+        // ابحث عن أي زر داخل widget
+        const triggerButton = shadowRoot.querySelector('button[aria-label*="call"], button[aria-label*="conversation"], button[aria-label*="start"], button');
+        if (triggerButton) {
+          triggerButton.click();
+          console.log('✅ تم فتح widget');
+          return;
         }
-      });
+      }
+
+      // fallback: إذا ما لقينا الزر، نحاول النقر على widget نفسه
+      widget.click();
+      console.log('✅ تم النقر على widget');
 
     } catch (err) {
-      console.error('❌ فشل بدء المحادثة:', err);
-      state.isConnected = false;
-      state.isConnecting = false;
-      setButtonState(false);
-      setStatus('', 'جاهزة');
-      showError('عذرًا، تعذر بدء المحادثة. يُرجى المحاولة مرة أخرى.');
+      console.error('❌ خطأ في فتح widget:', err);
+      alert('عذرًا، يُرجى البحث عن أيقونة المحادثة في أسفل يسار الصفحة والضغط عليها.');
     }
   }
 
   // =====================================================
-  // إنهاء المحادثة
+  // ربط الحدث
   // =====================================================
-  async function endConversation() {
-    if (state.conversation) {
-      try {
-        await state.conversation.endSession();
-      } catch (err) {
-        console.error('خطأ عند الإنهاء:', err);
-      }
-      state.conversation = null;
+  openButton.addEventListener('click', openWidget);
+
+  // =====================================================
+  // مراقبة تحميل widget
+  // =====================================================
+  let checkCount = 0;
+  const checkInterval = setInterval(function () {
+    const widget = document.querySelector('elevenlabs-convai');
+    if (widget && widget.shadowRoot) {
+      console.log('✅ ElevenLabs Widget جاهز');
+      clearInterval(checkInterval);
     }
-    state.isConnected = false;
-    state.isConnecting = false;
-    setButtonState(false);
-    setStatus('', 'جاهزة');
-  }
-
-  // =====================================================
-  // معالج زر التحدث
-  // =====================================================
-  function handleTalkButton() {
-    if (state.isConnected) {
-      endConversation();
-    } else {
-      startConversation();
+    checkCount++;
+    if (checkCount > 30) {
+      console.warn('⚠️ Widget لم يكتمل تحميله');
+      clearInterval(checkInterval);
     }
-  }
+  }, 500);
 
-  // =====================================================
-  // ربط الأحداث
-  // =====================================================
-  waitForSDK(function () {
-    console.log('✅ ElevenLabs SDK جاهز');
-    talkButton.addEventListener('click', handleTalkButton);
-    stopButton.addEventListener('click', endConversation);
-  });
-
-  // إنهاء المحادثة عند إغلاق الصفحة
-  window.addEventListener('beforeunload', function () {
-    if (state.conversation) {
-      try {
-        state.conversation.endSession();
-      } catch (e) {
-        // تجاهل
-      }
-    }
-  });
-
-  console.log('✅ جوجو AI جاهزة (Conversational AI)');
+  console.log('✅ جوجو AI - الواجهة جاهزة');
 })();
