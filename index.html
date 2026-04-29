@@ -60,38 +60,35 @@
         <p class="jojo-role">سفيرة التحول الحضري</p>
       </div>
 
-      <!-- صندوق الحالة -->
-      <div class="chat-display" id="chatDisplay" aria-live="polite">
+      <!-- صندوق الترحيب -->
+      <div class="chat-display" id="chatDisplay">
         <div class="welcome-message">
-          <p>مرحبًا بك، اضغط على الزر بالأسفل لبدء التحدث معي بأي لغة تريد</p>
+          <p>مرحبًا بك في موقع جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف. اضغطي على الزر الذهبي بالأسفل لبدء التحدث معي بأي لغة تريدين.</p>
         </div>
       </div>
 
       <!-- مؤشر الحالة -->
-      <div class="status-indicator" id="statusIndicator">
-        <span class="status-dot" id="statusDot"></span>
-        <span class="status-text" id="statusText">جاهزة</span>
+      <div class="status-indicator">
+        <span class="status-dot"></span>
+        <span class="status-text">جاهزة للتحدث معك</span>
       </div>
 
-      <!-- زر التحدث -->
-      <button class="talk-button" id="talkButton" type="button" aria-label="تحدث مع جوجو">
+      <!-- زر التحدث - يفتح الـ Widget -->
+      <button class="talk-button" id="openWidgetButton" type="button" aria-label="تحدث مع جوجو">
         <span class="button-ring" aria-hidden="true"></span>
-        <span class="button-icon" id="buttonIcon" aria-hidden="true">
+        <span class="button-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
             <path d="M12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2Z" fill="currentColor"/>
             <path d="M19 11C19 14.53 16.39 17.44 13 17.93V21H11V17.93C7.61 17.44 5 14.53 5 11H7C7 13.76 9.24 16 12 16C14.76 16 17 13.76 17 11H19Z" fill="currentColor"/>
           </svg>
         </span>
-        <span class="button-text" id="buttonText">تحدث مع جوجو</span>
+        <span class="button-text">تحدث مع جوجو</span>
       </button>
 
-      <!-- زر إنهاء -->
-      <button class="stop-button" id="stopButton" type="button" aria-label="إنهاء المحادثة">
-        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18" aria-hidden="true">
-          <rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>
-        </svg>
-        <span>إنهاء المحادثة</span>
-      </button>
+      <!-- معلومات إضافية -->
+      <div class="info-text">
+        <p>💬 محادثة فورية بصوت طبيعي  •  🌍 تدعم أكثر من 7 لغات  •  📚 معرفة شاملة بالطائف</p>
+      </div>
 
     </section>
 
@@ -102,10 +99,11 @@
 
   </main>
 
-  <!-- ElevenLabs Conversational AI SDK -->
-  <script src="https://unpkg.com/@elevenlabs/[email protected]/dist/lib/index.umd.js"></script>
+  <!-- ElevenLabs Conversational AI Widget -->
+  <elevenlabs-convai agent-id="agent_5301kqcwsvhxfa7aqn1sjewpd30z"></elevenlabs-convai>
+  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
-  <!-- كود جوجو -->
+  <!-- كود جوجو لربط الزر -->
   <script src="script.js" defer></script>
 </body>
 </html>
