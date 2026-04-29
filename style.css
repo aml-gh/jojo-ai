@@ -1,1 +1,739 @@
-body{margin:0;display:grid;place-items:center;height:100vh;background:#063;color:#fff;font-family:tahoma}.card{text-align:center;background:#ffffff15;padding:40px;border-radius:20px}button{padding:14px 22px;border:0;border-radius:25px;font-size:20px;background:#f0c24a}#jojo{font-size:80px}
+/* =====================================================
+   جوجو AI - تصميم فخم بألوان أمانة الطائف
+   ===================================================== */
+
+:root {
+  /* ألوان أمانة الطائف */
+  --color-primary: #0d4f3c;
+  --color-primary-light: #1a6e54;
+  --color-primary-dark: #062a20;
+  --color-gold: #c9a961;
+  --color-gold-light: #e6c98a;
+  --color-gold-dark: #9a7f3e;
+
+  /* ألوان الواجهة */
+  --color-bg: #0a1f1a;
+  --color-bg-secondary: #0f2a23;
+  --color-card: rgba(255, 255, 255, 0.06);
+  --color-card-border: rgba(201, 169, 97, 0.25);
+  --color-text: #f5f5f0;
+  --color-text-secondary: rgba(245, 245, 240, 0.75);
+  --color-text-muted: rgba(245, 245, 240, 0.5);
+
+  /* الخطوط */
+  --font-arabic: 'Tajawal', system-ui, -apple-system, sans-serif;
+
+  /* الأشعة والظلال */
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.3);
+  --shadow-card: 0 25px 80px rgba(0, 0, 0, 0.4);
+  --shadow-gold: 0 8px 32px rgba(201, 169, 97, 0.35);
+
+  /* الزوايا */
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 32px;
+  --radius-full: 9999px;
+}
+
+/* =====================================================
+   إعادة التهيئة
+   ===================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-arabic);
+  font-weight: 400;
+  color: var(--color-text);
+  background: var(--color-bg);
+  overflow-x: hidden;
+  position: relative;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: inherit;
+}
+
+button:focus-visible {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 4px;
+}
+
+/* =====================================================
+   الخلفية المتحركة
+   ===================================================== */
+.bg-gradient {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(ellipse at top, var(--color-primary-light) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom, var(--color-primary-dark) 0%, transparent 60%),
+    linear-gradient(135deg, #0a1f1a 0%, #0f2a23 50%, #082018 100%);
+}
+
+.bg-orbs {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  animation: float 20s ease-in-out infinite;
+}
+
+.orb-1 {
+  width: 400px;
+  height: 400px;
+  background: var(--color-gold);
+  top: -100px;
+  right: -100px;
+  animation-delay: 0s;
+}
+
+.orb-2 {
+  width: 500px;
+  height: 500px;
+  background: var(--color-primary-light);
+  bottom: -150px;
+  left: -150px;
+  animation-delay: -7s;
+}
+
+.orb-3 {
+  width: 300px;
+  height: 300px;
+  background: var(--color-gold-dark);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  animation-delay: -14s;
+  opacity: 0.2;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(30px, -30px) scale(1.05);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+}
+
+/* =====================================================
+   الحاوية الرئيسية
+   ===================================================== */
+.container {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* =====================================================
+   الترويسة
+   ===================================================== */
+.header {
+  text-align: center;
+  padding: 12px 0;
+}
+
+.logo-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 24px;
+  background: var(--color-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-soft);
+}
+
+.logo-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-gold);
+  flex-shrink: 0;
+}
+
+.logo-text {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+}
+
+.header-text {
+  text-align: right;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 2px;
+  letter-spacing: -0.3px;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--color-gold-light);
+  font-weight: 500;
+}
+
+/* =====================================================
+   بطاقة جوجو
+   ===================================================== */
+.jojo-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.03) 100%
+  );
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-card-border);
+  border-radius: var(--radius-lg);
+  padding: 40px 28px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+.jojo-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--color-gold),
+    transparent
+  );
+}
+
+/* =====================================================
+   الأفاتار
+   ===================================================== */
+.avatar-wrapper {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-glow {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    var(--color-gold) 0%,
+    transparent 70%
+  );
+  opacity: 0.4;
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes glow-pulse {
+  0%, 100% { opacity: 0.3; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+.avatar {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-light) 0%,
+    var(--color-primary) 50%,
+    var(--color-primary-dark) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid var(--color-gold);
+  box-shadow:
+    0 0 0 6px rgba(201, 169, 97, 0.15),
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 0 40px rgba(255, 255, 255, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.avatar.speaking {
+  animation: avatar-bounce 0.6s ease-in-out infinite;
+}
+
+.avatar.listening {
+  animation: avatar-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes avatar-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.04); }
+}
+
+@keyframes avatar-pulse {
+  0%, 100% {
+    box-shadow:
+      0 0 0 6px rgba(201, 169, 97, 0.15),
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      inset 0 0 40px rgba(255, 255, 255, 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 0 12px rgba(201, 169, 97, 0.25),
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      inset 0 0 40px rgba(255, 255, 255, 0.2);
+  }
+}
+
+.avatar-inner {
+  width: 90%;
+  height: 90%;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.avatar-name {
+  font-size: 38px;
+  font-weight: 900;
+  color: var(--color-gold-light);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  letter-spacing: 1px;
+}
+
+/* موجات الصوت */
+.voice-waves {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 24px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.voice-waves.active {
+  opacity: 1;
+}
+
+.voice-waves span {
+  display: block;
+  width: 4px;
+  background: linear-gradient(to top, var(--color-gold), var(--color-gold-light));
+  border-radius: var(--radius-full);
+  animation: wave 1s ease-in-out infinite;
+}
+
+.voice-waves span:nth-child(1) { animation-delay: 0s;    height: 30%; }
+.voice-waves span:nth-child(2) { animation-delay: 0.15s; height: 60%; }
+.voice-waves span:nth-child(3) { animation-delay: 0.3s;  height: 100%; }
+.voice-waves span:nth-child(4) { animation-delay: 0.45s; height: 60%; }
+.voice-waves span:nth-child(5) { animation-delay: 0.6s;  height: 30%; }
+
+@keyframes wave {
+  0%, 100% { transform: scaleY(0.6); }
+  50% { transform: scaleY(1.4); }
+}
+
+/* =====================================================
+   معلومات جوجو
+   ===================================================== */
+.jojo-info {
+  text-align: center;
+  margin-top: 8px;
+}
+
+.jojo-name {
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--color-text);
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+.jojo-role {
+  font-size: 15px;
+  color: var(--color-gold-light);
+  font-weight: 500;
+}
+
+/* =====================================================
+   صندوق المحادثة
+   ===================================================== */
+.chat-display {
+  width: 100%;
+  min-height: 120px;
+  max-height: 280px;
+  overflow-y: auto;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  scroll-behavior: smooth;
+}
+
+.chat-display::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-display::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chat-display::-webkit-scrollbar-thumb {
+  background: var(--color-gold-dark);
+  border-radius: var(--radius-full);
+}
+
+.welcome-message {
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  padding: 20px 0;
+  font-weight: 500;
+}
+
+.message {
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 90%;
+  animation: message-in 0.3s ease;
+}
+
+@keyframes message-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message.user {
+  background: rgba(201, 169, 97, 0.15);
+  border: 1px solid rgba(201, 169, 97, 0.3);
+  align-self: flex-start;
+  color: var(--color-gold-light);
+}
+
+.message.jojo {
+  background: rgba(13, 79, 60, 0.4);
+  border: 1px solid rgba(26, 110, 84, 0.5);
+  align-self: flex-end;
+  color: var(--color-text);
+}
+
+.message-label {
+  font-size: 11px;
+  font-weight: 700;
+  opacity: 0.7;
+  margin-bottom: 4px;
+  display: block;
+}
+
+/* =====================================================
+   مؤشر الحالة
+   ===================================================== */
+.status-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: all 0.3s ease;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  box-shadow: 0 0 8px #4ade80;
+  transition: all 0.3s ease;
+}
+
+.status-indicator.listening .status-dot {
+  background: #ef4444;
+  box-shadow: 0 0 12px #ef4444;
+  animation: dot-pulse 1s ease-in-out infinite;
+}
+
+.status-indicator.thinking .status-dot {
+  background: #f59e0b;
+  box-shadow: 0 0 12px #f59e0b;
+  animation: dot-pulse 0.8s ease-in-out infinite;
+}
+
+.status-indicator.speaking .status-dot {
+  background: var(--color-gold);
+  box-shadow: 0 0 12px var(--color-gold);
+  animation: dot-pulse 0.6s ease-in-out infinite;
+}
+
+@keyframes dot-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.7; }
+}
+
+/* =====================================================
+   زر التحدث الرئيسي
+   ===================================================== */
+.talk-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 18px 40px;
+  background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+  color: var(--color-primary-dark);
+  font-size: 17px;
+  font-weight: 700;
+  border-radius: var(--radius-full);
+  box-shadow:
+    0 8px 24px rgba(201, 169, 97, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-width: 240px;
+  overflow: hidden;
+}
+
+.talk-button:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 12px 32px rgba(201, 169, 97, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.talk-button:active {
+  transform: translateY(0);
+}
+
+.talk-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.talk-button.recording {
+  background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+  color: #fff;
+  animation: button-recording 1.2s ease-in-out infinite;
+}
+
+@keyframes button-recording {
+  0%, 100% { box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4); }
+  50% { box-shadow: 0 8px 32px rgba(239, 68, 68, 0.7); }
+}
+
+.button-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  pointer-events: none;
+}
+
+.talk-button.recording .button-ring::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border: 2px solid rgba(239, 68, 68, 0.5);
+  border-radius: var(--radius-full);
+  animation: ring-expand 1.2s ease-out infinite;
+}
+
+@keyframes ring-expand {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1.3); opacity: 0; }
+}
+
+.button-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-text {
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+/* =====================================================
+   زر الإيقاف
+   ===================================================== */
+.stop-button {
+  display: none;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  transition: all 0.2s ease;
+}
+
+.stop-button:hover {
+  background: rgba(239, 68, 68, 0.25);
+  color: #fff;
+}
+
+.stop-button.visible {
+  display: inline-flex;
+}
+
+/* =====================================================
+   التذييل
+   ===================================================== */
+.footer {
+  text-align: center;
+  padding: 16px 0;
+  color: var(--color-text-muted);
+  font-size: 13px;
+}
+
+/* =====================================================
+   الاستجابة للشاشات الصغيرة
+   ===================================================== */
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 16px;
+    gap: 24px;
+  }
+
+  .logo-container {
+    padding: 12px 18px;
+    gap: 12px;
+  }
+
+  .logo-badge {
+    width: 42px;
+    height: 42px;
+  }
+
+  .logo-text {
+    font-size: 22px;
+  }
+
+  .title {
+    font-size: 16px;
+  }
+
+  .subtitle {
+    font-size: 12px;
+  }
+
+  .jojo-card {
+    padding: 32px 20px;
+    gap: 20px;
+  }
+
+  .avatar-wrapper,
+  .avatar {
+    width: 130px;
+    height: 130px;
+  }
+
+  .avatar-name {
+    font-size: 32px;
+  }
+
+  .jojo-name {
+    font-size: 28px;
+  }
+
+  .jojo-role {
+    font-size: 14px;
+  }
+
+  .chat-display {
+    min-height: 100px;
+    max-height: 240px;
+    padding: 16px;
+  }
+
+  .talk-button {
+    padding: 16px 32px;
+    font-size: 16px;
+    min-width: 220px;
+  }
+}
+
+/* احترام تفضيل تقليل الحركة */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
