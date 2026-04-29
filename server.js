@@ -1,5 +1,5 @@
 // =====================================================
-// جوجو AI - Server
+// جوجو AI - Server (نسخة محسّنة بنماذج متعددة)
 // سفيرة التحول الحضري بأمانة محافظة الطائف
 // =====================================================
 
@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json({ limit: '1mb' }));
 
-// Content Security Policy آمن (يسمح بالميكروفون والصوت بدون eval)
+// Content Security Policy آمن
 app.use((req, res, next) => {
   res.setHeader(
     'Content-Security-Policy',
@@ -40,7 +40,7 @@ app.use(express.static(__dirname, {
 }));
 
 // =====================================================
-// شخصية جوجو - System Prompt
+// شخصية جوجو
 // =====================================================
 const JOJO_SYSTEM_PROMPT = `أنتِ "جوجو"، سفيرة التحول الحضري بأمانة محافظة الطائف في المملكة العربية السعودية.
 
@@ -65,7 +65,54 @@ const JOJO_SYSTEM_PROMPT = `أنتِ "جوجو"، سفيرة التحول الح
 "أهلاً وسهلاً بك، يسعدني خدمتك. كيف أقدر أساعدك اليوم؟"`;
 
 // =====================================================
-// نقطة النهاية الرئيسية للمحادثة
+// قائمة النماذج بالترتيب (الأعلى جودة أولاً، ثم احتياطي)
+// =====================================================
+const MODELS = [
+  'deepseek/deepseek-chat-v3.1:free',
+  'meta-llama/llama-3.3-70b-instruct:free',
+  'google/gemini-2.0-flash-exp:free',
+  'mistralai/mistral-small-3.2-24b-instruct:free',
+  'qwen/qwen-2.5-72b-instruct:free'
+];
+
+// =====================================================
+// دالة استدعاء نموذج واحد
+// =====================================================
+async function callModel(model, messages, apiKey, siteUrl) {
+  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${apiKey}`,
+      'Content-Type': 'application/json',
+      'HTTP-Referer': siteUrl,
+      'X-Title': 'Jojo AI - Taif Municipality'
+    },
+    body: JSON.stringify({
+      model: model,
+      messages: messages,
+      temperature: 0.7,
+      max_tokens: 400,
+      top_p: 0.9
+    })
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    const errMsg = data?.error?.message || `HTTP ${response.status}`;
+    throw new Error(`[${model}] ${errMsg}`);
+  }
+
+  const reply = data?.choices?.[0]?.message?.content?.trim();
+  if (!reply) {
+    throw new Error(`[${model}] رد فارغ`);
+  }
+
+  return reply;
+}
+
+// =====================================================
+// نقطة المحادثة الرئيسية
 // =====================================================
 app.post('/api/chat', async (req, res) => {
   try {
@@ -83,83 +130,44 @@ app.post('/api/chat', async (req, res) => {
       console.error('❌ OPENROUTER_API_KEY غير موجود');
       return res.status(500).json({
         error: 'مفتاح API غير مهيأ',
-        reply: 'عذرًا، الخدمة غير متاحة حاليًا. يُرجى المحاولة لاحقًا.'
+        reply: 'عذرًا، الخدمة غير متاحة حاليًا.'
       });
     }
+
+    const siteUrl = process.env.SITE_URL || 'https://jojo-ai.up.railway.app';
 
     // بناء سجل المحادثة
     const messages = [
       { role: 'system', content: JOJO_SYSTEM_PROMPT },
-      ...history.slice(-6), // آخر 6 رسائل فقط للحفاظ على السياق
+      ...history.slice(-6),
       { role: 'user', content: message }
     ];
 
-    console.log('📨 إرسال رسالة إلى OpenRouter:', message);
+    console.log('📨 رسالة جديدة:', message);
 
-    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.SITE_URL || 'https://jojo-ai.up.railway.app',
-        'X-Title': 'Jojo AI - Taif Municipality'
-      },
-      body: JSON.stringify({
-        model: 'meta-llama/llama-3.3-70b-instruct:free',
-        messages: messages,
-        temperature: 0.7,
-        max_tokens: 400,
-        top_p: 0.9
-      })
-    });
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('❌ خطأ من OpenRouter:', response.status, errorText);
-
-      // محاولة بنموذج بديل في حال فشل النموذج الأساسي
-      const fallbackResponse = await fetch('https://openrouter.ai/api/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-          'HTTP-Referer': process.env.SITE_URL || 'https://jojo-ai.up.railway.app',
-          'X-Title': 'Jojo AI - Taif Municipality'
-        },
-        body: JSON.stringify({
-          model: 'google/gemini-2.0-flash-exp:free',
-          messages: messages,
-          temperature: 0.7,
-          max_tokens: 400
-        })
-      });
-
-      if (!fallbackResponse.ok) {
-        return res.status(500).json({
-          error: 'فشل الاتصال بالنموذج',
-          reply: 'عذرًا، أواجه صعوبة في الرد حاليًا. يُرجى المحاولة بعد قليل.'
-        });
+    // محاولة كل نموذج بالترتيب
+    let lastError = null;
+    for (const model of MODELS) {
+      try {
+        console.log(`🔄 محاولة النموذج: ${model}`);
+        const reply = await callModel(model, messages, apiKey, siteUrl);
+        console.log(`✅ نجح النموذج: ${model}`);
+        console.log(`💬 الرد: ${reply.substring(0, 80)}...`);
+        return res.json({ reply, model });
+      } catch (err) {
+        console.warn(`⚠️ فشل ${model}:`, err.message);
+        lastError = err;
+        // كمّل للنموذج التالي
       }
-
-      const fallbackData = await fallbackResponse.json();
-      const fallbackReply = fallbackData?.choices?.[0]?.message?.content?.trim() || 'عذرًا، لم أتمكن من الرد.';
-      console.log('✅ رد من النموذج البديل');
-      return res.json({ reply: fallbackReply });
     }
 
-    const data = await response.json();
-    const reply = data?.choices?.[0]?.message?.content?.trim();
-
-    if (!reply) {
-      console.error('❌ رد فارغ من OpenRouter:', JSON.stringify(data));
-      return res.status(500).json({
-        error: 'رد فارغ',
-        reply: 'عذرًا، لم أتمكن من تكوين رد. هل يمكنك إعادة صياغة سؤالك؟'
-      });
-    }
-
-    console.log('✅ رد جوجو:', reply.substring(0, 80) + '...');
-    res.json({ reply });
+    // كل النماذج فشلت
+    console.error('❌ كل النماذج فشلت. آخر خطأ:', lastError?.message);
+    return res.status(500).json({
+      error: 'فشل كل النماذج',
+      details: lastError?.message,
+      reply: 'عذرًا، الخدمة مشغولة حاليًا. يُرجى المحاولة بعد قليل.'
+    });
 
   } catch (error) {
     console.error('❌ خطأ في السيرفر:', error.message);
@@ -178,8 +186,34 @@ app.get('/api/health', (req, res) => {
     status: 'ok',
     service: 'Jojo AI',
     hasApiKey: !!process.env.OPENROUTER_API_KEY,
+    models: MODELS.length,
     timestamp: new Date().toISOString()
   });
+});
+
+// =====================================================
+// اختبار النماذج (للتشخيص)
+// =====================================================
+app.get('/api/test-models', async (req, res) => {
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  if (!apiKey) {
+    return res.json({ error: 'لا يوجد مفتاح API' });
+  }
+
+  const siteUrl = process.env.SITE_URL || 'https://jojo-ai.up.railway.app';
+  const testMessages = [{ role: 'user', content: 'قل: مرحبا' }];
+  const results = [];
+
+  for (const model of MODELS) {
+    try {
+      const reply = await callModel(model, testMessages, apiKey, siteUrl);
+      results.push({ model, status: 'ok', reply: reply.substring(0, 50) });
+    } catch (err) {
+      results.push({ model, status: 'failed', error: err.message });
+    }
+  }
+
+  res.json({ results });
 });
 
 // =====================================================
@@ -196,5 +230,6 @@ app.listen(PORT, '0.0.0.0', () => {
   console.log('═══════════════════════════════════════════');
   console.log(`🌟 جوجو AI تعمل على المنفذ ${PORT}`);
   console.log(`🔑 OpenRouter API Key: ${process.env.OPENROUTER_API_KEY ? '✅ موجود' : '❌ مفقود'}`);
+  console.log(`🤖 عدد النماذج المتاحة: ${MODELS.length}`);
   console.log('═══════════════════════════════════════════');
 });
