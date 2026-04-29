@@ -1,7 +1,7 @@
-// =====================================================
-// جوجو AI - Server (مع ElevenLabs Widget + AudioWorklets)
-// سفيرة التحول الحضري بأمانة محافظة الطائف
-// =====================================================
+// ═══════════════════════════════════════════════════════════
+// جوجو AI - Server
+// أمانة محافظة الطائف
+// ═══════════════════════════════════════════════════════════
 
 const express = require('express');
 const cors = require('cors');
@@ -11,17 +11,16 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// =====================================================
+// ─────────────────────────────────────────────
 // Middleware
-// =====================================================
+// ─────────────────────────────────────────────
 app.use(cors());
 app.use(express.json({ limit: '1mb' }));
 
-// =====================================================
-// Headers مهمة للـ AudioWorklets و Widget
-// =====================================================
-app.use((req, res, next) => {
-  // CSP مفتوح للسماح بكل ما يحتاجه Widget من ElevenLabs
+// ─────────────────────────────────────────────
+// Headers مهمة لـ ElevenLabs ConvAI
+// ─────────────────────────────────────────────
+app.use(function (req, res, next) {
   res.setHeader(
     'Content-Security-Policy',
     [
@@ -39,49 +38,54 @@ app.use((req, res, next) => {
     ].join('; ')
   );
 
-  // Headers مهمة لـ AudioWorklets
   res.setHeader('Cross-Origin-Embedder-Policy', 'credentialless');
   res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-  res.setHeader('Permissions-Policy', 'microphone=(self "https://*.elevenlabs.io"), camera=()');
+  res.setHeader('Permissions-Policy', 'microphone=(self), camera=()');
 
   next();
 });
 
-// تقديم الملفات الثابتة من جذر المشروع
+// ─────────────────────────────────────────────
+// Static Files
+// ─────────────────────────────────────────────
 app.use(express.static(__dirname, {
   index: false,
-  extensions: ['html']
+  extensions: ['html'],
+  setHeaders: function (res, filepath) {
+    if (filepath.endsWith('.mp4') || filepath.endsWith('.webm')) {
+      res.setHeader('Accept-Ranges', 'bytes');
+      res.setHeader('Cache-Control', 'public, max-age=3600');
+    }
+  }
 }));
 
-// =====================================================
-// نقطة فحص الصحة
-// =====================================================
-app.get('/api/health', (req, res) => {
+// ─────────────────────────────────────────────
+// Health Check
+// ─────────────────────────────────────────────
+app.get('/api/health', function (req, res) {
   res.json({
     status: 'ok',
-    service: 'Jojo AI',
-    mode: 'ElevenLabs Conversational AI Widget',
-    agentId: 'agent_5301kqcwsvhxfa7aqn1sjewpd30z',
+    service: 'Jojo AI - Cinematic Edition',
+    version: '4.0.0',
     timestamp: new Date().toISOString()
   });
 });
 
-// =====================================================
-// الصفحة الرئيسية
-// =====================================================
-app.get('/', (req, res) => {
+// ─────────────────────────────────────────────
+// Home Route
+// ─────────────────────────────────────────────
+app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-// =====================================================
-// تشغيل السيرفر
-// =====================================================
-app.listen(PORT, '0.0.0.0', () => {
+// ─────────────────────────────────────────────
+// Start Server
+// ─────────────────────────────────────────────
+app.listen(PORT, '0.0.0.0', function () {
   console.log('═══════════════════════════════════════════');
-  console.log(`🌟 جوجو AI - Conversational Edition v2`);
-  console.log(`📡 المنفذ: ${PORT}`);
-  console.log(`🤖 Agent ID: agent_5301kqcwsvhxfa7aqn1sjewpd30z`);
-  console.log(`💬 ElevenLabs Conversational AI Widget`);
-  console.log(`🎤 AudioWorklets: مفعّل`);
+  console.log('🌟 جوجو AI - Cinematic Edition');
+  console.log('📡 Port: ' + PORT);
+  console.log('🤖 ElevenLabs ConvAI: Active');
+  console.log('🎨 Design: Premium Cinematic');
   console.log('═══════════════════════════════════════════');
 });
