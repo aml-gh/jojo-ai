@@ -238,9 +238,13 @@
         </div>
       </section>
 
-      <!-- بطاقة المحادثة المباشرة - Widget مدمج -->
+      <!-- بطاقة المحادثة المباشرة - كرابط مباشر -->
       <section class="voice-section">
-        <div class="card voice-card">
+        <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_5301kqcwsvhxfa7aqn1sjewpd30z"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="card voice-card-link">
+
           <div class="card-header">
             <div class="card-icon">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
@@ -253,32 +257,32 @@
           </div>
 
           <p class="voice-card-desc">
-            اضغطي على الزر بالأسفل لبدء محادثة فورية بصوت طبيعي. جوجو تدعم 7 لغات وتجاوبك على كل أسئلتك عن الطائف وموسم الحج.
+            محادثة فورية بصوت طبيعي تدعم 7 لغات. جوجو تجاوبك على كل أسئلتك عن الطائف وموسم الحج.
           </p>
 
-          <!-- منطقة Widget -->
-          <div class="widget-zone">
-            <div class="widget-info">
-              <div class="widget-icon-circle">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+          <div class="voice-action">
+            <div class="voice-action-info">
+              <div class="voice-action-icon">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
                   <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
                   <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
                   <line x1="12" y1="19" x2="12" y2="22"/>
                 </svg>
               </div>
-              <div>
-                <p class="widget-title">المحادثة الصوتية</p>
-                <p class="widget-sub">اضغطي على الأيقونة الدائرية ↓</p>
+              <div class="voice-action-text">
+                <p class="voice-action-title">ابدأي المحادثة الآن</p>
+                <p class="voice-action-sub">اضغطي هنا لفتح صفحة المحادثة</p>
               </div>
             </div>
-            <div class="widget-arrow">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <line x1="12" y1="5" x2="12" y2="19"/>
-                <polyline points="19 12 12 19 5 12"/>
+            <div class="voice-action-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
               </svg>
             </div>
           </div>
-        </div>
+
+        </a>
       </section>
 
     </div>
@@ -305,12 +309,6 @@
   <div id="toast" class="toast" aria-live="polite"></div>
 
 </div>
-
-<!-- ═══════════════════════════════════════════════════════════
-     ElevenLabs Widget الرسمي (مضمون 100%)
-═══════════════════════════════════════════════════════════ -->
-<elevenlabs-convai agent-id="agent_5301kqcwsvhxfa7aqn1sjewpd30z"></elevenlabs-convai>
-<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
 <script src="script.js" defer></script>
 
