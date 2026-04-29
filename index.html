@@ -1,66 +1,107 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>جوجو</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="جوجو - سفيرة التحول الحضري بأمانة محافظة الطائف" />
+  <title>جوجو AI | سفيرة التحول الحضري</title>
 
-<link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
 
-<style>
-body{
-margin:0;
-font-family:Tahoma, Arial;
-background:#0b6b2a;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-
-.box{
-background:#2e7d4a;
-padding:40px;
-border-radius:20px;
-text-align:center;
-width:260px;
-color:white;
-}
-
-button{
-background:#f0c13b;
-border:none;
-padding:15px 25px;
-border-radius:30px;
-font-size:20px;
-cursor:pointer;
-font-weight:bold;
-}
-
-#status{
-margin-top:20px;
-font-size:22px;
-}
-
-h1{
-font-size:50px;
-margin:10px 0;
-}
-</style>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-<div class="box">
-<div style="font-size:70px;">🙋‍♀️</div>
-<h1>جوجو</h1>
+  <!-- خلفية متدرجة متحركة -->
+  <div class="bg-gradient" aria-hidden="true"></div>
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
 
-<button onclick="startVoiceChat()">🎤 تحدث مع جوجو</button>
+  <!-- الحاوية الرئيسية -->
+  <main class="container">
 
-<div id="status">جاهزة</div>
-</div>
+    <!-- الترويسة -->
+    <header class="header">
+      <div class="logo-container">
+        <div class="logo-badge">
+          <span class="logo-text">ط</span>
+        </div>
+        <div class="header-text">
+          <h1 class="title">أمانة محافظة الطائف</h1>
+          <p class="subtitle">سفيرة التحول الحضري</p>
+        </div>
+      </div>
+    </header>
 
-<script src="script.js?v=999"></script>
+    <!-- بطاقة جوجو -->
+    <section class="jojo-card">
 
+      <!-- الأفاتار -->
+      <div class="avatar-wrapper">
+        <div class="avatar-glow"></div>
+        <div class="avatar" id="avatar">
+          <div class="avatar-inner">
+            <span class="avatar-name">جوجو</span>
+          </div>
+          <div class="voice-waves" id="voiceWaves" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- الاسم والدور -->
+      <div class="jojo-info">
+        <h2 class="jojo-name">جوجو</h2>
+        <p class="jojo-role">سفيرة التحول الحضري</p>
+      </div>
+
+      <!-- صندوق المحادثة -->
+      <div class="chat-display" id="chatDisplay" aria-live="polite">
+        <div class="welcome-message">
+          <p>مرحبًا بك، اضغط على الزر بالأسفل لبدء التحدث معي</p>
+        </div>
+      </div>
+
+      <!-- مؤشر الحالة -->
+      <div class="status-indicator" id="statusIndicator">
+        <span class="status-dot" id="statusDot"></span>
+        <span class="status-text" id="statusText">جاهزة</span>
+      </div>
+
+      <!-- زر التحدث -->
+      <button class="talk-button" id="talkButton" type="button" aria-label="تحدث مع جوجو">
+        <span class="button-ring" aria-hidden="true"></span>
+        <span class="button-icon" id="buttonIcon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
+            <path d="M12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2Z" fill="currentColor"/>
+            <path d="M19 11C19 14.53 16.39 17.44 13 17.93V21H11V17.93C7.61 17.44 5 14.53 5 11H7C7 13.76 9.24 16 12 16C14.76 16 17 13.76 17 11H19Z" fill="currentColor"/>
+          </svg>
+        </span>
+        <span class="button-text" id="buttonText">تحدث مع جوجو</span>
+      </button>
+
+      <!-- زر إيقاف -->
+      <button class="stop-button" id="stopButton" type="button" aria-label="إيقاف الصوت">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="18" height="18" aria-hidden="true">
+          <rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/>
+        </svg>
+        <span>إيقاف</span>
+      </button>
+
+    </section>
+
+    <!-- التذييل -->
+    <footer class="footer">
+      <p>جميع الحقوق محفوظة &copy; أمانة محافظة الطائف</p>
+    </footer>
+
+  </main>
+
+  <script src="script.js" defer></script>
 </body>
 </html>
