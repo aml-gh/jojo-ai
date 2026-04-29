@@ -1649,8 +1649,9 @@ elevenlabs-convai {
 }
 
 
+
 /* ═══════════════════════════════════════════════════════════
-   بطاقة المحادثة + Widget الـ ElevenLabs
+   بطاقة المحادثة المباشرة (رابط)
 ═══════════════════════════════════════════════════════════ */
 
 .voice-section {
@@ -1658,16 +1659,33 @@ elevenlabs-convai {
   margin-top: 8px;
 }
 
-.voice-card {
-  text-align: center;
+.voice-card-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
   background:
     linear-gradient(135deg, rgba(232, 192, 80, 0.15) 0%, rgba(22, 60, 45, 0.5) 100%);
   border: 2px solid var(--border-gold);
   position: relative;
   overflow: hidden;
+  padding: 24px 26px;
+  border-radius: var(--r-xl);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.3s var(--ease-expo), border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.voice-card::after {
+.voice-card-link:hover {
+  transform: translateY(-6px);
+  border-color: var(--gold-300);
+  box-shadow:
+    var(--shadow-lg),
+    0 0 60px rgba(232, 192, 80, 0.25);
+}
+
+.voice-card-link::after {
   content: '';
   position: absolute;
   top: 0;
@@ -1683,44 +1701,70 @@ elevenlabs-convai {
   50% { opacity: 1; }
 }
 
-.voice-card .card-header {
+.voice-card-link .card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.voice-card-link .card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(232, 192, 80, 0.2), rgba(22, 145, 106, 0.15));
+  border: 1px solid var(--border-gold);
+  color: var(--gold-300);
+  display: flex;
+  align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+}
+
+.voice-card-link h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
 }
 
 .voice-card-desc {
   font-size: 14px;
   color: var(--text-secondary);
   line-height: 1.7;
-  margin-bottom: 24px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-bottom: 20px;
+  max-width: 700px;
 }
 
-.widget-zone {
+.voice-action {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   padding: 18px 22px;
   background:
-    linear-gradient(135deg, rgba(232, 192, 80, 0.12), rgba(22, 145, 106, 0.08));
-  border: 1px dashed var(--border-gold);
+    linear-gradient(135deg, rgba(232, 192, 80, 0.18), rgba(22, 145, 106, 0.1));
+  border: 1px solid var(--border-gold);
   border-radius: var(--r-md);
-  position: relative;
-  overflow: hidden;
+  transition: all 0.3s var(--ease-expo);
 }
 
-.widget-info {
+.voice-card-link:hover .voice-action {
+  background:
+    linear-gradient(135deg, rgba(232, 192, 80, 0.25), rgba(22, 145, 106, 0.15));
+  border-color: var(--gold-300);
+}
+
+.voice-action-info {
   display: flex;
   align-items: center;
   gap: 14px;
   text-align: right;
 }
 
-.widget-icon-circle {
-  width: 52px;
-  height: 52px;
+.voice-action-icon {
+  width: 56px;
+  height: 56px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--gold-200), var(--gold-500));
   color: var(--green-900);
@@ -1728,64 +1772,57 @@ elevenlabs-convai {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 6px 20px rgba(232, 192, 80, 0.4);
-  animation: widget-icon-pulse 2.5s ease-in-out infinite;
+  box-shadow: 0 8px 24px rgba(232, 192, 80, 0.4);
+  animation: action-icon-pulse 2.5s ease-in-out infinite;
 }
 
-@keyframes widget-icon-pulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 6px 20px rgba(232, 192, 80, 0.4); }
-  50% { transform: scale(1.08); box-shadow: 0 8px 28px rgba(232, 192, 80, 0.6); }
+@keyframes action-icon-pulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 8px 24px rgba(232, 192, 80, 0.4); }
+  50% { transform: scale(1.08); box-shadow: 0 10px 32px rgba(232, 192, 80, 0.6); }
 }
 
-.widget-title {
-  font-size: 16px;
+.voice-action-title {
+  font-size: 17px;
   font-weight: 700;
   color: var(--text-primary);
   margin-bottom: 4px;
 }
 
-.widget-sub {
+.voice-action-sub {
   font-size: 13px;
   color: var(--gold-300);
   font-weight: 500;
 }
 
-.widget-arrow {
+.voice-action-arrow {
   color: var(--gold-300);
-  animation: arrow-bounce 1.8s ease-in-out infinite;
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease-expo);
 }
 
-@keyframes arrow-bounce {
-  0%, 100% { transform: translateY(0); opacity: 0.6; }
-  50% { transform: translateY(8px); opacity: 1; }
+.voice-card-link:hover .voice-action-arrow {
+  transform: translateX(-8px);
+  color: var(--gold-100);
 }
 
-/* Widget الـ ElevenLabs - تنسيق مكانه */
-elevenlabs-convai {
-  z-index: 9999;
-  /* Widget يظهر تلقائيًا في زاوية الصفحة */
-}
-
-/* تأثير توهج للفت الانتباه عند تشغيل الموقع */
-elevenlabs-convai {
-  animation: widget-attention 3s ease-in-out 2s 3;
-}
-
-@keyframes widget-attention {
-  0%, 100% { filter: drop-shadow(0 0 10px rgba(232, 192, 80, 0.3)); }
-  50% { filter: drop-shadow(0 0 30px rgba(232, 192, 80, 0.8)) drop-shadow(0 0 50px rgba(232, 192, 80, 0.4)); }
-}
-
-/* للجوال - widget في الأسفل */
+/* للجوال */
 @media (max-width: 768px) {
-  .widget-zone {
+  .voice-action {
     flex-direction: column;
     text-align: center;
-    gap: 12px;
+    gap: 14px;
   }
 
-  .widget-info {
+  .voice-action-info {
     flex-direction: column;
+  }
+
+  .voice-action-arrow {
+    transform: rotate(-90deg);
+  }
+
+  .voice-card-link:hover .voice-action-arrow {
+    transform: rotate(-90deg) translateX(-4px);
   }
 
   .voice-card-desc {
