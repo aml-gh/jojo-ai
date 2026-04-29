@@ -6,13 +6,9 @@
 (function () {
   'use strict';
 
-  // ─────────────────────────────────────────────
-  // العناصر
-  // ─────────────────────────────────────────────
   const splash = document.getElementById('splash');
   const main = document.getElementById('main');
   const startButton = document.getElementById('startButton');
-  const voiceButton = document.getElementById('voiceButton');
   const videoStage = document.getElementById('videoStage');
   const mainVideo = document.getElementById('mainVideo');
   const closeVideoBtn = document.getElementById('closeVideoBtn');
@@ -20,14 +16,8 @@
   const particlesContainer = document.getElementById('particles');
   const jojoIdle = document.getElementById('jojoIdle');
 
-  // ─────────────────────────────────────────────
-  // الحالة
-  // ─────────────────────────────────────────────
   let currentLang = 'ar';
 
-  // ─────────────────────────────────────────────
-  // بيانات الأسئلة
-  // ─────────────────────────────────────────────
   const questions = {
     ar: {
       q1: 'ما جهود أمانة الطائف في النظافة خلال موسم الحج؟',
@@ -64,9 +54,6 @@
     tr: []
   };
 
-  // ─────────────────────────────────────────────
-  // التهيئة
-  // ─────────────────────────────────────────────
   function init() {
     createParticles();
     bindEvents();
@@ -75,9 +62,6 @@
     console.log('✅ جوجو AI جاهزة');
   }
 
-  // ─────────────────────────────────────────────
-  // إنشاء الجسيمات
-  // ─────────────────────────────────────────────
   function createParticles() {
     if (!particlesContainer) return;
     const count = window.innerWidth < 768 ? 15 : 30;
@@ -96,9 +80,6 @@
     }
   }
 
-  // ─────────────────────────────────────────────
-  // فحص دعم الفيديو
-  // ─────────────────────────────────────────────
   function checkVideoSupport() {
     if (!jojoIdle) return;
     jojoIdle.addEventListener('error', function () {
@@ -113,9 +94,6 @@
     }, 2000);
   }
 
-  // ─────────────────────────────────────────────
-  // ربط الأحداث
-  // ─────────────────────────────────────────────
   function bindEvents() {
     if (startButton) {
       startButton.addEventListener('click', startApp);
@@ -132,10 +110,6 @@
         playAnswer(this.dataset.q);
       });
     });
-
-    if (voiceButton) {
-      voiceButton.addEventListener('click', highlightWidget);
-    }
 
     if (closeVideoBtn) {
       closeVideoBtn.addEventListener('click', closeVideo);
@@ -158,9 +132,6 @@
     document.addEventListener('pointerdown', addRippleEffect, { passive: true });
   }
 
-  // ─────────────────────────────────────────────
-  // بدء التطبيق
-  // ─────────────────────────────────────────────
   function startApp() {
     if (!splash || !main) return;
     splash.classList.add('fade-out');
@@ -170,9 +141,6 @@
     }, 700);
   }
 
-  // ─────────────────────────────────────────────
-  // اختيار اللغة
-  // ─────────────────────────────────────────────
   function setLanguage(lang) {
     if (!questions[lang]) return;
     currentLang = lang;
@@ -182,9 +150,6 @@
     updateQuestions();
   }
 
-  // ─────────────────────────────────────────────
-  // تحديث نصوص الأسئلة
-  // ─────────────────────────────────────────────
   function updateQuestions() {
     const langData = questions[currentLang];
     if (!langData) return;
@@ -197,14 +162,11 @@
     });
   }
 
-  // ─────────────────────────────────────────────
-  // تشغيل إجابة فيديو
-  // ─────────────────────────────────────────────
   function playAnswer(qKey) {
     if (!availableVideoAnswers[currentLang] || !availableVideoAnswers[currentLang].includes(qKey)) {
       const messages = {
-        ar: 'هذه الإجابة قيد التجهيز. اضغطي على أيقونة المحادثة في زاوية الصفحة للحصول على إجابة فورية!',
-        en: 'This answer is being prepared. Click the chat icon in the corner!',
+        ar: 'هذه الإجابة قيد التجهيز. اضغطي على الأيقونة الدائرية في الزاوية للحصول على إجابة فورية!',
+        en: 'This answer is being prepared. Click the round icon in the corner!',
         fr: 'Cette réponse est en préparation.',
         ur: 'یہ جواب تیار کیا جا رہا ہے۔',
         tr: 'Bu cevap hazırlanıyor.'
@@ -227,9 +189,6 @@
     }
   }
 
-  // ─────────────────────────────────────────────
-  // إغلاق الفيديو
-  // ─────────────────────────────────────────────
   function closeVideo() {
     if (!videoStage || !mainVideo) return;
     mainVideo.pause();
@@ -237,43 +196,6 @@
     videoStage.classList.add('hidden');
   }
 
-  // ─────────────────────────────────────────────
-  // إبراز الـ Widget
-  // ─────────────────────────────────────────────
-  function highlightWidget() {
-    const widget = document.querySelector('elevenlabs-convai');
-
-    if (!widget) {
-      showToast('يُرجى الانتظار، خدمة المحادثة قيد التحميل...');
-      // أعد المحاولة بعد ثانية
-      setTimeout(highlightWidget, 1500);
-      return;
-    }
-
-    // اجعل widget يظهر بشكل واضح
-    widget.style.zIndex = '99999';
-
-    // أضف تأثير نبض حول widget
-    widget.classList.add('widget-highlight');
-
-    // أزل التأثير بعد 4 ثواني
-    setTimeout(function () {
-      widget.classList.remove('widget-highlight');
-    }, 4000);
-
-    // اعرض رسالة توجيهية
-    showToast('👈 اضغطي على الأيقونة الدائرية في زاوية الصفحة للتحدث مع جوجو');
-
-    // مرّر الصفحة لأسفل عشان widget يبان أكثر
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: 'smooth'
-    });
-  }
-
-  // ─────────────────────────────────────────────
-  // Toast
-  // ─────────────────────────────────────────────
   let toastTimer = null;
   function showToast(message) {
     if (!toast) return;
@@ -285,15 +207,11 @@
     }, 4500);
   }
 
-  // ─────────────────────────────────────────────
-  // تأثير Ripple
-  // ─────────────────────────────────────────────
   function addRippleEffect(e) {
     const btn = e.target.closest('button');
     if (!btn) return;
-    if (btn.tagName !== 'BUTTON') return;
-    if (btn.closest('elevenlabs-convai')) return;
     if (btn.classList.contains('close-video-btn')) return;
+    if (btn.closest('elevenlabs-convai')) return;
 
     const rect = btn.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height) * 2.2;
@@ -323,22 +241,12 @@
     }, 650);
   }
 
-  // إضافة CSS للـ ripple وتأثير highlight
   (function () {
     const style = document.createElement('style');
-    style.textContent =
-      '@keyframes ripple-grow { to { transform: scale(1); opacity: 0; } }' +
-      '.widget-highlight { animation: widget-glow 1.2s ease-in-out infinite; }' +
-      '@keyframes widget-glow { ' +
-      '  0%, 100% { filter: drop-shadow(0 0 20px rgba(232, 192, 80, 0.5)); }' +
-      '  50% { filter: drop-shadow(0 0 40px rgba(232, 192, 80, 1)) drop-shadow(0 0 60px rgba(232, 192, 80, 0.8)); transform: scale(1.1); }' +
-      '}';
+    style.textContent = '@keyframes ripple-grow { to { transform: scale(1); opacity: 0; } }';
     document.head.appendChild(style);
   })();
 
-  // ─────────────────────────────────────────────
-  // البدء
-  // ─────────────────────────────────────────────
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
