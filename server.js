@@ -1,5 +1,5 @@
 // =====================================================
-// جوجو AI - Server (مع ElevenLabs TTS)
+// جوجو AI - Server (صوت طبيعي محسّن)
 // سفيرة التحول الحضري بأمانة محافظة الطائف
 // =====================================================
 
@@ -15,8 +15,16 @@ const PORT = process.env.PORT || 3000;
 // =====================================================
 // إعدادات ElevenLabs
 // =====================================================
-const JOJO_VOICE_ID = 'mRdG9GYEjJmIzqbYTidv'; // صوت Sana
-const ELEVENLABS_MODEL = 'eleven_multilingual_v2'; // يدعم العربية وكل اللغات
+const JOJO_VOICE_ID = 'mRdG9GYEjJmIzqbYTidv'; // Sana
+
+// النماذج المتاحة (نجرب الأحدث أولاً)
+// eleven_v3        = الأحدث - أكثر تعبيرًا (Alpha)
+// eleven_turbo_v2_5 = سريع وعالي الجودة - يدعم العربية
+// eleven_multilingual_v2 = مستقر - يدعم العربية
+const TTS_MODELS = [
+  'eleven_turbo_v2_5',        // الأفضل: سريع + طبيعي + يدعم العربية
+  'eleven_multilingual_v2'    // احتياطي
+];
 
 // =====================================================
 // Middleware
@@ -44,33 +52,44 @@ app.use(express.static(__dirname, {
 }));
 
 // =====================================================
-// شخصية جوجو
+// شخصية جوجو - محسّنة للصوت الطبيعي
 // =====================================================
-const JOJO_SYSTEM_PROMPT = `You are "Jojo" (جوجو), the Urban Transformation Ambassador for the Municipality of Taif Governorate (أمانة محافظة الطائف) in Saudi Arabia.
+const JOJO_SYSTEM_PROMPT = `أنتِ "جوجو"، سفيرة التحول الحضري بأمانة محافظة الطائف في المملكة العربية السعودية.
 
-YOUR IDENTITY:
-- Name: Jojo (جوجو)
-- Role: Urban Transformation Ambassador at Taif Municipality
-- Personality: Elegant, formal, smart, warm, professional, concise
+شخصيتك:
+- اسمك: جوجو
+- منصبك: سفيرة التحول الحضري بأمانة محافظة الطائف
+- شخصيتك: راقية، أنيقة، حيوية، ودودة، محترفة
+- لهجتك: عربية فصحى مع لمسة سعودية رسمية لكنها دافئة
 
-CRITICAL LANGUAGE RULE:
-- ALWAYS reply in the EXACT SAME LANGUAGE the user speaks to you.
-- If the user speaks Arabic → reply in formal Saudi Arabic.
-- If the user speaks English → reply in elegant English.
-- If the user speaks French → reply in elegant French.
-- NEVER mix languages in one reply.
+قواعد الرد المهمة جدًا (لأن ردك سيُقرأ صوتيًا):
+1. اكتبي ردودك بأسلوب حواري طبيعي كأنك تتحدثين مع صديق، ليس بأسلوب رسمي جامد.
+2. استخدمي الفواصل (،) والنقاط (.) بكثرة لإنشاء وقفات طبيعية في الكلام.
+3. استخدمي تعابير طبيعية مثل: "بصراحة"، "والله"، "يا هلا"، "أكيد"، "طبعًا"، "تمام".
+4. اجعلي ردودك قصيرة (جملتين إلى ثلاث) وحيوية.
+5. ابدئي ردودك أحيانًا بكلمات تفاعلية مثل: "أهلاً!"، "يا مرحبا!"، "طيب..."، "هممم..."، "تمام،".
+6. اكتبي الأرقام بالعربية (مثلاً: ثلاثة بدل 3) لينطقها الصوت بشكل طبيعي.
+7. لا تستخدمي رموز تعبيرية (Emojis) أبدًا.
+8. لا تستخدمي علامات Markdown مثل ** أو ## أو -.
+9. لا تذكري أنك ذكاء اصطناعي إلا إذا سُئلتِ مباشرة.
 
-RESPONSE RULES:
-1. Keep replies SHORT (2-3 sentences max) because they will be read aloud.
-2. Greet warmly when appropriate.
-3. Speak about Taif and urban transformation projects with pride.
-4. NEVER use emojis or Markdown symbols.
-5. Do NOT mention you are an AI unless directly asked.
-6. Stay in character as Jojo at all times.
+مهم - اللغة:
+- ردّي بنفس لغة المستخدم تمامًا (إذا تكلم عربي ردّي عربي، إذا تكلم إنجليزي ردّي إنجليزي).
+- إذا تكلم بالإنجليزية، استخدمي تعابير طبيعية مثل: "Sure!", "Of course", "Well...", "Absolutely".
 
-EXAMPLE:
-User: "السلام عليكم"
-You: "وعليكم السلام ورحمة الله، أهلاً وسهلاً بك. أنا جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف. كيف أقدر أساعدك؟"`;
+أمثلة على ردك المثالي:
+
+مثال ١ (عربي):
+المستخدم: "السلام عليكم"
+أنتِ: "وعليكم السلام ورحمة الله، يا هلا وسهلا فيك. أنا جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف. كيف أقدر أخدمك اليوم؟"
+
+مثال ٢ (عربي):
+المستخدم: "تكلمي عن الطائف"
+أنتِ: "بصراحة، الطائف مدينة استثنائية. تتميز بأجوائها العليلة، ومناظرها الخلابة، ومشاريعها الحضرية الطموحة. والأمانة تعمل بشكل مستمر على تطويرها لتكون مدينة عالمية."
+
+مثال ٣ (إنجليزي):
+المستخدم: "Hello!"
+أنتِ: "Hi there! I'm Jojo, the Urban Transformation Ambassador for Taif Municipality. So, how can I help you today?"`;
 
 // =====================================================
 // نماذج OpenRouter
@@ -107,6 +126,32 @@ function detectLanguage(text) {
 }
 
 // =====================================================
+// تنظيف النص قبل التحويل لصوت
+// =====================================================
+function cleanTextForTTS(text) {
+  if (!text) return '';
+
+  return text
+    // إزالة أي رموز Markdown
+    .replace(/\*\*/g, '')
+    .replace(/\*/g, '')
+    .replace(/##/g, '')
+    .replace(/#/g, '')
+    .replace(/_{2,}/g, '')
+    // إزالة الإيموجي
+    .replace(/[\u{1F600}-\u{1F64F}]|[\u{1F300}-\u{1F5FF}]|[\u{1F680}-\u{1F6FF}]|[\u{1F1E0}-\u{1F1FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '')
+    // إضافة وقفات طبيعية بعد علامات الترقيم
+    .replace(/،/g, '، ')
+    .replace(/\./g, '. ')
+    .replace(/\؟/g, '؟ ')
+    .replace(/\?/g, '? ')
+    .replace(/!/g, '! ')
+    // إزالة المسافات الزائدة
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// =====================================================
 // استدعاء نموذج OpenRouter
 // =====================================================
 async function callModel(model, messages, apiKey, siteUrl) {
@@ -121,9 +166,9 @@ async function callModel(model, messages, apiKey, siteUrl) {
     body: JSON.stringify({
       model: model,
       messages: messages,
-      temperature: 0.7,
+      temperature: 0.85,  // أعلى = أكثر إبداعًا وطبيعية
       max_tokens: 400,
-      top_p: 0.9
+      top_p: 0.95
     })
   });
 
@@ -138,7 +183,7 @@ async function callModel(model, messages, apiKey, siteUrl) {
 }
 
 // =====================================================
-// نقطة المحادثة الرئيسية
+// نقطة المحادثة
 // =====================================================
 app.post('/api/chat', async (req, res) => {
   try {
@@ -169,7 +214,6 @@ app.post('/api/chat', async (req, res) => {
       { role: 'user', content: message }
     ];
 
-    // محاولة النموذج الرئيسي
     try {
       const result = await callModel(PRIMARY_MODEL, messages, apiKey, siteUrl);
       const replyLang = detectLanguage(result.reply);
@@ -179,7 +223,6 @@ app.post('/api/chat', async (req, res) => {
       console.warn(`⚠️ فشل ${PRIMARY_MODEL}:`, err.message);
     }
 
-    // المحاولات الاحتياطية
     let lastError = null;
     for (const model of FALLBACK_MODELS) {
       try {
@@ -195,8 +238,7 @@ app.post('/api/chat', async (req, res) => {
 
     const errorMessages = {
       ar: 'عذرًا، الخدمة مشغولة حاليًا. يُرجى المحاولة بعد قليل.',
-      en: 'Sorry, the service is busy right now. Please try again shortly.',
-      fr: 'Désolé, le service est occupé. Veuillez réessayer plus tard.'
+      en: 'Sorry, the service is busy right now. Please try again shortly.'
     };
 
     return res.status(500).json({
@@ -216,8 +258,42 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // =====================================================
-// نقطة تحويل النص لصوت (ElevenLabs TTS)
+// 🔊 ElevenLabs TTS - محسّن للصوت الطبيعي
 // =====================================================
+async function callElevenLabs(text, model, apiKey) {
+  const cleanText = cleanTextForTTS(text);
+
+  const response = await fetch(
+    `https://api.elevenlabs.io/v1/text-to-speech/${JOJO_VOICE_ID}`,
+    {
+      method: 'POST',
+      headers: {
+        'Accept': 'audio/mpeg',
+        'Content-Type': 'application/json',
+        'xi-api-key': apiKey
+      },
+      body: JSON.stringify({
+        text: cleanText,
+        model_id: model,
+        voice_settings: {
+          // ⭐ الإعدادات المحسّنة للصوت الطبيعي
+          stability: 0.35,           // منخفض = أكثر تعبيرًا وحيوية (مو مسطح)
+          similarity_boost: 0.85,    // عالي = يحافظ على هوية الصوت
+          style: 0.65,               // عالي = يلتقط النبرة الطبيعية والتعبير
+          use_speaker_boost: true    // وضوح أعلى
+        }
+      })
+    }
+  );
+
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(`[${model}] ${response.status}: ${errorText}`);
+  }
+
+  return await response.buffer();
+}
+
 app.post('/api/tts', async (req, res) => {
   try {
     const { text } = req.body;
@@ -232,49 +308,36 @@ app.post('/api/tts', async (req, res) => {
       return res.status(500).json({ error: 'مفتاح ElevenLabs غير مهيأ' });
     }
 
-    console.log(`🔊 تحويل النص لصوت (${text.length} حرف)`);
+    console.log(`🔊 طلب صوت (${text.length} حرف)`);
 
-    const response = await fetch(
-      `https://api.elevenlabs.io/v1/text-to-speech/${JOJO_VOICE_ID}`,
-      {
-        method: 'POST',
-        headers: {
-          'Accept': 'audio/mpeg',
-          'Content-Type': 'application/json',
-          'xi-api-key': elevenApiKey
-        },
-        body: JSON.stringify({
-          text: text,
-          model_id: ELEVENLABS_MODEL,
-          voice_settings: {
-            stability: 0.5,
-            similarity_boost: 0.75,
-            style: 0.0,
-            use_speaker_boost: true
-          }
-        })
+    // محاولة كل نموذج بالترتيب
+    let lastError = null;
+    for (const model of TTS_MODELS) {
+      try {
+        console.log(`🎵 محاولة النموذج: ${model}`);
+        const audioBuffer = await callElevenLabs(text, model, elevenApiKey);
+
+        res.set({
+          'Content-Type': 'audio/mpeg',
+          'Content-Length': audioBuffer.length,
+          'Cache-Control': 'no-cache'
+        });
+        res.send(audioBuffer);
+
+        console.log(`✅ نجح ${model}: ${audioBuffer.length} بايت`);
+        return;
+      } catch (err) {
+        console.warn(`⚠️ فشل ${model}:`, err.message);
+        lastError = err;
       }
-    );
-
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error('❌ خطأ من ElevenLabs:', response.status, errorText);
-      return res.status(response.status).json({
-        error: 'فشل تحويل النص لصوت',
-        details: errorText
-      });
     }
 
-    // تمرير الصوت مباشرة للمتصفح
-    const audioBuffer = await response.buffer();
-    res.set({
-      'Content-Type': 'audio/mpeg',
-      'Content-Length': audioBuffer.length,
-      'Cache-Control': 'no-cache'
+    // كل النماذج فشلت
+    console.error('❌ كل نماذج TTS فشلت:', lastError?.message);
+    return res.status(500).json({
+      error: 'فشل تحويل النص لصوت',
+      details: lastError?.message
     });
-    res.send(audioBuffer);
-
-    console.log(`✅ تم إرسال ${audioBuffer.length} بايت من الصوت`);
 
   } catch (error) {
     console.error('❌ خطأ في TTS:', error.message);
@@ -292,7 +355,13 @@ app.get('/api/health', (req, res) => {
     hasOpenRouterKey: !!process.env.OPENROUTER_API_KEY,
     hasElevenLabsKey: !!process.env.ELEVENLABS_API_KEY,
     voiceId: JOJO_VOICE_ID,
-    primaryModel: PRIMARY_MODEL,
+    ttsModels: TTS_MODELS,
+    voiceSettings: {
+      stability: 0.35,
+      similarity_boost: 0.85,
+      style: 0.65,
+      use_speaker_boost: true
+    },
     timestamp: new Date().toISOString()
   });
 });
@@ -309,9 +378,12 @@ app.get('/', (req, res) => {
 // =====================================================
 app.listen(PORT, '0.0.0.0', () => {
   console.log('═══════════════════════════════════════════');
-  console.log(`🌟 جوجو AI تعمل على المنفذ ${PORT}`);
+  console.log(`🌟 جوجو AI - الإصدار المحسّن`);
+  console.log(`📡 المنفذ: ${PORT}`);
   console.log(`🔑 OpenRouter: ${process.env.OPENROUTER_API_KEY ? '✅' : '❌'}`);
   console.log(`🎤 ElevenLabs: ${process.env.ELEVENLABS_API_KEY ? '✅' : '❌'}`);
   console.log(`🎵 Voice ID: ${JOJO_VOICE_ID}`);
+  console.log(`🎚️ Stability: 0.35 (تعبيري)`);
+  console.log(`🎚️ Style: 0.65 (طبيعي)`);
   console.log('═══════════════════════════════════════════');
 });
