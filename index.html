@@ -2,108 +2,383 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <meta name="description" content="جوجو - سفيرة التحول الحضري بأمانة محافظة الطائف" />
-  <title>جوجو AI | سفيرة التحول الحضري</title>
+  <meta name="theme-color" content="#0a3d2e" />
+  <title>جوجو AI | أمانة محافظة الطائف</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- خلفية متدرجة متحركة -->
-  <div class="bg-gradient" aria-hidden="true"></div>
-  <div class="bg-orbs" aria-hidden="true">
-    <span class="orb orb-1"></span>
-    <span class="orb orb-2"></span>
-    <span class="orb orb-3"></span>
+<div class="app">
+
+  <!-- ═══════════════════════════════════
+       طبقة الخلفية السينمائية
+  ═══════════════════════════════════ -->
+  <div class="cinematic-bg" aria-hidden="true">
+    <div class="aurora aurora-1"></div>
+    <div class="aurora aurora-2"></div>
+    <div class="aurora aurora-3"></div>
+    <div class="grid-pattern"></div>
+    <div class="particles" id="particles"></div>
   </div>
 
-  <!-- الحاوية الرئيسية -->
-  <main class="container">
+  <!-- ═══════════════════════════════════
+       شاشة البداية السينمائية
+  ═══════════════════════════════════ -->
+  <section id="splash" class="splash">
 
-    <!-- الترويسة -->
-    <header class="header">
-      <div class="logo-container">
-        <div class="logo-badge">
-          <span class="logo-text">ط</span>
-        </div>
-        <div class="header-text">
-          <h1 class="title">أمانة محافظة الطائف</h1>
-          <p class="subtitle">سفيرة التحول الحضري</p>
-        </div>
-      </div>
-    </header>
+    <!-- شعاع دوار -->
+    <div class="splash-rays" aria-hidden="true"></div>
 
-    <!-- بطاقة جوجو -->
-    <section class="jojo-card">
+    <!-- حلقات نابضة -->
+    <div class="splash-rings" aria-hidden="true">
+      <span class="ring r1"></span>
+      <span class="ring r2"></span>
+      <span class="ring r3"></span>
+    </div>
 
-      <!-- الأفاتار -->
-      <div class="avatar-wrapper">
-        <div class="avatar-glow"></div>
-        <div class="avatar" id="avatar">
-          <div class="avatar-inner">
-            <span class="avatar-name">جوجو</span>
-          </div>
-          <div class="voice-waves" id="voiceWaves" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span>
-          </div>
-        </div>
-      </div>
+    <!-- المحتوى المركزي -->
+    <div class="splash-content">
 
-      <!-- الاسم والدور -->
-      <div class="jojo-info">
-        <h2 class="jojo-name">جوجو</h2>
-        <p class="jojo-role">سفيرة التحول الحضري</p>
-      </div>
-
-      <!-- صندوق الترحيب -->
-      <div class="chat-display" id="chatDisplay">
-        <div class="welcome-message">
-          <p>مرحبًا بك في موقع جوجو، سفيرة التحول الحضري بأمانة محافظة الطائف. اضغطي على الزر الذهبي بالأسفل لبدء التحدث معي بأي لغة تريدين.</p>
-        </div>
-      </div>
-
-      <!-- مؤشر الحالة -->
-      <div class="status-indicator">
-        <span class="status-dot"></span>
-        <span class="status-text">جاهزة للتحدث معك</span>
-      </div>
-
-      <!-- زر التحدث - يفتح الـ Widget -->
-      <button class="talk-button" id="openWidgetButton" type="button" aria-label="تحدث مع جوجو">
-        <span class="button-ring" aria-hidden="true"></span>
-        <span class="button-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="28" height="28">
-            <path d="M12 2C10.34 2 9 3.34 9 5V11C9 12.66 10.34 14 12 14C13.66 14 15 12.66 15 11V5C15 3.34 13.66 2 12 2Z" fill="currentColor"/>
-            <path d="M19 11C19 14.53 16.39 17.44 13 17.93V21H11V17.93C7.61 17.44 5 14.53 5 11H7C7 13.76 9.24 16 12 16C14.76 16 17 13.76 17 11H19Z" fill="currentColor"/>
+      <!-- الشعار -->
+      <div class="splash-logo">
+        <div class="logo-circle">
+          <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="logoGold" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#fde68a"/>
+                <stop offset="50%" stop-color="#f7e08a"/>
+                <stop offset="100%" stop-color="#c99520"/>
+              </linearGradient>
+            </defs>
+            <!-- نخلة وسيوف مبسطة -->
+            <circle cx="60" cy="60" r="55" fill="none" stroke="url(#logoGold)" stroke-width="2" opacity="0.4"/>
+            <text x="60" y="78" text-anchor="middle" font-family="Cairo, sans-serif" font-size="48" font-weight="900" fill="url(#logoGold)">ط</text>
           </svg>
+        </div>
+        <div class="logo-glow"></div>
+      </div>
+
+      <!-- النصوص -->
+      <div class="splash-text">
+        <p class="splash-label">
+          <span class="label-line"></span>
+          أمانة محافظة الطائف
+          <span class="label-line"></span>
+        </p>
+
+        <h1 class="splash-title">
+          <span class="title-word" style="animation-delay: 0.3s">مرحبًا</span>
+          <span class="title-word" style="animation-delay: 0.5s">بك</span>
+          <span class="title-word" style="animation-delay: 0.7s">في</span>
+          <span class="title-word title-highlight" style="animation-delay: 0.9s">جوجو</span>
+        </h1>
+
+        <p class="splash-sub">سفيرة التحول الحضري ومساعدتك الذكية</p>
+      </div>
+
+      <!-- زر البدء -->
+      <button id="startButton" class="splash-button" type="button" aria-label="ابدأ التجربة">
+        <span class="btn-bg"></span>
+        <span class="btn-shimmer"></span>
+        <span class="btn-content">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <polygon points="6 4 20 12 6 20"/>
+          </svg>
+          <span>ابدأ التجربة</span>
         </span>
-        <span class="button-text">تحدث مع جوجو</span>
       </button>
 
-      <!-- معلومات إضافية -->
-      <div class="info-text">
-        <p>💬 محادثة فورية بصوت طبيعي  •  🌍 تدعم أكثر من 7 لغات  •  📚 معرفة شاملة بالطائف</p>
+      <!-- شارة AI -->
+      <div class="splash-badge">
+        <span class="badge-dot"></span>
+        <span>مدعوم بالذكاء الاصطناعي المتقدم</span>
       </div>
 
-    </section>
+    </div>
+
+  </section>
+
+  <!-- ═══════════════════════════════════
+       الواجهة الرئيسية
+  ═══════════════════════════════════ -->
+  <main id="main" class="main hidden">
+
+    <!-- الشريط العلوي -->
+    <header class="top-bar">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+            <text x="16" y="22" text-anchor="middle" font-family="Cairo, sans-serif" font-size="16" font-weight="900" fill="currentColor">ط</text>
+          </svg>
+        </div>
+        <div class="brand-text">
+          <p class="brand-ar">أمانة محافظة الطائف</p>
+          <p class="brand-en">Taif Municipality</p>
+        </div>
+      </div>
+
+      <button id="homeButton" class="icon-btn hidden" type="button" aria-label="العودة للرئيسية">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
+          <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+          <polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </button>
+    </header>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="content">
+
+      <!-- البطاقة العلوية - جوجو -->
+      <section class="hero-card">
+        <div class="hero-left">
+          <div class="hero-eyebrow">
+            <span class="eyebrow-dot"></span>
+            خدمة الحجاج الذكية
+          </div>
+          <h2 class="hero-title">
+            اسأل <span class="text-gold">جوجو</span>
+          </h2>
+          <p class="hero-desc">مساعدتك التفاعلية لخدمات موسم الحج</p>
+          <p class="hero-hint">اختر اللغة ثم اضغط على السؤال أو تحدث معي مباشرة</p>
+        </div>
+
+        <div class="hero-right">
+          <!-- الأفاتار الفاخر -->
+          <div class="avatar-stage">
+            <div class="avatar-rings" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+
+            <div class="avatar-orb">
+              <!-- بديل CSS لـ jojo_idle.webm -->
+              <video id="jojoIdle" class="avatar-video" autoplay muted loop playsinline poster="">
+                <source src="jojo_idle.webm" type="video/webm" />
+              </video>
+
+              <div class="avatar-fallback" aria-hidden="true">
+                <div class="orb-core"></div>
+                <div class="orb-aura"></div>
+                <span class="orb-text">جوجو</span>
+              </div>
+            </div>
+
+            <div class="avatar-glow" aria-hidden="true"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- بطاقة اللغات -->
+      <section class="card languages-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="2" y1="12" x2="22" y2="12"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+          </div>
+          <h3>اختر اللغة</h3>
+        </div>
+
+        <div class="languages">
+          <button class="lang-btn active" data-lang="ar" type="button">
+            <span class="lang-flag">🇸🇦</span>
+            <span class="lang-name">العربية</span>
+          </button>
+          <button class="lang-btn" data-lang="en" type="button">
+            <span class="lang-flag">🇬🇧</span>
+            <span class="lang-name">English</span>
+          </button>
+          <button class="lang-btn" data-lang="fr" type="button">
+            <span class="lang-flag">🇫🇷</span>
+            <span class="lang-name">Français</span>
+          </button>
+          <button class="lang-btn" data-lang="ur" type="button">
+            <span class="lang-flag">🇵🇰</span>
+            <span class="lang-name">اردو</span>
+          </button>
+          <button class="lang-btn" data-lang="tr" type="button">
+            <span class="lang-flag">🇹🇷</span>
+            <span class="lang-name">Türkçe</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- بطاقة الأسئلة -->
+      <section class="card questions-card">
+        <div class="card-header">
+          <div class="card-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+          <h3>الأسئلة الشائعة</h3>
+        </div>
+
+        <div class="questions">
+          <button class="question-btn" data-q="q1" type="button">
+            <span class="q-num">١</span>
+            <span class="q-text"></span>
+            <span class="q-arrow">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </span>
+          </button>
+
+          <button class="question-btn" data-q="q2" type="button">
+            <span class="q-num">٢</span>
+            <span class="q-text"></span>
+            <span class="q-arrow">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </span>
+          </button>
+
+          <button class="question-btn" data-q="q3" type="button">
+            <span class="q-num">٣</span>
+            <span class="q-text"></span>
+            <span class="q-arrow">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </section>
+
+      <!-- زر التحدث المباشر مع جوجو -->
+      <section class="voice-cta">
+        <button id="voiceButton" class="voice-button" type="button" aria-label="تحدث مع جوجو مباشرة">
+          <span class="vb-bg"></span>
+          <span class="vb-rings">
+            <span></span>
+            <span></span>
+          </span>
+          <span class="vb-content">
+            <span class="vb-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="22"/>
+              </svg>
+            </span>
+            <span class="vb-text">تحدث مع جوجو مباشرة</span>
+          </span>
+        </button>
+        <p class="voice-hint">محادثة فورية بصوت طبيعي • تدعم 7 لغات</p>
+      </section>
+
+    </div><!-- /content -->
 
     <!-- التذييل -->
-    <footer class="footer">
-      <p>جميع الحقوق محفوظة &copy; أمانة محافظة الطائف</p>
+    <footer class="bottom-info">
+      <p>جميع الحقوق محفوظة © أمانة محافظة الطائف</p>
     </footer>
 
   </main>
 
-  <!-- ElevenLabs Conversational AI Widget -->
-  <elevenlabs-convai agent-id="agent_5301kqcwsvhxfa7aqn1sjewpd30z"></elevenlabs-convai>
-  <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+  <!-- ═══════════════════════════════════
+       شاشة عرض الفيديو
+  ═══════════════════════════════════ -->
+  <div id="videoStage" class="video-stage hidden">
+    <video id="mainVideo" class="main-video" playsinline></video>
+    <button id="closeVideoBtn" class="close-video-btn" type="button" aria-label="إغلاق الفيديو">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
 
-  <!-- كود جوجو لربط الزر -->
-  <script src="script.js" defer></script>
+  <!-- ═══════════════════════════════════
+       شاشة المحادثة الصوتية الفاخرة
+  ═══════════════════════════════════ -->
+  <div id="voiceOverlay" class="voice-overlay hidden" role="dialog" aria-label="المحادثة الصوتية مع جوجو">
+    <div class="vo-backdrop"></div>
+
+    <div class="vo-card">
+      <!-- زر إغلاق -->
+      <button id="closeVoiceBtn" class="vo-close" type="button" aria-label="إنهاء المحادثة">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"/>
+          <line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+
+      <!-- الأفاتار الكبير -->
+      <div class="vo-avatar">
+        <div class="vo-pulse-ring r1"></div>
+        <div class="vo-pulse-ring r2"></div>
+        <div class="vo-pulse-ring r3"></div>
+
+        <div class="vo-orb">
+          <video id="voiceJojoVideo" class="vo-video" autoplay muted loop playsinline>
+            <source src="jojo_idle.webm" type="video/webm" />
+          </video>
+
+          <div class="vo-orb-fallback" aria-hidden="true">
+            <div class="vo-orb-inner"></div>
+            <span class="vo-orb-name">جوجو</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- الاسم -->
+      <h3 class="vo-name">جوجو</h3>
+      <p class="vo-role">سفيرة التحول الحضري</p>
+
+      <!-- مؤشر الحالة -->
+      <div id="voiceStatus" class="vo-status">
+        <span class="vo-dot"></span>
+        <span class="vo-status-text" id="voiceStatusText">جاري الاتصال...</span>
+      </div>
+
+      <!-- موجات الصوت -->
+      <div class="vo-waves" id="voiceWaves" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <!-- النص -->
+      <div class="vo-transcript" id="voiceTranscript"></div>
+
+      <!-- زر إنهاء -->
+      <button id="endVoiceBtn" class="vo-end-btn" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M21 15.46l-5.27-.61-2.52 2.52a15.05 15.05 0 0 1-6.59-6.58l2.53-2.53L8.54 3H3.03A18 18 0 0 0 21 20.97v-5.51z" transform="rotate(135 12 12)"/>
+        </svg>
+        <span>إنهاء المحادثة</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast للإشعارات -->
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+</div><!-- /app -->
+
+<!-- ElevenLabs Conversational AI -->
+<script type="module">
+  import { Conversation } from "https://esm.sh/@elevenlabs/[email protected]";
+  window.ElevenLabsConversation = Conversation;
+  window.dispatchEvent(new Event('eleven-sdk-ready'));
+</script>
+
+<script src="script.js" defer></script>
+
 </body>
 </html>
