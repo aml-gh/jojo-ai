@@ -1,6 +1,6 @@
 {
   "name": "jojo-ai",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "جوجو - سفيرة التحول الحضري بأمانة محافظة الطائف",
   "main": "server.js",
   "scripts": {
@@ -16,7 +16,7 @@
     "dotenv": "^16.4.5",
     "node-fetch": "^2.7.0"
   },
-  "keywords": ["jojo", "ai", "taif", "arabic"],
+  "keywords": ["jojo", "ai", "taif", "arabic", "elevenlabs"],
   "author": "Taif Municipality",
   "license": "MIT"
 }
