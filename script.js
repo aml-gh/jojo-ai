@@ -134,7 +134,7 @@
     });
 
     if (voiceButton) {
-      voiceButton.addEventListener('click', openVoiceWidget);
+      voiceButton.addEventListener('click', highlightWidget);
     }
 
     if (closeVideoBtn) {
@@ -203,9 +203,9 @@
   function playAnswer(qKey) {
     if (!availableVideoAnswers[currentLang] || !availableVideoAnswers[currentLang].includes(qKey)) {
       const messages = {
-        ar: 'هذه الإجابة قيد التجهيز. اضغط على "تحدث مع جوجو" للحصول على إجابة فورية!',
-        en: 'This answer is being prepared. Click "Talk to Jojo" for instant response!',
-        fr: 'Cette réponse est en préparation. Cliquez sur "Parler à Jojo" !',
+        ar: 'هذه الإجابة قيد التجهيز. اضغطي على أيقونة المحادثة في زاوية الصفحة للحصول على إجابة فورية!',
+        en: 'This answer is being prepared. Click the chat icon in the corner!',
+        fr: 'Cette réponse est en préparation.',
         ur: 'یہ جواب تیار کیا جا رہا ہے۔',
         tr: 'Bu cevap hazırlanıyor.'
       };
@@ -238,53 +238,37 @@
   }
 
   // ─────────────────────────────────────────────
-  // فتح Widget الـ ElevenLabs
+  // إبراز الـ Widget
   // ─────────────────────────────────────────────
-  function openVoiceWidget() {
+  function highlightWidget() {
     const widget = document.querySelector('elevenlabs-convai');
 
     if (!widget) {
-      showToast('يُرجى الانتظار لحظة، خدمة المحادثة قيد التحميل...');
+      showToast('يُرجى الانتظار، خدمة المحادثة قيد التحميل...');
+      // أعد المحاولة بعد ثانية
+      setTimeout(highlightWidget, 1500);
       return;
     }
 
-    // محاولة فتح widget بطرق متعددة
-    try {
-      // الطريقة 1: محاولة العثور على زر داخل shadow DOM
-      if (widget.shadowRoot) {
-        const buttons = widget.shadowRoot.querySelectorAll('button');
-        if (buttons.length > 0) {
-          // ابحث عن زر "ابدأ" أو الزر الرئيسي
-          let mainButton = null;
-          buttons.forEach(function (btn) {
-            const text = (btn.textContent || '').toLowerCase();
-            const ariaLabel = (btn.getAttribute('aria-label') || '').toLowerCase();
-            if (text.includes('start') || text.includes('call') ||
-                ariaLabel.includes('start') || ariaLabel.includes('call') ||
-                ariaLabel.includes('conversation')) {
-              mainButton = btn;
-            }
-          });
-          if (mainButton) {
-            mainButton.click();
-            console.log('✅ تم فتح widget عبر الزر');
-            return;
-          }
-          // إذا ما لقينا زر محدد، اضغط أول زر
-          buttons[0].click();
-          console.log('✅ تم النقر على أول زر');
-          return;
-        }
-      }
+    // اجعل widget يظهر بشكل واضح
+    widget.style.zIndex = '99999';
 
-      // الطريقة 2: النقر على widget نفسه
-      widget.click();
-      console.log('✅ تم النقر على widget مباشرة');
+    // أضف تأثير نبض حول widget
+    widget.classList.add('widget-highlight');
 
-    } catch (err) {
-      console.error('خطأ:', err);
-      showToast('يُرجى البحث عن أيقونة المحادثة في زاوية الصفحة والضغط عليها');
-    }
+    // أزل التأثير بعد 4 ثواني
+    setTimeout(function () {
+      widget.classList.remove('widget-highlight');
+    }, 4000);
+
+    // اعرض رسالة توجيهية
+    showToast('👈 اضغطي على الأيقونة الدائرية في زاوية الصفحة للتحدث مع جوجو');
+
+    // مرّر الصفحة لأسفل عشان widget يبان أكثر
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth'
+    });
   }
 
   // ─────────────────────────────────────────────
@@ -298,7 +282,7 @@
     if (toastTimer) clearTimeout(toastTimer);
     toastTimer = setTimeout(function () {
       toast.classList.remove('show');
-    }, 3500);
+    }, 4500);
   }
 
   // ─────────────────────────────────────────────
@@ -339,10 +323,16 @@
     }, 650);
   }
 
-  // إضافة CSS للـ ripple
+  // إضافة CSS للـ ripple وتأثير highlight
   (function () {
     const style = document.createElement('style');
-    style.textContent = '@keyframes ripple-grow { to { transform: scale(1); opacity: 0; } }';
+    style.textContent =
+      '@keyframes ripple-grow { to { transform: scale(1); opacity: 0; } }' +
+      '.widget-highlight { animation: widget-glow 1.2s ease-in-out infinite; }' +
+      '@keyframes widget-glow { ' +
+      '  0%, 100% { filter: drop-shadow(0 0 20px rgba(232, 192, 80, 0.5)); }' +
+      '  50% { filter: drop-shadow(0 0 40px rgba(232, 192, 80, 1)) drop-shadow(0 0 60px rgba(232, 192, 80, 0.8)); transform: scale(1.1); }' +
+      '}';
     document.head.appendChild(style);
   })();
 
