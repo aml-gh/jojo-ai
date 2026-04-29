@@ -165,8 +165,8 @@
   function playAnswer(qKey) {
     if (!availableVideoAnswers[currentLang] || !availableVideoAnswers[currentLang].includes(qKey)) {
       const messages = {
-        ar: 'هذه الإجابة قيد التجهيز. اضغطي على الأيقونة الدائرية في الزاوية للحصول على إجابة فورية!',
-        en: 'This answer is being prepared. Click the round icon in the corner!',
+        ar: 'هذه الإجابة قيد التجهيز. اضغطي على بطاقة "تحدث مع جوجو" للحصول على إجابة فورية!',
+        en: 'This answer is being prepared. Click "Talk to Jojo" card!',
         fr: 'Cette réponse est en préparation.',
         ur: 'یہ جواب تیار کیا جا رہا ہے۔',
         tr: 'Bu cevap hazırlanıyor.'
@@ -208,10 +208,9 @@
   }
 
   function addRippleEffect(e) {
-    const btn = e.target.closest('button');
+    const btn = e.target.closest('button, .voice-card-link');
     if (!btn) return;
     if (btn.classList.contains('close-video-btn')) return;
-    if (btn.closest('elevenlabs-convai')) return;
 
     const rect = btn.getBoundingClientRect();
     const size = Math.max(rect.width, rect.height) * 2.2;
