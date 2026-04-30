@@ -1645,24 +1645,20 @@ svg {
   width: 100%;
   max-width: 480px;
   height: 380px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin: 0 auto;
 }
 
 /* الإضاءة من فوق (Spotlight) */
 .jc-spotlight {
   position: absolute;
-  top: -30px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 70%;
-  height: 110%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background:
-    radial-gradient(ellipse 50% 70% at 50% 30%,
-      rgba(232, 192, 80, 0.4) 0%,
-      rgba(232, 192, 80, 0.15) 30%,
+    radial-gradient(ellipse 50% 70% at 50% 50%,
+      rgba(232, 192, 80, 0.45) 0%,
+      rgba(232, 192, 80, 0.18) 30%,
       rgba(232, 192, 80, 0.05) 60%,
       transparent 80%);
   filter: blur(20px);
@@ -1676,25 +1672,29 @@ svg {
   50% { opacity: 1; }
 }
 
-/* حاوية جوجو */
+/* حاوية جوجو - متمركزة 100% */
 .jc-jojo-container {
-  position: relative;
-  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 2;
 }
 
-/* فيديو جوجو - شفاف وكبير */
+/* فيديو جوجو - شفاف وكبير ومتمركز */
 .jc-jojo-video {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
+  object-position: center center;
   background: transparent !important;
   filter:
-    drop-shadow(0 25px 35px rgba(232, 192, 80, 0.35))
+    drop-shadow(0 25px 35px rgba(232, 192, 80, 0.4))
     drop-shadow(0 12px 20px rgba(0, 0, 0, 0.4));
   animation: jc-float 4s ease-in-out infinite;
 }
@@ -1704,22 +1704,23 @@ svg {
   50% { transform: translateY(-8px); }
 }
 
-/* المنصة (الأرضية تحت جوجو) */
+/* المنصة (الأرضية تحت جوجو) - متمركزة */
 .jc-jojo-platform {
   position: absolute;
-  bottom: 10px;
+  bottom: 5%;
   left: 50%;
   transform: translateX(-50%);
-  width: 65%;
+  width: 60%;
   height: 30px;
   background:
     radial-gradient(ellipse 50% 100% at 50% 0%,
-      rgba(232, 192, 80, 0.5),
-      rgba(232, 192, 80, 0.15) 40%,
+      rgba(232, 192, 80, 0.55),
+      rgba(232, 192, 80, 0.18) 40%,
       transparent 70%);
   filter: blur(10px);
   z-index: 1;
   animation: platform-pulse 4s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes platform-pulse {
