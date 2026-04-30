@@ -1692,8 +1692,8 @@ svg {
   height: 100%;
   object-fit: contain;
   background: transparent !important;
-  /* تحريك جوجو لليسار لتدخل وسط الإضاءة */
-  transform: translateX(-34%) scale(1.3);
+  /* زيادة بسيطة لليسار للوصول للمنتصف */
+  transform: translateX(-42%) scale(1.3);
   transform-origin: center center;
   filter:
     drop-shadow(0 25px 35px rgba(232, 192, 80, 0.4))
@@ -1703,10 +1703,10 @@ svg {
 
 @keyframes jc-float {
   0%, 100% {
-    transform: translateX(-34%) scale(1.3) translateY(0);
+    transform: translateX(-42%) scale(1.3) translateY(0);
   }
   50% {
-    transform: translateX(-34%) scale(1.3) translateY(-8px);
+    transform: translateX(-42%) scale(1.3) translateY(-8px);
   }
 }
 
