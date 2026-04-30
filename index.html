@@ -17,9 +17,7 @@
 
 <div class="app">
 
-  <!-- ═══════════════════════════════════
-       طبقة الخلفية السينمائية
-  ═══════════════════════════════════ -->
+  <!-- طبقة الخلفية السينمائية -->
   <div class="cinematic-bg" aria-hidden="true">
     <div class="aurora aurora-1"></div>
     <div class="aurora aurora-2"></div>
@@ -28,21 +26,15 @@
     <div class="particles" id="particles"></div>
   </div>
 
-  <!-- ═══════════════════════════════════
-       شاشة البداية السينمائية
-  ═══════════════════════════════════ -->
+  <!-- شاشة البداية -->
   <section id="splash" class="splash">
-
     <div class="splash-rays" aria-hidden="true"></div>
-
     <div class="splash-rings" aria-hidden="true">
       <span class="ring r1"></span>
       <span class="ring r2"></span>
       <span class="ring r3"></span>
     </div>
-
     <div class="splash-content">
-
       <div class="splash-logo">
         <div class="logo-circle">
           <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -66,22 +58,20 @@
           أمانة محافظة الطائف
           <span class="label-line"></span>
         </p>
-
         <h1 class="splash-title">
           <span class="title-word" style="animation-delay: 0.3s">مرحبًا</span>
           <span class="title-word" style="animation-delay: 0.5s">بك</span>
           <span class="title-word" style="animation-delay: 0.7s">في</span>
           <span class="title-word title-highlight" style="animation-delay: 0.9s">جوجو</span>
         </h1>
-
         <p class="splash-sub">سفيرة التحول الحضري ومساعدتك الذكية</p>
       </div>
 
-      <button id="startButton" class="splash-button" type="button" aria-label="ابدأ التجربة">
+      <button id="startButton" class="splash-button" type="button">
         <span class="btn-bg"></span>
         <span class="btn-shimmer"></span>
         <span class="btn-content">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
             <polygon points="6 4 20 12 6 20"/>
           </svg>
           <span>ابدأ التجربة</span>
@@ -92,20 +82,15 @@
         <span class="badge-dot"></span>
         <span>مدعوم بالذكاء الاصطناعي المتقدم</span>
       </div>
-
     </div>
-
   </section>
 
-  <!-- ═══════════════════════════════════
-       الواجهة الرئيسية
-  ═══════════════════════════════════ -->
+  <!-- الواجهة الرئيسية -->
   <main id="main" class="main hidden">
-
     <header class="top-bar">
       <div class="brand">
         <div class="brand-icon">
-          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
             <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
             <text x="16" y="22" text-anchor="middle" font-family="Cairo, sans-serif" font-size="16" font-weight="900" fill="currentColor">ط</text>
           </svg>
@@ -125,9 +110,7 @@
             <span class="eyebrow-dot"></span>
             خدمة الحجاج الذكية
           </div>
-          <h2 class="hero-title">
-            اسأل <span class="text-gold">جوجو</span>
-          </h2>
+          <h2 class="hero-title">اسأل <span class="text-gold">جوجو</span></h2>
           <p class="hero-desc">مساعدتك التفاعلية لخدمات موسم الحج</p>
           <p class="hero-hint">اختر اللغة ثم اضغط على السؤال أو تحدث معي مباشرة</p>
         </div>
@@ -139,19 +122,16 @@
               <span></span>
               <span></span>
             </div>
-
             <div class="avatar-orb">
               <video id="jojoIdle" class="avatar-video" autoplay muted loop playsinline poster="">
                 <source src="jojo_idle.webm" type="video/webm" />
               </video>
-
               <div class="avatar-fallback" aria-hidden="true">
                 <div class="orb-core"></div>
                 <div class="orb-aura"></div>
                 <span class="orb-text">جوجو</span>
               </div>
             </div>
-
             <div class="avatar-glow" aria-hidden="true"></div>
           </div>
         </div>
@@ -160,7 +140,7 @@
       <section class="card languages-card">
         <div class="card-header">
           <div class="card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"/>
               <line x1="2" y1="12" x2="22" y2="12"/>
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
@@ -196,7 +176,7 @@
       <section class="card questions-card">
         <div class="card-header">
           <div class="card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"/>
               <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
               <line x1="12" y1="17" x2="12.01" y2="17"/>
@@ -210,7 +190,7 @@
             <span class="q-num">١</span>
             <span class="q-text"></span>
             <span class="q-arrow">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="15 18 9 12 15 6"/>
               </svg>
             </span>
@@ -220,7 +200,7 @@
             <span class="q-num">٢</span>
             <span class="q-text"></span>
             <span class="q-arrow">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="15 18 9 12 15 6"/>
               </svg>
             </span>
@@ -230,7 +210,7 @@
             <span class="q-num">٣</span>
             <span class="q-text"></span>
             <span class="q-arrow">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="15 18 9 12 15 6"/>
               </svg>
             </span>
@@ -238,16 +218,12 @@
         </div>
       </section>
 
-      <!-- بطاقة المحادثة المباشرة - كرابط مباشر -->
+      <!-- بطاقة المحادثة -->
       <section class="voice-section">
-        <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_5301kqcwsvhxfa7aqn1sjewpd30z"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="card voice-card-link">
-
+        <div class="card voice-card">
           <div class="card-header">
             <div class="card-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
                 <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
                 <line x1="12" y1="19" x2="12" y2="22"/>
@@ -260,29 +236,25 @@
             محادثة فورية بصوت طبيعي تدعم 7 لغات. جوجو تجاوبك على كل أسئلتك عن الطائف وموسم الحج.
           </p>
 
-          <div class="voice-action">
-            <div class="voice-action-info">
-              <div class="voice-action-icon">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+          <button id="voiceBtn" class="voice-big-btn" type="button">
+            <span class="vbb-bg"></span>
+            <span class="vbb-content">
+              <span class="vbb-icon" id="vbbIcon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                   <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
                   <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
                   <line x1="12" y1="19" x2="12" y2="22"/>
                 </svg>
-              </div>
-              <div class="voice-action-text">
-                <p class="voice-action-title">ابدأي المحادثة الآن</p>
-                <p class="voice-action-sub">اضغطي هنا لفتح صفحة المحادثة</p>
-              </div>
-            </div>
-            <div class="voice-action-arrow">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
-            </div>
-          </div>
+              </span>
+              <span class="vbb-text" id="vbbText">ابدأ المحادثة</span>
+            </span>
+          </button>
 
-        </a>
+          <div id="voiceStatus" class="voice-status hidden">
+            <span class="vs-dot" id="vsDot"></span>
+            <span id="vsText">جاهزة</span>
+          </div>
+        </div>
       </section>
 
     </div>
@@ -293,13 +265,11 @@
 
   </main>
 
-  <!-- ═══════════════════════════════════
-       شاشة عرض الفيديو
-  ═══════════════════════════════════ -->
+  <!-- شاشة عرض الفيديو -->
   <div id="videoStage" class="video-stage hidden">
     <video id="mainVideo" class="main-video" playsinline></video>
-    <button id="closeVideoBtn" class="close-video-btn" type="button" aria-label="إغلاق الفيديو">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+    <button id="closeVideoBtn" class="close-video-btn" type="button">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <line x1="18" y1="6" x2="6" y2="18"/>
         <line x1="6" y1="6" x2="18" y2="18"/>
       </svg>
@@ -309,6 +279,16 @@
   <div id="toast" class="toast" aria-live="polite"></div>
 
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     ElevenLabs Client SDK (مباشر، بدون UI)
+═══════════════════════════════════════════════════════════ -->
+<script type="module">
+  import { Conversation } from "https://esm.sh/@elevenlabs/[email protected]";
+  window.ElevenLabsConversation = Conversation;
+  window.dispatchEvent(new Event('eleven-sdk-ready'));
+  console.log('✅ ElevenLabs SDK loaded');
+</script>
 
 <script src="script.js" defer></script>
 
