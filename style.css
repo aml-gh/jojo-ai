@@ -1355,48 +1355,49 @@ svg {
 @keyframes wr-4-anim { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(-360deg); } }
 
 /* ═══════════════════════════════════════════════════════════
-   براعم على بطاقة الترحيب
+   ورود طائفية على بطاقة الترحيب
 ═══════════════════════════════════════════════════════════ */
 
 .hero-card {
   position: relative;
 }
 
-.hero-bud {
+.hero-rose {
   position: absolute;
-  width: 50px;
+  width: 70px;
   height: 70px;
   z-index: 1;
-  opacity: 0.45;
+  opacity: 0.4;
   pointer-events: none;
-  animation: bud-sway 4s ease-in-out infinite;
+  filter: drop-shadow(0 4px 12px rgba(196, 107, 134, 0.3));
+  animation: hero-rose-float 5s ease-in-out infinite;
 }
 
-.hero-bud.bud-1 {
-  top: -10px;
-  left: 30px;
+.hero-rose.hero-rose-1 {
+  top: -20px;
+  left: 20px;
   transform: rotate(-15deg);
 }
 
-.hero-bud.bud-2 {
-  bottom: -15px;
-  right: 30px;
+.hero-rose.hero-rose-2 {
+  bottom: -20px;
+  right: 20px;
   transform: rotate(20deg);
-  animation-delay: 2s;
+  animation-delay: 2.5s;
 }
 
-@keyframes bud-sway {
-  0%, 100% { transform: rotate(-15deg) translateY(0); }
-  50% { transform: rotate(-10deg) translateY(-3px); }
+@keyframes hero-rose-float {
+  0%, 100% { transform: rotate(-15deg) translateY(0) scale(1); }
+  50% { transform: rotate(-10deg) translateY(-5px) scale(1.05); }
 }
 
-.hero-bud.bud-2 {
-  animation-name: bud-sway-2;
+.hero-rose.hero-rose-2 {
+  animation-name: hero-rose-float-2;
 }
 
-@keyframes bud-sway-2 {
-  0%, 100% { transform: rotate(20deg) translateY(0); }
-  50% { transform: rotate(15deg) translateY(-3px); }
+@keyframes hero-rose-float-2 {
+  0%, 100% { transform: rotate(20deg) translateY(0) scale(1); }
+  50% { transform: rotate(15deg) translateY(-5px) scale(1.05); }
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1498,9 +1499,9 @@ svg {
     height: 60px;
   }
 
-  .hero-bud {
-    width: 40px;
-    height: 56px;
+  .hero-rose {
+    width: 50px;
+    height: 50px;
   }
 
   .footer-ornament {
