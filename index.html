@@ -25,6 +25,11 @@
     <div class="particles" id="particles"></div>
   </div>
 
+  <!-- ═══════════════════════════════════
+       checkbox مخفي - يتحكم في التنقل بدون JavaScript
+  ═══════════════════════════════════ -->
+  <input type="checkbox" id="appStarted" class="app-toggle" />
+
   <!-- شاشة البداية -->
   <section id="splash" class="splash">
     <div class="splash-rays" aria-hidden="true"></div>
@@ -66,7 +71,8 @@
         <p class="splash-sub">سفيرة التحول الحضري ومساعدتك الذكية</p>
       </div>
 
-      <button id="startButton" class="splash-button" type="button">
+      <!-- ✨ الزر الجديد: label يربط بـ checkbox - يشتغل بدون JavaScript -->
+      <label for="appStarted" class="splash-button">
         <span class="btn-bg"></span>
         <span class="btn-shimmer"></span>
         <span class="btn-content">
@@ -75,7 +81,7 @@
           </svg>
           <span>ابدأ التجربة</span>
         </span>
-      </button>
+      </label>
 
       <div class="splash-badge">
         <span class="badge-dot"></span>
@@ -85,7 +91,7 @@
   </section>
 
   <!-- الواجهة الرئيسية -->
-  <main id="main" class="main hidden">
+  <main id="main" class="main">
     <header class="top-bar">
       <div class="brand">
         <div class="brand-icon">
@@ -111,7 +117,7 @@
           </div>
           <h2 class="hero-title">اسأل <span class="text-gold">جوجو</span></h2>
           <p class="hero-desc">مساعدتك التفاعلية لخدمات موسم الحج</p>
-          <p class="hero-hint">اختر اللغة ثم اضغط على السؤال أو على الزر الذهبي للتحدث</p>
+          <p class="hero-hint">اضغطي على الزر الذهبي بالأسفل للتحدث مع جوجو</p>
         </div>
 
         <div class="hero-right">
@@ -136,88 +142,7 @@
         </div>
       </section>
 
-      <section class="card languages-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="2" y1="12" x2="22" y2="12"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
-          </div>
-          <h3>اختر اللغة</h3>
-        </div>
-
-        <div class="languages">
-          <button class="lang-btn active" data-lang="ar" type="button">
-            <span class="lang-flag">🇸🇦</span>
-            <span class="lang-name">العربية</span>
-          </button>
-          <button class="lang-btn" data-lang="en" type="button">
-            <span class="lang-flag">🇬🇧</span>
-            <span class="lang-name">English</span>
-          </button>
-          <button class="lang-btn" data-lang="fr" type="button">
-            <span class="lang-flag">🇫🇷</span>
-            <span class="lang-name">Français</span>
-          </button>
-          <button class="lang-btn" data-lang="ur" type="button">
-            <span class="lang-flag">🇵🇰</span>
-            <span class="lang-name">اردو</span>
-          </button>
-          <button class="lang-btn" data-lang="tr" type="button">
-            <span class="lang-flag">🇹🇷</span>
-            <span class="lang-name">Türkçe</span>
-          </button>
-        </div>
-      </section>
-
-      <section class="card questions-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-              <line x1="12" y1="17" x2="12.01" y2="17"/>
-            </svg>
-          </div>
-          <h3>الأسئلة الشائعة</h3>
-        </div>
-
-        <div class="questions">
-          <button class="question-btn" data-q="q1" type="button">
-            <span class="q-num">١</span>
-            <span class="q-text"></span>
-            <span class="q-arrow">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="15 18 9 12 15 6"/>
-              </svg>
-            </span>
-          </button>
-
-          <button class="question-btn" data-q="q2" type="button">
-            <span class="q-num">٢</span>
-            <span class="q-text"></span>
-            <span class="q-arrow">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="15 18 9 12 15 6"/>
-              </svg>
-            </span>
-          </button>
-
-          <button class="question-btn" data-q="q3" type="button">
-            <span class="q-num">٣</span>
-            <span class="q-text"></span>
-            <span class="q-arrow">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="15 18 9 12 15 6"/>
-              </svg>
-            </span>
-          </button>
-        </div>
-      </section>
-
-      <!-- زر المحادثة - رابط مباشر مضمون -->
+      <!-- الزر الذهبي الكبير - رابط مباشر -->
       <section class="voice-section">
         <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_5301kqcwsvhxfa7aqn1sjewpd30z"
            target="_blank"
@@ -226,7 +151,7 @@
           <div class="vlb-bg"></div>
           <div class="vlb-content">
             <div class="vlb-icon-circle">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
                 <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
                 <line x1="12" y1="19" x2="12" y2="22"/>
@@ -237,7 +162,7 @@
               <p class="vlb-sub">محادثة فورية بصوت طبيعي • تدعم 7 لغات</p>
             </div>
             <div class="vlb-arrow">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <polyline points="9 18 15 12 9 6"/>
               </svg>
             </div>
@@ -253,22 +178,7 @@
 
   </main>
 
-  <!-- شاشة عرض الفيديو -->
-  <div id="videoStage" class="video-stage hidden">
-    <video id="mainVideo" class="main-video" playsinline></video>
-    <button id="closeVideoBtn" class="close-video-btn" type="button">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <line x1="18" y1="6" x2="6" y2="18"/>
-        <line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
-    </button>
-  </div>
-
-  <div id="toast" class="toast" aria-live="polite"></div>
-
 </div>
-
-<script src="script.js" defer></script>
 
 </body>
 </html>
