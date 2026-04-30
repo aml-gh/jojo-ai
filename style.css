@@ -1152,50 +1152,50 @@ svg {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   زخارف الأركان - شاشة البداية
+   زخارف الأركان - شاشة البداية (ورود كاملة)
 ═══════════════════════════════════════════════════════════ */
 
 .corner-decoration {
   position: absolute;
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   z-index: 5;
-  opacity: 0.55;
+  opacity: 0.6;
   pointer-events: none;
   animation: corner-float 6s ease-in-out infinite;
 }
 
 .corner-decoration.top-right {
-  top: -40px;
-  right: -40px;
+  top: 30px;
+  right: 30px;
   transform: rotate(135deg);
   animation-delay: 0s;
 }
 
 .corner-decoration.top-left {
-  top: -40px;
-  left: -40px;
+  top: 30px;
+  left: 30px;
   transform: rotate(-135deg);
   animation-delay: 1.5s;
 }
 
 .corner-decoration.bottom-right {
-  bottom: -40px;
-  right: -40px;
+  bottom: 30px;
+  right: 30px;
   transform: rotate(45deg);
   animation-delay: 3s;
 }
 
 .corner-decoration.bottom-left {
-  bottom: -40px;
-  left: -40px;
+  bottom: 30px;
+  left: 30px;
   transform: rotate(-45deg);
   animation-delay: 4.5s;
 }
 
 @keyframes corner-float {
-  0%, 100% { transform-origin: center; filter: drop-shadow(0 0 10px rgba(212, 86, 122, 0.3)); }
-  50% { filter: drop-shadow(0 0 25px rgba(212, 86, 122, 0.6)); }
+  0%, 100% { filter: drop-shadow(0 0 12px rgba(212, 86, 122, 0.35)); }
+  50% { filter: drop-shadow(0 0 28px rgba(212, 86, 122, 0.65)); }
 }
 
 .corner-rose {
@@ -1207,11 +1207,11 @@ svg {
 
 .corner-leaf {
   position: absolute;
-  width: 60px;
-  height: 90px;
-  top: 30%;
-  right: 10%;
-  opacity: 0.7;
+  width: 50px;
+  height: 75px;
+  top: 25%;
+  right: 5%;
+  opacity: 0.65;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1468,8 +1468,28 @@ svg {
 
 @media (max-width: 768px) {
   .corner-decoration {
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
+  }
+
+  .corner-decoration.top-right,
+  .corner-decoration.top-left {
+    top: 20px;
+  }
+
+  .corner-decoration.bottom-right,
+  .corner-decoration.bottom-left {
+    bottom: 20px;
+  }
+
+  .corner-decoration.top-right,
+  .corner-decoration.bottom-right {
+    right: 15px;
+  }
+
+  .corner-decoration.top-left,
+  .corner-decoration.bottom-left {
+    left: 15px;
   }
 
   .rose-tagline {
@@ -1511,9 +1531,9 @@ svg {
 
 @media (max-width: 480px) {
   .corner-decoration {
-    width: 90px;
-    height: 90px;
-    opacity: 0.4;
+    width: 70px;
+    height: 70px;
+    opacity: 0.5;
   }
 
   .rose-tagline {
