@@ -14,67 +14,127 @@
   <link rel="stylesheet" href="style.css" />
 
   <!-- ═══════════════════════════════════
-       SVG ورود مخصصة - رموز قابلة للاستخدام
+       SVG ورود الطائف - رسم دقيق للوردة الدمشقية
   ═══════════════════════════════════ -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
-      <!-- وردة طائفية فاخرة -->
+      <!-- ╔══════════════════════════════════════╗
+           ║  الوردة الطائفية - Rosa Damascena    ║
+           ║  وردي فاتح • 30+ بتلة • مفتوحة      ║
+           ╚══════════════════════════════════════╝ -->
       <symbol id="taif-rose" viewBox="0 0 100 100">
         <defs>
-          <radialGradient id="rose-grad" cx="50%" cy="40%">
-            <stop offset="0%" stop-color="#fce4e8"/>
-            <stop offset="40%" stop-color="#f8a5b8"/>
-            <stop offset="80%" stop-color="#d4567a"/>
-            <stop offset="100%" stop-color="#8b1538"/>
+          <!-- التدرج الأساسي للبتلات الخارجية -->
+          <radialGradient id="petal-outer" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#fce7eb"/>
+            <stop offset="50%" stop-color="#f4a8be"/>
+            <stop offset="100%" stop-color="#d97a96"/>
           </radialGradient>
-          <radialGradient id="rose-center" cx="50%" cy="50%">
-            <stop offset="0%" stop-color="#fff"/>
-            <stop offset="100%" stop-color="#f8a5b8"/>
+          <!-- التدرج للبتلات الوسطى -->
+          <radialGradient id="petal-mid" cx="50%" cy="40%" r="60%">
+            <stop offset="0%" stop-color="#fcd5de"/>
+            <stop offset="60%" stop-color="#ec99b5"/>
+            <stop offset="100%" stop-color="#c46b86"/>
           </radialGradient>
+          <!-- التدرج للبتلات الداخلية -->
+          <radialGradient id="petal-inner" cx="50%" cy="35%" r="65%">
+            <stop offset="0%" stop-color="#ffebef"/>
+            <stop offset="50%" stop-color="#f4b8c9"/>
+            <stop offset="100%" stop-color="#d889a3"/>
+          </radialGradient>
+          <!-- ظل خفيف للعمق -->
+          <filter id="rose-shadow">
+            <feGaussianBlur stdDeviation="0.5"/>
+          </filter>
         </defs>
-        <!-- بتلات خارجية -->
+
         <g transform="translate(50, 50)">
-          <ellipse cx="0" cy="-30" rx="18" ry="28" fill="url(#rose-grad)" opacity="0.85" transform="rotate(0)"/>
-          <ellipse cx="0" cy="-30" rx="18" ry="28" fill="url(#rose-grad)" opacity="0.85" transform="rotate(72)"/>
-          <ellipse cx="0" cy="-30" rx="18" ry="28" fill="url(#rose-grad)" opacity="0.85" transform="rotate(144)"/>
-          <ellipse cx="0" cy="-30" rx="18" ry="28" fill="url(#rose-grad)" opacity="0.85" transform="rotate(216)"/>
-          <ellipse cx="0" cy="-30" rx="18" ry="28" fill="url(#rose-grad)" opacity="0.85" transform="rotate(288)"/>
-          <!-- بتلات داخلية -->
-          <ellipse cx="0" cy="-15" rx="12" ry="18" fill="url(#rose-grad)" opacity="0.95" transform="rotate(36)"/>
-          <ellipse cx="0" cy="-15" rx="12" ry="18" fill="url(#rose-grad)" opacity="0.95" transform="rotate(108)"/>
-          <ellipse cx="0" cy="-15" rx="12" ry="18" fill="url(#rose-grad)" opacity="0.95" transform="rotate(180)"/>
-          <ellipse cx="0" cy="-15" rx="12" ry="18" fill="url(#rose-grad)" opacity="0.95" transform="rotate(252)"/>
-          <ellipse cx="0" cy="-15" rx="12" ry="18" fill="url(#rose-grad)" opacity="0.95" transform="rotate(324)"/>
-          <!-- مركز الوردة -->
-          <circle cx="0" cy="0" r="10" fill="url(#rose-center)"/>
+          <!-- الطبقة 1: 8 بتلات خارجية كبيرة (مفتوحة بالكامل) -->
+          <g opacity="0.85">
+            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(45)"/>
+            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(135)"/>
+            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(225)"/>
+            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(315)"/>
+          </g>
+
+          <!-- الطبقة 2: 8 بتلات خارجية وسطى (متناوبة) -->
+          <g opacity="0.9">
+            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(22.5)"/>
+            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(67.5)"/>
+            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(112.5)"/>
+            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(157.5)"/>
+            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(202.5)"/>
+            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(247.5)"/>
+            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(292.5)"/>
+            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(337.5)"/>
+          </g>
+
+          <!-- الطبقة 3: 8 بتلات داخلية -->
+          <g opacity="0.95">
+            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(0)"/>
+            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(45)"/>
+            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(135)"/>
+            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(180)"/>
+            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(225)"/>
+            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(315)"/>
+          </g>
+
+          <!-- الطبقة 4: 6 بتلات داخلية صغيرة (متناوبة) -->
+          <g>
+            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(30)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(90)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(150)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(210)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(270)"/>
+            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(330)"/>
+          </g>
+
+          <!-- الطبقة 5: المركز (بتلات ملفوفة بشكل دائري) -->
+          <g>
+            <circle cx="0" cy="0" r="9" fill="url(#petal-inner)"/>
+            <ellipse cx="0" cy="-4" rx="6" ry="8" fill="url(#petal-inner)" transform="rotate(20)"/>
+            <ellipse cx="0" cy="-4" rx="6" ry="8" fill="url(#petal-inner)" transform="rotate(140)"/>
+            <ellipse cx="0" cy="-4" rx="6" ry="8" fill="url(#petal-inner)" transform="rotate(260)"/>
+            <!-- نقطة المركز الفاتحة -->
+            <circle cx="0" cy="0" r="3" fill="#fff5f7" opacity="0.7"/>
+          </g>
         </g>
       </symbol>
 
-      <!-- وردة برعم -->
-      <symbol id="taif-bud" viewBox="0 0 60 80">
+      <!-- وردة طائفية بشكل جانبي (Profile) -->
+      <symbol id="taif-rose-side" viewBox="0 0 100 100">
         <defs>
-          <linearGradient id="bud-grad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#fce4e8"/>
-            <stop offset="50%" stop-color="#d4567a"/>
-            <stop offset="100%" stop-color="#8b1538"/>
-          </linearGradient>
-          <linearGradient id="stem-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <radialGradient id="side-grad" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#fce7eb"/>
+            <stop offset="50%" stop-color="#f4a8be"/>
+            <stop offset="100%" stop-color="#c46b86"/>
+          </radialGradient>
+          <linearGradient id="side-stem" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stop-color="#34d399"/>
             <stop offset="100%" stop-color="#064e3b"/>
           </linearGradient>
         </defs>
         <!-- ساق -->
-        <path d="M30 40 Q28 60 30 80" stroke="url(#stem-grad)" stroke-width="2" fill="none"/>
+        <path d="M50 50 Q48 70 50 95" stroke="url(#side-stem)" stroke-width="2" fill="none"/>
         <!-- ورقة -->
-        <ellipse cx="22" cy="55" rx="7" ry="3" fill="url(#stem-grad)" transform="rotate(-30 22 55)"/>
-        <!-- البرعم -->
-        <ellipse cx="30" cy="25" rx="14" ry="20" fill="url(#bud-grad)"/>
-        <ellipse cx="30" cy="25" rx="8" ry="18" fill="url(#bud-grad)" opacity="0.7"/>
-        <!-- كأس البرعم -->
-        <path d="M16 38 Q30 30 44 38 Q40 45 30 45 Q20 45 16 38Z" fill="url(#stem-grad)"/>
+        <ellipse cx="40" cy="65" rx="9" ry="4" fill="url(#side-stem)" transform="rotate(-30 40 65)" opacity="0.8"/>
+        <!-- البتلات الخلفية -->
+        <ellipse cx="40" cy="35" rx="13" ry="20" fill="url(#side-grad)" opacity="0.7" transform="rotate(-15 40 35)"/>
+        <ellipse cx="60" cy="35" rx="13" ry="20" fill="url(#side-grad)" opacity="0.7" transform="rotate(15 60 35)"/>
+        <!-- البتلات الأمامية -->
+        <ellipse cx="50" cy="32" rx="18" ry="22" fill="url(#side-grad)" opacity="0.9"/>
+        <ellipse cx="50" cy="38" rx="14" ry="16" fill="url(#side-grad)"/>
+        <!-- المركز -->
+        <circle cx="50" cy="38" r="6" fill="#fce7eb" opacity="0.6"/>
       </symbol>
 
-      <!-- زخرفة ورقة -->
+      <!-- ورقة طائفية -->
       <symbol id="taif-leaf" viewBox="0 0 50 80">
         <defs>
           <linearGradient id="leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -116,16 +176,16 @@
     <div class="aurora aurora-3"></div>
     <div class="grid-pattern"></div>
 
-    <!-- بتلات ورد طائفي متساقطة -->
+    <!-- بتلات ورد طائفي متساقطة - لون وردي فاتح حقيقي -->
     <div class="petals-container" aria-hidden="true">
-      <svg class="petal p-1" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#d4567a" opacity="0.5"/></svg>
-      <svg class="petal p-2" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f8a5b8" opacity="0.4"/></svg>
-      <svg class="petal p-3" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#d4567a" opacity="0.5"/></svg>
-      <svg class="petal p-4" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f8a5b8" opacity="0.4"/></svg>
-      <svg class="petal p-5" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#d4567a" opacity="0.5"/></svg>
-      <svg class="petal p-6" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f8a5b8" opacity="0.4"/></svg>
-      <svg class="petal p-7" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#d4567a" opacity="0.5"/></svg>
-      <svg class="petal p-8" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f8a5b8" opacity="0.4"/></svg>
+      <svg class="petal p-1" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f4a8be" opacity="0.55"/></svg>
+      <svg class="petal p-2" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#fce7eb" opacity="0.5"/></svg>
+      <svg class="petal p-3" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#ec99b5" opacity="0.55"/></svg>
+      <svg class="petal p-4" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#fcd5de" opacity="0.45"/></svg>
+      <svg class="petal p-5" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f4a8be" opacity="0.55"/></svg>
+      <svg class="petal p-6" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#fce7eb" opacity="0.5"/></svg>
+      <svg class="petal p-7" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#ec99b5" opacity="0.55"/></svg>
+      <svg class="petal p-8" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#fcd5de" opacity="0.45"/></svg>
     </div>
   </div>
 
@@ -249,9 +309,9 @@
 
       <!-- بطاقة الترحيب -->
       <section class="hero-card">
-        <!-- زخرفة ورد على البطاقة -->
-        <svg class="hero-bud bud-1" viewBox="0 0 60 80"><use href="#taif-bud"/></svg>
-        <svg class="hero-bud bud-2" viewBox="0 0 60 80"><use href="#taif-bud"/></svg>
+        <!-- زخرفة ورود الطائف على البطاقة -->
+        <svg class="hero-rose hero-rose-1" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+        <svg class="hero-rose hero-rose-2" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
 
         <div class="hero-left">
           <div class="hero-eyebrow">
