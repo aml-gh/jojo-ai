@@ -17,7 +17,6 @@
 
 <div class="app">
 
-  <!-- طبقة الخلفية السينمائية -->
   <div class="cinematic-bg" aria-hidden="true">
     <div class="aurora aurora-1"></div>
     <div class="aurora aurora-2"></div>
@@ -112,7 +111,7 @@
           </div>
           <h2 class="hero-title">اسأل <span class="text-gold">جوجو</span></h2>
           <p class="hero-desc">مساعدتك التفاعلية لخدمات موسم الحج</p>
-          <p class="hero-hint">اختر اللغة ثم اضغط على السؤال أو تحدث معي مباشرة</p>
+          <p class="hero-hint">اختر اللغة ثم اضغط على السؤال أو على أيقونة المحادثة</p>
         </div>
 
         <div class="hero-right">
@@ -218,7 +217,7 @@
         </div>
       </section>
 
-      <!-- بطاقة المحادثة -->
+      <!-- بطاقة المحادثة - بسيطة وواضحة -->
       <section class="voice-section">
         <div class="card voice-card">
           <div class="card-header">
@@ -233,26 +232,30 @@
           </div>
 
           <p class="voice-card-desc">
-            محادثة فورية بصوت طبيعي تدعم 7 لغات. جوجو تجاوبك على كل أسئلتك عن الطائف وموسم الحج.
+            محادثة فورية بصوت طبيعي تدعم 7 لغات
           </p>
 
-          <button id="voiceBtn" class="voice-big-btn" type="button">
-            <span class="vbb-bg"></span>
-            <span class="vbb-content">
-              <span class="vbb-icon" id="vbbIcon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <!-- مؤشر يوضح للمستخدم مكان Widget -->
+          <div class="widget-pointer">
+            <div class="pointer-content">
+              <div class="pointer-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                   <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
                   <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
                   <line x1="12" y1="19" x2="12" y2="22"/>
                 </svg>
-              </span>
-              <span class="vbb-text" id="vbbText">ابدأ المحادثة</span>
-            </span>
-          </button>
-
-          <div id="voiceStatus" class="voice-status hidden">
-            <span class="vs-dot" id="vsDot"></span>
-            <span id="vsText">جاهزة</span>
+              </div>
+              <div class="pointer-text">
+                <p class="pointer-title">ابحثي عن أيقونة المحادثة</p>
+                <p class="pointer-sub">في زاوية الصفحة ↙ اضغطيها للتحدث مع جوجو</p>
+              </div>
+            </div>
+            <div class="pointer-arrow">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <line x1="7" y1="17" x2="17" y2="7"/>
+                <polyline points="7 7 7 17 17 17"/>
+              </svg>
+            </div>
           </div>
         </div>
       </section>
@@ -281,14 +284,10 @@
 </div>
 
 <!-- ═══════════════════════════════════════════════════════════
-     ElevenLabs Client SDK (مباشر، بدون UI)
+     ElevenLabs Widget الرسمي - مضمون 100%
 ═══════════════════════════════════════════════════════════ -->
-<script type="module">
-  import { Conversation } from "https://esm.sh/@elevenlabs/[email protected]";
-  window.ElevenLabsConversation = Conversation;
-  window.dispatchEvent(new Event('eleven-sdk-ready'));
-  console.log('✅ ElevenLabs SDK loaded');
-</script>
+<elevenlabs-convai agent-id="agent_5301kqcwsvhxfa7aqn1sjewpd30z"></elevenlabs-convai>
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
 <script src="script.js" defer></script>
 
