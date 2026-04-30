@@ -111,7 +111,7 @@
           </div>
           <h2 class="hero-title">اسأل <span class="text-gold">جوجو</span></h2>
           <p class="hero-desc">مساعدتك التفاعلية لخدمات موسم الحج</p>
-          <p class="hero-hint">اختر اللغة ثم اضغط على السؤال أو على أيقونة المحادثة</p>
+          <p class="hero-hint">اختر اللغة ثم اضغط على السؤال أو على الزر الذهبي للتحدث</p>
         </div>
 
         <div class="hero-right">
@@ -217,47 +217,32 @@
         </div>
       </section>
 
-      <!-- بطاقة المحادثة - بسيطة وواضحة -->
+      <!-- زر المحادثة - رابط مباشر مضمون -->
       <section class="voice-section">
-        <div class="card voice-card">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_5301kqcwsvhxfa7aqn1sjewpd30z"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="voice-link-btn">
+          <div class="vlb-bg"></div>
+          <div class="vlb-content">
+            <div class="vlb-icon-circle">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                 <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
                 <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
                 <line x1="12" y1="19" x2="12" y2="22"/>
               </svg>
             </div>
-            <h3>تحدث مع جوجو مباشرة</h3>
-          </div>
-
-          <p class="voice-card-desc">
-            محادثة فورية بصوت طبيعي تدعم 7 لغات
-          </p>
-
-          <!-- مؤشر يوضح للمستخدم مكان Widget -->
-          <div class="widget-pointer">
-            <div class="pointer-content">
-              <div class="pointer-icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
-                  <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                  <line x1="12" y1="19" x2="12" y2="22"/>
-                </svg>
-              </div>
-              <div class="pointer-text">
-                <p class="pointer-title">ابحثي عن أيقونة المحادثة</p>
-                <p class="pointer-sub">في زاوية الصفحة ↙ اضغطيها للتحدث مع جوجو</p>
-              </div>
+            <div class="vlb-text">
+              <p class="vlb-title">تحدث مع جوجو مباشرة</p>
+              <p class="vlb-sub">محادثة فورية بصوت طبيعي • تدعم 7 لغات</p>
             </div>
-            <div class="pointer-arrow">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <line x1="7" y1="17" x2="17" y2="7"/>
-                <polyline points="7 7 7 17 17 17"/>
+            <div class="vlb-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="9 18 15 12 9 6"/>
               </svg>
             </div>
           </div>
-        </div>
+        </a>
       </section>
 
     </div>
@@ -282,12 +267,6 @@
   <div id="toast" class="toast" aria-live="polite"></div>
 
 </div>
-
-<!-- ═══════════════════════════════════════════════════════════
-     ElevenLabs Widget الرسمي - مضمون 100%
-═══════════════════════════════════════════════════════════ -->
-<elevenlabs-convai agent-id="agent_5301kqcwsvhxfa7aqn1sjewpd30z"></elevenlabs-convai>
-<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
 <script src="script.js" defer></script>
 
