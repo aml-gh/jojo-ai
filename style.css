@@ -1654,8 +1654,9 @@ elevenlabs-convai {
 
 
 
+
 /* ═══════════════════════════════════════════════════════════
-   بطاقة المحادثة + Widget الـ ElevenLabs
+   زر المحادثة - رابط مباشر مضمون
 ═══════════════════════════════════════════════════════════ */
 
 .voice-section {
@@ -1663,118 +1664,131 @@ elevenlabs-convai {
   margin-top: 8px;
 }
 
-.voice-card {
-  background:
-    linear-gradient(135deg, rgba(232, 192, 80, 0.15) 0%, rgba(22, 60, 45, 0.5) 100%);
-  border: 2px solid var(--border-gold);
+.voice-link-btn {
+  display: block;
+  width: 100%;
+  padding: 24px 28px;
+  border-radius: var(--r-xl);
+  text-decoration: none;
+  color: var(--green-900);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease-spring), box-shadow 0.3s ease;
+  box-shadow:
+    0 16px 48px rgba(232, 192, 80, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
 }
 
-.voice-card::after {
+.voice-link-btn:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    0 24px 60px rgba(232, 192, 80, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.voice-link-btn:active {
+  transform: translateY(-2px);
+}
+
+.vlb-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--gold-100), var(--gold-300), var(--gold-500));
+  border-radius: inherit;
+}
+
+.vlb-bg::before {
   content: '';
   position: absolute;
   top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--gold-300), transparent);
-  animation: voice-shimmer 3s ease-in-out infinite;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  animation: vlb-shimmer 3s ease-in-out infinite;
+  animation-delay: 1s;
 }
 
-@keyframes voice-shimmer {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+@keyframes vlb-shimmer {
+  0%, 60% { left: -100%; }
+  100% { left: 100%; }
 }
 
-.voice-card-desc {
-  font-size: 14px;
-  color: var(--text-secondary);
-  line-height: 1.7;
-  margin-bottom: 20px;
-  text-align: center;
-}
-
-/* بطاقة الإرشاد */
-.widget-pointer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 18px 22px;
-  background:
-    linear-gradient(135deg, rgba(232, 192, 80, 0.12), rgba(22, 145, 106, 0.08));
-  border: 1px dashed var(--border-gold);
-  border-radius: var(--r-md);
+.vlb-content {
   position: relative;
-  overflow: hidden;
-}
-
-.pointer-content {
+  z-index: 1;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 18px;
   text-align: right;
 }
 
-.pointer-icon {
-  width: 52px;
-  height: 52px;
+.vlb-icon-circle {
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold-200), var(--gold-500));
-  color: var(--green-900);
+  background: rgba(0, 0, 0, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 6px 20px rgba(232, 192, 80, 0.4);
-  animation: pointer-pulse 2.5s ease-in-out infinite;
+  animation: vlb-icon-pulse 2.5s ease-in-out infinite;
 }
 
-@keyframes pointer-pulse {
-  0%, 100% { transform: scale(1); box-shadow: 0 6px 20px rgba(232, 192, 80, 0.4); }
-  50% { transform: scale(1.08); box-shadow: 0 8px 28px rgba(232, 192, 80, 0.6); }
+@keyframes vlb-icon-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
 
-.pointer-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--text-primary);
+.vlb-text {
+  flex: 1;
+}
+
+.vlb-title {
+  font-family: 'Cairo', sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--green-900);
   margin-bottom: 4px;
 }
 
-.pointer-sub {
+.vlb-sub {
   font-size: 13px;
-  color: var(--gold-300);
+  color: rgba(2, 20, 16, 0.7);
   font-weight: 500;
 }
 
-.pointer-arrow {
-  color: var(--gold-300);
-  animation: arrow-bounce 1.8s ease-in-out infinite;
+.vlb-arrow {
+  color: var(--green-900);
+  flex-shrink: 0;
+  animation: vlb-arrow-move 1.8s ease-in-out infinite;
 }
 
-@keyframes arrow-bounce {
-  0%, 100% { transform: translate(0, 0); opacity: 0.7; }
-  50% { transform: translate(-5px, 5px); opacity: 1; }
+@keyframes vlb-arrow-move {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-6px); }
 }
 
-/* Widget الـ ElevenLabs - يظهر في الزاوية تلقائيًا */
-elevenlabs-convai {
-  z-index: 9999 !important;
-}
-
-@media (max-width: 768px) {
-  .widget-pointer {
-    flex-direction: column;
-    text-align: center;
+@media (max-width: 480px) {
+  .voice-link-btn {
+    padding: 20px;
   }
 
-  .pointer-content {
-    flex-direction: column;
+  .vlb-content {
+    gap: 12px;
   }
 
-  .voice-card-desc {
-    font-size: 13px;
+  .vlb-icon-circle {
+    width: 48px;
+    height: 48px;
+  }
+
+  .vlb-title {
+    font-size: 16px;
+  }
+
+  .vlb-sub {
+    font-size: 12px;
   }
 }
