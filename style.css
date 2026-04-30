@@ -1,4 +1,4 @@
-I’m /* ═══════════════════════════════════════════════════════════
+/* ═══════════════════════════════════════════════════════════
    جوجو AI - تصميم سينمائي فاخر
    أمانة محافظة الطائف
 ═══════════════════════════════════════════════════════════ */
@@ -1553,192 +1553,316 @@ svg {
 
 
 
+
 /* ═══════════════════════════════════════════════════════════
-   بطاقة جوجو + الأسئلة - حل بسيط ومضمون
+   بطاقة المحادثة - تصميم متناغم وأنيق
+   جوجو في المنتصف، الأسئلة كفقاعات حوار تحتها
 ═══════════════════════════════════════════════════════════ */
 
-.questions-with-jojo {
+.jojo-conversation {
   grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 24px;
-  padding: 32px;
   position: relative;
-  overflow: hidden;
-  align-items: center;
-  min-height: 600px;
-}
-
-/* الخلفية المتوهجة على نص البطاقة */
-.questions-with-jojo::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  background:
-    radial-gradient(circle at 50% 50%, rgba(232, 192, 80, 0.2) 0%, rgba(232, 192, 80, 0.08) 35%, transparent 65%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* قسم جوجو - متمركز */
-.qwj-jojo {
-  position: relative;
-  z-index: 1;
+  padding: 40px 32px 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
+  background:
+    linear-gradient(180deg,
+      rgba(22, 60, 45, 0.6) 0%,
+      rgba(22, 60, 45, 0.4) 50%,
+      rgba(7, 36, 24, 0.5) 100%);
 }
 
-/* إطار جوجو - شفاف وكبير */
-.qwj-jojo-frame {
+/* خلفية ذهبية ناعمة عامة */
+.jojo-conversation::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(232, 192, 80, 0.15) 0%,
+      rgba(232, 192, 80, 0.05) 30%,
+      transparent 60%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   عنوان البطاقة
+═══════════════════════════════════════════════════════════ */
+
+.jc-header {
   position: relative;
-  width: 100%;
-  height: 540px;
+  z-index: 2;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.jc-title-line {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 16px;
-  background: transparent !important;
-  border: none !important;
-  border-radius: 0 !important;
-  overflow: visible;
+  gap: 16px;
+  margin-bottom: 8px;
 }
 
-/* الهالة الذهبية */
-.qwj-jojo-frame::before {
-  content: '';
+.jc-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
+}
+
+.jc-title {
+  font-family: 'Cairo', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold-100), var(--gold-300), var(--gold-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.jc-subtitle {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   جوجو في المنتصف - مرحلة المسرح
+═══════════════════════════════════════════════════════════ */
+
+.jc-jojo-stage {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+/* الإضاءة من فوق (Spotlight) */
+.jc-spotlight {
   position: absolute;
-  top: 50%;
+  top: -30px;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 90%;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 110%;
   background:
-    radial-gradient(circle at 50% 60%, rgba(232, 192, 80, 0.4) 0%, rgba(232, 192, 80, 0.15) 30%, transparent 65%);
-  filter: blur(35px);
+    radial-gradient(ellipse 50% 70% at 50% 30%,
+      rgba(232, 192, 80, 0.4) 0%,
+      rgba(232, 192, 80, 0.15) 30%,
+      rgba(232, 192, 80, 0.05) 60%,
+      transparent 80%);
+  filter: blur(20px);
   z-index: 0;
-  animation: jojo-aura 4s ease-in-out infinite;
+  animation: spotlight-pulse 4s ease-in-out infinite;
   pointer-events: none;
 }
 
-@keyframes jojo-aura {
+@keyframes spotlight-pulse {
   0%, 100% { opacity: 0.7; }
   50% { opacity: 1; }
 }
 
-/* فيديو جوجو - يأخذ كل المساحة بدون scale */
-.qwj-jojo-video {
+/* حاوية جوجو */
+.jc-jojo-container {
   position: relative;
   z-index: 2;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  background: transparent !important;
-  background-color: transparent !important;
-  filter: drop-shadow(0 20px 35px rgba(232, 192, 80, 0.4))
-          drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
-  animation: jojo-breathe 4s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-@keyframes jojo-breathe {
+/* فيديو جوجو - شفاف وكبير */
+.jc-jojo-video {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: transparent !important;
+  filter:
+    drop-shadow(0 25px 35px rgba(232, 192, 80, 0.35))
+    drop-shadow(0 12px 20px rgba(0, 0, 0, 0.4));
+  animation: jc-float 4s ease-in-out infinite;
+}
+
+@keyframes jc-float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-8px); }
 }
 
-/* بديل لو الفيديو ما اشتغل */
-.qwj-jojo-fallback {
+/* المنصة (الأرضية تحت جوجو) */
+.jc-jojo-platform {
   position: absolute;
-  inset: 30%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  pointer-events: none;
-  opacity: 0;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 65%;
+  height: 30px;
+  background:
+    radial-gradient(ellipse 50% 100% at 50% 0%,
+      rgba(232, 192, 80, 0.5),
+      rgba(232, 192, 80, 0.15) 40%,
+      transparent 70%);
+  filter: blur(10px);
   z-index: 1;
+  animation: platform-pulse 4s ease-in-out infinite;
 }
 
-.qwj-orb-glow {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, var(--gold-100), var(--gold-400) 50%, var(--gold-700));
-  box-shadow:
-    inset 0 0 30px rgba(255, 255, 255, 0.3),
-    0 0 50px rgba(232, 192, 80, 0.6);
-  animation: orb-rotate 8s linear infinite;
+@keyframes platform-pulse {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scaleX(1); }
+  50% { opacity: 1; transform: translateX(-50%) scaleX(1.15); }
 }
 
-.qwj-orb-name {
-  font-family: 'Cairo', sans-serif;
-  font-size: 36px;
-  font-weight: 900;
-  color: var(--gold-100);
-}
+/* ═══════════════════════════════════════════════════════════
+   شارة الحالة "جوجو متاحة الآن"
+═══════════════════════════════════════════════════════════ */
 
-/* قاعدة جوجو */
-.qwj-jojo-base {
-  width: 70%;
-  height: 28px;
-  background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(232, 192, 80, 0.6), transparent 70%);
-  margin-bottom: 16px;
-  filter: blur(8px);
-  animation: base-pulse 4s ease-in-out infinite;
+.jc-status {
   position: relative;
-  z-index: 1;
-}
-
-@keyframes base-pulse {
-  0%, 100% { opacity: 0.6; transform: scaleX(1); }
-  50% { opacity: 1; transform: scaleX(1.2); }
-}
-
-/* علامة "جوجو معك الآن" */
-.qwj-jojo-label {
+  z-index: 2;
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 24px;
-  background: linear-gradient(135deg, rgba(232, 192, 80, 0.2), rgba(22, 145, 106, 0.15));
-  border: 1.5px solid var(--border-gold);
+  padding: 10px 22px;
+  background:
+    linear-gradient(135deg,
+      rgba(34, 211, 153, 0.15),
+      rgba(232, 192, 80, 0.12));
+  border: 1px solid rgba(34, 211, 153, 0.35);
   border-radius: var(--r-full);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--gold-100);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green-300);
+  margin: 8px 0 32px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  position: relative;
-  z-index: 2;
-  box-shadow: 0 4px 20px rgba(232, 192, 80, 0.2);
+  box-shadow: 0 4px 16px rgba(34, 211, 153, 0.15);
 }
 
-.qwj-dot {
-  width: 10px;
-  height: 10px;
+.jc-status-dot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--green-400);
-  box-shadow: 0 0 12px var(--green-400);
+  box-shadow: 0 0 10px var(--green-400);
   animation: dot-blink 1.5s ease-in-out infinite;
 }
 
-/* قسم الأسئلة */
-.qwj-questions {
+/* ═══════════════════════════════════════════════════════════
+   فقاعات الأسئلة
+═══════════════════════════════════════════════════════════ */
+
+.jc-bubbles {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  width: 100%;
+  max-width: 640px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  gap: 12px;
+  margin: 0 auto;
 }
 
-.qwj-questions .card-header {
-  margin-bottom: 18px;
+.jc-bubbles-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gold-300);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+  padding-right: 8px;
+}
+
+/* فقاعة سؤال */
+.jc-bubble {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  padding: 16px 22px;
+  background:
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--border-soft);
+  border-radius: 18px 18px 18px 4px;
+  text-align: right;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-expo);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: bubble-in 0.6s var(--ease-spring) both;
+}
+
+.jc-bubble:nth-child(2) { animation-delay: 0.1s; }
+.jc-bubble:nth-child(3) { animation-delay: 0.2s; }
+.jc-bubble:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes bubble-in {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.jc-bubble:hover {
+  background:
+    linear-gradient(135deg,
+      rgba(232, 192, 80, 0.15),
+      rgba(232, 192, 80, 0.05));
+  border-color: var(--border-gold);
+  color: var(--text-primary);
+  transform: translateX(-4px);
+  box-shadow:
+    0 8px 24px rgba(232, 192, 80, 0.15),
+    inset 0 1px 0 rgba(232, 192, 80, 0.2);
+}
+
+.jc-bubble-text {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.jc-bubble-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(232, 192, 80, 0.1);
+  color: var(--gold-300);
+  flex-shrink: 0;
+  transition: all 0.3s var(--ease-expo);
+}
+
+.jc-bubble:hover .jc-bubble-icon {
+  background: var(--gold-300);
+  color: var(--green-900);
+  transform: translateX(-3px);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1746,52 +1870,55 @@ svg {
 ═══════════════════════════════════════════════════════════ */
 
 @media (max-width: 768px) {
-  .questions-with-jojo {
-    grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 24px 16px;
-    min-height: auto;
+  .jojo-conversation {
+    padding: 32px 20px 24px;
   }
 
-  .qwj-questions {
-    order: 1;
+  .jc-title {
+    font-size: 22px;
   }
 
-  .qwj-jojo {
-    order: 2;
+  .jc-line {
+    width: 40px;
   }
 
-  .qwj-jojo-frame {
-    height: 420px;
-    background: transparent !important;
-    background-color: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
+  .jc-jojo-stage {
+    height: 320px;
+    max-width: 360px;
   }
 
-  .qwj-jojo-video {
-    width: 100%;
-    height: 100%;
-    background: transparent !important;
-    background-color: transparent !important;
-    object-fit: contain;
+  .jc-bubble {
+    padding: 14px 18px;
+    font-size: 13px;
   }
 
-  .questions-with-jojo::before {
-    width: 100%;
-    height: 50%;
-    top: auto;
-    bottom: 0;
+  .jc-status {
+    margin: 8px 0 24px;
+    font-size: 13px;
   }
 }
 
 @media (max-width: 480px) {
-  .qwj-jojo-frame {
-    height: 360px;
+  .jojo-conversation {
+    padding: 24px 16px 20px;
   }
 
-  .qwj-jojo-label {
-    font-size: 13px;
-    padding: 10px 20px;
+  .jc-jojo-stage {
+    height: 280px;
+    max-width: 280px;
+  }
+
+  .jc-title {
+    font-size: 20px;
+  }
+
+  .jc-bubble {
+    padding: 12px 16px;
+    font-size: 12.5px;
+  }
+
+  .jc-bubble-icon {
+    width: 28px;
+    height: 28px;
   }
 }
