@@ -14,33 +14,25 @@ const PORT = process.env.PORT || 3000;
 // ─────────────────────────────────────────────
 // Middleware
 // ─────────────────────────────────────────────
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['*']
+}));
 app.use(express.json({ limit: '1mb' }));
 
 // ─────────────────────────────────────────────
-// Headers مهمة لـ ElevenLabs ConvAI
+// Headers - بدون أي قيود تحجب WebRTC
 // ─────────────────────────────────────────────
 app.use(function (req, res, next) {
-  res.setHeader(
-    'Content-Security-Policy',
-    [
-      "default-src 'self' https: data: blob:",
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https: blob:",
-      "style-src 'self' 'unsafe-inline' https:",
-      "font-src 'self' https: data:",
-      "img-src 'self' data: blob: https:",
-      "connect-src 'self' https: wss: data: blob:",
-      "media-src 'self' blob: data: https:",
-      "worker-src 'self' blob: data:",
-      "child-src 'self' blob: data:",
-      "frame-src 'self' https: blob:",
-      "object-src 'none'"
-    ].join('; ')
-  );
+  // إذن الميكروفون مهم
+  res.setHeader('Permissions-Policy', 'microphone=*, camera=*');
 
-  res.setHeader('Cross-Origin-Embedder-Policy', 'credentialless');
-  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
-  res.setHeader('Permissions-Policy', 'microphone=(self), camera=()');
+  // إزالة أي قيود على الـ embedding
+  res.removeHeader('X-Frame-Options');
+  res.removeHeader('Content-Security-Policy');
+  res.removeHeader('Cross-Origin-Embedder-Policy');
+  res.removeHeader('Cross-Origin-Opener-Policy');
 
   next();
 });
@@ -66,7 +58,7 @@ app.get('/api/health', function (req, res) {
   res.json({
     status: 'ok',
     service: 'Jojo AI - Cinematic Edition',
-    version: '4.0.0',
+    version: '5.0.0',
     timestamp: new Date().toISOString()
   });
 });
@@ -83,9 +75,9 @@ app.get('/', function (req, res) {
 // ─────────────────────────────────────────────
 app.listen(PORT, '0.0.0.0', function () {
   console.log('═══════════════════════════════════════════');
-  console.log('🌟 جوجو AI - Cinematic Edition');
+  console.log('🌟 جوجو AI - Cinematic Edition v5');
   console.log('📡 Port: ' + PORT);
-  console.log('🤖 ElevenLabs ConvAI: Active');
-  console.log('🎨 Design: Premium Cinematic');
+  console.log('🤖 ElevenLabs Direct SDK');
+  console.log('🎤 Microphone: Allowed');
   console.log('═══════════════════════════════════════════');
 });
