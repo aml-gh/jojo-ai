@@ -1690,9 +1690,14 @@ svg {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center center;
+  /* استخدم cover مع object-position عشان نزحلق الفيديو ونكبر الشخصية */
+  object-fit: cover;
+  /* الفيديو فيه جوجو على اليمين، نزحلقه لليسار عشان جوجو تروح للوسط */
+  object-position: 75% center;
   background: transparent !important;
+  /* تكبير الفيديو بـ scale عشان جوجو تظهر أكبر */
+  transform: scale(1.4);
+  transform-origin: 75% center;
   filter:
     drop-shadow(0 25px 35px rgba(232, 192, 80, 0.4))
     drop-shadow(0 12px 20px rgba(0, 0, 0, 0.4));
@@ -1700,8 +1705,8 @@ svg {
 }
 
 @keyframes jc-float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+  0%, 100% { transform: scale(1.4) translateY(0); }
+  50% { transform: scale(1.4) translateY(-8px); }
 }
 
 /* المنصة (الأرضية تحت جوجو) - متمركزة */
