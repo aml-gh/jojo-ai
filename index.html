@@ -9,9 +9,101 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+
+  <!-- ═══════════════════════════════════
+       SVG ورود مخصصة - رموز قابلة للاستخدام
+  ═══════════════════════════════════ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <!-- وردة طائفية فاخرة -->
+      <symbol id="taif-rose" viewBox="0 0 100 100">
+        <defs>
+          <radialGradient id="rose-grad" cx="50%" cy="40%">
+            <stop offset="0%" stop-color="#fce4e8"/>
+            <stop offset="40%" stop-color="#f8a5b8"/>
+            <stop offset="80%" stop-color="#d4567a"/>
+            <stop offset="100%" stop-color="#8b1538"/>
+          </radialGradient>
+          <radialGradient id="rose-center" cx="50%" cy="50%">
+            <stop offset="0%" stop-color="#fff"/>
+            <stop offset="100%" stop-color="#f8a5b8"/>
+          </radialGradient>
+        </defs>
+        <!-- بتلات خارجية -->
+        <g transform="translate(50, 50)">
+          <ellipse cx="0" cy="-30" rx="18" ry="28" fill="url(#rose-grad)" opacity="0.85" transform="rotate(0)"/>
+          <ellipse cx="0" cy="-30" rx="18" ry="28" fill="url(#rose-grad)" opacity="0.85" transform="rotate(72)"/>
+          <ellipse cx="0" cy="-30" rx="18" ry="28" fill="url(#rose-grad)" opacity="0.85" transform="rotate(144)"/>
+          <ellipse cx="0" cy="-30" rx="18" ry="28" fill="url(#rose-grad)" opacity="0.85" transform="rotate(216)"/>
+          <ellipse cx="0" cy="-30" rx="18" ry="28" fill="url(#rose-grad)" opacity="0.85" transform="rotate(288)"/>
+          <!-- بتلات داخلية -->
+          <ellipse cx="0" cy="-15" rx="12" ry="18" fill="url(#rose-grad)" opacity="0.95" transform="rotate(36)"/>
+          <ellipse cx="0" cy="-15" rx="12" ry="18" fill="url(#rose-grad)" opacity="0.95" transform="rotate(108)"/>
+          <ellipse cx="0" cy="-15" rx="12" ry="18" fill="url(#rose-grad)" opacity="0.95" transform="rotate(180)"/>
+          <ellipse cx="0" cy="-15" rx="12" ry="18" fill="url(#rose-grad)" opacity="0.95" transform="rotate(252)"/>
+          <ellipse cx="0" cy="-15" rx="12" ry="18" fill="url(#rose-grad)" opacity="0.95" transform="rotate(324)"/>
+          <!-- مركز الوردة -->
+          <circle cx="0" cy="0" r="10" fill="url(#rose-center)"/>
+        </g>
+      </symbol>
+
+      <!-- وردة برعم -->
+      <symbol id="taif-bud" viewBox="0 0 60 80">
+        <defs>
+          <linearGradient id="bud-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#fce4e8"/>
+            <stop offset="50%" stop-color="#d4567a"/>
+            <stop offset="100%" stop-color="#8b1538"/>
+          </linearGradient>
+          <linearGradient id="stem-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#34d399"/>
+            <stop offset="100%" stop-color="#064e3b"/>
+          </linearGradient>
+        </defs>
+        <!-- ساق -->
+        <path d="M30 40 Q28 60 30 80" stroke="url(#stem-grad)" stroke-width="2" fill="none"/>
+        <!-- ورقة -->
+        <ellipse cx="22" cy="55" rx="7" ry="3" fill="url(#stem-grad)" transform="rotate(-30 22 55)"/>
+        <!-- البرعم -->
+        <ellipse cx="30" cy="25" rx="14" ry="20" fill="url(#bud-grad)"/>
+        <ellipse cx="30" cy="25" rx="8" ry="18" fill="url(#bud-grad)" opacity="0.7"/>
+        <!-- كأس البرعم -->
+        <path d="M16 38 Q30 30 44 38 Q40 45 30 45 Q20 45 16 38Z" fill="url(#stem-grad)"/>
+      </symbol>
+
+      <!-- زخرفة ورقة -->
+      <symbol id="taif-leaf" viewBox="0 0 50 80">
+        <defs>
+          <linearGradient id="leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#34d399"/>
+            <stop offset="50%" stop-color="#16916a"/>
+            <stop offset="100%" stop-color="#064e3b"/>
+          </linearGradient>
+        </defs>
+        <path d="M25 5 Q5 30 10 60 Q15 75 25 75 Q35 75 40 60 Q45 30 25 5Z" fill="url(#leaf-grad)" opacity="0.7"/>
+        <path d="M25 10 L25 70" stroke="#064e3b" stroke-width="0.5" opacity="0.5"/>
+      </symbol>
+
+      <!-- زخرفة عربية -->
+      <symbol id="ornament" viewBox="0 0 100 20">
+        <defs>
+          <linearGradient id="orn-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stop-color="transparent"/>
+            <stop offset="50%" stop-color="#e8c050"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </linearGradient>
+        </defs>
+        <line x1="0" y1="10" x2="35" y2="10" stroke="url(#orn-grad)" stroke-width="1"/>
+        <circle cx="42" cy="10" r="2" fill="#e8c050" opacity="0.6"/>
+        <circle cx="50" cy="10" r="3" fill="#e8c050"/>
+        <circle cx="58" cy="10" r="2" fill="#e8c050" opacity="0.6"/>
+        <line x1="65" y1="10" x2="100" y2="10" stroke="url(#orn-grad)" stroke-width="1"/>
+      </symbol>
+    </defs>
+  </svg>
 </head>
 <body>
 
@@ -23,6 +115,18 @@
     <div class="aurora aurora-2"></div>
     <div class="aurora aurora-3"></div>
     <div class="grid-pattern"></div>
+
+    <!-- بتلات ورد طائفي متساقطة -->
+    <div class="petals-container" aria-hidden="true">
+      <svg class="petal p-1" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#d4567a" opacity="0.5"/></svg>
+      <svg class="petal p-2" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f8a5b8" opacity="0.4"/></svg>
+      <svg class="petal p-3" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#d4567a" opacity="0.5"/></svg>
+      <svg class="petal p-4" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f8a5b8" opacity="0.4"/></svg>
+      <svg class="petal p-5" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#d4567a" opacity="0.5"/></svg>
+      <svg class="petal p-6" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f8a5b8" opacity="0.4"/></svg>
+      <svg class="petal p-7" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#d4567a" opacity="0.5"/></svg>
+      <svg class="petal p-8" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f8a5b8" opacity="0.4"/></svg>
+    </div>
   </div>
 
   <!-- checkbox مخفي للتنقل -->
@@ -33,6 +137,22 @@
   ═══════════════════════════════════ -->
   <section class="splash">
     <div class="splash-rays" aria-hidden="true"></div>
+
+    <!-- زخارف ورد على الأركان -->
+    <div class="corner-decoration top-right" aria-hidden="true">
+      <svg class="corner-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+      <svg class="corner-leaf" viewBox="0 0 50 80"><use href="#taif-leaf"/></svg>
+    </div>
+    <div class="corner-decoration top-left" aria-hidden="true">
+      <svg class="corner-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+      <svg class="corner-leaf" viewBox="0 0 50 80"><use href="#taif-leaf"/></svg>
+    </div>
+    <div class="corner-decoration bottom-right" aria-hidden="true">
+      <svg class="corner-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+    </div>
+    <div class="corner-decoration bottom-left" aria-hidden="true">
+      <svg class="corner-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+    </div>
 
     <div class="splash-rings" aria-hidden="true">
       <span class="ring r1"></span>
@@ -60,10 +180,18 @@
 
       <div class="splash-text">
         <p class="splash-label">
-          <span class="label-line"></span>
+          <svg class="label-ornament" viewBox="0 0 100 20"><use href="#ornament"/></svg>
           أمانة محافظة الطائف
-          <span class="label-line"></span>
+          <svg class="label-ornament" viewBox="0 0 100 20"><use href="#ornament"/></svg>
         </p>
+
+        <!-- شعار "موطن الورد" بطريقة شاعرية -->
+        <p class="splash-poetry">
+          <svg class="poetry-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+          <span>موطن الورد · عاصمة المصايف</span>
+          <svg class="poetry-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+        </p>
+
         <h1 class="splash-title">
           <span class="title-word">مرحبًا</span>
           <span class="title-word">بك</span>
@@ -73,7 +201,6 @@
         <p class="splash-sub">سفيرة التحول الحضري ومساعدتك الذكية</p>
       </div>
 
-      <!-- زر ابدأ التجربة - label يشتغل بدون JavaScript -->
       <label for="appStarted" class="splash-button">
         <span class="btn-bg"></span>
         <span class="btn-shimmer"></span>
@@ -110,12 +237,22 @@
           <p class="brand-en">Taif Municipality</p>
         </div>
       </div>
+
+      <!-- تاج "موطن الورد" -->
+      <div class="rose-tagline">
+        <svg class="tagline-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+        <span class="tagline-text">موطن الورد</span>
+      </div>
     </header>
 
     <div class="content">
 
       <!-- بطاقة الترحيب -->
       <section class="hero-card">
+        <!-- زخرفة ورد على البطاقة -->
+        <svg class="hero-bud bud-1" viewBox="0 0 60 80"><use href="#taif-bud"/></svg>
+        <svg class="hero-bud bud-2" viewBox="0 0 60 80"><use href="#taif-bud"/></svg>
+
         <div class="hero-left">
           <div class="hero-eyebrow">
             <span class="eyebrow-dot"></span>
@@ -128,6 +265,14 @@
 
         <div class="hero-right">
           <div class="avatar-stage">
+            <!-- إكليل ورد حول جوجو -->
+            <div class="avatar-wreath" aria-hidden="true">
+              <svg class="wreath-rose wr-1" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+              <svg class="wreath-rose wr-2" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+              <svg class="wreath-rose wr-3" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+              <svg class="wreath-rose wr-4" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+            </div>
+
             <div class="avatar-rings" aria-hidden="true">
               <span></span>
               <span></span>
@@ -228,13 +373,18 @@
         </div>
       </section>
 
-      <!-- زر المحادثة - رابط مباشر -->
+      <!-- زر المحادثة -->
       <section class="voice-section">
         <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_5301kqcwsvhxfa7aqn1sjewpd30z"
            target="_blank"
            rel="noopener noreferrer"
            class="voice-link-btn">
           <span class="vlb-bg"></span>
+
+          <!-- زخرفة ورد على الزر -->
+          <svg class="vlb-decor vlb-decor-right" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+          <svg class="vlb-decor vlb-decor-left" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
+
           <span class="vlb-content">
             <span class="vlb-icon-circle">
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -245,7 +395,7 @@
             </span>
             <span class="vlb-text">
               <span class="vlb-title">تحدث مع جوجو مباشرة</span>
-              <span class="vlb-sub">محادثة فورية بصوت طبيعي • تدعم 7 لغات</span>
+              <span class="vlb-sub">محادثة فورية بصوت طبيعي · تدعم 7 لغات</span>
             </span>
             <span class="vlb-arrow">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -259,7 +409,9 @@
     </div>
 
     <footer class="bottom-info">
-      <p>جميع الحقوق محفوظة © أمانة محافظة الطائف</p>
+      <svg class="footer-ornament" viewBox="0 0 100 20"><use href="#ornament"/></svg>
+      <p>جميع الحقوق محفوظة © أمانة محافظة الطائف · موطن الورد</p>
+      <svg class="footer-ornament" viewBox="0 0 100 20"><use href="#ornament"/></svg>
     </footer>
 
   </main>
