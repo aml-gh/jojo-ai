@@ -371,69 +371,68 @@
         </div>
       </section>
 
-      <!-- بطاقة الأسئلة + جوجو الواقفة -->
-      <section class="card questions-with-jojo">
-        <div class="qwj-jojo">
-          <div class="qwj-jojo-frame">
-            <video class="qwj-jojo-video" autoplay muted loop playsinline poster="">
+      <!-- بطاقة جوجو + الأسئلة (تصميم محادثة) -->
+      <section class="card jojo-conversation">
+
+        <!-- العنوان -->
+        <div class="jc-header">
+          <div class="jc-title-line">
+            <span class="jc-line"></span>
+            <h3 class="jc-title">تحدثي معي</h3>
+            <span class="jc-line"></span>
+          </div>
+          <p class="jc-subtitle">اختاري سؤالاً من المقترحات</p>
+        </div>
+
+        <!-- جوجو في المنتصف -->
+        <div class="jc-jojo-stage">
+          <div class="jc-spotlight"></div>
+          <div class="jc-jojo-container">
+            <video class="jc-jojo-video" autoplay muted loop playsinline>
               <source src="jojo_idle.webm" type="video/webm" />
             </video>
-            <div class="qwj-jojo-fallback">
-              <div class="qwj-orb-glow"></div>
-              <span class="qwj-orb-name">جوجو</span>
-            </div>
           </div>
-          <div class="qwj-jojo-base"></div>
-          <div class="qwj-jojo-label">
-            <span class="qwj-dot"></span>
-            <span>جوجو معك الآن</span>
-          </div>
+          <div class="jc-jojo-platform"></div>
         </div>
 
-        <div class="qwj-questions">
-          <div class="card-header">
-            <div class="card-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                <line x1="12" y1="17" x2="12.01" y2="17"/>
+        <!-- شارة "متاحة الآن" -->
+        <div class="jc-status">
+          <span class="jc-status-dot"></span>
+          <span>جوجو متاحة الآن</span>
+        </div>
+
+        <!-- الأسئلة كفقاعات حوار -->
+        <div class="jc-bubbles">
+          <p class="jc-bubbles-label">اقتراحات:</p>
+
+          <button class="jc-bubble" type="button">
+            <span class="jc-bubble-text">ما جهود أمانة الطائف في النظافة خلال موسم الحج؟</span>
+            <span class="jc-bubble-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"/>
               </svg>
-            </div>
-            <h3>الأسئلة الشائعة</h3>
-          </div>
+            </span>
+          </button>
 
-          <div class="questions">
-            <button class="question-btn" type="button">
-              <span class="q-num">١</span>
-              <span class="q-text">ما جهود أمانة الطائف في النظافة خلال موسم الحج؟</span>
-              <span class="q-arrow">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="15 18 9 12 15 6"/>
-                </svg>
-              </span>
-            </button>
+          <button class="jc-bubble" type="button">
+            <span class="jc-bubble-text">ما المواقع التي تخدمها أمانة الطائف خلال موسم الحج؟</span>
+            <span class="jc-bubble-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </span>
+          </button>
 
-            <button class="question-btn" type="button">
-              <span class="q-num">٢</span>
-              <span class="q-text">ما المواقع التي تخدمها أمانة الطائف خلال موسم الحج؟</span>
-              <span class="q-arrow">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="15 18 9 12 15 6"/>
-                </svg>
-              </span>
-            </button>
-
-            <button class="question-btn" type="button">
-              <span class="q-num">٣</span>
-              <span class="q-text">كيف تتم أعمال الإصحاح البيئي ومكافحة الحشرات؟</span>
-              <span class="q-arrow">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                  <polyline points="15 18 9 12 15 6"/>
-                </svg>
-              </span>
-            </button>
-          </div>
+          <button class="jc-bubble" type="button">
+            <span class="jc-bubble-text">كيف تتم أعمال الإصحاح البيئي ومكافحة الحشرات؟</span>
+            <span class="jc-bubble-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </span>
+          </button>
         </div>
+
       </section>
 
       <!-- زر المحادثة -->
