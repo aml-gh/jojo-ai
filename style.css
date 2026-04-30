@@ -1550,37 +1550,42 @@ svg {
   }
 }
 
+
 /* ═══════════════════════════════════════════════════════════
-   بطاقة جوجو الواقفة + الأسئلة (تصميم احترافي)
+   بطاقة جوجو الواقفة + الأسئلة - تصميم نظيف وكبير
 ═══════════════════════════════════════════════════════════ */
 
 .questions-with-jojo {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 380px 1fr;
-  gap: 32px;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
   padding: 32px;
   position: relative;
   overflow: hidden;
-  align-items: stretch;
+  align-items: center;
+  min-height: 600px;
 }
 
-/* خلفية متوهجة خلف جوجو */
+/* خلفية متوهجة فقط في الجزء اللي فيه جوجو */
 .questions-with-jojo::before {
   content: '';
   position: absolute;
   top: 0;
   right: 0;
-  width: 420px;
+  width: 50%;
   height: 100%;
   background:
-    radial-gradient(ellipse 70% 90% at 50% 50%, rgba(232, 192, 80, 0.18) 0%, transparent 70%),
-    radial-gradient(ellipse 80% 70% at 50% 90%, rgba(22, 145, 106, 0.2) 0%, transparent 70%);
+    radial-gradient(ellipse 60% 90% at 50% 50%, rgba(232, 192, 80, 0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 80% 60% at 50% 90%, rgba(22, 145, 106, 0.2) 0%, transparent 70%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* قسم جوجو الواقفة */
+/* ═══════════════════════════════════════════════════════════
+   قسم جوجو
+═══════════════════════════════════════════════════════════ */
+
 .qwj-jojo {
   position: relative;
   z-index: 1;
@@ -1588,59 +1593,69 @@ svg {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 480px;
+  width: 100%;
+  height: 100%;
 }
 
-/* إطار جوجو */
+/* إطار جوجو - شفاف 100% بدون أي خلفية */
 .qwj-jojo-frame {
   position: relative;
   width: 100%;
-  height: 420px;
+  height: 540px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 16px;
+  /* ⚠️ مهم جدًا: لا خلفية، لا حدود */
+  background: transparent !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-radius: 0 !important;
   overflow: visible;
 }
 
-/* الهالة الذهبية الكبيرة خلف جوجو */
+/* الهالة الذهبية خلف جوجو */
 .qwj-jojo-frame::before {
   content: '';
   position: absolute;
-  inset: 0;
+  inset: 15%;
   background:
-    radial-gradient(circle at 50% 60%, rgba(232, 192, 80, 0.35) 0%, rgba(232, 192, 80, 0.15) 30%, transparent 65%);
-  filter: blur(20px);
+    radial-gradient(circle at 50% 60%, rgba(232, 192, 80, 0.4) 0%, rgba(232, 192, 80, 0.15) 30%, transparent 65%);
+  filter: blur(35px);
   z-index: 0;
   animation: jojo-aura 4s ease-in-out infinite;
+  pointer-events: none;
 }
 
 @keyframes jojo-aura {
-  0%, 100% { opacity: 0.7; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.05); }
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.15); }
 }
 
-/* فيديو جوجو - كبير وواضح */
+/* فيديو جوجو - يأخذ كل المساحة بدون خلفية */
 .qwj-jojo-video {
   position: relative;
   z-index: 2;
   width: 100%;
   height: 100%;
-  max-width: 360px;
   object-fit: contain;
-  filter: drop-shadow(0 25px 40px rgba(232, 192, 80, 0.5)) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
+  /* ⚠️ مهم جدًا: لا خلفية للفيديو نفسه */
+  background: transparent !important;
+  background-color: transparent !important;
+  filter: drop-shadow(0 25px 40px rgba(232, 192, 80, 0.5))
+          drop-shadow(0 10px 20px rgba(0, 0, 0, 0.3));
   animation: jojo-breathe 4s ease-in-out infinite;
 }
 
 @keyframes jojo-breathe {
   0%, 100% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-6px) scale(1.02); }
+  50% { transform: translateY(-8px) scale(1.02); }
 }
 
-/* بديل CSS لو الفيديو ما اشتغل */
+/* بديل لو الفيديو ما اشتغل */
 .qwj-jojo-fallback {
   position: absolute;
-  inset: 25%;
+  inset: 30%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1651,14 +1666,9 @@ svg {
   z-index: 1;
 }
 
-.qwj-jojo-video[src=""] ~ .qwj-jojo-fallback,
-.qwj-jojo-video.video-failed ~ .qwj-jojo-fallback {
-  opacity: 1;
-}
-
 .qwj-orb-glow {
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   background:
     radial-gradient(circle at 35% 35%, var(--gold-100), var(--gold-400) 50%, var(--gold-700));
@@ -1670,18 +1680,18 @@ svg {
 
 .qwj-orb-name {
   font-family: 'Cairo', sans-serif;
-  font-size: 32px;
+  font-size: 36px;
   font-weight: 900;
   color: var(--gold-100);
 }
 
-/* قاعدة جوجو (أرضية متوهجة كبيرة) */
+/* قاعدة جوجو - الأرضية المتوهجة */
 .qwj-jojo-base {
-  width: 75%;
-  height: 24px;
-  background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(232, 192, 80, 0.5), transparent 70%);
+  width: 70%;
+  height: 28px;
+  background: radial-gradient(ellipse 60% 100% at 50% 0%, rgba(232, 192, 80, 0.6), transparent 70%);
   margin-bottom: 16px;
-  filter: blur(6px);
+  filter: blur(8px);
   animation: base-pulse 4s ease-in-out infinite;
   position: relative;
   z-index: 1;
@@ -1689,19 +1699,19 @@ svg {
 
 @keyframes base-pulse {
   0%, 100% { opacity: 0.6; transform: scaleX(1); }
-  50% { opacity: 1; transform: scaleX(1.15); }
+  50% { opacity: 1; transform: scaleX(1.2); }
 }
 
-/* علامة "جوجو معك" */
+/* علامة "جوجو معك الآن" */
 .qwj-jojo-label {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 22px;
+  padding: 12px 24px;
   background: linear-gradient(135deg, rgba(232, 192, 80, 0.2), rgba(22, 145, 106, 0.15));
   border: 1.5px solid var(--border-gold);
   border-radius: var(--r-full);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--gold-100);
   backdrop-filter: blur(10px);
@@ -1726,73 +1736,78 @@ svg {
   z-index: 1;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 .qwj-questions .card-header {
   margin-bottom: 18px;
 }
 
-/* استجابة للجوال */
-@media (max-width: 1024px) {
-  .questions-with-jojo {
-    grid-template-columns: 320px 1fr;
-    gap: 24px;
-  }
-
-  .qwj-jojo {
-    min-height: 400px;
-  }
-
-  .qwj-jojo-frame {
-    height: 340px;
-  }
-
-  .qwj-jojo-video {
-    max-width: 300px;
-  }
-}
+/* ═══════════════════════════════════════════════════════════
+   الجوال - الأسئلة فوق + جوجو تحت + لا خلفية
+═══════════════════════════════════════════════════════════ */
 
 @media (max-width: 768px) {
   .questions-with-jojo {
     grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 24px;
+    gap: 32px;
+    padding: 24px 20px;
+    min-height: auto;
   }
 
+  /* الأسئلة أولاً (فوق) */
+  .qwj-questions {
+    order: 1;
+  }
+
+  /* جوجو ثانيًا (تحت) */
   .qwj-jojo {
-    min-height: 360px;
+    order: 2;
   }
 
+  /* إعادة ضبط الإطار للجوال */
   .qwj-jojo-frame {
-    height: 300px;
+    height: 420px;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
   }
 
+  /* فيديو الجوال - بدون خلفية */
   .qwj-jojo-video {
-    max-width: 280px;
+    width: 100%;
+    height: 100%;
+    background: transparent !important;
+    background-color: transparent !important;
+    object-fit: contain;
   }
 
+  /* الخلفية المتوهجة في الأسفل */
   .questions-with-jojo::before {
     width: 100%;
     height: 50%;
-    top: 0;
+    top: auto;
+    bottom: 0;
   }
 }
 
 @media (max-width: 480px) {
-  .qwj-jojo {
-    min-height: 300px;
-  }
-
   .qwj-jojo-frame {
-    height: 240px;
-  }
-
-  .qwj-jojo-video {
-    max-width: 240px;
+    height: 360px;
   }
 
   .qwj-jojo-label {
     font-size: 13px;
-    padding: 8px 18px;
+    padding: 10px 20px;
+  }
+
+  .qwj-orb-glow {
+    width: 130px;
+    height: 130px;
+  }
+
+  .qwj-orb-name {
+    font-size: 28px;
   }
 }
