@@ -1,14 +1,24 @@
 /* ═══════════════════════════════════════════════════════════
    جوجو AI - Script
    أمانة محافظة الطائف
+   استخدام مباشر لـ @elevenlabs/client SDK
 ═══════════════════════════════════════════════════════════ */
 
 (function () {
   'use strict';
 
+  const AGENT_ID = 'agent_5301kqcwsvhxfa7aqn1sjewpd30z';
+
+  // العناصر
   const splash = document.getElementById('splash');
   const main = document.getElementById('main');
   const startButton = document.getElementById('startButton');
+  const voiceBtn = document.getElementById('voiceBtn');
+  const vbbIcon = document.getElementById('vbbIcon');
+  const vbbText = document.getElementById('vbbText');
+  const voiceStatus = document.getElementById('voiceStatus');
+  const vsDot = document.getElementById('vsDot');
+  const vsText = document.getElementById('vsText');
   const videoStage = document.getElementById('videoStage');
   const mainVideo = document.getElementById('mainVideo');
   const closeVideoBtn = document.getElementById('closeVideoBtn');
@@ -17,6 +27,8 @@
   const jojoIdle = document.getElementById('jojoIdle');
 
   let currentLang = 'ar';
+  let conversation = null;
+  let isConnecting = false;
 
   const questions = {
     ar: {
@@ -48,10 +60,7 @@
 
   const availableVideoAnswers = {
     ar: ['q1', 'q2', 'q3'],
-    en: [],
-    fr: [],
-    ur: [],
-    tr: []
+    en: [], fr: [], ur: [], tr: []
   };
 
   function init() {
@@ -111,6 +120,10 @@
       });
     });
 
+    if (voiceBtn) {
+      voiceBtn.addEventListener('click', toggleConversation);
+    }
+
     if (closeVideoBtn) {
       closeVideoBtn.addEventListener('click', closeVideo);
     }
@@ -130,6 +143,12 @@
     });
 
     document.addEventListener('pointerdown', addRippleEffect, { passive: true });
+
+    window.addEventListener('beforeunload', function () {
+      if (conversation) {
+        try { conversation.endSession(); } catch (e) {}
+      }
+    });
   }
 
   function startApp() {
@@ -165,8 +184,8 @@
   function playAnswer(qKey) {
     if (!availableVideoAnswers[currentLang] || !availableVideoAnswers[currentLang].includes(qKey)) {
       const messages = {
-        ar: 'هذه الإجابة قيد التجهيز. اضغطي على بطاقة "تحدث مع جوجو" للحصول على إجابة فورية!',
-        en: 'This answer is being prepared. Click "Talk to Jojo" card!',
+        ar: 'هذه الإجابة قيد التجهيز. اضغطي "ابدأ المحادثة" للحصول على إجابة فورية!',
+        en: 'This answer is being prepared. Click "Start Conversation"!',
         fr: 'Cette réponse est en préparation.',
         ur: 'یہ جواب تیار کیا جا رہا ہے۔',
         tr: 'Bu cevap hazırlanıyor.'
@@ -196,6 +215,179 @@
     videoStage.classList.add('hidden');
   }
 
+  // ═══════════════════════════════════════════════════════════
+  // المحادثة الصوتية - SDK مباشر
+  // ═══════════════════════════════════════════════════════════
+
+  function setVoiceStatus(state, text) {
+    if (!voiceStatus || !vsDot || !vsText) return;
+    voiceStatus.classList.remove('hidden');
+    vsDot.className = 'vs-dot ' + state;
+    vsText.textContent = text;
+  }
+
+  function setButtonState(state) {
+    if (!voiceBtn || !vbbText) return;
+    voiceBtn.classList.remove('connecting', 'connected', 'error');
+
+    if (state === 'connecting') {
+      voiceBtn.classList.add('connecting');
+      vbbText.textContent = 'جاري الاتصال...';
+    } else if (state === 'connected') {
+      voiceBtn.classList.add('connected');
+      vbbText.textContent = 'إنهاء المحادثة';
+    } else if (state === 'error') {
+      voiceBtn.classList.add('error');
+      vbbText.textContent = 'حدث خطأ - اضغط للمحاولة مجددًا';
+    } else {
+      vbbText.textContent = 'ابدأ المحادثة';
+    }
+  }
+
+  async function toggleConversation() {
+    if (conversation) {
+      await endConversation();
+    } else {
+      await startConversation();
+    }
+  }
+
+  async function waitForSDK(maxAttempts) {
+    if (typeof maxAttempts === 'undefined') maxAttempts = 100;
+
+    return new Promise(function (resolve, reject) {
+      let count = 0;
+
+      const check = function () {
+        if (window.ElevenLabsConversation) {
+          resolve(window.ElevenLabsConversation);
+          return;
+        }
+        count++;
+        if (count > maxAttempts) {
+          reject(new Error('SDK timeout'));
+          return;
+        }
+        setTimeout(check, 100);
+      };
+
+      check();
+    });
+  }
+
+  async function requestMic() {
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      return false;
+    }
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach(t => t.stop());
+      return true;
+    } catch (err) {
+      console.error('❌ Microphone:', err);
+      return false;
+    }
+  }
+
+  async function startConversation() {
+    if (isConnecting || conversation) return;
+    isConnecting = true;
+
+    setButtonState('connecting');
+    setVoiceStatus('connecting', 'جاري التحضير...');
+
+    const micOk = await requestMic();
+    if (!micOk) {
+      isConnecting = false;
+      setButtonState('error');
+      setVoiceStatus('error', 'يُرجى السماح بالميكروفون');
+      showToast('🎤 يُرجى السماح بالوصول للميكروفون');
+      setTimeout(function () {
+        setButtonState('idle');
+        if (voiceStatus) voiceStatus.classList.add('hidden');
+      }, 3000);
+      return;
+    }
+
+    setVoiceStatus('connecting', 'جاري الاتصال بجوجو...');
+
+    try {
+      const Conversation = await waitForSDK();
+
+      conversation = await Conversation.startSession({
+        agentId: AGENT_ID,
+        connectionType: 'webrtc',
+
+        onConnect: function () {
+          console.log('✅ متصل');
+          isConnecting = false;
+          setButtonState('connected');
+          setVoiceStatus('listening', 'متصل - تحدث الآن');
+        },
+
+        onDisconnect: function () {
+          console.log('🔌 منقطع');
+          cleanup();
+        },
+
+        onError: function (error) {
+          console.error('❌ خطأ:', error);
+          isConnecting = false;
+          setButtonState('error');
+          setVoiceStatus('error', 'حدث خطأ في الاتصال');
+          showToast('❌ تعذر الاتصال، حاولي مجددًا');
+          setTimeout(cleanup, 2500);
+        },
+
+        onModeChange: function (modeData) {
+          const mode = (modeData && modeData.mode) || modeData;
+          console.log('🔄 الوضع:', mode);
+          if (mode === 'speaking') {
+            setVoiceStatus('speaking', 'تتحدث جوجو...');
+          } else if (mode === 'listening') {
+            setVoiceStatus('listening', 'أستمع إليك...');
+          }
+        },
+
+        onMessage: function (msg) {
+          console.log('💬', msg);
+        }
+      });
+
+      console.log('✅ المحادثة بدأت');
+
+    } catch (err) {
+      console.error('❌ فشل بدء المحادثة:', err);
+      isConnecting = false;
+      setButtonState('error');
+      setVoiceStatus('error', 'تعذر الاتصال');
+      showToast('❌ تعذر بدء المحادثة');
+      setTimeout(cleanup, 2500);
+    }
+  }
+
+  async function endConversation() {
+    if (conversation) {
+      try {
+        await conversation.endSession();
+      } catch (e) {
+        console.warn('خطأ عند الإنهاء:', e);
+      }
+    }
+    cleanup();
+  }
+
+  function cleanup() {
+    conversation = null;
+    isConnecting = false;
+    setButtonState('idle');
+    if (voiceStatus) {
+      setTimeout(function () {
+        voiceStatus.classList.add('hidden');
+      }, 1500);
+    }
+  }
+
   let toastTimer = null;
   function showToast(message) {
     if (!toast) return;
@@ -208,7 +400,7 @@
   }
 
   function addRippleEffect(e) {
-    const btn = e.target.closest('button, .voice-card-link');
+    const btn = e.target.closest('button');
     if (!btn) return;
     if (btn.classList.contains('close-video-btn')) return;
 
