@@ -371,49 +371,68 @@
         </div>
       </section>
 
-      <!-- بطاقة الأسئلة -->
-      <section class="card questions-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-              <line x1="12" y1="17" x2="12.01" y2="17"/>
-            </svg>
+      <!-- بطاقة الأسئلة + جوجو الواقفة -->
+      <section class="card questions-with-jojo">
+        <div class="qwj-jojo">
+          <div class="qwj-jojo-frame">
+            <video class="qwj-jojo-video" autoplay muted loop playsinline poster="">
+              <source src="jojo_idle.webm" type="video/webm" />
+            </video>
+            <div class="qwj-jojo-fallback">
+              <div class="qwj-orb-glow"></div>
+              <span class="qwj-orb-name">جوجو</span>
+            </div>
           </div>
-          <h3>الأسئلة الشائعة</h3>
+          <div class="qwj-jojo-base"></div>
+          <div class="qwj-jojo-label">
+            <span class="qwj-dot"></span>
+            <span>جوجو معك الآن</span>
+          </div>
         </div>
 
-        <div class="questions">
-          <button class="question-btn" type="button">
-            <span class="q-num">١</span>
-            <span class="q-text">ما جهود أمانة الطائف في النظافة خلال موسم الحج؟</span>
-            <span class="q-arrow">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="15 18 9 12 15 6"/>
+        <div class="qwj-questions">
+          <div class="card-header">
+            <div class="card-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
               </svg>
-            </span>
-          </button>
+            </div>
+            <h3>الأسئلة الشائعة</h3>
+          </div>
 
-          <button class="question-btn" type="button">
-            <span class="q-num">٢</span>
-            <span class="q-text">ما المواقع التي تخدمها أمانة الطائف خلال موسم الحج؟</span>
-            <span class="q-arrow">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="15 18 9 12 15 6"/>
-              </svg>
-            </span>
-          </button>
+          <div class="questions">
+            <button class="question-btn" type="button">
+              <span class="q-num">١</span>
+              <span class="q-text">ما جهود أمانة الطائف في النظافة خلال موسم الحج؟</span>
+              <span class="q-arrow">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="15 18 9 12 15 6"/>
+                </svg>
+              </span>
+            </button>
 
-          <button class="question-btn" type="button">
-            <span class="q-num">٣</span>
-            <span class="q-text">كيف تتم أعمال الإصحاح البيئي ومكافحة الحشرات؟</span>
-            <span class="q-arrow">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="15 18 9 12 15 6"/>
-              </svg>
-            </span>
-          </button>
+            <button class="question-btn" type="button">
+              <span class="q-num">٢</span>
+              <span class="q-text">ما المواقع التي تخدمها أمانة الطائف خلال موسم الحج؟</span>
+              <span class="q-arrow">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="15 18 9 12 15 6"/>
+                </svg>
+              </span>
+            </button>
+
+            <button class="question-btn" type="button">
+              <span class="q-num">٣</span>
+              <span class="q-text">كيف تتم أعمال الإصحاح البيئي ومكافحة الحشرات؟</span>
+              <span class="q-arrow">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                  <polyline points="15 18 9 12 15 6"/>
+                </svg>
+              </span>
+            </button>
+          </div>
         </div>
       </section>
 
