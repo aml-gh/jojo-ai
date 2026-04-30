@@ -1549,3 +1549,205 @@ svg {
     display: none;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   بطاقة جوجو الواقفة + الأسئلة (تصميم احترافي)
+═══════════════════════════════════════════════════════════ */
+
+.questions-with-jojo {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 28px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* خلفية متوهجة خلف جوجو */
+.questions-with-jojo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 320px;
+  height: 100%;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 50%, rgba(232, 192, 80, 0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 70% 70% at 50% 80%, rgba(22, 145, 106, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* قسم جوجو الواقفة */
+.qwj-jojo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  min-height: 380px;
+}
+
+/* إطار جوجو */
+.qwj-jojo-frame {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  margin-bottom: 16px;
+  overflow: hidden;
+  border-radius: 20px 20px 50% 50% / 20px 20px 30% 30%;
+  background:
+    radial-gradient(ellipse 80% 100% at 50% 100%, rgba(232, 192, 80, 0.15), transparent 70%);
+}
+
+/* فيديو جوجو */
+.qwj-jojo-video {
+  width: 100%;
+  max-height: 320px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px rgba(232, 192, 80, 0.35));
+  animation: jojo-breathe 4s ease-in-out infinite;
+}
+
+@keyframes jojo-breathe {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-3px) scale(1.01); }
+}
+
+/* بديل CSS لو الفيديو ما اشتغل */
+.qwj-jojo-fallback {
+  position: absolute;
+  inset: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.qwj-jojo-video[src=""] ~ .qwj-jojo-fallback,
+.qwj-jojo-video.video-failed ~ .qwj-jojo-fallback {
+  opacity: 1;
+}
+
+.qwj-orb-glow {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 35%, var(--gold-100), var(--gold-400) 50%, var(--gold-700));
+  box-shadow:
+    inset 0 0 25px rgba(255, 255, 255, 0.3),
+    0 0 40px rgba(232, 192, 80, 0.5);
+  animation: orb-rotate 8s linear infinite;
+}
+
+.qwj-orb-name {
+  font-family: 'Cairo', sans-serif;
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--gold-200);
+}
+
+/* قاعدة جوجو (أرضية متوهجة) */
+.qwj-jojo-base {
+  width: 80%;
+  height: 16px;
+  background: radial-gradient(ellipse 50% 100% at 50% 0%, rgba(232, 192, 80, 0.4), transparent 70%);
+  margin-bottom: 12px;
+  filter: blur(4px);
+  animation: base-pulse 4s ease-in-out infinite;
+}
+
+@keyframes base-pulse {
+  0%, 100% { opacity: 0.5; transform: scaleX(1); }
+  50% { opacity: 0.9; transform: scaleX(1.1); }
+}
+
+/* علامة "جوجو معك" */
+.qwj-jojo-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(232, 192, 80, 0.12);
+  border: 1px solid var(--border-gold);
+  border-radius: var(--r-full);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gold-200);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.qwj-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green-400);
+  box-shadow: 0 0 10px var(--green-400);
+  animation: dot-blink 1.5s ease-in-out infinite;
+}
+
+/* قسم الأسئلة */
+.qwj-questions {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.qwj-questions .card-header {
+  margin-bottom: 18px;
+}
+
+/* حالة عدم وجود الفيديو - أظهر fallback افتراضيًا */
+.qwj-jojo-frame:not(:has(.qwj-jojo-video[src*="webm"])) .qwj-jojo-fallback {
+  opacity: 1;
+}
+
+/* استجابة للجوال */
+@media (max-width: 768px) {
+  .questions-with-jojo {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .qwj-jojo {
+    min-height: 280px;
+    max-height: 320px;
+  }
+
+  .qwj-jojo-video {
+    max-height: 240px;
+  }
+
+  .questions-with-jojo::before {
+    width: 100%;
+    height: 50%;
+    top: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .qwj-jojo {
+    min-height: 240px;
+  }
+
+  .qwj-jojo-video {
+    max-height: 200px;
+  }
+
+  .qwj-jojo-label {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
