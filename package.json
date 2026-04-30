@@ -1,11 +1,10 @@
 {
   "name": "jojo-ai",
-  "version": "4.0.0",
+  "version": "5.0.0",
   "description": "جوجو - سفيرة التحول الحضري بأمانة محافظة الطائف",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node server.js"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -15,7 +14,6 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5"
   },
-  "keywords": ["jojo", "ai", "taif", "elevenlabs", "conversational-ai"],
-  "author": "Amal Al-Ghamdi - Taif Municipality",
+  "author": "Amal Al-Ghamdi",
   "license": "MIT"
 }
