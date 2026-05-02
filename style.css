@@ -1639,101 +1639,6 @@ svg {
    جوجو في المنتصف - مرحلة المسرح
 ═══════════════════════════════════════════════════════════ */
 
-.jc-jojo-stage {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  max-width: 480px;
-  height: 380px;
-  margin: 0 auto;
-}
-
-/* الإضاءة من فوق (Spotlight) - في المنتصف */
-.jc-spotlight {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background:
-    radial-gradient(ellipse 50% 70% at 50% 50%,
-      rgba(232, 192, 80, 0.45) 0%,
-      rgba(232, 192, 80, 0.18) 30%,
-      rgba(232, 192, 80, 0.05) 60%,
-      transparent 80%);
-  filter: blur(20px);
-  z-index: 0;
-  animation: spotlight-pulse 4s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes spotlight-pulse {
-  0%, 100% { opacity: 0.7; }
-  50% { opacity: 1; }
-}
-
-/* حاوية جوجو */
-.jc-jojo-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-
-/* فيديو جوجو - أكبر ومرفوعة لفوق */
-.jc-jojo-video {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: transparent !important;
-  /* تكبير + رفع لفوق */
-  transform: translateX(-52%) translateY(-12%) scale(1.6);
-  transform-origin: center center;
-  filter:
-    drop-shadow(0 25px 35px rgba(232, 192, 80, 0.4))
-    drop-shadow(0 12px 20px rgba(0, 0, 0, 0.4));
-  animation: jc-float 4s ease-in-out infinite;
-}
-
-@keyframes jc-float {
-  0%, 100% {
-    transform: translateX(-52%) translateY(-12%) scale(1.6);
-  }
-  50% {
-    transform: translateX(-52%) translateY(-15%) scale(1.6);
-  }
-}
-
-/* المنصة (الأرضية تحت جوجو) - في المنتصف */
-.jc-jojo-platform {
-  position: absolute;
-  bottom: 5%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 50%;
-  height: 28px;
-  background:
-    radial-gradient(ellipse 50% 100% at 50% 0%,
-      rgba(232, 192, 80, 0.6),
-      rgba(232, 192, 80, 0.2) 40%,
-      transparent 70%);
-  filter: blur(10px);
-  z-index: 1;
-  animation: platform-pulse 4s ease-in-out infinite;
-  pointer-events: none;
-}
-
-@keyframes platform-pulse {
-  0%, 100% { opacity: 0.6; transform: translateX(-50%) scaleX(1); }
-  50% { opacity: 1; transform: translateX(-50%) scaleX(1.15); }
-}
-
 /* ═══════════════════════════════════════════════════════════
    شارة الحالة "جوجو متاحة الآن"
 ═══════════════════════════════════════════════════════════ */
@@ -2145,5 +2050,121 @@ svg {
   .jc-jojo-stage {
     height: 320px !important;
     max-width: 280px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   تعديل تمركز جوجو داخل الضوء الذهبي بدقة 100%
+   ازاحة بسيطة لليسار + للأعلى
+═══════════════════════════════════════════════════════════ */
+
+/* المسرح */
+.jc-jojo-stage{
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  height: 380px;
+  margin: 0 auto;
+}
+
+/* الضوء الذهبي */
+.jc-spotlight{
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse 52% 72% at 50% 50%,
+      rgba(232,192,80,.48) 0%,
+      rgba(232,192,80,.20) 28%,
+      rgba(232,192,80,.06) 58%,
+      transparent 82%
+    );
+  filter: blur(18px);
+  z-index: 0;
+}
+
+/* الحاوية */
+.jc-jojo-container{
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+/* الفيديو - متمركز بدقة */
+.jc-jojo-video{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: transparent !important;
+  transform: translateX(-54%) translateY(-16%) scale(1.58);
+  transform-origin: center center;
+  filter:
+    drop-shadow(0 24px 34px rgba(232,192,80,.38))
+    drop-shadow(0 10px 18px rgba(0,0,0,.35));
+  animation: jc-float 4s ease-in-out infinite;
+}
+
+/* حركة ناعمة بدون فقدان التمركز */
+@keyframes jc-float{
+  0%,100%{
+    transform: translateX(-54%) translateY(-16%) scale(1.58);
+  }
+  50%{
+    transform: translateX(-54%) translateY(-19%) scale(1.58);
+  }
+}
+
+/* المنصة السفلية */
+.jc-jojo-platform{
+  position: absolute;
+  bottom: 7%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 52%;
+  height: 28px;
+  background:
+    radial-gradient(
+      ellipse 50% 100% at 50% 0%,
+      rgba(232,192,80,.60),
+      rgba(232,192,80,.20) 42%,
+      transparent 72%
+    );
+  filter: blur(10px);
+  z-index: 1;
+}
+
+/* للشاشات المتوسطة */
+@media (max-width:768px){
+  .jc-jojo-video{
+    transform: translateX(-53%) translateY(-14%) scale(1.48);
+  }
+
+  @keyframes jc-float{
+    0%,100%{
+      transform: translateX(-53%) translateY(-14%) scale(1.48);
+    }
+    50%{
+      transform: translateX(-53%) translateY(-17%) scale(1.48);
+    }
+  }
+}
+
+/* للجوال */
+@media (max-width:480px){
+  .jc-jojo-video{
+    transform: translateX(-52%) translateY(-12%) scale(1.38);
+  }
+
+  @keyframes jc-float{
+    0%,100%{
+      transform: translateX(-52%) translateY(-12%) scale(1.38);
+    }
+    50%{
+      transform: translateX(-52%) translateY(-15%) scale(1.38);
+    }
   }
 }
