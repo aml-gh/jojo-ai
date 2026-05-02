@@ -2102,7 +2102,7 @@ svg {
   background: transparent !important;
 
   /* تعديل مضبوط: يسار بسيط + فوق بسيط */
-  transform: translate(-280px, -34px) scale(1.58);
+  transform: translate(-250px, -34px) scale(1.58);
   transform-origin: center center;
 
   filter:
@@ -2115,10 +2115,10 @@ svg {
 /* حركة ناعمة */
 @keyframes jc-float{
   0%,100%{
-    transform: translate(-280px, -34px) scale(1.58);
+    transform: translate(-250px, -34px) scale(1.58);
   }
   50%{
-    transform: translate(-280px, -42px) scale(1.58);
+    transform: translate(-250px, -42px) scale(1.58);
   }
 }
 
@@ -2144,15 +2144,15 @@ svg {
 /* للشاشات المتوسطة */
 @media (max-width:768px){
   .jc-jojo-video{
-    transform: translate(-220px, -28px) scale(1.48);
+    transform: translate(-200px, -28px) scale(1.48);
   }
 
   @keyframes jc-float{
     0%,100%{
-      transform: translate(-220px, -28px) scale(1.48);
+      transform: translate(-200px, -28px) scale(1.48);
     }
     50%{
-      transform: translate(-220px, -36px) scale(1.48);
+      transform: translate(-200px, -36px) scale(1.48);
     }
   }
 }
@@ -2160,15 +2160,15 @@ svg {
 /* للجوال */
 @media (max-width:480px){
   .jc-jojo-video{
-    transform: translate(-180px, -22px) scale(1.38);
+    transform: translate(-160px, -22px) scale(1.38);
   }
 
   @keyframes jc-float{
     0%,100%{
-      transform: translate(-180px, -22px) scale(1.38);
+      transform: translate(-160px, -22px) scale(1.38);
     }
     50%{
-      transform: translate(-180px, -28px) scale(1.38);
+      transform: translate(-160px, -28px) scale(1.38);
     }
   }
 }
