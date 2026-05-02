@@ -2100,21 +2100,25 @@ svg {
   height: 100%;
   object-fit: contain;
   background: transparent !important;
-  transform: translateX(-54%) translateY(-16%) scale(1.58);
+
+  /* تعديل مضبوط: يسار بسيط + فوق بسيط */
+  transform: translate(-18px, -34px) scale(1.58);
   transform-origin: center center;
+
   filter:
     drop-shadow(0 24px 34px rgba(232,192,80,.38))
     drop-shadow(0 10px 18px rgba(0,0,0,.35));
+
   animation: jc-float 4s ease-in-out infinite;
 }
 
-/* حركة ناعمة بدون فقدان التمركز */
+/* حركة ناعمة */
 @keyframes jc-float{
   0%,100%{
-    transform: translateX(-54%) translateY(-16%) scale(1.58);
+    transform: translate(-18px, -34px) scale(1.58);
   }
   50%{
-    transform: translateX(-54%) translateY(-19%) scale(1.58);
+    transform: translate(-18px, -42px) scale(1.58);
   }
 }
 
@@ -2140,15 +2144,15 @@ svg {
 /* للشاشات المتوسطة */
 @media (max-width:768px){
   .jc-jojo-video{
-    transform: translateX(-53%) translateY(-14%) scale(1.48);
+    transform: translate(-15px, -28px) scale(1.48);
   }
 
   @keyframes jc-float{
     0%,100%{
-      transform: translateX(-53%) translateY(-14%) scale(1.48);
+      transform: translate(-15px, -28px) scale(1.48);
     }
     50%{
-      transform: translateX(-53%) translateY(-17%) scale(1.48);
+      transform: translate(-15px, -36px) scale(1.48);
     }
   }
 }
@@ -2156,15 +2160,15 @@ svg {
 /* للجوال */
 @media (max-width:480px){
   .jc-jojo-video{
-    transform: translateX(-52%) translateY(-12%) scale(1.38);
+    transform: translate(-12px, -22px) scale(1.38);
   }
 
   @keyframes jc-float{
     0%,100%{
-      transform: translateX(-52%) translateY(-12%) scale(1.38);
+      transform: translate(-12px, -22px) scale(1.38);
     }
     50%{
-      transform: translateX(-52%) translateY(-15%) scale(1.38);
+      transform: translate(-12px, -28px) scale(1.38);
     }
   }
 }
