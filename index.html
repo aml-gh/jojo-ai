@@ -169,6 +169,31 @@
 
 <div class="app">
 
+  <!-- ═══════════════════════════════════
+       فيديو الافتتاح (Intro) - يفتح بعد ضغط ابدأ التجربة
+  ═══════════════════════════════════ -->
+  <div id="introOverlay" class="intro-overlay" style="display: none;">
+    <video id="introVideo" class="intro-video" muted playsinline>
+      <source src="intro.mp4" type="video/mp4" />
+    </video>
+
+    <!-- زر رجوع لشاشة البداية -->
+    <button id="backFromIntro" class="back-intro-btn" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      <span>رجوع</span>
+    </button>
+
+    <!-- زر تخطّي -->
+    <button id="skipIntro" class="skip-intro-btn" type="button">
+      <span>تخطّي</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+  </div>
+
   <!-- خلفية سينمائية -->
   <div class="cinematic-bg" aria-hidden="true">
     <div class="aurora aurora-1"></div>
@@ -479,6 +504,81 @@
   </main>
 
 </div>
+
+<script>
+(function() {
+  'use strict';
+
+  const intro = document.getElementById('introOverlay');
+  const video = document.getElementById('introVideo');
+  const skipBtn = document.getElementById('skipIntro');
+  const backBtn = document.getElementById('backFromIntro');
+  const startCheckbox = document.getElementById('appStarted');
+  const startButton = document.querySelector('label[for="appStarted"]');
+
+  if (!intro || !video || !startCheckbox || !startButton) return;
+
+  // فتح الـ intro
+  function showIntro() {
+    intro.style.display = 'flex';
+    intro.classList.remove('intro-fade-out');
+    video.currentTime = 0;
+    video.play().catch(function(err) {
+      console.warn('Video play failed:', err);
+    });
+  }
+
+  // إخفاء الـ intro والذهاب للموقع الرئيسي
+  function hideIntroAndContinue() {
+    intro.classList.add('intro-fade-out');
+    setTimeout(function() {
+      intro.style.display = 'none';
+      video.pause();
+    }, 700);
+    // الـ checkbox يبقى مفعّل (الواجهة الرئيسية)
+  }
+
+  // إخفاء الـ intro والرجوع لشاشة البداية
+  function hideIntroAndBack() {
+    intro.classList.add('intro-fade-out');
+    setTimeout(function() {
+      intro.style.display = 'none';
+      intro.classList.remove('intro-fade-out');
+      video.pause();
+      // إلغاء تفعيل الـ checkbox عشان نرجع لشاشة البداية
+      startCheckbox.checked = false;
+    }, 700);
+  }
+
+  // لما تضغط "ابدأ التجربة"، نفتح الـ intro
+  startButton.addEventListener('click', function(e) {
+    e.preventDefault();
+    // نشغّل الـ checkbox يدوياً (مؤجل)
+    startCheckbox.checked = true;
+    // نفتح الـ intro
+    showIntro();
+  });
+
+  // الفيديو خلص → نروح للموقع الرئيسي
+  video.addEventListener('ended', hideIntroAndContinue);
+
+  // زر تخطّي → نروح للموقع الرئيسي
+  if (skipBtn) {
+    skipBtn.addEventListener('click', hideIntroAndContinue);
+  }
+
+  // زر رجوع → نرجع لشاشة البداية
+  if (backBtn) {
+    backBtn.addEventListener('click', hideIntroAndBack);
+  }
+
+  // لو فيه خطأ في الفيديو، نروح للموقع مباشرة
+  video.addEventListener('error', function() {
+    console.warn('Intro video failed to load');
+    hideIntroAndContinue();
+  });
+})();
+</script>
 
 </body>
 </html>
