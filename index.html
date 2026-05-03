@@ -628,15 +628,25 @@
   const comingSoon = document.getElementById('comingSoon');
   const comingSoonClose = document.getElementById('comingSoonClose');
 
-  // اللغات اللي عندها فيديوهات (الحين العربي فقط)
-  const availableLanguages = ['ar'];
+  // اللغات وأرقام الأسئلة المتاحة
+  // كل لغة فيها مصفوفة بأرقام الأسئلة الموجودة
+  const availableVideos = {
+    'ar': [1, 2, 3],  // العربي: كل الأسئلة موجودة
+    'en': [1],         // الإنجليزي: السؤال الأول فقط
+    'fr': [],          // الفرنسي: لا شي
+    'ur': [],          // الأوردو: لا شي
+    'tr': []           // التركي: لا شي
+  };
 
   function showAnswerVideo(questionNum) {
     if (!answerOverlay) return;
 
-    // فحص إذا اللغة فيها فيديوهات
-    if (availableLanguages.indexOf(currentLang) === -1) {
-      // اللغة ما عندها فيديو - نعرض رسالة "قريباً"
+    // فحص إذا الفيديو موجود لهذي اللغة وهذا السؤال
+    const langVideos = availableVideos[currentLang] || [];
+    const questionNumInt = parseInt(questionNum);
+
+    if (langVideos.indexOf(questionNumInt) === -1) {
+      // الفيديو ما موجود - نعرض رسالة "قريباً"
       showComingSoon();
       return;
     }
@@ -655,7 +665,6 @@
       answerVideo.currentTime = 0;
       answerVideo.play().catch(function(err) {
         console.warn('Answer video play failed:', err);
-        // لو الفيديو ما اشتغل، نعرض رسالة "قريباً"
         showComingSoon();
       });
     }
