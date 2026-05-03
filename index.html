@@ -571,7 +571,7 @@
         <span>جوجو متاحة الآن</span>
       </div>
       <h2 class="voice-modal-title">تحدث مع جوجو</h2>
-      <p class="voice-modal-subtitle">المحادثة تبدأ تلقائياً... تحدث بطبيعية</p>
+      <p class="voice-modal-subtitle">اضغط على زر الهاتف 📞 لبدء المحادثة الصوتية</p>
     </div>
 
     <!-- ElevenLabs Widget -->
@@ -987,50 +987,6 @@
     setTimeout(function() {
       voiceModal.classList.add('voice-modal-open');
     }, 10);
-
-    // 🎙️ بدء المحادثة تلقائياً بعد ما الـ Widget يحمل
-    setTimeout(function() {
-      autoStartConversation();
-    }, 800);
-  }
-
-  // دالة بدء المحادثة تلقائياً
-  function autoStartConversation() {
-    // البحث عن زر "Call AI agent" أو "Start" داخل الـ Widget
-    const widget = document.querySelector('elevenlabs-convai');
-    if (!widget) return;
-
-    // محاولة الوصول للـ shadow DOM
-    const shadowRoot = widget.shadowRoot;
-    if (shadowRoot) {
-      // البحث عن زر البداية بعدة طرق
-      const startBtn = shadowRoot.querySelector('button[aria-label*="Call"]') ||
-                       shadowRoot.querySelector('button[aria-label*="Start"]') ||
-                       shadowRoot.querySelector('button[aria-label*="agent"]') ||
-                       shadowRoot.querySelector('button.call-button') ||
-                       shadowRoot.querySelector('[role="button"]');
-      if (startBtn) {
-        startBtn.click();
-        console.log('🎙️ Conversation started automatically');
-        return;
-      }
-    }
-
-    // محاولة ثانية بعد ثانية
-    setTimeout(function() {
-      const widget2 = document.querySelector('elevenlabs-convai');
-      if (widget2 && widget2.shadowRoot) {
-        const btns = widget2.shadowRoot.querySelectorAll('button');
-        btns.forEach(function(btn) {
-          const text = (btn.textContent || '').toLowerCase();
-          const aria = (btn.getAttribute('aria-label') || '').toLowerCase();
-          if (text.includes('call') || text.includes('start') || aria.includes('call') || aria.includes('start') || aria.includes('agent')) {
-            btn.click();
-            console.log('🎙️ Conversation started (attempt 2)');
-          }
-        });
-      }
-    }, 1200);
   }
 
   function closeVoiceModal() {
