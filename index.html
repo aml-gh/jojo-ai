@@ -506,10 +506,9 @@
 
       <!-- زر المحادثة -->
       <section class="voice-section">
-        <a href="https://elevenlabs.io/app/talk-to?agent_id=agent_5301kqcwsvhxfa7aqn1sjewpd30z"
-           target="_blank"
-           rel="noopener noreferrer"
-           class="voice-link-btn">
+        <button id="openVoiceModal"
+                type="button"
+                class="voice-link-btn">
           <span class="vlb-bg"></span>
 
           <!-- زخرفة ورد على الزر -->
@@ -534,7 +533,7 @@
               </svg>
             </span>
           </span>
-        </a>
+        </button>
       </section>
 
     </div>
@@ -548,6 +547,47 @@
   </main>
 
 </div>
+
+<!-- ═══════════════════════════════════
+     Modal محادثة جوجو الصوتية
+     ElevenLabs Widget داخل الموقع نفسه
+═══════════════════════════════════ -->
+<div id="voiceModal" class="voice-modal" style="display: none;" aria-hidden="true">
+  <div class="voice-modal-backdrop"></div>
+
+  <div class="voice-modal-content">
+    <!-- زر إغلاق -->
+    <button id="closeVoiceModal" class="voice-modal-close" type="button" aria-label="إغلاق">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <line x1="18" y1="6" x2="6" y2="18"/>
+        <line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+
+    <!-- الترويسة -->
+    <div class="voice-modal-header">
+      <div class="vm-status">
+        <span class="vm-status-dot"></span>
+        <span>جوجو متاحة الآن</span>
+      </div>
+      <h2 class="voice-modal-title">تحدث مع جوجو</h2>
+      <p class="voice-modal-subtitle">اضغط على الكرة لبدء المحادثة الصوتية</p>
+    </div>
+
+    <!-- ElevenLabs Widget -->
+    <div class="voice-widget-wrapper">
+      <elevenlabs-convai agent-id="agent_5301kqcwsvhxfa7aqn1sjewpd30z"></elevenlabs-convai>
+    </div>
+
+    <!-- التذييل -->
+    <div class="voice-modal-footer">
+      <p>محادثة فورية بصوت طبيعي · تدعم 7 لغات</p>
+    </div>
+  </div>
+</div>
+
+<!-- ElevenLabs Widget Script -->
+<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
 <script>
 (function() {
@@ -929,6 +969,46 @@
   if (skipAnswerBtn) skipAnswerBtn.addEventListener('click', hideAnswer);
   if (backAnswerBtn) backAnswerBtn.addEventListener('click', hideAnswer);
   if (comingSoonClose) comingSoonClose.addEventListener('click', hideAnswer);
+
+  // ═══════════════════════════════════
+  // 💬 Modal المحادثة الصوتية
+  // ═══════════════════════════════════
+
+  const voiceModal = document.getElementById('voiceModal');
+  const openVoiceModalBtn = document.getElementById('openVoiceModal');
+  const closeVoiceModalBtn = document.getElementById('closeVoiceModal');
+  const voiceModalBackdrop = voiceModal ? voiceModal.querySelector('.voice-modal-backdrop') : null;
+
+  function openVoiceModal() {
+    if (!voiceModal) return;
+    voiceModal.style.display = 'flex';
+    voiceModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() {
+      voiceModal.classList.add('voice-modal-open');
+    }, 10);
+  }
+
+  function closeVoiceModal() {
+    if (!voiceModal) return;
+    voiceModal.classList.remove('voice-modal-open');
+    setTimeout(function() {
+      voiceModal.style.display = 'none';
+      voiceModal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }, 400);
+  }
+
+  if (openVoiceModalBtn) openVoiceModalBtn.addEventListener('click', openVoiceModal);
+  if (closeVoiceModalBtn) closeVoiceModalBtn.addEventListener('click', closeVoiceModal);
+  if (voiceModalBackdrop) voiceModalBackdrop.addEventListener('click', closeVoiceModal);
+
+  // إغلاق بـ ESC
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && voiceModal && voiceModal.style.display === 'flex') {
+      closeVoiceModal();
+    }
+  });
 })();
 </script>
 
