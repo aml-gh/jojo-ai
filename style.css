@@ -2507,3 +2507,212 @@ svg {
     height: 42px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   Modal محادثة جوجو الصوتية - فاخر واحترافي
+═══════════════════════════════════════════════════════════ */
+
+.voice-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.voice-modal.voice-modal-open {
+  opacity: 1;
+}
+
+.voice-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(22, 145, 106, 0.15), transparent 60%),
+    rgba(7, 36, 24, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  cursor: pointer;
+}
+
+.voice-modal-content {
+  position: relative;
+  width: 100%;
+  max-width: 540px;
+  background:
+    linear-gradient(180deg,
+      rgba(22, 60, 45, 0.98) 0%,
+      rgba(7, 36, 24, 0.98) 100%);
+  border: 1.5px solid var(--border-gold);
+  border-radius: 28px;
+  padding: 40px 32px 32px;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(232, 192, 80, 0.2),
+    0 0 100px rgba(232, 192, 80, 0.15);
+  transform: scale(0.9);
+  transition: transform 0.4s var(--ease-spring);
+  overflow: hidden;
+}
+
+.voice-modal.voice-modal-open .voice-modal-content {
+  transform: scale(1);
+}
+
+/* خلفية ذهبية متدرجة */
+.voice-modal-content::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(232, 192, 80, 0.15) 0%,
+      rgba(232, 192, 80, 0.05) 30%,
+      transparent 60%);
+  filter: blur(40px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* زر الإغلاق */
+.voice-modal-close {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1.5px solid var(--border-soft);
+  border-radius: 50%;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 2;
+}
+
+.voice-modal-close:hover {
+  background: rgba(232, 192, 80, 0.15);
+  border-color: var(--border-gold);
+  color: var(--gold-200);
+  transform: rotate(90deg);
+}
+
+/* الترويسة */
+.voice-modal-header {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.vm-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 18px;
+  background:
+    linear-gradient(135deg,
+      rgba(34, 211, 153, 0.15),
+      rgba(232, 192, 80, 0.1));
+  border: 1px solid rgba(34, 211, 153, 0.35);
+  border-radius: var(--r-full);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--green-300);
+  margin-bottom: 16px;
+}
+
+.vm-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green-400);
+  box-shadow: 0 0 10px var(--green-400);
+  animation: dot-blink 1.5s ease-in-out infinite;
+}
+
+.voice-modal-title {
+  font-family: 'Cairo', sans-serif;
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--gold-100), var(--gold-300), var(--gold-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 8px;
+}
+
+.voice-modal-subtitle {
+  font-size: 14px;
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+/* غلاف الـ Widget */
+.voice-widget-wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  padding: 20px;
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(232, 192, 80, 0.08) 0%,
+      transparent 70%);
+  border-radius: 20px;
+  margin-bottom: 24px;
+}
+
+/* تنسيق ElevenLabs Widget داخل الـ modal */
+.voice-widget-wrapper elevenlabs-convai {
+  --el-spacing: 20px;
+}
+
+/* التذييل */
+.voice-modal-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.voice-modal-footer p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* للجوال */
+@media (max-width: 640px) {
+  .voice-modal {
+    padding: 12px;
+  }
+
+  .voice-modal-content {
+    padding: 32px 20px 24px;
+    border-radius: 24px;
+  }
+
+  .voice-modal-title {
+    font-size: 24px;
+  }
+
+  .voice-widget-wrapper {
+    min-height: 240px;
+    padding: 12px;
+  }
+}
