@@ -2466,3 +2466,44 @@ svg {
     font-size: 14px;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════
+   زر الصوت (mute/unmute) في فيديو intro
+═══════════════════════════════════════════════════════════ */
+
+.mute-toggle-btn {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  z-index: 10000;
+}
+
+.mute-toggle-btn:hover {
+  background: rgba(232, 192, 80, 0.9);
+  border-color: var(--gold-300);
+  color: var(--green-900);
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(232, 192, 80, 0.4);
+}
+
+@media (max-width: 768px) {
+  .mute-toggle-btn {
+    bottom: 16px;
+    left: 16px;
+    width: 42px;
+    height: 42px;
+  }
+}
