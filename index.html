@@ -194,6 +194,48 @@
     </button>
   </div>
 
+  <!-- ═══════════════════════════════════
+       فيديو الإجابة (Answer Video)
+       يفتح لما تضغطين سؤال
+  ═══════════════════════════════════ -->
+  <div id="answerOverlay" class="intro-overlay" style="display: none;">
+    <video id="answerVideo" class="intro-video" muted playsinline>
+      <source src="" type="video/mp4" />
+    </video>
+
+    <!-- رسالة "قريباً" -->
+    <div id="comingSoon" class="coming-soon" style="display: none;">
+      <div class="coming-soon-icon">
+        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </div>
+      <h3 class="coming-soon-title">قريباً</h3>
+      <p class="coming-soon-text">هذه الإجابة باللغة المختارة قيد الإعداد</p>
+      <p class="coming-soon-text-small">جرّبي اللغة العربية لتشاهدي الفيديو</p>
+      <button id="comingSoonClose" class="coming-soon-close" type="button">
+        <span>العودة</span>
+      </button>
+    </div>
+
+    <!-- زر رجوع -->
+    <button id="backFromAnswer" class="back-intro-btn" type="button">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="15 18 9 12 15 6"/>
+      </svg>
+      <span>رجوع</span>
+    </button>
+
+    <!-- زر تخطّي -->
+    <button id="skipAnswer" class="skip-intro-btn" type="button">
+      <span>تخطّي</span>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+        <polyline points="9 18 15 12 9 6"/>
+      </svg>
+    </button>
+  </div>
+
   <!-- خلفية سينمائية -->
   <div class="cinematic-bg" aria-hidden="true">
     <div class="aurora aurora-1"></div>
@@ -360,23 +402,23 @@
         </div>
 
         <div class="languages">
-          <button class="lang-btn active" type="button">
+          <button class="lang-btn active" type="button" data-lang="ar">
             <span class="lang-flag">🇸🇦</span>
             <span class="lang-name">العربية</span>
           </button>
-          <button class="lang-btn" type="button">
+          <button class="lang-btn" type="button" data-lang="en">
             <span class="lang-flag">🇬🇧</span>
             <span class="lang-name">English</span>
           </button>
-          <button class="lang-btn" type="button">
+          <button class="lang-btn" type="button" data-lang="fr">
             <span class="lang-flag">🇫🇷</span>
             <span class="lang-name">Français</span>
           </button>
-          <button class="lang-btn" type="button">
+          <button class="lang-btn" type="button" data-lang="ur">
             <span class="lang-flag">🇵🇰</span>
             <span class="lang-name">اردو</span>
           </button>
-          <button class="lang-btn" type="button">
+          <button class="lang-btn" type="button" data-lang="tr">
             <span class="lang-flag">🇹🇷</span>
             <span class="lang-name">Türkçe</span>
           </button>
@@ -417,7 +459,7 @@
         <div class="jc-bubbles">
           <p class="jc-bubbles-label">اقتراحات:</p>
 
-          <button class="jc-bubble" type="button">
+          <button class="jc-bubble" type="button" data-question="1">
             <span class="jc-bubble-text">ما جهود أمانة الطائف في النظافة خلال موسم الحج؟</span>
             <span class="jc-bubble-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -426,7 +468,7 @@
             </span>
           </button>
 
-          <button class="jc-bubble" type="button">
+          <button class="jc-bubble" type="button" data-question="2">
             <span class="jc-bubble-text">ما المواقع التي تخدمها أمانة الطائف خلال موسم الحج؟</span>
             <span class="jc-bubble-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -435,7 +477,7 @@
             </span>
           </button>
 
-          <button class="jc-bubble" type="button">
+          <button class="jc-bubble" type="button" data-question="3">
             <span class="jc-bubble-text">كيف تتم أعمال الإصحاح البيئي ومكافحة الحشرات؟</span>
             <span class="jc-bubble-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -496,6 +538,28 @@
 (function() {
   'use strict';
 
+  // ═══════════════════════════════════
+  // 🌍 إدارة اللغة المختارة
+  // ═══════════════════════════════════
+
+  let currentLang = 'ar'; // اللغة الافتراضية
+
+  const langButtons = document.querySelectorAll('.lang-btn');
+  langButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      // إزالة التفعيل من كل الأزرار
+      langButtons.forEach(function(b) { b.classList.remove('active'); });
+      // تفعيل الزر المختار
+      btn.classList.add('active');
+      // حفظ اللغة
+      currentLang = btn.getAttribute('data-lang') || 'ar';
+    });
+  });
+
+  // ═══════════════════════════════════
+  // 🎬 فيديو الافتتاح (Intro)
+  // ═══════════════════════════════════
+
   const intro = document.getElementById('introOverlay');
   const video = document.getElementById('introVideo');
   const skipBtn = document.getElementById('skipIntro');
@@ -503,67 +567,148 @@
   const startCheckbox = document.getElementById('appStarted');
   const startButton = document.querySelector('label[for="appStarted"]');
 
-  if (!intro || !video || !startCheckbox || !startButton) return;
-
-  // فتح الـ intro
   function showIntro() {
+    if (!intro || !video) return;
     intro.style.display = 'flex';
     intro.classList.remove('intro-fade-out');
     video.currentTime = 0;
     video.play().catch(function(err) {
-      console.warn('Video play failed:', err);
+      console.warn('Intro video play failed:', err);
     });
   }
 
-  // إخفاء الـ intro والذهاب للموقع الرئيسي
   function hideIntroAndContinue() {
+    if (!intro) return;
     intro.classList.add('intro-fade-out');
     setTimeout(function() {
       intro.style.display = 'none';
-      video.pause();
+      if (video) video.pause();
     }, 700);
-    // الـ checkbox يبقى مفعّل (الواجهة الرئيسية)
   }
 
-  // إخفاء الـ intro والرجوع لشاشة البداية
   function hideIntroAndBack() {
+    if (!intro) return;
     intro.classList.add('intro-fade-out');
     setTimeout(function() {
       intro.style.display = 'none';
       intro.classList.remove('intro-fade-out');
-      video.pause();
-      // إلغاء تفعيل الـ checkbox عشان نرجع لشاشة البداية
-      startCheckbox.checked = false;
+      if (video) video.pause();
+      if (startCheckbox) startCheckbox.checked = false;
     }, 700);
   }
 
-  // لما تضغط "ابدأ التجربة"، نفتح الـ intro
-  startButton.addEventListener('click', function(e) {
-    e.preventDefault();
-    // نشغّل الـ checkbox يدوياً (مؤجل)
-    startCheckbox.checked = true;
-    // نفتح الـ intro
-    showIntro();
-  });
-
-  // الفيديو خلص → نروح للموقع الرئيسي
-  video.addEventListener('ended', hideIntroAndContinue);
-
-  // زر تخطّي → نروح للموقع الرئيسي
-  if (skipBtn) {
-    skipBtn.addEventListener('click', hideIntroAndContinue);
+  if (startButton && startCheckbox) {
+    startButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      startCheckbox.checked = true;
+      showIntro();
+    });
   }
 
-  // زر رجوع → نرجع لشاشة البداية
-  if (backBtn) {
-    backBtn.addEventListener('click', hideIntroAndBack);
+  if (video) {
+    video.addEventListener('ended', hideIntroAndContinue);
+    video.addEventListener('error', function() {
+      console.warn('Intro video failed to load');
+      hideIntroAndContinue();
+    });
   }
 
-  // لو فيه خطأ في الفيديو، نروح للموقع مباشرة
-  video.addEventListener('error', function() {
-    console.warn('Intro video failed to load');
-    hideIntroAndContinue();
+  if (skipBtn) skipBtn.addEventListener('click', hideIntroAndContinue);
+  if (backBtn) backBtn.addEventListener('click', hideIntroAndBack);
+
+  // ═══════════════════════════════════
+  // 🎬 فيديوهات الإجابات
+  // ═══════════════════════════════════
+
+  const answerOverlay = document.getElementById('answerOverlay');
+  const answerVideo = document.getElementById('answerVideo');
+  const answerSource = answerVideo ? answerVideo.querySelector('source') : null;
+  const skipAnswerBtn = document.getElementById('skipAnswer');
+  const backAnswerBtn = document.getElementById('backFromAnswer');
+  const comingSoon = document.getElementById('comingSoon');
+  const comingSoonClose = document.getElementById('comingSoonClose');
+
+  // اللغات اللي عندها فيديوهات (الحين العربي فقط)
+  const availableLanguages = ['ar'];
+
+  function showAnswerVideo(questionNum) {
+    if (!answerOverlay) return;
+
+    // فحص إذا اللغة فيها فيديوهات
+    if (availableLanguages.indexOf(currentLang) === -1) {
+      // اللغة ما عندها فيديو - نعرض رسالة "قريباً"
+      showComingSoon();
+      return;
+    }
+
+    // نشغل الفيديو
+    const videoSrc = currentLang + '_q' + questionNum + '.mp4';
+
+    if (answerSource && answerVideo) {
+      answerSource.setAttribute('src', videoSrc);
+      answerVideo.load();
+
+      answerOverlay.style.display = 'flex';
+      answerOverlay.classList.remove('intro-fade-out');
+      if (comingSoon) comingSoon.style.display = 'none';
+
+      answerVideo.currentTime = 0;
+      answerVideo.play().catch(function(err) {
+        console.warn('Answer video play failed:', err);
+        // لو الفيديو ما اشتغل، نعرض رسالة "قريباً"
+        showComingSoon();
+      });
+    }
+  }
+
+  function showComingSoon() {
+    if (!answerOverlay || !comingSoon) return;
+    answerOverlay.style.display = 'flex';
+    answerOverlay.classList.remove('intro-fade-out');
+    comingSoon.style.display = 'flex';
+    if (answerVideo) answerVideo.style.display = 'none';
+    // نخفي زر تخطّي لأن الفيديو غير موجود
+    if (skipAnswerBtn) skipAnswerBtn.style.display = 'none';
+  }
+
+  function hideAnswer() {
+    if (!answerOverlay) return;
+    answerOverlay.classList.add('intro-fade-out');
+    setTimeout(function() {
+      answerOverlay.style.display = 'none';
+      answerOverlay.classList.remove('intro-fade-out');
+      if (answerVideo) {
+        answerVideo.pause();
+        answerVideo.style.display = '';
+      }
+      if (comingSoon) comingSoon.style.display = 'none';
+      if (skipAnswerBtn) skipAnswerBtn.style.display = '';
+    }, 700);
+  }
+
+  // ربط أزرار الأسئلة
+  const questionButtons = document.querySelectorAll('.jc-bubble');
+  questionButtons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const questionNum = btn.getAttribute('data-question');
+      if (questionNum) {
+        showAnswerVideo(questionNum);
+      }
+    });
   });
+
+  // أزرار الإغلاق
+  if (answerVideo) {
+    answerVideo.addEventListener('ended', hideAnswer);
+    answerVideo.addEventListener('error', function() {
+      console.warn('Answer video failed to load');
+      showComingSoon();
+    });
+  }
+
+  if (skipAnswerBtn) skipAnswerBtn.addEventListener('click', hideAnswer);
+  if (backAnswerBtn) backAnswerBtn.addEventListener('click', hideAnswer);
+  if (comingSoonClose) comingSoonClose.addEventListener('click', hideAnswer);
 })();
 </script>
 
