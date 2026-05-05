@@ -677,7 +677,7 @@ svg { display: block; }
   height: 100%;
   object-fit: contain;
   background: transparent;
-  transform: translate(-180px, -30px) scale(1.7);
+  transform: translate(-280px, -55px) scale(1.7);
   transform-origin: center center;
   filter:
     drop-shadow(0 20px 30px rgba(232, 192, 80, 0.35))
@@ -687,8 +687,8 @@ svg { display: block; }
 
 /* حركة عائمة - مع الحفاظ على الإزاحة والتكبير */
 @keyframes jojo-float {
-  0%, 100% { transform: translate(-180px, -30px) scale(1.7); }
-  50%      { transform: translate(-180px, -38px) scale(1.7); }
+  0%, 100% { transform: translate(-280px, -55px) scale(1.7); }
+  50%      { transform: translate(-280px, -63px) scale(1.7); }
 }
 
 /* صورة جوجو للجوال - مخفية في Desktop */
