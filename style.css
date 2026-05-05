@@ -4,7 +4,6 @@
 ═══════════════════════════════════════════════════════════ */
 
 :root {
-  /* ألوان ذهبية */
   --gold-100: #fde68a;
   --gold-200: #fcd34d;
   --gold-300: #f7e08a;
@@ -13,7 +12,6 @@
   --gold-600: #c99520;
   --gold-700: #a8780f;
 
-  /* ألوان خضراء */
   --green-300: #6ee7b7;
   --green-400: #34d399;
   --green-500: #16916a;
@@ -21,37 +19,27 @@
   --green-800: #062518;
   --green-900: #021410;
 
-  /* خلفيات */
   --bg-primary: #021410;
 
-  /* نصوص */
   --text-primary: #ffffff;
   --text-secondary: rgba(255, 255, 255, 0.85);
   --text-tertiary: rgba(255, 255, 255, 0.6);
   --text-muted: rgba(255, 255, 255, 0.4);
 
-  /* حدود */
   --border-soft: rgba(255, 255, 255, 0.08);
   --border-medium: rgba(255, 255, 255, 0.15);
   --border-gold: rgba(232, 192, 80, 0.3);
 
-  /* ظلال */
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.35);
   --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.5);
 
-  /* انتقالات */
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
 
-  /* أنصاف الأقطار */
   --r-md: 18px;
   --r-xl: 32px;
   --r-full: 999px;
 }
-
-/* ═══════════════════════════════════════════════════════════
-   إعادة الضبط
-═══════════════════════════════════════════════════════════ */
 
 *, *::before, *::after {
   box-sizing: border-box;
@@ -92,10 +80,6 @@ a {
 svg {
   display: block;
 }
-
-/* ═══════════════════════════════════════════════════════════
-   الحاوية الرئيسية
-═══════════════════════════════════════════════════════════ */
 
 .app {
   position: relative;
@@ -182,7 +166,7 @@ svg {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   التنقل بين الشاشات (بدون JavaScript)
+   التنقل بين الشاشات
 ═══════════════════════════════════════════════════════════ */
 
 .app-toggle {
@@ -261,24 +245,9 @@ svg {
   animation: ring-pulse 4s ease-out infinite;
 }
 
-.splash-rings .r1 {
-  width: 320px;
-  height: 320px;
-}
-
-.splash-rings .r2 {
-  width: 540px;
-  height: 540px;
-  animation-delay: 1.3s;
-  border-color: rgba(22, 145, 106, 0.2);
-}
-
-.splash-rings .r3 {
-  width: 760px;
-  height: 760px;
-  animation-delay: 2.6s;
-  border-color: rgba(232, 192, 80, 0.1);
-}
+.splash-rings .r1 { width: 320px; height: 320px; }
+.splash-rings .r2 { width: 540px; height: 540px; animation-delay: 1.3s; border-color: rgba(22, 145, 106, 0.2); }
+.splash-rings .r3 { width: 760px; height: 760px; animation-delay: 2.6s; border-color: rgba(232, 192, 80, 0.1); }
 
 @keyframes ring-pulse {
   0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.8); }
@@ -311,18 +280,37 @@ svg {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: linear-gradient(160deg, rgba(232, 192, 80, 0.15), rgba(22, 145, 106, 0.1));
-  border: 2px solid var(--border-gold);
+  background: transparent;
+  border: none;
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 40px rgba(232, 192, 80, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter:
+    drop-shadow(0 8px 20px rgba(232, 192, 80, 0.4))
+    drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
   animation: logo-pulse 4s ease-in-out infinite;
 }
 
 @keyframes logo-pulse {
-  0%, 100% { box-shadow: 0 0 30px rgba(232, 192, 80, 0.2); }
-  50% { box-shadow: 0 0 60px rgba(232, 192, 80, 0.4); }
+  0%, 100% {
+    transform: scale(1);
+    filter:
+      drop-shadow(0 8px 20px rgba(232, 192, 80, 0.4))
+      drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
+  }
+  50% {
+    transform: scale(1.03);
+    filter:
+      drop-shadow(0 12px 28px rgba(232, 192, 80, 0.6))
+      drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
+  }
 }
 
 .logo-glow {
@@ -353,12 +341,6 @@ svg {
   letter-spacing: 1px;
   color: var(--gold-300);
   margin-bottom: 16px;
-}
-
-.label-line {
-  width: 30px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
 }
 
 .splash-title {
@@ -408,7 +390,6 @@ svg {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* زر ابدأ التجربة */
 .splash-button {
   position: relative;
   display: inline-flex;
@@ -507,7 +488,9 @@ svg {
   position: relative;
   z-index: 5;
   min-height: 100vh;
-  padding: 20px 24px;
+  padding: 12px 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .top-bar {
@@ -515,13 +498,14 @@ svg {
   align-items: center;
   justify-content: space-between;
   max-width: 1100px;
-  margin: 0 auto 32px;
-  padding: 16px 20px;
+  margin: 0 auto 12px;
+  padding: 10px 16px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-soft);
   border-radius: var(--r-md);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  width: 100%;
 }
 
 .brand {
@@ -531,26 +515,32 @@ svg {
 }
 
 .brand-icon {
-  width: 44px;
-  height: 44px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  background: linear-gradient(135deg, rgba(232, 192, 80, 0.2), rgba(22, 145, 106, 0.15));
-  border: 1px solid var(--border-gold);
+  background: transparent;
+  border: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--gold-300);
   flex-shrink: 0;
 }
 
+.brand-logo-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(232, 192, 80, 0.3));
+}
+
 .brand-text .brand-ar {
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 600;
-  margin-bottom: 2px;
+  margin-bottom: 0;
 }
 
 .brand-text .brand-en {
-  font-size: 11px;
+  font-size: 10px;
   color: var(--gold-300);
   letter-spacing: 1px;
   font-weight: 500;
@@ -561,18 +551,23 @@ svg {
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 12px;
+  flex: 1;
+  width: 100%;
 }
 
-/* بطاقة الترحيب */
+/* ═══════════════════════════════════════════════════════════
+   بطاقة الترحيب
+═══════════════════════════════════════════════════════════ */
+
 .hero-card {
-  grid-column: 1 / -1;
+  grid-column: 1 / 2;
   position: relative;
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 24px;
   align-items: center;
-  padding: 32px 36px;
+  padding: 18px 22px;
   background: linear-gradient(135deg, rgba(22, 60, 45, 0.6), rgba(7, 36, 24, 0.4));
   border: 1px solid var(--border-gold);
   border-radius: var(--r-xl);
@@ -596,14 +591,14 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 6px 14px;
+  padding: 4px 10px;
   background: rgba(232, 192, 80, 0.1);
   border: 1px solid var(--border-gold);
   border-radius: var(--r-full);
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 500;
   color: var(--gold-200);
-  margin-bottom: 16px;
+  margin-bottom: 8px;
 }
 
 .eyebrow-dot {
@@ -617,10 +612,10 @@ svg {
 
 .hero-title {
   font-family: 'Cairo', sans-serif;
-  font-size: clamp(32px, 4vw, 44px);
+  font-size: clamp(24px, 3vw, 32px);
   font-weight: 700;
   line-height: 1.2;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   letter-spacing: -1px;
 }
 
@@ -632,21 +627,21 @@ svg {
 }
 
 .hero-desc {
-  font-size: 17px;
+  font-size: 14px;
   color: var(--text-secondary);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
 }
 
 .hero-hint {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-tertiary);
 }
 
-/* الأفاتار */
+/* الأفاتار في الترحيب */
 .avatar-stage {
   position: relative;
-  width: 180px;
-  height: 180px;
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -678,8 +673,8 @@ svg {
 .avatar-orb {
   position: relative;
   z-index: 2;
-  width: 130px;
-  height: 130px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid var(--gold-400);
@@ -732,7 +727,7 @@ svg {
   position: relative;
   z-index: 2;
   font-family: 'Cairo', sans-serif;
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 900;
   color: var(--green-900);
   text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
@@ -746,10 +741,13 @@ svg {
   z-index: 0;
 }
 
-/* البطاقات */
+/* ═══════════════════════════════════════════════════════════
+   البطاقات
+═══════════════════════════════════════════════════════════ */
+
 .card {
   position: relative;
-  padding: 24px 26px;
+  padding: 18px 22px;
   background: linear-gradient(135deg, rgba(22, 60, 45, 0.5), rgba(7, 36, 24, 0.35));
   border: 1px solid var(--border-medium);
   border-radius: var(--r-xl);
@@ -768,7 +766,7 @@ svg {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .card-icon {
@@ -790,6 +788,10 @@ svg {
   letter-spacing: -0.3px;
 }
 
+.languages-card {
+  grid-column: 2 / 3;
+}
+
 /* اللغات */
 .languages {
   display: flex;
@@ -801,11 +803,11 @@ svg {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 16px;
+  padding: 7px 12px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-soft);
   border-radius: var(--r-full);
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
   transition: all 0.25s ease;
 }
@@ -829,76 +831,300 @@ svg {
   font-size: 16px;
 }
 
-/* الأسئلة */
-.questions {
+/* ═══════════════════════════════════════════════════════════
+   ✅ بطاقة المحادثة - جوجو متمركزة فوق + الأسئلة تحتها
+═══════════════════════════════════════════════════════════ */
+
+.jojo-conversation {
+  grid-column: 1 / -1;
+  position: relative;
+  padding: 24px 28px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-}
-
-.question-btn {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 14px;
-  padding: 16px 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--r-md);
-  text-align: right;
-  font-size: 14px;
-  color: var(--text-secondary);
-  transition: all 0.3s var(--ease-expo);
+  overflow: hidden;
+  background:
+    linear-gradient(180deg,
+      rgba(22, 60, 45, 0.6) 0%,
+      rgba(22, 60, 45, 0.4) 50%,
+      rgba(7, 36, 24, 0.5) 100%);
 }
 
-.question-btn:hover {
-  background: rgba(232, 192, 80, 0.08);
-  border-color: var(--border-gold);
-  color: var(--text-primary);
-  transform: translateX(-4px);
+.jojo-conversation::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background:
+    radial-gradient(circle at 50% 50%,
+      rgba(232, 192, 80, 0.15) 0%,
+      rgba(232, 192, 80, 0.05) 30%,
+      transparent 60%);
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 0;
 }
 
-.q-num {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--gold-300), var(--gold-500));
-  color: var(--green-900);
-  font-weight: 700;
-  font-size: 14px;
+/* العنوان */
+.jc-header {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.jc-title-line {
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  gap: 16px;
+  margin-bottom: 8px;
 }
 
-.q-text {
+.jc-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
+}
+
+.jc-title {
+  font-family: 'Cairo', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--gold-100), var(--gold-300), var(--gold-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+.jc-subtitle {
+  font-size: 13px;
+  color: var(--text-tertiary);
+  font-weight: 400;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ✅ مسرح جوجو - متمركز في النص فوق
+═══════════════════════════════════════════════════════════ */
+
+.jc-jojo-stage {
+  position: relative;
+  width: 100%;
+  max-width: 320px;
+  height: 280px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.jc-spotlight {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 60% 70% at 50% 50%,
+    rgba(232, 192, 80, 0.45) 0%,
+    rgba(232, 192, 80, 0.18) 30%,
+    rgba(232, 192, 80, 0.05) 60%,
+    transparent 85%
+  );
+  filter: blur(20px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.jc-jojo-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
+
+.jc-jojo-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: transparent;
+  filter:
+    drop-shadow(0 20px 30px rgba(232, 192, 80, 0.35))
+    drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+  animation: jojo-float 4s ease-in-out infinite;
+}
+
+@keyframes jojo-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+.jc-jojo-mobile {
+  display: none;
+}
+
+.jc-jojo-platform {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 24px;
+  background: radial-gradient(
+    ellipse 50% 100% at 50% 0%,
+    rgba(232, 192, 80, 0.55),
+    rgba(232, 192, 80, 0.18) 45%,
+    transparent 75%
+  );
+  filter: blur(10px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* شارة "متاحة الآن" */
+.jc-status {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  background:
+    linear-gradient(135deg,
+      rgba(34, 211, 153, 0.15),
+      rgba(232, 192, 80, 0.12));
+  border: 1px solid rgba(34, 211, 153, 0.35);
+  border-radius: var(--r-full);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--green-300);
+  margin: 0 0 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 16px rgba(34, 211, 153, 0.15);
+}
+
+.jc-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--green-400);
+  box-shadow: 0 0 10px var(--green-400);
+  animation: dot-blink 1.5s ease-in-out infinite;
+}
+
+/* ✅ فقاعات الأسئلة - تحت جوجو بدون تداخل */
+.jc-bubbles {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0 auto;
+}
+
+.jc-bubbles-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold-300);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+  padding-right: 8px;
+}
+
+.jc-bubble {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  width: 100%;
+  padding: 10px 16px;
+  background:
+    linear-gradient(135deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.02));
+  border: 1px solid var(--border-soft);
+  border-radius: 18px 18px 18px 4px;
+  text-align: right;
+  font-size: 13px;
   font-weight: 500;
-  line-height: 1.4;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-expo);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: bubble-in 0.6s var(--ease-spring) both;
 }
 
-.q-arrow {
+.jc-bubble:nth-child(2) { animation-delay: 0.1s; }
+.jc-bubble:nth-child(3) { animation-delay: 0.2s; }
+.jc-bubble:nth-child(4) { animation-delay: 0.3s; }
+
+@keyframes bubble-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.jc-bubble:hover {
+  background:
+    linear-gradient(135deg,
+      rgba(232, 192, 80, 0.15),
+      rgba(232, 192, 80, 0.05));
+  border-color: var(--border-gold);
+  color: var(--text-primary);
+  transform: translateX(-4px);
+  box-shadow:
+    0 8px 24px rgba(232, 192, 80, 0.15),
+    inset 0 1px 0 rgba(232, 192, 80, 0.2);
+}
+
+.jc-bubble-text {
+  flex: 1;
+  line-height: 1.5;
+}
+
+.jc-bubble-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(232, 192, 80, 0.1);
   color: var(--gold-300);
   flex-shrink: 0;
-  opacity: 0.6;
   transition: all 0.3s var(--ease-expo);
 }
 
-.question-btn:hover .q-arrow {
-  opacity: 1;
-  transform: translateX(-4px);
+.jc-bubble:hover .jc-bubble-icon {
+  background: var(--gold-300);
+  color: var(--green-900);
+  transform: translateX(-3px);
 }
 
-/* زر المحادثة - الذهبي الكبير */
+/* ═══════════════════════════════════════════════════════════
+   زر المحادثة الذهبي
+═══════════════════════════════════════════════════════════ */
+
 .voice-section {
   grid-column: 1 / -1;
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .voice-link-btn {
   display: block;
   width: 100%;
-  padding: 24px 28px;
+  padding: 14px 22px;
   border-radius: var(--r-xl);
   position: relative;
   overflow: hidden;
@@ -954,8 +1180,8 @@ svg {
 }
 
 .vlb-icon-circle {
-  width: 60px;
-  height: 60px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(0, 0, 0, 0.15);
   display: flex;
@@ -978,14 +1204,14 @@ svg {
 
 .vlb-title {
   font-family: 'Cairo', sans-serif;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 800;
   color: var(--green-900);
-  margin-bottom: 4px;
+  margin-bottom: 2px;
 }
 
 .vlb-sub {
-  font-size: 13px;
+  font-size: 11px;
   color: rgba(2, 20, 16, 0.7);
   font-weight: 500;
 }
@@ -1001,110 +1227,70 @@ svg {
   50% { transform: translateX(-6px); }
 }
 
-/* التذييل */
+.vlb-decor {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  opacity: 0.25;
+  z-index: 1;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(139, 21, 56, 0.3));
+}
+
+.vlb-decor-right {
+  top: 50%;
+  right: -20px;
+  transform: translateY(-50%) rotate(-25deg);
+}
+
+.vlb-decor-left {
+  top: 50%;
+  left: -20px;
+  transform: translateY(-50%) rotate(25deg);
+}
+
+.voice-link-btn:hover .vlb-decor {
+  opacity: 0.4;
+  animation: decor-spin 0.8s ease-out;
+}
+
+@keyframes decor-spin {
+  from { transform: translateY(-50%) rotate(0deg); }
+  to { transform: translateY(-50%) rotate(360deg); }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   التذييل
+═══════════════════════════════════════════════════════════ */
+
 .bottom-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
   text-align: center;
-  margin-top: 40px;
-  padding-bottom: 20px;
-  font-size: 12px;
+  margin-top: 8px;
+  padding-bottom: 8px;
+  font-size: 11px;
   color: var(--text-muted);
   letter-spacing: 0.3px;
 }
 
-/* ═══════════════════════════════════════════════════════════
-   استجابة الجوال
-═══════════════════════════════════════════════════════════ */
-
-@media (max-width: 768px) {
-  .main {
-    padding: 16px;
-  }
-
-  .top-bar {
-    padding: 12px 16px;
-    margin-bottom: 20px;
-  }
-
-  .content {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
-
-  .hero-card {
-    grid-template-columns: 1fr;
-    text-align: center;
-    padding: 24px 20px;
-  }
-
-  .hero-right {
-    order: -1;
-  }
-
-  .avatar-stage {
-    width: 140px;
-    height: 140px;
-    margin: 0 auto;
-  }
-
-  .avatar-orb {
-    width: 100px;
-    height: 100px;
-  }
-
-  .card {
-    padding: 18px 20px;
-  }
-
-  .voice-link-btn {
-    padding: 20px;
-  }
-
-  .vlb-content {
-    gap: 12px;
-  }
-
-  .vlb-icon-circle {
-    width: 48px;
-    height: 48px;
-  }
-
-  .vlb-title {
-    font-size: 16px;
-  }
-
-  .vlb-sub {
-    font-size: 12px;
-  }
-
-  .splash-rings .r2 { width: 380px; height: 380px; }
-  .splash-rings .r3 { width: 540px; height: 540px; }
+.footer-ornament {
+  width: 40px;
+  height: 8px;
+  opacity: 0.5;
 }
 
-@media (max-width: 480px) {
-  .languages {
-    gap: 6px;
-  }
-
-  .lang-btn {
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  .question-btn {
-    padding: 14px 16px;
-    font-size: 13px;
-  }
-
-  .splash-button {
-    padding: 14px 32px;
-  }
+.bottom-info p {
+  margin: 0;
 }
 
 /* ═══════════════════════════════════════════════════════════
-   لمسة الورد الطائفي - تصميم فاخر وراقٍ
+   البتلات المتساقطة
 ═══════════════════════════════════════════════════════════ */
 
-/* بتلات متساقطة في الخلفية */
 .petals-container {
   position: absolute;
   inset: 0;
@@ -1122,100 +1308,25 @@ svg {
   animation: petal-fall linear infinite;
 }
 
-.petal.p-1 { left: 8%;  animation-duration: 18s; animation-delay: 0s;    width: 22px; height: 22px; }
-.petal.p-2 { left: 22%; animation-duration: 22s; animation-delay: 3s;    width: 18px; height: 18px; }
-.petal.p-3 { left: 38%; animation-duration: 25s; animation-delay: 7s;    width: 26px; height: 26px; }
-.petal.p-4 { left: 52%; animation-duration: 20s; animation-delay: 1s;    width: 20px; height: 20px; }
-.petal.p-5 { left: 65%; animation-duration: 28s; animation-delay: 5s;    width: 24px; height: 24px; }
-.petal.p-6 { left: 78%; animation-duration: 19s; animation-delay: 9s;    width: 18px; height: 18px; }
-.petal.p-7 { left: 88%; animation-duration: 24s; animation-delay: 2s;    width: 22px; height: 22px; }
-.petal.p-8 { left: 95%; animation-duration: 26s; animation-delay: 11s;   width: 20px; height: 20px; }
+.petal.p-1 { left: 8%;  animation-duration: 18s; animation-delay: 0s;  width: 22px; height: 22px; }
+.petal.p-2 { left: 22%; animation-duration: 22s; animation-delay: 3s;  width: 18px; height: 18px; }
+.petal.p-3 { left: 38%; animation-duration: 25s; animation-delay: 7s;  width: 26px; height: 26px; }
+.petal.p-4 { left: 52%; animation-duration: 20s; animation-delay: 1s;  width: 20px; height: 20px; }
+.petal.p-5 { left: 65%; animation-duration: 28s; animation-delay: 5s;  width: 24px; height: 24px; }
+.petal.p-6 { left: 78%; animation-duration: 19s; animation-delay: 9s;  width: 18px; height: 18px; }
+.petal.p-7 { left: 88%; animation-duration: 24s; animation-delay: 2s;  width: 22px; height: 22px; }
+.petal.p-8 { left: 95%; animation-duration: 26s; animation-delay: 11s; width: 20px; height: 20px; }
 
 @keyframes petal-fall {
-  0% {
-    transform: translateY(-30px) translateX(0) rotate(0deg);
-    opacity: 0;
-  }
-  10% {
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(50vh) translateX(60px) rotate(180deg);
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(110vh) translateX(-30px) rotate(360deg);
-    opacity: 0;
-  }
+  0% { transform: translateY(-30px) translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  50% { transform: translateY(50vh) translateX(60px) rotate(180deg); }
+  90% { opacity: 1; }
+  100% { transform: translateY(110vh) translateX(-30px) rotate(360deg); opacity: 0; }
 }
 
 /* ═══════════════════════════════════════════════════════════
-   زخارف الأركان - شاشة البداية (ورود كاملة)
-═══════════════════════════════════════════════════════════ */
-
-.corner-decoration {
-  position: absolute;
-  width: 160px;
-  height: 160px;
-  z-index: 5;
-  opacity: 0.6;
-  pointer-events: none;
-  animation: corner-float 6s ease-in-out infinite;
-}
-
-.corner-decoration.top-right {
-  top: 30px;
-  right: 30px;
-  transform: rotate(135deg);
-  animation-delay: 0s;
-}
-
-.corner-decoration.top-left {
-  top: 30px;
-  left: 30px;
-  transform: rotate(-135deg);
-  animation-delay: 1.5s;
-}
-
-.corner-decoration.bottom-right {
-  bottom: 30px;
-  right: 30px;
-  transform: rotate(45deg);
-  animation-delay: 3s;
-}
-
-.corner-decoration.bottom-left {
-  bottom: 30px;
-  left: 30px;
-  transform: rotate(-45deg);
-  animation-delay: 4.5s;
-}
-
-@keyframes corner-float {
-  0%, 100% { filter: drop-shadow(0 0 12px rgba(212, 86, 122, 0.35)); }
-  50% { filter: drop-shadow(0 0 28px rgba(212, 86, 122, 0.65)); }
-}
-
-.corner-rose {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-}
-
-.corner-leaf {
-  position: absolute;
-  width: 50px;
-  height: 75px;
-  top: 25%;
-  right: 5%;
-  opacity: 0.65;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   زخرفة شاعرية "موطن الورد"
+   زخرفة "موطن الورد"
 ═══════════════════════════════════════════════════════════ */
 
 .splash-poetry {
@@ -1250,7 +1361,6 @@ svg {
   50% { transform: scale(1.15) rotate(15deg); }
 }
 
-/* زخرفة الأمانة (السطر اللي يحوي اسم الأمانة) */
 .label-ornament {
   width: 40px;
   height: 8px;
@@ -1308,7 +1418,7 @@ svg {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   إكليل الورد حول جوجو
+   إكليل الورد حول جوجو في الترحيب
 ═══════════════════════════════════════════════════════════ */
 
 .avatar-wreath {
@@ -1316,38 +1426,19 @@ svg {
   inset: -10px;
   pointer-events: none;
   z-index: 0;
-  animation: wreath-rotate 30s linear infinite;
-}
-
-@keyframes wreath-rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
 }
 
 .wreath-rose {
   position: absolute;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   filter: drop-shadow(0 3px 8px rgba(212, 86, 122, 0.5));
-  animation: wreath-rose-counter 30s linear infinite;
 }
 
-/* الورود في 4 جوانب الإكليل */
-.wr-1 { top: -5px; left: 50%; transform: translateX(-50%); }
-.wr-2 { right: -5px; top: 50%; transform: translateY(-50%); }
-.wr-3 { bottom: -5px; left: 50%; transform: translateX(-50%); }
-.wr-4 { left: -5px; top: 50%; transform: translateY(-50%); }
-
-/* البقاء معتدلة بينما الإكليل يدور */
-@keyframes wreath-rose-counter {
-  from { transform: rotate(0deg) translateX(0) rotate(0deg); }
-  to { transform: rotate(-360deg); }
-}
-
-.wr-1 { animation: wr-1-anim 30s linear infinite; }
-.wr-2 { animation: wr-2-anim 30s linear infinite; }
-.wr-3 { animation: wr-3-anim 30s linear infinite; }
-.wr-4 { animation: wr-4-anim 30s linear infinite; }
+.wr-1 { top: -5px; left: 50%; animation: wr-1-anim 30s linear infinite; }
+.wr-2 { right: -5px; top: 50%; animation: wr-2-anim 30s linear infinite; }
+.wr-3 { bottom: -5px; left: 50%; animation: wr-3-anim 30s linear infinite; }
+.wr-4 { left: -5px; top: 50%; animation: wr-4-anim 30s linear infinite; }
 
 @keyframes wr-1-anim { from { transform: translateX(-50%) rotate(0deg); } to { transform: translateX(-50%) rotate(-360deg); } }
 @keyframes wr-2-anim { from { transform: translateY(-50%) rotate(0deg); } to { transform: translateY(-50%) rotate(-360deg); } }
@@ -1358,41 +1449,33 @@ svg {
    ورود طائفية على بطاقة الترحيب
 ═══════════════════════════════════════════════════════════ */
 
-.hero-card {
-  position: relative;
-}
-
 .hero-rose {
   position: absolute;
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   z-index: 1;
   opacity: 0.4;
   pointer-events: none;
   filter: drop-shadow(0 4px 12px rgba(196, 107, 134, 0.3));
-  animation: hero-rose-float 5s ease-in-out infinite;
 }
 
 .hero-rose.hero-rose-1 {
   top: -20px;
   left: 20px;
   transform: rotate(-15deg);
+  animation: hero-rose-float 5s ease-in-out infinite;
 }
 
 .hero-rose.hero-rose-2 {
   bottom: -20px;
   right: 20px;
   transform: rotate(20deg);
-  animation-delay: 2.5s;
+  animation: hero-rose-float-2 5s ease-in-out 2.5s infinite;
 }
 
 @keyframes hero-rose-float {
   0%, 100% { transform: rotate(-15deg) translateY(0) scale(1); }
   50% { transform: rotate(-10deg) translateY(-5px) scale(1.05); }
-}
-
-.hero-rose.hero-rose-2 {
-  animation-name: hero-rose-float-2;
 }
 
 @keyframes hero-rose-float-2 {
@@ -1401,780 +1484,7 @@ svg {
 }
 
 /* ═══════════════════════════════════════════════════════════
-   زخرفة الزر الذهبي
-═══════════════════════════════════════════════════════════ */
-
-.vlb-decor {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  opacity: 0.25;
-  z-index: 1;
-  pointer-events: none;
-  filter: drop-shadow(0 2px 4px rgba(139, 21, 56, 0.3));
-}
-
-.vlb-decor-right {
-  top: 50%;
-  right: -20px;
-  transform: translateY(-50%) rotate(-25deg);
-}
-
-.vlb-decor-left {
-  top: 50%;
-  left: -20px;
-  transform: translateY(-50%) rotate(25deg);
-}
-
-.voice-link-btn {
-  overflow: hidden;
-}
-
-.voice-link-btn:hover .vlb-decor {
-  opacity: 0.4;
-  animation: decor-spin 0.8s ease-out;
-}
-
-@keyframes decor-spin {
-  from { transform: translateY(-50%) rotate(0deg); }
-  to { transform: translateY(-50%) rotate(360deg); }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   تذييل أنيق
-═══════════════════════════════════════════════════════════ */
-
-.bottom-info {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  flex-wrap: wrap;
-}
-
-.footer-ornament {
-  width: 60px;
-  height: 12px;
-  opacity: 0.5;
-}
-
-.bottom-info p {
-  margin: 0;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   استجابة الجوال - الورد
-═══════════════════════════════════════════════════════════ */
-
-@media (max-width: 768px) {
-  .corner-decoration {
-    width: 100px;
-    height: 100px;
-  }
-
-  .corner-decoration.top-right,
-  .corner-decoration.top-left {
-    top: 20px;
-  }
-
-  .corner-decoration.bottom-right,
-  .corner-decoration.bottom-left {
-    bottom: 20px;
-  }
-
-  .corner-decoration.top-right,
-  .corner-decoration.bottom-right {
-    right: 15px;
-  }
-
-  .corner-decoration.top-left,
-  .corner-decoration.bottom-left {
-    left: 15px;
-  }
-
-  .rose-tagline {
-    padding: 6px 14px;
-  }
-
-  .tagline-text {
-    font-size: 12px;
-  }
-
-  .splash-poetry {
-    font-size: 13px;
-  }
-
-  .poetry-rose {
-    width: 18px;
-    height: 18px;
-  }
-
-  .wreath-rose {
-    width: 24px;
-    height: 24px;
-  }
-
-  .vlb-decor {
-    width: 60px;
-    height: 60px;
-  }
-
-  .hero-rose {
-    width: 50px;
-    height: 50px;
-  }
-
-  .footer-ornament {
-    width: 40px;
-  }
-}
-
-@media (max-width: 480px) {
-  .corner-decoration {
-    width: 70px;
-    height: 70px;
-    opacity: 0.5;
-  }
-
-  .rose-tagline {
-    display: none;
-  }
-
-  .splash-poetry {
-    flex-direction: row;
-    gap: 8px;
-  }
-
-  .vlb-decor {
-    display: none;
-  }
-}
-
-
-
-
-
-/* ═══════════════════════════════════════════════════════════
-   بطاقة المحادثة - تصميم متناغم وأنيق
-   جوجو في المنتصف، الأسئلة كفقاعات حوار تحتها
-═══════════════════════════════════════════════════════════ */
-
-.jojo-conversation {
-  grid-column: 1 / -1;
-  position: relative;
-  padding: 40px 32px 32px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  overflow: hidden;
-  background:
-    linear-gradient(180deg,
-      rgba(22, 60, 45, 0.6) 0%,
-      rgba(22, 60, 45, 0.4) 50%,
-      rgba(7, 36, 24, 0.5) 100%);
-}
-
-/* خلفية ذهبية ناعمة عامة */
-.jojo-conversation::before {
-  content: '';
-  position: absolute;
-  top: -100px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 600px;
-  background:
-    radial-gradient(circle at 50% 50%,
-      rgba(232, 192, 80, 0.15) 0%,
-      rgba(232, 192, 80, 0.05) 30%,
-      transparent 60%);
-  filter: blur(50px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   عنوان البطاقة
-═══════════════════════════════════════════════════════════ */
-
-.jc-header {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.jc-title-line {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 8px;
-}
-
-.jc-line {
-  width: 60px;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
-}
-
-.jc-title {
-  font-family: 'Cairo', sans-serif;
-  font-size: 24px;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--gold-100), var(--gold-300), var(--gold-500));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -0.5px;
-}
-
-.jc-subtitle {
-  font-size: 14px;
-  color: var(--text-tertiary);
-  font-weight: 400;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   جوجو في المنتصف - مرحلة المسرح
-═══════════════════════════════════════════════════════════ */
-
-/* ═══════════════════════════════════════════════════════════
-   شارة الحالة "جوجو متاحة الآن"
-═══════════════════════════════════════════════════════════ */
-
-.jc-status {
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 22px;
-  background:
-    linear-gradient(135deg,
-      rgba(34, 211, 153, 0.15),
-      rgba(232, 192, 80, 0.12));
-  border: 1px solid rgba(34, 211, 153, 0.35);
-  border-radius: var(--r-full);
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--green-300);
-  margin: 8px 0 32px;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 16px rgba(34, 211, 153, 0.15);
-}
-
-.jc-status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--green-400);
-  box-shadow: 0 0 10px var(--green-400);
-  animation: dot-blink 1.5s ease-in-out infinite;
-}
-
-/* ═══════════════════════════════════════════════════════════
-   فقاعات الأسئلة
-═══════════════════════════════════════════════════════════ */
-
-.jc-bubbles {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  max-width: 640px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin: 0 auto;
-}
-
-.jc-bubbles-label {
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--gold-300);
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 4px;
-  padding-right: 8px;
-}
-
-/* فقاعة سؤال */
-.jc-bubble {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  width: 100%;
-  padding: 16px 22px;
-  background:
-    linear-gradient(135deg,
-      rgba(255, 255, 255, 0.06),
-      rgba(255, 255, 255, 0.02));
-  border: 1px solid var(--border-soft);
-  border-radius: 18px 18px 18px 4px;
-  text-align: right;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: all 0.3s var(--ease-expo);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  animation: bubble-in 0.6s var(--ease-spring) both;
-}
-
-.jc-bubble:nth-child(2) { animation-delay: 0.1s; }
-.jc-bubble:nth-child(3) { animation-delay: 0.2s; }
-.jc-bubble:nth-child(4) { animation-delay: 0.3s; }
-
-@keyframes bubble-in {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.jc-bubble:hover {
-  background:
-    linear-gradient(135deg,
-      rgba(232, 192, 80, 0.15),
-      rgba(232, 192, 80, 0.05));
-  border-color: var(--border-gold);
-  color: var(--text-primary);
-  transform: translateX(-4px);
-  box-shadow:
-    0 8px 24px rgba(232, 192, 80, 0.15),
-    inset 0 1px 0 rgba(232, 192, 80, 0.2);
-}
-
-.jc-bubble-text {
-  flex: 1;
-  line-height: 1.5;
-}
-
-.jc-bubble-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: rgba(232, 192, 80, 0.1);
-  color: var(--gold-300);
-  flex-shrink: 0;
-  transition: all 0.3s var(--ease-expo);
-}
-
-.jc-bubble:hover .jc-bubble-icon {
-  background: var(--gold-300);
-  color: var(--green-900);
-  transform: translateX(-3px);
-}
-
-/* ═══════════════════════════════════════════════════════════
-   الجوال
-═══════════════════════════════════════════════════════════ */
-
-@media (max-width: 768px) {
-  .jojo-conversation {
-    padding: 32px 20px 24px;
-  }
-
-  .jc-title {
-    font-size: 22px;
-  }
-
-  .jc-line {
-    width: 40px;
-  }
-
-  .jc-jojo-stage {
-    height: 320px;
-    max-width: 360px;
-  }
-
-  .jc-bubble {
-    padding: 14px 18px;
-    font-size: 13px;
-  }
-
-  .jc-status {
-    margin: 8px 0 24px;
-    font-size: 13px;
-  }
-}
-
-@media (max-width: 480px) {
-  .jojo-conversation {
-    padding: 24px 16px 20px;
-  }
-
-  .jc-jojo-stage {
-    height: 280px;
-    max-width: 280px;
-  }
-
-  .jc-title {
-    font-size: 20px;
-  }
-
-  .jc-bubble {
-    padding: 12px 16px;
-    font-size: 12.5px;
-  }
-
-  .jc-bubble-icon {
-    width: 28px;
-    height: 28px;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   🎯 وضع "صفحة واحدة" - كل المحتوى يظهر بدون scroll
-═══════════════════════════════════════════════════════════ */
-
-/* تقليل المساحات العامة */
-.main {
-  min-height: 100vh;
-  padding: 12px 20px !important;
-  display: flex;
-  flex-direction: column;
-}
-
-/* تقليل الترويسة */
-.top-bar {
-  margin: 0 auto 12px !important;
-  padding: 10px 16px !important;
-}
-
-.brand-icon {
-  width: 36px !important;
-  height: 36px !important;
-}
-
-.brand-text .brand-ar {
-  font-size: 13px !important;
-  margin-bottom: 0 !important;
-}
-
-.brand-text .brand-en {
-  font-size: 10px !important;
-}
-
-/* المحتوى - شبكة ذكية */
-.content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px !important;
-  flex: 1;
-}
-
-/* بطاقة الترحيب - مدمجة */
-.hero-card {
-  grid-column: 1 / 2 !important;
-  padding: 18px 22px !important;
-  min-height: auto !important;
-}
-
-.hero-title {
-  font-size: clamp(24px, 3vw, 32px) !important;
-  margin-bottom: 4px !important;
-}
-
-.hero-desc {
-  font-size: 14px !important;
-  margin-bottom: 4px !important;
-}
-
-.hero-hint {
-  font-size: 12px !important;
-}
-
-.hero-eyebrow {
-  margin-bottom: 8px !important;
-  padding: 4px 10px !important;
-  font-size: 11px !important;
-}
-
-/* الكرة في بطاقة الترحيب - أصغر */
-.avatar-stage {
-  width: 120px !important;
-  height: 120px !important;
-}
-
-.avatar-orb {
-  width: 90px !important;
-  height: 90px !important;
-}
-
-.orb-text {
-  font-size: 16px !important;
-}
-
-/* بطاقة اللغات - بجانب الترحيب */
-.languages-card {
-  grid-column: 2 / 3 !important;
-  padding: 18px 22px !important;
-}
-
-.languages-card .card-header {
-  margin-bottom: 12px !important;
-}
-
-.lang-btn {
-  padding: 7px 12px !important;
-  font-size: 13px !important;
-}
-
-/* بطاقة "تحدثي معي" - عرض كامل، أصغر */
-.jojo-conversation {
-  grid-column: 1 / -1 !important;
-  padding: 18px 24px !important;
-}
-
-.jc-header {
-  margin-bottom: 12px !important;
-}
-
-.jc-title {
-  font-size: 20px !important;
-}
-
-.jc-subtitle {
-  font-size: 12px !important;
-}
-
-/* جوجو أصغر شوي */
-.jc-jojo-stage {
-  height: 240px !important;
-  max-width: 360px !important;
-}
-
-.jc-status {
-  margin: 8px 0 14px !important;
-  padding: 6px 16px !important;
-  font-size: 12px !important;
-}
-
-.jc-bubbles {
-  gap: 8px !important;
-  max-width: 100% !important;
-}
-
-.jc-bubbles-label {
-  font-size: 11px !important;
-  margin-bottom: 2px !important;
-}
-
-.jc-bubble {
-  padding: 10px 16px !important;
-  font-size: 13px !important;
-}
-
-.jc-bubble-icon {
-  width: 26px !important;
-  height: 26px !important;
-}
-
-/* زر المحادثة - مدمج */
-.voice-section {
-  margin-top: 4px !important;
-}
-
-.voice-link-btn {
-  padding: 14px 22px !important;
-}
-
-.vlb-icon-circle {
-  width: 44px !important;
-  height: 44px !important;
-}
-
-.vlb-title {
-  font-size: 16px !important;
-  margin-bottom: 2px !important;
-}
-
-.vlb-sub {
-  font-size: 11px !important;
-}
-
-/* التذييل - مدمج */
-.bottom-info {
-  margin-top: 8px !important;
-  padding-bottom: 8px !important;
-  font-size: 11px !important;
-}
-
-.footer-ornament {
-  width: 40px !important;
-  height: 8px !important;
-}
-
-/* على الشاشات الصغيرة جداً */
-@media (max-height: 800px) {
-  .jc-jojo-stage {
-    height: 200px !important;
-  }
-
-  .hero-card,
-  .languages-card,
-  .jojo-conversation {
-    padding: 14px 18px !important;
-  }
-}
-
-/* على الجوال - رجوع للسكرول الطبيعي */
-@media (max-width: 768px) {
-  .main {
-    padding: 16px !important;
-    min-height: auto;
-  }
-
-  .content {
-    grid-template-columns: 1fr;
-    gap: 16px !important;
-  }
-
-  .hero-card,
-  .languages-card {
-    grid-column: 1 / -1 !important;
-  }
-
-  .jc-jojo-stage {
-    height: 320px !important;
-    max-width: 280px !important;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   تعديل تمركز جوجو داخل الضوء الذهبي بدقة 100%
-   ازاحة بسيطة لليسار + للأعلى
-═══════════════════════════════════════════════════════════ */
-
-/* المسرح */
-.jc-jojo-stage{
-  position: relative;
-  width: 100%;
-  max-width: 480px;
-  height: 380px;
-  margin: 0 auto;
-}
-
-/* الضوء الذهبي */
-.jc-spotlight{
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(
-      ellipse 52% 72% at 50% 50%,
-      rgba(232,192,80,.48) 0%,
-      rgba(232,192,80,.20) 28%,
-      rgba(232,192,80,.06) 58%,
-      transparent 82%
-    );
-  filter: blur(18px);
-  z-index: 0;
-}
-
-/* الحاوية */
-.jc-jojo-container{
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
-}
-
-/* الفيديو - متمركز بدقة */
-.jc-jojo-video{
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  background: transparent !important;
-
-  /* تعديل مضبوط: يسار بسيط + فوق بسيط */
-  transform: translate(-250px, -34px) scale(1.58);
-  transform-origin: center center;
-
-  filter:
-    drop-shadow(0 24px 34px rgba(232,192,80,.38))
-    drop-shadow(0 10px 18px rgba(0,0,0,.35));
-
-  animation: jc-float 4s ease-in-out infinite;
-}
-
-/* حركة ناعمة */
-@keyframes jc-float{
-  0%,100%{
-    transform: translate(-250px, -34px) scale(1.58);
-  }
-  50%{
-    transform: translate(-250px, -42px) scale(1.58);
-  }
-}
-
-/* المنصة السفلية */
-.jc-jojo-platform{
-  position: absolute;
-  bottom: 7%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 52%;
-  height: 28px;
-  background:
-    radial-gradient(
-      ellipse 50% 100% at 50% 0%,
-      rgba(232,192,80,.60),
-      rgba(232,192,80,.20) 42%,
-      transparent 72%
-    );
-  filter: blur(10px);
-  z-index: 1;
-}
-
-/* للشاشات المتوسطة */
-@media (max-width:768px){
-  .jc-jojo-video{
-    transform: translate(-200px, -28px) scale(1.48);
-  }
-
-  @keyframes jc-float{
-    0%,100%{
-      transform: translate(-200px, -28px) scale(1.48);
-    }
-    50%{
-      transform: translate(-200px, -36px) scale(1.48);
-    }
-  }
-}
-
-/* للجوال */
-@media (max-width:480px){
-  .jc-jojo-video{
-    transform: translate(-160px, -22px) scale(1.38);
-  }
-
-  @keyframes jc-float{
-    0%,100%{
-      transform: translate(-160px, -22px) scale(1.38);
-    }
-    50%{
-      transform: translate(-160px, -28px) scale(1.38);
-    }
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   فيديو الافتتاح (Intro)
+   فيديو الافتتاح
 ═══════════════════════════════════════════════════════════ */
 
 .intro-overlay {
@@ -2201,7 +1511,6 @@ svg {
   background: #000;
 }
 
-/* زر تخطّي */
 .skip-intro-btn {
   position: absolute;
   top: 24px;
@@ -2232,31 +1541,13 @@ svg {
   box-shadow: 0 8px 20px rgba(232, 192, 80, 0.4);
 }
 
-/* تأثير الإخفاء */
 .intro-fade-out {
   animation: intro-fade-out 0.7s ease-in forwards;
 }
 
 @keyframes intro-fade-out {
-  to {
-    opacity: 0;
-    transform: scale(1.05);
-  }
+  to { opacity: 0; transform: scale(1.05); }
 }
-
-/* للجوال */
-@media (max-width: 768px) {
-  .skip-intro-btn {
-    top: 16px;
-    left: 16px;
-    padding: 8px 14px;
-    font-size: 13px;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   زر الرجوع لشاشة البداية (في صفحة intro)
-═══════════════════════════════════════════════════════════ */
 
 .back-intro-btn {
   position: absolute;
@@ -2289,76 +1580,39 @@ svg {
 }
 
 .back-intro-btn svg {
-  /* السهم يشير لليمين في RTL */
   transform: scaleX(-1);
 }
 
-/* للجوال */
-@media (max-width: 768px) {
-  .back-intro-btn {
-    top: 16px;
-    right: 16px;
-    padding: 8px 14px;
-    font-size: 13px;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   صور اللوقو - شاشة البداية + الترويسة (مفرّغة بدون خلفية)
-═══════════════════════════════════════════════════════════ */
-
-/* اللوقو الكبير في شاشة البداية */
-.logo-circle {
-  background: transparent !important;
-  border: none !important;
-  box-shadow: none !important;
-}
-
-.logo-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter:
-    drop-shadow(0 8px 20px rgba(232, 192, 80, 0.4))
-    drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
-  animation: logo-pulse 4s ease-in-out infinite;
-}
-
-@keyframes logo-pulse {
-  0%, 100% {
-    transform: scale(1);
-    filter:
-      drop-shadow(0 8px 20px rgba(232, 192, 80, 0.4))
-      drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
-  }
-  50% {
-    transform: scale(1.03);
-    filter:
-      drop-shadow(0 12px 28px rgba(232, 192, 80, 0.6))
-      drop-shadow(0 6px 14px rgba(0, 0, 0, 0.35));
-  }
-}
-
-/* اللوقو الصغير في الترويسة */
-.brand-icon {
-  background: transparent !important;
-  border: none !important;
+.mute-toggle-btn {
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  z-index: 10000;
 }
 
-.brand-logo-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 6px rgba(232, 192, 80, 0.3));
+.mute-toggle-btn:hover {
+  background: rgba(232, 192, 80, 0.9);
+  border-color: var(--gold-300);
+  color: var(--green-900);
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(232, 192, 80, 0.4);
 }
 
 /* ═══════════════════════════════════════════════════════════
-   شاشة "قريباً" - تظهر للغات اللي ما عندها فيديو
+   شاشة "قريباً"
 ═══════════════════════════════════════════════════════════ */
 
 .coming-soon {
@@ -2390,8 +1644,7 @@ svg {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background:
-    radial-gradient(circle at 35% 35%, var(--gold-100), var(--gold-400) 50%, var(--gold-700));
+  background: radial-gradient(circle at 35% 35%, var(--gold-100), var(--gold-400) 50%, var(--gold-700));
   color: var(--green-900);
   margin-bottom: 8px;
   box-shadow:
@@ -2452,64 +1705,8 @@ svg {
   box-shadow: 0 12px 28px rgba(232, 192, 80, 0.5);
 }
 
-@media (max-width: 480px) {
-  .coming-soon-icon {
-    width: 80px;
-    height: 80px;
-  }
-
-  .coming-soon-title {
-    font-size: 28px;
-  }
-
-  .coming-soon-text {
-    font-size: 14px;
-  }
-}
-
 /* ═══════════════════════════════════════════════════════════
-   زر الصوت (mute/unmute) في فيديو intro
-═══════════════════════════════════════════════════════════ */
-
-.mute-toggle-btn {
-  position: absolute;
-  bottom: 24px;
-  left: 24px;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1.5px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  color: #fff;
-  cursor: pointer;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  transition: all 0.3s ease;
-  z-index: 10000;
-}
-
-.mute-toggle-btn:hover {
-  background: rgba(232, 192, 80, 0.9);
-  border-color: var(--gold-300);
-  color: var(--green-900);
-  transform: scale(1.1);
-  box-shadow: 0 8px 20px rgba(232, 192, 80, 0.4);
-}
-
-@media (max-width: 768px) {
-  .mute-toggle-btn {
-    bottom: 16px;
-    left: 16px;
-    width: 42px;
-    height: 42px;
-  }
-}
-
-/* ═══════════════════════════════════════════════════════════
-   Modal محادثة جوجو الصوتية - فاخر واحترافي
+   Modal محادثة جوجو الصوتية
 ═══════════════════════════════════════════════════════════ */
 
 .voice-modal {
@@ -2563,7 +1760,6 @@ svg {
   transform: scale(1);
 }
 
-/* خلفية ذهبية متدرجة */
 .voice-modal-content::before {
   content: '';
   position: absolute;
@@ -2582,7 +1778,6 @@ svg {
   z-index: 0;
 }
 
-/* زر الإغلاق */
 .voice-modal-close {
   position: absolute;
   top: 16px;
@@ -2608,7 +1803,6 @@ svg {
   transform: rotate(90deg);
 }
 
-/* الترويسة */
 .voice-modal-header {
   position: relative;
   z-index: 1;
@@ -2659,7 +1853,6 @@ svg {
   margin: 0;
 }
 
-/* غلاف الـ Widget */
 .voice-widget-wrapper {
   position: relative;
   z-index: 1;
@@ -2676,12 +1869,6 @@ svg {
   margin-bottom: 24px;
 }
 
-/* تنسيق ElevenLabs Widget داخل الـ modal */
-.voice-widget-wrapper elevenlabs-convai {
-  --el-spacing: 20px;
-}
-
-/* التذييل */
 .voice-modal-footer {
   position: relative;
   z-index: 1;
@@ -2695,134 +1882,188 @@ svg {
   color: var(--text-muted);
   margin: 0;
 }
-/* ======================================================
-   FINAL JOJO FIX
-   Desktop/Android = WebM
-   iPhone/Mobile = PNG
-====================================================== */
 
-.jc-jojo-stage{
-  position: relative !important;
-  width: 100% !important;
-  max-width: 480px !important;
-  height: 380px !important;
-  margin: 0 auto !important;
-  overflow: hidden !important;
-}
+/* ═══════════════════════════════════════════════════════════
+   📱 الجوال
+═══════════════════════════════════════════════════════════ */
 
-.jc-spotlight{
-  position: absolute !important;
-  inset: 0 !important;
-  background:
-    radial-gradient(
-      ellipse 52% 72% at 50% 50%,
-      rgba(232,192,80,.48) 0%,
-      rgba(232,192,80,.20) 28%,
-      rgba(232,192,80,.06) 58%,
-      transparent 82%
-    ) !important;
-  filter: blur(18px) !important;
-  z-index: 0 !important;
-  pointer-events: none !important;
-}
-
-.jc-jojo-container{
-  position: absolute !important;
-  inset: 0 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  z-index: 2 !important;
-}
-
-.jc-jojo-video{
-  display: block !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: contain !important;
-  background: transparent !important;
-
-  transform: translate(-250px, -34px) scale(1.58) !important;
-  transform-origin: center center !important;
-
-  filter:
-    drop-shadow(0 24px 34px rgba(232,192,80,.38))
-    drop-shadow(0 10px 18px rgba(0,0,0,.35)) !important;
-
-  animation: jojo-float-desktop 4s ease-in-out infinite !important;
-}
-
-@keyframes jojo-float-desktop{
-  0%,100%{
-    transform: translate(-250px, -34px) scale(1.58);
-  }
-  50%{
-    transform: translate(-250px, -42px) scale(1.58);
-  }
-}
-
-.jc-jojo-mobile{
-  display: none !important;
-}
-
-.jc-jojo-platform{
-  position: absolute !important;
-  bottom: 7% !important;
-  left: 50% !important;
-  transform: translateX(-50%) !important;
-  width: 52% !important;
-  height: 28px !important;
-  background:
-    radial-gradient(
-      ellipse 50% 100% at 50% 0%,
-      rgba(232,192,80,.60),
-      rgba(232,192,80,.20) 42%,
-      transparent 72%
-    ) !important;
-  filter: blur(10px) !important;
-  z-index: 1 !important;
-  pointer-events: none !important;
-}
-
-/* Mobile / iPhone */
-@media (max-width:768px){
-
-  .jc-jojo-stage{
-    height: 320px !important;
-    max-width: 280px !important;
+@media (max-width: 768px) {
+  .main {
+    padding: 16px;
+    min-height: auto;
   }
 
-  .jc-jojo-video{
-    display: none !important;
+  .top-bar {
+    padding: 12px 16px;
+    margin-bottom: 16px;
   }
 
-  .jc-jojo-mobile{
-    display: block !important;
-    position: absolute !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: contain !important;
+  .content {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 
-    transform: translate(-115px, -24px) scale(1.38) !important;
-    transform-origin: center center !important;
+  .hero-card,
+  .languages-card {
+    grid-column: 1 / -1;
+  }
 
-    z-index: 3 !important;
+  .hero-card {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 20px;
+  }
 
+  .hero-right {
+    order: -1;
+    display: flex;
+    justify-content: center;
+  }
+
+  .avatar-stage {
+    width: 110px;
+    height: 110px;
+  }
+
+  .avatar-orb {
+    width: 80px;
+    height: 80px;
+  }
+
+  /* جوجو في الجوال - استخدام PNG */
+  .jc-jojo-stage {
+    max-width: 240px;
+    height: 240px;
+  }
+
+  .jc-jojo-video {
+    display: none;
+  }
+
+  .jc-jojo-mobile {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
     filter:
-      drop-shadow(0 24px 34px rgba(232,192,80,.38))
-      drop-shadow(0 10px 18px rgba(0,0,0,.35)) !important;
+      drop-shadow(0 20px 30px rgba(232, 192, 80, 0.35))
+      drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+    animation: jojo-float 4s ease-in-out infinite;
+  }
+
+  .jojo-conversation {
+    padding: 20px 18px;
+  }
+
+  .jc-title {
+    font-size: 20px;
+  }
+
+  .jc-line {
+    width: 40px;
+  }
+
+  .voice-link-btn {
+    padding: 14px 18px;
+  }
+
+  .vlb-content {
+    gap: 12px;
+  }
+
+  .vlb-icon-circle {
+    width: 42px;
+    height: 42px;
+  }
+
+  .vlb-title {
+    font-size: 15px;
+  }
+
+  .vlb-sub {
+    font-size: 11px;
+  }
+
+  .skip-intro-btn,
+  .back-intro-btn {
+    top: 16px;
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .skip-intro-btn { left: 16px; }
+  .back-intro-btn { right: 16px; }
+
+  .mute-toggle-btn {
+    bottom: 16px;
+    left: 16px;
+    width: 42px;
+    height: 42px;
+  }
+
+  .splash-rings .r2 { width: 380px; height: 380px; }
+  .splash-rings .r3 { width: 540px; height: 540px; }
+
+  .rose-tagline {
+    padding: 6px 14px;
+  }
+
+  .tagline-text {
+    font-size: 12px;
+  }
+
+  .footer-ornament {
+    width: 30px;
   }
 }
 
-/* Small phones */
-@media (max-width:480px){
-
-  .jc-jojo-stage{
-    height: 280px !important;
-    max-width: 260px !important;
+@media (max-width: 480px) {
+  .jc-jojo-stage {
+    max-width: 200px;
+    height: 220px;
   }
 
-  .jc-jojo-mobile{
-    transform: translate(-100px, -20px) scale(1.30) !important;
+  .languages {
+    gap: 6px;
+  }
+
+  .lang-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .jc-bubble {
+    padding: 10px 14px;
+    font-size: 12.5px;
+  }
+
+  .jc-bubble-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .splash-button {
+    padding: 14px 32px;
+  }
+
+  .rose-tagline {
+    display: none;
+  }
+
+  .vlb-decor {
+    display: none;
+  }
+
+  .coming-soon-icon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .coming-soon-title {
+    font-size: 28px;
+  }
+
+  .coming-soon-text {
+    font-size: 14px;
   }
 }
