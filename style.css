@@ -336,7 +336,7 @@ svg { display: block; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1100px;
+  max-width: 1500px;
   margin: 0 auto 8px;
   padding: 8px 14px;
   background: rgba(255, 255, 255, 0.03);
@@ -369,11 +369,11 @@ svg { display: block; }
   filter: drop-shadow(0 2px 6px rgba(232, 192, 80, 0.3));
 }
 
-.brand-text .brand-ar { font-size: 13px; font-weight: 600; margin-bottom: 0; }
-.brand-text .brand-en { font-size: 10px; color: var(--gold-300); letter-spacing: 1px; font-weight: 500; }
+.brand-text .brand-ar { font-size: 15px; font-weight: 600; margin-bottom: 0; }
+.brand-text .brand-en { font-size: 11px; color: var(--gold-300); letter-spacing: 1px; font-weight: 500; }
 
 .content {
-  max-width: 1100px;
+  max-width: 1500px;
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -435,7 +435,7 @@ svg { display: block; }
 
 .hero-title {
   font-family: 'Cairo', sans-serif;
-  font-size: clamp(24px, 3vw, 32px);
+  font-size: clamp(28px, 3.5vw, 38px);
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: 4px;
@@ -449,8 +449,8 @@ svg { display: block; }
   -webkit-text-fill-color: transparent;
 }
 
-.hero-desc { font-size: 14px; color: var(--text-secondary); margin-bottom: 4px; }
-.hero-hint { font-size: 12px; color: var(--text-tertiary); }
+.hero-desc { font-size: 16px; color: var(--text-secondary); margin-bottom: 4px; }
+.hero-hint { font-size: 14px; color: var(--text-tertiary); }
 
 /* الأفاتار في الترحيب */
 .avatar-stage {
@@ -570,11 +570,11 @@ svg { display: block; }
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 12px;
+  padding: 8px 14px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--border-soft);
   border-radius: var(--r-full);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-secondary);
   transition: all 0.25s ease;
 }
@@ -627,7 +627,7 @@ svg { display: block; }
 
 .jc-title {
   font-family: 'Cairo', sans-serif;
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
   background: linear-gradient(135deg, var(--gold-100), var(--gold-300), var(--gold-500));
   -webkit-background-clip: text;
@@ -636,7 +636,7 @@ svg { display: block; }
   letter-spacing: -0.5px;
 }
 
-.jc-subtitle { font-size: 13px; color: var(--text-tertiary); font-weight: 400; }
+.jc-subtitle { font-size: 15px; color: var(--text-tertiary); font-weight: 400; }
 
 /* ✅ مسرح جوجو - متمركز في النص فوق */
 .jc-jojo-stage {
@@ -714,11 +714,11 @@ svg { display: block; }
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 5px 14px;
+  padding: 6px 16px;
   background: linear-gradient(135deg, rgba(34, 211, 153, 0.15), rgba(232, 192, 80, 0.12));
   border: 1px solid rgba(34, 211, 153, 0.35);
   border-radius: var(--r-full);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--green-300);
   margin: 0 0 6px;
@@ -749,7 +749,7 @@ svg { display: block; }
 }
 
 .jc-bubbles-label {
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 600;
   color: var(--gold-300);
   letter-spacing: 1px;
@@ -765,12 +765,12 @@ svg { display: block; }
   justify-content: space-between;
   gap: 14px;
   width: 100%;
-  padding: 8px 14px;
+  padding: 10px 18px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   border: 1px solid var(--border-soft);
   border-radius: 18px 18px 18px 4px;
   text-align: right;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 500;
   color: var(--text-secondary);
   cursor: pointer;
@@ -865,8 +865,8 @@ svg { display: block; }
 @keyframes vlb-icon-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
 .vlb-text { flex: 1; display: flex; flex-direction: column; }
-.vlb-title { font-family: 'Cairo', sans-serif; font-size: 16px; font-weight: 800; color: var(--green-900); margin-bottom: 2px; }
-.vlb-sub { font-size: 11px; color: rgba(2, 20, 16, 0.7); font-weight: 500; }
+.vlb-title { font-family: 'Cairo', sans-serif; font-size: 19px; font-weight: 800; color: var(--green-900); margin-bottom: 2px; }
+.vlb-sub { font-size: 13px; color: rgba(2, 20, 16, 0.7); font-weight: 500; }
 
 .vlb-arrow { color: var(--green-900); flex-shrink: 0; animation: vlb-arrow-move 1.8s ease-in-out infinite; }
 
@@ -899,7 +899,7 @@ svg { display: block; }
   text-align: center;
   margin-top: 4px;
   padding-bottom: 4px;
-  font-size: 11px;
+  font-size: 13px;
   color: var(--text-muted);
   letter-spacing: 0.3px;
 }
