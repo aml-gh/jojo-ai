@@ -13,43 +13,27 @@
 
   <link rel="stylesheet" href="style.css" />
 
-  <!-- ═══════════════════════════════════
-       SVG ورود الطائف - رسم دقيق للوردة الدمشقية
-  ═══════════════════════════════════ -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true">
     <defs>
-      <!-- ╔══════════════════════════════════════╗
-           ║  الوردة الطائفية - Rosa Damascena    ║
-           ║  وردي فاتح • 30+ بتلة • مفتوحة      ║
-           ╚══════════════════════════════════════╝ -->
       <symbol id="taif-rose" viewBox="0 0 100 100">
         <defs>
-          <!-- التدرج الأساسي للبتلات الخارجية -->
           <radialGradient id="petal-outer" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stop-color="#fce7eb"/>
             <stop offset="50%" stop-color="#f4a8be"/>
             <stop offset="100%" stop-color="#d97a96"/>
           </radialGradient>
-          <!-- التدرج للبتلات الوسطى -->
           <radialGradient id="petal-mid" cx="50%" cy="40%" r="60%">
             <stop offset="0%" stop-color="#fcd5de"/>
             <stop offset="60%" stop-color="#ec99b5"/>
             <stop offset="100%" stop-color="#c46b86"/>
           </radialGradient>
-          <!-- التدرج للبتلات الداخلية -->
           <radialGradient id="petal-inner" cx="50%" cy="35%" r="65%">
             <stop offset="0%" stop-color="#ffebef"/>
             <stop offset="50%" stop-color="#f4b8c9"/>
             <stop offset="100%" stop-color="#d889a3"/>
           </radialGradient>
-          <!-- ظل خفيف للعمق -->
-          <filter id="rose-shadow">
-            <feGaussianBlur stdDeviation="0.5"/>
-          </filter>
         </defs>
-
         <g transform="translate(50, 50)">
-          <!-- الطبقة 1: 8 بتلات خارجية كبيرة (مفتوحة بالكامل) -->
           <g opacity="0.85">
             <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(0)"/>
             <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(45)"/>
@@ -60,8 +44,6 @@
             <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(270)"/>
             <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(315)"/>
           </g>
-
-          <!-- الطبقة 2: 8 بتلات خارجية وسطى (متناوبة) -->
           <g opacity="0.9">
             <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(22.5)"/>
             <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(67.5)"/>
@@ -72,8 +54,6 @@
             <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(292.5)"/>
             <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(337.5)"/>
           </g>
-
-          <!-- الطبقة 3: 8 بتلات داخلية -->
           <g opacity="0.95">
             <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(0)"/>
             <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(45)"/>
@@ -84,8 +64,6 @@
             <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(270)"/>
             <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(315)"/>
           </g>
-
-          <!-- الطبقة 4: 6 بتلات داخلية صغيرة (متناوبة) -->
           <g>
             <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(30)"/>
             <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(90)"/>
@@ -94,60 +72,16 @@
             <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(270)"/>
             <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(330)"/>
           </g>
-
-          <!-- الطبقة 5: المركز (بتلات ملفوفة بشكل دائري) -->
           <g>
             <circle cx="0" cy="0" r="9" fill="url(#petal-inner)"/>
             <ellipse cx="0" cy="-4" rx="6" ry="8" fill="url(#petal-inner)" transform="rotate(20)"/>
             <ellipse cx="0" cy="-4" rx="6" ry="8" fill="url(#petal-inner)" transform="rotate(140)"/>
             <ellipse cx="0" cy="-4" rx="6" ry="8" fill="url(#petal-inner)" transform="rotate(260)"/>
-            <!-- نقطة المركز الفاتحة -->
             <circle cx="0" cy="0" r="3" fill="#fff5f7" opacity="0.7"/>
           </g>
         </g>
       </symbol>
 
-      <!-- وردة طائفية بشكل جانبي (Profile) -->
-      <symbol id="taif-rose-side" viewBox="0 0 100 100">
-        <defs>
-          <radialGradient id="side-grad" cx="50%" cy="50%">
-            <stop offset="0%" stop-color="#fce7eb"/>
-            <stop offset="50%" stop-color="#f4a8be"/>
-            <stop offset="100%" stop-color="#c46b86"/>
-          </radialGradient>
-          <linearGradient id="side-stem" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#34d399"/>
-            <stop offset="100%" stop-color="#064e3b"/>
-          </linearGradient>
-        </defs>
-        <!-- ساق -->
-        <path d="M50 50 Q48 70 50 95" stroke="url(#side-stem)" stroke-width="2" fill="none"/>
-        <!-- ورقة -->
-        <ellipse cx="40" cy="65" rx="9" ry="4" fill="url(#side-stem)" transform="rotate(-30 40 65)" opacity="0.8"/>
-        <!-- البتلات الخلفية -->
-        <ellipse cx="40" cy="35" rx="13" ry="20" fill="url(#side-grad)" opacity="0.7" transform="rotate(-15 40 35)"/>
-        <ellipse cx="60" cy="35" rx="13" ry="20" fill="url(#side-grad)" opacity="0.7" transform="rotate(15 60 35)"/>
-        <!-- البتلات الأمامية -->
-        <ellipse cx="50" cy="32" rx="18" ry="22" fill="url(#side-grad)" opacity="0.9"/>
-        <ellipse cx="50" cy="38" rx="14" ry="16" fill="url(#side-grad)"/>
-        <!-- المركز -->
-        <circle cx="50" cy="38" r="6" fill="#fce7eb" opacity="0.6"/>
-      </symbol>
-
-      <!-- ورقة طائفية -->
-      <symbol id="taif-leaf" viewBox="0 0 50 80">
-        <defs>
-          <linearGradient id="leaf-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#34d399"/>
-            <stop offset="50%" stop-color="#16916a"/>
-            <stop offset="100%" stop-color="#064e3b"/>
-          </linearGradient>
-        </defs>
-        <path d="M25 5 Q5 30 10 60 Q15 75 25 75 Q35 75 40 60 Q45 30 25 5Z" fill="url(#leaf-grad)" opacity="0.7"/>
-        <path d="M25 10 L25 70" stroke="#064e3b" stroke-width="0.5" opacity="0.5"/>
-      </symbol>
-
-      <!-- زخرفة عربية -->
       <symbol id="ornament" viewBox="0 0 100 20">
         <defs>
           <linearGradient id="orn-grad" x1="0%" y1="0%" x2="100%" y2="0%">
@@ -169,30 +103,24 @@
 
 <div class="app">
 
-  <!-- ═══════════════════════════════════
-       فيديو الافتتاح (Intro) - يفتح بعد ضغط ابدأ التجربة
-  ═══════════════════════════════════ -->
+  <!-- فيديو الافتتاح -->
   <div id="introOverlay" class="intro-overlay" style="display: none;">
     <video id="introVideo" class="intro-video" muted playsinline>
       <source src="intro.mp4" type="video/mp4" />
     </video>
 
-    <!-- زر صوت/كتم -->
     <button id="muteToggle" class="mute-toggle-btn" type="button" aria-label="تشغيل الصوت">
-      <!-- أيقونة مكتوم (الافتراضي) -->
       <svg id="muteIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
         <line x1="23" y1="9" x2="17" y2="15"></line>
         <line x1="17" y1="9" x2="23" y2="15"></line>
       </svg>
-      <!-- أيقونة بصوت (مخفية) -->
       <svg id="unmuteIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none">
         <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
         <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
       </svg>
     </button>
 
-    <!-- زر رجوع لشاشة البداية -->
     <button id="backFromIntro" class="back-intro-btn" type="button">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <polyline points="15 18 9 12 15 6"/>
@@ -200,7 +128,6 @@
       <span>رجوع</span>
     </button>
 
-    <!-- زر تخطّي -->
     <button id="skipIntro" class="skip-intro-btn" type="button">
       <span>تخطّي</span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -209,16 +136,12 @@
     </button>
   </div>
 
-  <!-- ═══════════════════════════════════
-       فيديو الإجابة (Answer Video)
-       يفتح لما تضغطين سؤال
-  ═══════════════════════════════════ -->
+  <!-- فيديو الإجابة -->
   <div id="answerOverlay" class="intro-overlay" style="display: none;">
     <video id="answerVideo" class="intro-video" playsinline>
       <source src="" type="video/mp4" />
     </video>
 
-    <!-- رسالة "قريباً" -->
     <div id="comingSoon" class="coming-soon" style="display: none;">
       <div class="coming-soon-icon">
         <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
@@ -234,7 +157,6 @@
       </button>
     </div>
 
-    <!-- زر رجوع -->
     <button id="backFromAnswer" class="back-intro-btn" type="button">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <polyline points="15 18 9 12 15 6"/>
@@ -242,7 +164,6 @@
       <span>رجوع</span>
     </button>
 
-    <!-- زر تخطّي -->
     <button id="skipAnswer" class="skip-intro-btn" type="button">
       <span>تخطّي</span>
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -258,7 +179,6 @@
     <div class="aurora aurora-3"></div>
     <div class="grid-pattern"></div>
 
-    <!-- بتلات ورد طائفي متساقطة - لون وردي فاتح حقيقي -->
     <div class="petals-container" aria-hidden="true">
       <svg class="petal p-1" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f4a8be" opacity="0.55"/></svg>
       <svg class="petal p-2" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#fce7eb" opacity="0.5"/></svg>
@@ -271,12 +191,9 @@
     </div>
   </div>
 
-  <!-- checkbox مخفي للتنقل -->
   <input type="checkbox" id="appStarted" class="app-toggle" />
 
-  <!-- ═══════════════════════════════════
-       شاشة البداية
-  ═══════════════════════════════════ -->
+  <!-- شاشة البداية -->
   <section class="splash">
     <div class="splash-rays" aria-hidden="true"></div>
 
@@ -301,7 +218,6 @@
           <svg class="label-ornament" viewBox="0 0 100 20"><use href="#ornament"/></svg>
         </p>
 
-        <!-- شعار "موطن الورد" -->
         <p class="splash-poetry">
           <svg class="poetry-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
           <span>موطن الورد</span>
@@ -335,9 +251,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════
-       الواجهة الرئيسية
-  ═══════════════════════════════════ -->
+  <!-- الواجهة الرئيسية -->
   <main class="main">
 
     <header class="top-bar">
@@ -351,7 +265,6 @@
         </div>
       </div>
 
-      <!-- تاج "موطن الورد" -->
       <div class="rose-tagline">
         <svg class="tagline-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
         <span class="tagline-text">موطن الورد</span>
@@ -362,7 +275,6 @@
 
       <!-- بطاقة الترحيب -->
       <section class="hero-card">
-        <!-- زخرفة ورود الطائف على البطاقة -->
         <svg class="hero-rose hero-rose-1" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
         <svg class="hero-rose hero-rose-2" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
 
@@ -378,7 +290,6 @@
 
         <div class="hero-right">
           <div class="avatar-stage">
-            <!-- إكليل ورد حول جوجو -->
             <div class="avatar-wreath" aria-hidden="true">
               <svg class="wreath-rose wr-1" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
               <svg class="wreath-rose wr-2" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
@@ -440,7 +351,7 @@
         </div>
       </section>
 
-      <!-- بطاقة جوجو + الأسئلة (تصميم محادثة) -->
+      <!-- ✅ بطاقة جوجو + الأسئلة -->
       <section class="card jojo-conversation">
 
         <!-- العنوان -->
@@ -453,18 +364,17 @@
           <p class="jc-subtitle">اختاري سؤالاً من المقترحات</p>
         </div>
 
-        <!-- جوجو في المنتصف -->
-        <div class="jc-jojo-container">
-
-  <!-- الفيديو -->
-  <video class="jc-jojo-video" autoplay muted loop playsinline>
-    <source src="jojo_idle.webm" type="video/webm">
-  </video>
-
-  <!-- الصورة للجوال -->
-  <img src="jojo.png" class="jc-jojo-mobile" alt="جوجو">
-
-</div>
+        <!-- ✅ جوجو متمركزة فوق -->
+        <div class="jc-jojo-stage">
+          <div class="jc-spotlight"></div>
+          <div class="jc-jojo-container">
+            <video class="jc-jojo-video" autoplay muted loop playsinline>
+              <source src="jojo_idle.webm" type="video/webm">
+            </video>
+            <img src="jojo.png" class="jc-jojo-mobile" alt="جوجو">
+          </div>
+          <div class="jc-jojo-platform"></div>
+        </div>
 
         <!-- شارة "متاحة الآن" -->
         <div class="jc-status">
@@ -472,7 +382,7 @@
           <span>جوجو متاحة الآن</span>
         </div>
 
-        <!-- الأسئلة كفقاعات حوار -->
+        <!-- ✅ الأسئلة تحت جوجو بدون تداخل -->
         <div class="jc-bubbles">
           <p class="jc-bubbles-label">اقتراحات:</p>
 
@@ -508,12 +418,9 @@
 
       <!-- زر المحادثة -->
       <section class="voice-section">
-        <button id="openVoiceModal"
-                type="button"
-                class="voice-link-btn">
+        <button id="openVoiceModal" type="button" class="voice-link-btn">
           <span class="vlb-bg"></span>
 
-          <!-- زخرفة ورد على الزر -->
           <svg class="vlb-decor vlb-decor-right" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
           <svg class="vlb-decor vlb-decor-left" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
 
@@ -550,15 +457,11 @@
 
 </div>
 
-<!-- ═══════════════════════════════════
-     Modal محادثة جوجو الصوتية
-     ElevenLabs Widget داخل الموقع نفسه
-═══════════════════════════════════ -->
+<!-- Modal محادثة جوجو الصوتية -->
 <div id="voiceModal" class="voice-modal" style="display: none;" aria-hidden="true">
   <div class="voice-modal-backdrop"></div>
 
   <div class="voice-modal-content">
-    <!-- زر إغلاق -->
     <button id="closeVoiceModal" class="voice-modal-close" type="button" aria-label="إغلاق">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <line x1="18" y1="6" x2="6" y2="18"/>
@@ -566,7 +469,6 @@
       </svg>
     </button>
 
-    <!-- الترويسة -->
     <div class="voice-modal-header">
       <div class="vm-status">
         <span class="vm-status-dot"></span>
@@ -576,48 +478,36 @@
       <p class="voice-modal-subtitle">اضغط على زر الهاتف 📞 لبدء المحادثة الصوتية</p>
     </div>
 
-    <!-- ElevenLabs Widget -->
     <div class="voice-widget-wrapper">
       <elevenlabs-convai agent-id="agent_5301kqcwsvhxfa7aqn1sjewpd30z"></elevenlabs-convai>
     </div>
 
-    <!-- التذييل -->
     <div class="voice-modal-footer">
       <p>محادثة فورية بصوت طبيعي · تدعم 7 لغات</p>
     </div>
   </div>
 </div>
 
-<!-- ElevenLabs Widget Script -->
 <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
 <script>
 (function() {
   'use strict';
 
-  // ═══════════════════════════════════
-  // 🌍 الترجمات لكل اللغات
-  // ═══════════════════════════════════
-
   const translations = {
     'ar': {
-      // عناوين البطاقات
       cardTitle: 'تحدث معي',
       cardSubtitle: 'اختاري سؤالاً من المقترحات',
       statusText: 'جوجو متاحة الآن',
       suggestionsLabel: 'اقتراحات:',
-      // الأسئلة
       q1: 'ما جهود أمانة الطائف في النظافة خلال موسم الحج؟',
       q2: 'ما المواقع التي تخدمها أمانة الطائف خلال موسم الحج؟',
       q3: 'كيف تتم أعمال الإصحاح البيئي ومكافحة الحشرات؟',
-      // أزرار
       voiceTitle: 'تحدث مع جوجو مباشرة',
       voiceSub: 'محادثة فورية بصوت طبيعي · تدعم 7 لغات',
       voiceTag: 'مدعوم بالذكاء الاصطناعي المتقدم',
-      // intro buttons
       skipBtn: 'تخطّي',
       backBtn: 'رجوع',
-      // coming soon
       comingSoonTitle: 'قريباً',
       comingSoonText: 'هذه الإجابة باللغة المختارة قيد الإعداد',
       comingSoonSmall: 'جرّبي اللغة العربية لتشاهدي الفيديو',
@@ -697,31 +587,23 @@
     }
   };
 
-  // ═══════════════════════════════════
-  // 🌍 إدارة اللغة المختارة
-  // ═══════════════════════════════════
-
   let currentLang = 'ar';
 
   function applyTranslation(lang) {
     const t = translations[lang] || translations['ar'];
 
-    // عنوان البطاقة
     const cardTitle = document.querySelector('.jc-title');
     if (cardTitle) cardTitle.textContent = t.cardTitle;
 
     const cardSubtitle = document.querySelector('.jc-subtitle');
     if (cardSubtitle) cardSubtitle.textContent = t.cardSubtitle;
 
-    // شارة الحالة
     const status = document.querySelector('.jc-status span:last-child');
     if (status) status.textContent = t.statusText;
 
-    // تسمية الاقتراحات
     const suggestionsLabel = document.querySelector('.jc-bubbles-label');
     if (suggestionsLabel) suggestionsLabel.textContent = t.suggestionsLabel;
 
-    // الأسئلة الثلاثة
     const q1Text = document.querySelector('[data-question="1"] .jc-bubble-text');
     if (q1Text) q1Text.textContent = t.q1;
 
@@ -731,18 +613,15 @@
     const q3Text = document.querySelector('[data-question="3"] .jc-bubble-text');
     if (q3Text) q3Text.textContent = t.q3;
 
-    // زر المحادثة
     const vlbTitle = document.querySelector('.vlb-title');
     if (vlbTitle) vlbTitle.textContent = t.voiceTitle;
 
     const vlbSub = document.querySelector('.vlb-sub');
     if (vlbSub) vlbSub.textContent = t.voiceSub;
 
-    // العلامة المساعدة في بطاقة الترحيب
     const heroHint = document.querySelector('.hero-hint');
     if (heroHint && lang !== 'ar') heroHint.textContent = t.voiceTag;
 
-    // أزرار intro
     const skipIntroSpan = document.querySelector('#skipIntro span');
     if (skipIntroSpan) skipIntroSpan.textContent = t.skipBtn;
 
@@ -755,7 +634,6 @@
     const backAnswerSpan = document.querySelector('#backFromAnswer span');
     if (backAnswerSpan) backAnswerSpan.textContent = t.backBtn;
 
-    // شاشة قريباً
     const comingTitle = document.querySelector('.coming-soon-title');
     if (comingTitle) comingTitle.textContent = t.comingSoonTitle;
 
@@ -768,7 +646,6 @@
     const comingBtn = document.querySelector('#comingSoonClose span');
     if (comingBtn) comingBtn.textContent = t.comingSoonBtn;
 
-    // تغيير اتجاه الصفحة لو الإنجليزي/الفرنسي/التركي
     const html = document.documentElement;
     if (lang === 'en' || lang === 'fr' || lang === 'tr') {
       html.setAttribute('dir', 'ltr');
@@ -788,10 +665,6 @@
       applyTranslation(currentLang);
     });
   });
-
-  // ═══════════════════════════════════
-  // 🎬 فيديو الافتتاح (Intro)
-  // ═══════════════════════════════════
 
   const intro = document.getElementById('introOverlay');
   const video = document.getElementById('introVideo');
@@ -849,7 +722,6 @@
   if (skipBtn) skipBtn.addEventListener('click', hideIntroAndContinue);
   if (backBtn) backBtn.addEventListener('click', hideIntroAndBack);
 
-  // زر الصوت (mute/unmute) للـ intro
   const muteToggle = document.getElementById('muteToggle');
   const muteIcon = document.getElementById('muteIcon');
   const unmuteIcon = document.getElementById('unmuteIcon');
@@ -869,10 +741,6 @@
     });
   }
 
-  // ═══════════════════════════════════
-  // 🎬 فيديوهات الإجابات
-  // ═══════════════════════════════════
-
   const answerOverlay = document.getElementById('answerOverlay');
   const answerVideo = document.getElementById('answerVideo');
   const answerSource = answerVideo ? answerVideo.querySelector('source') : null;
@@ -881,29 +749,25 @@
   const comingSoon = document.getElementById('comingSoon');
   const comingSoonClose = document.getElementById('comingSoonClose');
 
-  // اللغات وأرقام الأسئلة المتاحة
-  // كل لغة فيها مصفوفة بأرقام الأسئلة الموجودة
- const availableVideos = {
-  'ar': [1, 2, 3],
-  'en': [1, 2, 3],
-  'fr': [1, 2, 3],
-  'ur': [1, 2, 3],
-  'tr': [1, 2, 3]
-};
+  const availableVideos = {
+    'ar': [1, 2, 3],
+    'en': [1, 2, 3],
+    'fr': [1, 2, 3],
+    'ur': [1, 2, 3],
+    'tr': [1, 2, 3]
+  };
+
   function showAnswerVideo(questionNum) {
     if (!answerOverlay) return;
 
-    // فحص إذا الفيديو موجود لهذي اللغة وهذا السؤال
     const langVideos = availableVideos[currentLang] || [];
     const questionNumInt = parseInt(questionNum);
 
     if (langVideos.indexOf(questionNumInt) === -1) {
-      // الفيديو ما موجود - نعرض رسالة "قريباً"
       showComingSoon();
       return;
     }
 
-    // نشغل الفيديو
     const videoSrc = currentLang + '_q' + questionNum + '.mp4';
 
     if (answerSource && answerVideo) {
@@ -928,7 +792,6 @@
     answerOverlay.classList.remove('intro-fade-out');
     comingSoon.style.display = 'flex';
     if (answerVideo) answerVideo.style.display = 'none';
-    // نخفي زر تخطّي لأن الفيديو غير موجود
     if (skipAnswerBtn) skipAnswerBtn.style.display = 'none';
   }
 
@@ -947,7 +810,6 @@
     }, 700);
   }
 
-  // ربط أزرار الأسئلة
   const questionButtons = document.querySelectorAll('.jc-bubble');
   questionButtons.forEach(function(btn) {
     btn.addEventListener('click', function() {
@@ -958,7 +820,6 @@
     });
   });
 
-  // أزرار الإغلاق
   if (answerVideo) {
     answerVideo.addEventListener('ended', hideAnswer);
     answerVideo.addEventListener('error', function() {
@@ -970,10 +831,6 @@
   if (skipAnswerBtn) skipAnswerBtn.addEventListener('click', hideAnswer);
   if (backAnswerBtn) backAnswerBtn.addEventListener('click', hideAnswer);
   if (comingSoonClose) comingSoonClose.addEventListener('click', hideAnswer);
-
-  // ═══════════════════════════════════
-  // 💬 Modal المحادثة الصوتية
-  // ═══════════════════════════════════
 
   const voiceModal = document.getElementById('voiceModal');
   const openVoiceModalBtn = document.getElementById('openVoiceModal');
@@ -1004,7 +861,6 @@
   if (closeVoiceModalBtn) closeVoiceModalBtn.addEventListener('click', closeVoiceModal);
   if (voiceModalBackdrop) voiceModalBackdrop.addEventListener('click', closeVoiceModal);
 
-  // إغلاق بـ ESC
   document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape' && voiceModal && voiceModal.style.display === 'flex') {
       closeVoiceModal();
