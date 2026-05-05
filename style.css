@@ -327,7 +327,7 @@ svg { display: block; }
   position: relative;
   z-index: 5;
   min-height: 100vh;
-  padding: 8px 16px;
+  padding: 6px 16px;
   display: flex;
   flex-direction: column;
 }
@@ -337,8 +337,8 @@ svg { display: block; }
   align-items: center;
   justify-content: space-between;
   max-width: 1500px;
-  margin: 0 auto 8px;
-  padding: 8px 14px;
+  margin: 0 auto 6px;
+  padding: 6px 14px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid var(--border-soft);
   border-radius: var(--r-md);
@@ -377,7 +377,7 @@ svg { display: block; }
   margin: 0 auto;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
+  gap: 6px;
   flex: 1;
   width: 100%;
 }
@@ -390,7 +390,7 @@ svg { display: block; }
   grid-template-columns: 1fr auto;
   gap: 24px;
   align-items: center;
-  padding: 12px 22px;
+  padding: 10px 22px;
   background: linear-gradient(135deg, rgba(22, 60, 45, 0.6), rgba(7, 36, 24, 0.4));
   border: 1px solid var(--border-gold);
   border-radius: var(--r-xl);
@@ -533,7 +533,7 @@ svg { display: block; }
 /* البطاقات */
 .card {
   position: relative;
-  padding: 12px 22px;
+  padding: 10px 22px;
   background: linear-gradient(135deg, rgba(22, 60, 45, 0.5), rgba(7, 36, 24, 0.35));
   border: 1px solid var(--border-medium);
   border-radius: var(--r-xl);
@@ -598,7 +598,7 @@ svg { display: block; }
 .jojo-conversation {
   grid-column: 1 / -1;
   position: relative;
-  padding: 10px 24px 12px;
+  padding: 8px 24px 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -620,7 +620,7 @@ svg { display: block; }
   z-index: 0;
 }
 
-.jc-header { position: relative; z-index: 2; text-align: center; margin-bottom: 8px; }
+.jc-header { position: relative; z-index: 2; text-align: center; margin-bottom: 4px; }
 
 .jc-title-line { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 8px; }
 .jc-line { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-400), transparent); }
@@ -643,7 +643,7 @@ svg { display: block; }
   position: relative;
   width: 100%;
   max-width: 380px;
-  height: 280px;
+  height: 240px;
   margin: 0 auto 4px;
   display: flex;
   align-items: center;
@@ -744,7 +744,7 @@ svg { display: block; }
   max-width: 640px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
   margin: 0 auto;
 }
 
@@ -765,7 +765,7 @@ svg { display: block; }
   justify-content: space-between;
   gap: 14px;
   width: 100%;
-  padding: 14px 22px;
+  padding: 11px 22px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   border: 1px solid var(--border-soft);
   border-radius: 18px 18px 18px 4px;
@@ -820,7 +820,7 @@ svg { display: block; }
 .voice-link-btn {
   display: block;
   width: 100%;
-  padding: 10px 22px;
+  padding: 9px 22px;
   border-radius: var(--r-xl);
   position: relative;
   overflow: hidden;
