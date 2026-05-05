@@ -2695,24 +2695,134 @@ svg {
   color: var(--text-muted);
   margin: 0;
 }
+/* ======================================================
+   FINAL JOJO FIX
+   Desktop/Android = WebM
+   iPhone/Mobile = PNG
+====================================================== */
 
-/* للجوال */
-@media (max-width: 640px) {
-  .voice-modal {
-    padding: 12px;
+.jc-jojo-stage{
+  position: relative !important;
+  width: 100% !important;
+  max-width: 480px !important;
+  height: 380px !important;
+  margin: 0 auto !important;
+  overflow: hidden !important;
+}
+
+.jc-spotlight{
+  position: absolute !important;
+  inset: 0 !important;
+  background:
+    radial-gradient(
+      ellipse 52% 72% at 50% 50%,
+      rgba(232,192,80,.48) 0%,
+      rgba(232,192,80,.20) 28%,
+      rgba(232,192,80,.06) 58%,
+      transparent 82%
+    ) !important;
+  filter: blur(18px) !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+.jc-jojo-container{
+  position: absolute !important;
+  inset: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 2 !important;
+}
+
+.jc-jojo-video{
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  background: transparent !important;
+
+  transform: translate(-250px, -34px) scale(1.58) !important;
+  transform-origin: center center !important;
+
+  filter:
+    drop-shadow(0 24px 34px rgba(232,192,80,.38))
+    drop-shadow(0 10px 18px rgba(0,0,0,.35)) !important;
+
+  animation: jojo-float-desktop 4s ease-in-out infinite !important;
+}
+
+@keyframes jojo-float-desktop{
+  0%,100%{
+    transform: translate(-250px, -34px) scale(1.58);
+  }
+  50%{
+    transform: translate(-250px, -42px) scale(1.58);
+  }
+}
+
+.jc-jojo-mobile{
+  display: none !important;
+}
+
+.jc-jojo-platform{
+  position: absolute !important;
+  bottom: 7% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 52% !important;
+  height: 28px !important;
+  background:
+    radial-gradient(
+      ellipse 50% 100% at 50% 0%,
+      rgba(232,192,80,.60),
+      rgba(232,192,80,.20) 42%,
+      transparent 72%
+    ) !important;
+  filter: blur(10px) !important;
+  z-index: 1 !important;
+  pointer-events: none !important;
+}
+
+/* Mobile / iPhone */
+@media (max-width:768px){
+
+  .jc-jojo-stage{
+    height: 320px !important;
+    max-width: 280px !important;
   }
 
-  .voice-modal-content {
-    padding: 32px 20px 24px;
-    border-radius: 24px;
+  .jc-jojo-video{
+    display: none !important;
   }
 
-  .voice-modal-title {
-    font-size: 24px;
+  .jc-jojo-mobile{
+    display: block !important;
+    position: absolute !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+
+    transform: translate(-115px, -24px) scale(1.38) !important;
+    transform-origin: center center !important;
+
+    z-index: 3 !important;
+
+    filter:
+      drop-shadow(0 24px 34px rgba(232,192,80,.38))
+      drop-shadow(0 10px 18px rgba(0,0,0,.35)) !important;
+  }
+}
+
+/* Small phones */
+@media (max-width:480px){
+
+  .jc-jojo-stage{
+    height: 280px !important;
+    max-width: 260px !important;
   }
 
-  .voice-widget-wrapper {
-    min-height: 240px;
-    padding: 12px;
+  .jc-jojo-mobile{
+    transform: translate(-100px, -20px) scale(1.30) !important;
   }
 }
