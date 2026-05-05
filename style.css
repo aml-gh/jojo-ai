@@ -598,7 +598,7 @@ svg { display: block; }
 .jojo-conversation {
   grid-column: 1 / -1;
   position: relative;
-  padding: 24px 28px;
+  padding: 16px 24px 18px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -620,7 +620,7 @@ svg { display: block; }
   z-index: 0;
 }
 
-.jc-header { position: relative; z-index: 2; text-align: center; margin-bottom: 16px; }
+.jc-header { position: relative; z-index: 2; text-align: center; margin-bottom: 8px; }
 
 .jc-title-line { display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 8px; }
 .jc-line { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold-400), transparent); }
@@ -642,9 +642,9 @@ svg { display: block; }
 .jc-jojo-stage {
   position: relative;
   width: 100%;
-  max-width: 480px;
-  height: 420px;
-  margin: 0 auto 16px;
+  max-width: 380px;
+  height: 280px;
+  margin: 0 auto 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -677,7 +677,7 @@ svg { display: block; }
   height: 100%;
   object-fit: contain;
   background: transparent;
-  transform: translateX(-90px) scale(1.5);
+  transform: translateX(-250px) scale(1.35);
   transform-origin: center center;
   filter:
     drop-shadow(0 20px 30px rgba(232, 192, 80, 0.35))
@@ -687,8 +687,8 @@ svg { display: block; }
 
 /* حركة عائمة - مع الحفاظ على الإزاحة لليسار والتكبير */
 @keyframes jojo-float {
-  0%, 100% { transform: translateX(-90px) translateY(0) scale(1.5); }
-  50%      { transform: translateX(-90px) translateY(-10px) scale(1.5); }
+  0%, 100% { transform: translateX(-250px) translateY(0) scale(1.35); }
+  50%      { transform: translateX(-250px) translateY(-8px) scale(1.35); }
 }
 
 /* صورة جوجو للجوال - مخفية في Desktop */
@@ -714,14 +714,14 @@ svg { display: block; }
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  padding: 6px 16px;
+  padding: 5px 14px;
   background: linear-gradient(135deg, rgba(34, 211, 153, 0.15), rgba(232, 192, 80, 0.12));
   border: 1px solid rgba(34, 211, 153, 0.35);
   border-radius: var(--r-full);
   font-size: 12px;
   font-weight: 600;
   color: var(--green-300);
-  margin: 0 0 16px;
+  margin: 0 0 10px;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   box-shadow: 0 4px 16px rgba(34, 211, 153, 0.15);
@@ -744,7 +744,7 @@ svg { display: block; }
   max-width: 640px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   margin: 0 auto;
 }
 
@@ -765,7 +765,7 @@ svg { display: block; }
   justify-content: space-between;
   gap: 14px;
   width: 100%;
-  padding: 10px 16px;
+  padding: 8px 14px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
   border: 1px solid var(--border-soft);
   border-radius: 18px 18px 18px 4px;
