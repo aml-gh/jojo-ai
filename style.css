@@ -1058,6 +1058,14 @@ svg { display: block; }
 
 .intro-video { width: 100%; height: 100%; object-fit: cover; background: #000; }
 
+/* في الجوال - الفيديو يظهر كامل بدون قص */
+@media (max-width: 768px) {
+  .intro-video {
+    object-fit: contain !important;
+    background: #000;
+  }
+}
+
 .skip-intro-btn {
   position: absolute;
   top: 24px;
