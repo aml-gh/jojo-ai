@@ -4,10 +4,12 @@
 // ═══════════════════════════════════════════════════════════
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -17,6 +19,7 @@ app.use(function (req, res, next) {
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
   res.setHeader('Surrogate-Control', 'no-store');
+  res.setHeader('Permissions-Policy', 'microphone=*');
   next();
 });
 
@@ -89,6 +92,11 @@ p{font-size:1.1em;line-height:1.9;opacity:0.9;margin-bottom:12px}
 </div>
 </body>
 </html>`;
+
+// Health Check
+app.get('/api/health', function (req, res) {
+  res.json({ status: 'maintenance', service: 'Jojo AI' });
+});
 
 // كل الطلبات ترجع صفحة الصيانة
 app.get('*', function (req, res) {
