@@ -1615,3 +1615,505 @@ svg { display: block; }
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(232, 192, 80, 0.3) !important;
 }
+/* ═══════════════════════════════════════════════════════════ */
+/* تجاوب احترافي لجميع الشاشات */
+/* جوال - تابلت - لابتوب - شاشة كشك المطار */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* ═══ الفيديوهات: تظهر كاملة بدون قص + خلفية أخضر منسجم ═══ */
+.intro-overlay {
+  background: radial-gradient(ellipse at center, 
+    #1a5d4a 0%, 
+    #0f3a2e 50%, 
+    #082821 100%) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.intro-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 50% 50%, 
+    rgba(45, 134, 89, 0.4) 0%, 
+    rgba(26, 93, 74, 0.2) 50%, 
+    transparent 100%);
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.intro-video {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain !important;
+  background: transparent !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* ═══ الجوال (حتى 480px) ═══ */
+@media (max-width: 480px) {
+  .splash-title {
+    font-size: 1.8em !important;
+  }
+  
+  .hero-title {
+    font-size: 1.5em !important;
+  }
+  
+  .jc-jojo-stage {
+    max-width: 280px !important;
+    height: 220px !important;
+  }
+  
+  .voice-modal-content {
+    width: 95% !important;
+    max-width: 100% !important;
+    margin: 10px !important;
+  }
+}
+
+/* ═══ التابلت / iPad (768px - 1024px) ═══ */
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* عرض الصورة الثابتة بدل الفيديو */
+  .jc-jojo-video {
+    display: none !important;
+  }
+  
+  .jc-jojo-mobile {
+    display: block !important;
+    width: 100% !important;
+    max-width: 350px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+  }
+  
+  /* تكبير العناصر */
+  .splash-title {
+    font-size: 2.8em !important;
+  }
+  
+  .hero-title {
+    font-size: 2.2em !important;
+  }
+  
+  .splash-button {
+    padding: 18px 50px !important;
+    font-size: 1.2em !important;
+  }
+  
+  .content {
+    max-width: 700px !important;
+    margin: 0 auto !important;
+  }
+  
+  .lang-btn {
+    padding: 14px 24px !important;
+    font-size: 1.05em !important;
+  }
+  
+  .jc-bubble {
+    padding: 18px 22px !important;
+    font-size: 1.05em !important;
+  }
+}
+
+/* ═══ اللابتوب/الكمبيوتر (1025px - 1439px) ═══ */
+@media (min-width: 1025px) and (max-width: 1439px) {
+  .content {
+    max-width: 1100px !important;
+    margin: 0 auto !important;
+  }
+  
+  .hero-card {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 40px !important;
+  }
+  
+  .splash-title {
+    font-size: 3.5em !important;
+  }
+  
+  .hero-title {
+    font-size: 2.5em !important;
+  }
+}
+
+/* ═══ شاشات كبيرة جداً (1440px+) ═══ */
+@media (min-width: 1440px) {
+  .content {
+    max-width: 1300px !important;
+    margin: 0 auto !important;
+  }
+  
+  .splash-title {
+    font-size: 4em !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* 🪧 شاشة المطار العمودية (Kiosk) - 1080x1920 */
+/* ═══════════════════════════════════════════════════════════ */
+
+@media (min-width: 1000px) and (orientation: portrait) {
+  
+  /* إخفاء الفيديو وعرض الصورة الثابتة */
+  .jc-jojo-video {
+    display: none !important;
+  }
+  
+  .jc-jojo-mobile {
+    display: block !important;
+    width: 100% !important;
+    max-width: 600px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+  }
+  
+  /* تكبير كل النصوص للوضوح من بعيد */
+  body {
+    font-size: 22px !important;
+  }
+  
+  /* شاشة الترحيب */
+  .splash {
+    padding: 80px 60px !important;
+  }
+  
+  .logo-circle {
+    width: 280px !important;
+    height: 280px !important;
+  }
+  
+  .splash-label {
+    font-size: 1.6em !important;
+    margin: 30px 0 !important;
+  }
+  
+  .splash-title {
+    font-size: 5em !important;
+    line-height: 1.3 !important;
+    margin: 30px 0 !important;
+  }
+  
+  .splash-sub {
+    font-size: 1.8em !important;
+    margin: 25px 0 !important;
+  }
+  
+  .splash-poetry {
+    font-size: 2.2em !important;
+    gap: 25px !important;
+  }
+  
+  .splash-poetry .poetry-rose {
+    width: 80px !important;
+    height: 80px !important;
+  }
+  
+  .splash-button {
+    padding: 30px 80px !important;
+    font-size: 2em !important;
+    margin: 50px 0 !important;
+    border-radius: 100px !important;
+  }
+  
+  .splash-button svg {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  .splash-badge {
+    font-size: 1.4em !important;
+    padding: 18px 40px !important;
+    margin-top: 50px !important;
+  }
+  
+  /* الواجهة الرئيسية */
+  .top-bar {
+    padding: 40px 50px !important;
+  }
+  
+  .brand-icon img {
+    width: 90px !important;
+    height: 90px !important;
+  }
+  
+  .brand-ar {
+    font-size: 1.8em !important;
+  }
+  
+  .brand-en {
+    font-size: 1.2em !important;
+  }
+  
+  .tagline-text {
+    font-size: 1.5em !important;
+  }
+  
+  .content {
+    max-width: 950px !important;
+    padding: 30px !important;
+    gap: 40px !important;
+  }
+  
+  /* البطاقة الترحيبية */
+  .hero-card {
+    padding: 60px 50px !important;
+    border-radius: 40px !important;
+    margin-bottom: 40px !important;
+  }
+  
+  .hero-eyebrow {
+    font-size: 1.2em !important;
+    padding: 12px 24px !important;
+  }
+  
+  .hero-title {
+    font-size: 3.5em !important;
+    line-height: 1.3 !important;
+    margin: 25px 0 !important;
+  }
+  
+  .hero-desc {
+    font-size: 1.6em !important;
+    margin: 20px 0 !important;
+  }
+  
+  .hero-hint {
+    font-size: 1.2em !important;
+  }
+  
+  /* بطاقة اللغات */
+  .languages-card {
+    padding: 50px 40px !important;
+    border-radius: 35px !important;
+  }
+  
+  .card-header h3 {
+    font-size: 2em !important;
+  }
+  
+  .card-icon {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  .card-icon svg {
+    width: 30px !important;
+    height: 30px !important;
+  }
+  
+  .languages {
+    gap: 15px !important;
+    flex-wrap: wrap !important;
+  }
+  
+  .lang-btn {
+    padding: 22px 32px !important;
+    font-size: 1.4em !important;
+    border-radius: 50px !important;
+    min-width: 150px !important;
+  }
+  
+  .lang-flag {
+    font-size: 1.8em !important;
+  }
+  
+  /* بطاقة جوجو والأسئلة */
+  .jojo-conversation {
+    padding: 60px 40px !important;
+    border-radius: 40px !important;
+  }
+  
+  .jc-title {
+    font-size: 2.5em !important;
+  }
+  
+  .jc-subtitle {
+    font-size: 1.4em !important;
+    margin: 15px 0 30px !important;
+  }
+  
+  .jc-jojo-stage {
+    max-width: 700px !important;
+    height: 600px !important;
+    margin: 40px auto !important;
+  }
+  
+  .jc-status {
+    font-size: 1.3em !important;
+    padding: 15px 30px !important;
+    margin: 30px auto !important;
+  }
+  
+  .jc-status-dot {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  .jc-bubbles-label {
+    font-size: 1.3em !important;
+    margin: 30px 0 20px !important;
+  }
+  
+  .jc-bubble {
+    padding: 28px 32px !important;
+    font-size: 1.4em !important;
+    margin-bottom: 18px !important;
+    border-radius: 25px !important;
+    line-height: 1.6 !important;
+  }
+  
+  .jc-bubble-icon svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  
+  /* زر المكالمة الصوتية */
+  .voice-link-btn {
+    padding: 35px 40px !important;
+    border-radius: 35px !important;
+    margin-top: 40px !important;
+  }
+  
+  .vlb-icon-circle {
+    width: 90px !important;
+    height: 90px !important;
+  }
+  
+  .vlb-icon-circle svg {
+    width: 45px !important;
+    height: 45px !important;
+  }
+  
+  .vlb-title {
+    font-size: 1.8em !important;
+  }
+  
+  .vlb-sub {
+    font-size: 1.2em !important;
+  }
+  
+  .vlb-arrow svg {
+    width: 36px !important;
+    height: 36px !important;
+  }
+  
+  /* الفوتر */
+  .bottom-info {
+    padding: 50px 40px !important;
+  }
+  
+  .bottom-info p {
+    font-size: 1.2em !important;
+    line-height: 1.8 !important;
+  }
+  
+  .designer-credit {
+    font-size: 1.3em !important;
+    padding: 18px 40px !important;
+  }
+  
+  /* الفيديوهات في الـ Overlay */
+  .intro-overlay {
+    padding: 40px !important;
+  }
+  
+  .intro-video {
+    max-width: 100% !important;
+    max-height: 90vh !important;
+    object-fit: contain !important;
+    border-radius: 20px !important;
+  }
+  
+  /* أزرار التحكم */
+  .skip-intro-btn,
+  .back-intro-btn,
+  .mute-toggle-btn {
+    padding: 18px 28px !important;
+    font-size: 1.2em !important;
+    border-radius: 50px !important;
+  }
+  
+  .skip-intro-btn svg,
+  .back-intro-btn svg {
+    width: 24px !important;
+    height: 24px !important;
+  }
+  
+  .mute-toggle-btn svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* تحسينات الفيديو لكل الشاشات */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* خلفية ناعمة منسجمة مع الفيديو */
+#answerOverlay,
+#introOverlay {
+  background: linear-gradient(135deg, 
+    #082821 0%,
+    #0f3a2e 25%,
+    #1a5d4a 50%,
+    #0f3a2e 75%,
+    #082821 100%) !important;
+}
+
+#answerOverlay::after,
+#introOverlay::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background: radial-gradient(ellipse,
+    rgba(45, 134, 89, 0.3) 0%,
+    transparent 70%);
+  filter: blur(80px);
+  z-index: 0;
+  pointer-events: none;
+}
+
+video.intro-video,
+#answerVideo,
+#introVideo {
+  position: relative;
+  z-index: 2;
+  object-fit: contain !important;
+  width: auto !important;
+  height: auto !important;
+  max-width: 100% !important;
+  max-height: 100vh !important;
+  background: transparent !important;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* فيديو جوجو في الكارد - تحسينات */
+/* ═══════════════════════════════════════════════════════════ */
+
+.jc-jojo-video {
+  object-fit: contain !important;
+  background: transparent !important;
+}
+
+.jc-jojo-stage {
+  background: radial-gradient(circle at center,
+    rgba(45, 134, 89, 0.2) 0%,
+    rgba(26, 93, 74, 0.1) 50%,
+    transparent 100%) !important;
+  border-radius: 30px;
+  overflow: hidden;
+}
