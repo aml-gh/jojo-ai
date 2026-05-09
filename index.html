@@ -1,723 +1,268 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="جوجو - سفيرة التحول الحضري بأمانة محافظة الطائف" />
-  <meta name="theme-color" content="#0a3d2e" />
-  <title>جوجو AI | أمانة محافظة الطائف</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
-
-  <link rel="stylesheet" href="style.css" />
-
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <defs>
-      <symbol id="taif-rose" viewBox="0 0 100 100">
-        <defs>
-          <radialGradient id="petal-outer" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="#fce7eb"/>
-            <stop offset="50%" stop-color="#f4a8be"/>
-            <stop offset="100%" stop-color="#d97a96"/>
-          </radialGradient>
-          <radialGradient id="petal-mid" cx="50%" cy="40%" r="60%">
-            <stop offset="0%" stop-color="#fcd5de"/>
-            <stop offset="60%" stop-color="#ec99b5"/>
-            <stop offset="100%" stop-color="#c46b86"/>
-          </radialGradient>
-          <radialGradient id="petal-inner" cx="50%" cy="35%" r="65%">
-            <stop offset="0%" stop-color="#ffebef"/>
-            <stop offset="50%" stop-color="#f4b8c9"/>
-            <stop offset="100%" stop-color="#d889a3"/>
-          </radialGradient>
-        </defs>
-        <g transform="translate(50, 50)">
-          <g opacity="0.85">
-            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(0)"/>
-            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(45)"/>
-            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(90)"/>
-            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(135)"/>
-            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(180)"/>
-            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(225)"/>
-            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(270)"/>
-            <ellipse cx="0" cy="-32" rx="14" ry="22" fill="url(#petal-outer)" transform="rotate(315)"/>
-          </g>
-          <g opacity="0.9">
-            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(22.5)"/>
-            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(67.5)"/>
-            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(112.5)"/>
-            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(157.5)"/>
-            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(202.5)"/>
-            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(247.5)"/>
-            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(292.5)"/>
-            <ellipse cx="0" cy="-26" rx="11" ry="18" fill="url(#petal-mid)" transform="rotate(337.5)"/>
-          </g>
-          <g opacity="0.95">
-            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(0)"/>
-            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(45)"/>
-            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(90)"/>
-            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(135)"/>
-            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(180)"/>
-            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(225)"/>
-            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(270)"/>
-            <ellipse cx="0" cy="-18" rx="9" ry="14" fill="url(#petal-mid)" transform="rotate(315)"/>
-          </g>
-          <g>
-            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(30)"/>
-            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(90)"/>
-            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(150)"/>
-            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(210)"/>
-            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(270)"/>
-            <ellipse cx="0" cy="-12" rx="7" ry="11" fill="url(#petal-inner)" transform="rotate(330)"/>
-          </g>
-          <g>
-            <circle cx="0" cy="0" r="9" fill="url(#petal-inner)"/>
-            <ellipse cx="0" cy="-4" rx="6" ry="8" fill="url(#petal-inner)" transform="rotate(20)"/>
-            <ellipse cx="0" cy="-4" rx="6" ry="8" fill="url(#petal-inner)" transform="rotate(140)"/>
-            <ellipse cx="0" cy="-4" rx="6" ry="8" fill="url(#petal-inner)" transform="rotate(260)"/>
-            <circle cx="0" cy="0" r="3" fill="#fff5f7" opacity="0.7"/>
-          </g>
-        </g>
-      </symbol>
-
-      <symbol id="ornament" viewBox="0 0 100 20">
-        <defs>
-          <linearGradient id="orn-grad" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stop-color="transparent"/>
-            <stop offset="50%" stop-color="#e8c050"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </linearGradient>
-        </defs>
-        <line x1="0" y1="10" x2="35" y2="10" stroke="url(#orn-grad)" stroke-width="1"/>
-        <circle cx="42" cy="10" r="2" fill="#e8c050" opacity="0.6"/>
-        <circle cx="50" cy="10" r="3" fill="#e8c050"/>
-        <circle cx="58" cy="10" r="2" fill="#e8c050" opacity="0.6"/>
-        <line x1="65" y1="10" x2="100" y2="10" stroke="url(#orn-grad)" stroke-width="1"/>
-      </symbol>
-    </defs>
-  </svg>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0a3d2e">
+    <title>جوجو AI | تحت الصيانة - أمانة محافظة الطائف</title>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'IBM Plex Sans Arabic', 'Cairo', sans-serif;
+            background: linear-gradient(135deg, #0a3d2e 0%, #1a5d4a 50%, #2d8659 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* خلفية متحركة */
+        body::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(232, 192, 80, 0.08) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: moveBackground 25s linear infinite;
+        }
+        
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(40px, 40px); }
+        }
+        
+        /* بتلات الورد المتساقطة */
+        .petal {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            opacity: 0;
+            pointer-events: none;
+            animation: fall 15s linear infinite;
+        }
+        
+        .petal:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .petal:nth-child(2) { left: 25%; animation-delay: 3s; }
+        .petal:nth-child(3) { left: 50%; animation-delay: 6s; }
+        .petal:nth-child(4) { left: 75%; animation-delay: 9s; }
+        .petal:nth-child(5) { left: 90%; animation-delay: 12s; }
+        
+        @keyframes fall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        .container {
+            max-width: 580px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            padding: 60px 40px;
+            border: 1px solid rgba(232, 192, 80, 0.3);
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1.2s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(40px) scale(0.95); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        
+        .logo-circle {
+            width: 110px;
+            height: 110px;
+            background: linear-gradient(135deg, rgba(232, 192, 80, 0.2), rgba(232, 192, 80, 0.05));
+            border: 2px solid rgba(232, 192, 80, 0.4);
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5em;
+            animation: float 3.5s ease-in-out infinite;
+            box-shadow: 0 0 50px rgba(232, 192, 80, 0.2);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        
+        .ornament {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            opacity: 0.8;
+        }
+        
+        .ornament-line {
+            height: 1px;
+            width: 50px;
+            background: linear-gradient(90deg, transparent, #e8c050, transparent);
+        }
+        
+        .ornament-dot {
+            width: 6px;
+            height: 6px;
+            background: #e8c050;
+            border-radius: 50%;
+        }
+        
+        .label {
+            font-size: 0.95em;
+            font-weight: 500;
+            color: #e8c050;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            font-weight: 900;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #ffffff, #e8c050, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 30px;
+            color: #fce7eb;
+        }
+        
+        p {
+            font-size: 1.1em;
+            line-height: 1.9;
+            opacity: 0.9;
+            margin-bottom: 12px;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(232, 192, 80, 0.15);
+            padding: 14px 32px;
+            border-radius: 50px;
+            margin-top: 30px;
+            border: 1px solid rgba(232, 192, 80, 0.4);
+            font-weight: 700;
+            font-size: 1.05em;
+            color: #e8c050;
+        }
+        
+        .badge-dot {
+            width: 10px;
+            height: 10px;
+            background: #4caf50;
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { 
+                box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.6);
+                transform: scale(1);
+            }
+            50% { 
+                box-shadow: 0 0 0 12px rgba(76, 175, 80, 0);
+                transform: scale(1.1);
+            }
+        }
+        
+        .footer {
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85em;
+            opacity: 0.7;
+            line-height: 1.8;
+        }
+        
+        .dots span {
+            display: inline-block;
+            opacity: 0;
+            animation: dotAnimation 1.5s infinite;
+        }
+        
+        .dots span:nth-child(1) { animation-delay: 0s; }
+        .dots span:nth-child(2) { animation-delay: 0.3s; }
+        .dots span:nth-child(3) { animation-delay: 0.6s; }
+        
+        @keyframes dotAnimation {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+        
+        @media (max-width: 480px) {
+            .container { padding: 40px 25px; }
+            h1 { font-size: 1.9em; }
+            .subtitle { font-size: 1.15em; }
+            .logo-circle { width: 90px; height: 90px; font-size: 2.8em; }
+            p { font-size: 1em; }
+        }
+    </style>
 </head>
 <body>
-
-<div class="app">
-
-  <div id="introOverlay" class="intro-overlay" style="display: none;">
-    <video id="introVideo" class="intro-video" muted playsinline>
-      <source src="intro.mp4" type="video/mp4" />
-    </video>
-
-    <button id="muteToggle" class="mute-toggle-btn" type="button" aria-label="تشغيل الصوت">
-      <svg id="muteIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-        <line x1="23" y1="9" x2="17" y2="15"></line>
-        <line x1="17" y1="9" x2="23" y2="15"></line>
-      </svg>
-      <svg id="unmuteIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none">
-        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
-        <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-      </svg>
-    </button>
-
-    <button id="backFromIntro" class="back-intro-btn" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polyline points="15 18 9 12 15 6"/>
-      </svg>
-      <span>رجوع</span>
-    </button>
-
-    <button id="skipIntro" class="skip-intro-btn" type="button">
-      <span>تخطّي</span>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polyline points="9 18 15 12 9 6"/>
-      </svg>
-    </button>
-  </div>
-
-  <div id="answerOverlay" class="intro-overlay" style="display: none;">
-    <video id="answerVideo" class="intro-video" playsinline>
-      <source src="" type="video/mp4" />
-    </video>
-
-    <div id="comingSoon" class="coming-soon" style="display: none;">
-      <div class="coming-soon-icon">
-        <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12 6 12 12 16 14"/>
-        </svg>
-      </div>
-      <h3 class="coming-soon-title">قريباً</h3>
-      <p class="coming-soon-text">هذه الإجابة باللغة المختارة قيد الإعداد</p>
-      <p class="coming-soon-text-small">جرّبي اللغة العربية لتشاهدي الفيديو</p>
-      <button id="comingSoonClose" class="coming-soon-close" type="button">
-        <span>العودة</span>
-      </button>
+    <!-- بتلات ورد متساقطة -->
+    <div class="petal" style="font-size: 28px;">🌹</div>
+    <div class="petal" style="font-size: 24px;">🌹</div>
+    <div class="petal" style="font-size: 32px;">🌹</div>
+    <div class="petal" style="font-size: 26px;">🌹</div>
+    <div class="petal" style="font-size: 30px;">🌹</div>
+    
+    <div class="container">
+        <div class="logo-circle">🔧</div>
+        
+        <div class="ornament">
+            <div class="ornament-line"></div>
+            <div class="ornament-dot"></div>
+            <div class="ornament-line"></div>
+        </div>
+        
+        <p class="label">أمانة محافظة الطائف</p>
+        
+        <h1>جوجو AI</h1>
+        <p class="subtitle">الموقع تحت الصيانة</p>
+        
+        <p>نعمل حالياً على تحديث وتطوير الموقع<br>لتقديم تجربة أفضل لزوارنا الكرام</p>
+        <p style="margin-top: 18px;">شكراً لصبركم وتفهمكم 🌹</p>
+        
+        <div class="badge">
+            <span class="badge-dot"></span>
+            <span>سنعود قريباً<span class="dots"><span>.</span><span>.</span><span>.</span></span></span>
+        </div>
+        
+        <div class="footer">
+            <p>سفيرة التحول الحضري - مساعد موسم الحج الذكي</p>
+            <p style="margin-top: 8px; font-size: 0.9em;">© الإعلام المؤسسي لأمانة محافظة الطائف</p>
+        </div>
     </div>
-
-    <button id="backFromAnswer" class="back-intro-btn" type="button">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polyline points="15 18 9 12 15 6"/>
-      </svg>
-      <span>رجوع</span>
-    </button>
-
-    <button id="skipAnswer" class="skip-intro-btn" type="button">
-      <span>تخطّي</span>
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polyline points="9 18 15 12 9 6"/>
-      </svg>
-    </button>
-  </div>
-
-  <div class="cinematic-bg" aria-hidden="true">
-    <div class="aurora aurora-1"></div>
-    <div class="aurora aurora-2"></div>
-    <div class="aurora aurora-3"></div>
-    <div class="grid-pattern"></div>
-
-    <div class="petals-container" aria-hidden="true">
-      <svg class="petal p-1" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f4a8be" opacity="0.55"/></svg>
-      <svg class="petal p-2" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#fce7eb" opacity="0.5"/></svg>
-      <svg class="petal p-3" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#ec99b5" opacity="0.55"/></svg>
-      <svg class="petal p-4" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#fcd5de" opacity="0.45"/></svg>
-      <svg class="petal p-5" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#f4a8be" opacity="0.55"/></svg>
-      <svg class="petal p-6" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#fce7eb" opacity="0.5"/></svg>
-      <svg class="petal p-7" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#ec99b5" opacity="0.55"/></svg>
-      <svg class="petal p-8" viewBox="0 0 30 30"><path d="M15 5 Q22 12 22 18 Q22 25 15 25 Q8 25 8 18 Q8 12 15 5Z" fill="#fcd5de" opacity="0.45"/></svg>
-    </div>
-  </div>
-
-  <input type="checkbox" id="appStarted" class="app-toggle" />
-
-  <section class="splash">
-    <div class="splash-rays" aria-hidden="true"></div>
-
-    <div class="splash-rings" aria-hidden="true">
-      <span class="ring r1"></span>
-      <span class="ring r2"></span>
-      <span class="ring r3"></span>
-    </div>
-
-    <div class="splash-content">
-      <div class="splash-logo">
-        <div class="logo-circle">
-          <img src="logo.png" alt="شعار أمانة محافظة الطائف" class="logo-image" />
-        </div>
-        <div class="logo-glow"></div>
-      </div>
-
-      <div class="splash-text">
-        <p class="splash-label">
-          <svg class="label-ornament" viewBox="0 0 100 20"><use href="#ornament"/></svg>
-          أمانة محافظة الطائف
-          <svg class="label-ornament" viewBox="0 0 100 20"><use href="#ornament"/></svg>
-        </p>
-
-        <p class="splash-poetry">
-          <svg class="poetry-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
-          <span>موطن الورد</span>
-          <svg class="poetry-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
-        </p>
-
-        <h1 class="splash-title">
-          <span class="title-word">مرحبًا</span>
-          <span class="title-word">بك</span>
-          <span class="title-word">في</span>
-          <span class="title-word title-highlight">جوجو</span>
-        </h1>
-        <p class="splash-sub">سفيرة التحول الحضري ومساعدتك الذكية</p>
-      </div>
-
-      <label for="appStarted" class="splash-button">
-        <span class="btn-bg"></span>
-        <span class="btn-shimmer"></span>
-        <span class="btn-content">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <polygon points="6 4 20 12 6 20"/>
-          </svg>
-          <span>ابدأ التجربة</span>
-        </span>
-      </label>
-
-      <div class="splash-badge">
-        <span class="badge-dot"></span>
-        <span>مدعوم بالذكاء الاصطناعي المتقدم</span>
-      </div>
-    </div>
-  </section>
-
-  <main class="main">
-
-    <header class="top-bar">
-      <div class="brand">
-        <div class="brand-icon">
-          <img src="logo.png" alt="شعار" class="brand-logo-image" />
-        </div>
-        <div class="brand-text">
-          <p class="brand-ar">أمانة محافظة الطائف</p>
-          <p class="brand-en">Taif Municipality</p>
-        </div>
-      </div>
-
-      <div class="rose-tagline">
-        <svg class="tagline-rose" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
-        <span class="tagline-text">موطن الورد</span>
-      </div>
-    </header>
-
-    <div class="content">
-
-      <section class="hero-card">
-        <svg class="hero-rose hero-rose-1" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
-        <svg class="hero-rose hero-rose-2" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
-
-        <div class="hero-left">
-          <div class="hero-eyebrow">
-            <span class="eyebrow-dot"></span>
-            خدمة الحجاج الذكية
-          </div>
-          <h2 class="hero-title">اسأل <span class="text-gold">جوجو</span></h2>
-          <p class="hero-desc">مساعدتك التفاعلية لخدمات موسم الحج</p>
-          <p class="hero-hint">اختر اللغة ثم اضغط على السؤال أو تحدث معي مباشرة</p>
-        </div>
-
-        <div class="hero-right">
-          <div class="avatar-stage">
-            <div class="avatar-wreath" aria-hidden="true">
-              <svg class="wreath-rose wr-1" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
-              <svg class="wreath-rose wr-2" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
-              <svg class="wreath-rose wr-3" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
-              <svg class="wreath-rose wr-4" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
-            </div>
-            <div class="avatar-rings" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="avatar-orb">
-              <div class="avatar-fallback">
-                <div class="orb-core"></div>
-                <div class="orb-aura"></div>
-                <span class="orb-text">جوجو</span>
-              </div>
-            </div>
-            <div class="avatar-glow" aria-hidden="true"></div>
-          </div>
-        </div>
-      </section>
-
-      <section class="card languages-card">
-        <div class="card-header">
-          <div class="card-icon">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <line x1="2" y1="12" x2="22" y2="12"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-            </svg>
-          </div>
-          <h3>اختر اللغة</h3>
-        </div>
-
-        <div class="languages">
-          <button class="lang-btn active" type="button" data-lang="ar">
-            <span class="lang-flag">🇸🇦</span>
-            <span class="lang-name">العربية</span>
-          </button>
-          <button class="lang-btn" type="button" data-lang="en">
-            <span class="lang-flag">🇬🇧</span>
-            <span class="lang-name">English</span>
-          </button>
-          <button class="lang-btn" type="button" data-lang="fr">
-            <span class="lang-flag">🇫🇷</span>
-            <span class="lang-name">Français</span>
-          </button>
-          <button class="lang-btn" type="button" data-lang="ur">
-            <span class="lang-flag">🇵🇰</span>
-            <span class="lang-name">اردو</span>
-          </button>
-          <button class="lang-btn" type="button" data-lang="tr">
-            <span class="lang-flag">🇹🇷</span>
-            <span class="lang-name">Türkçe</span>
-          </button>
-        </div>
-      </section>
-
-      <section class="card jojo-conversation">
-
-        <div class="jc-header">
-          <div class="jc-title-line">
-            <span class="jc-line"></span>
-            <h3 class="jc-title">تحدث معي</h3>
-            <span class="jc-line"></span>
-          </div>
-          <p class="jc-subtitle">اختاري سؤالاً من المقترحات</p>
-        </div>
-
-        <div class="jc-jojo-stage">
-          <div class="jc-spotlight"></div>
-          <div class="jc-jojo-container">
-            <video class="jc-jojo-video" autoplay muted loop playsinline>
-              <source src="jojo_idle.webm" type="video/webm">
-            </video>
-            <img src="jojo.png" class="jc-jojo-mobile" alt="جوجو">
-          </div>
-          <div class="jc-jojo-platform"></div>
-        </div>
-
-        <div class="jc-status">
-          <span class="jc-status-dot"></span>
-          <span>جوجو متاحة الآن</span>
-        </div>
-
-        <div class="jc-bubbles">
-          <p class="jc-bubbles-label">اقتراحات:</p>
-
-          <button class="jc-bubble" type="button" data-question="1">
-            <span class="jc-bubble-text">ما جهود أمانة الطائف في النظافة خلال موسم الحج؟</span>
-            <span class="jc-bubble-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="15 18 9 12 15 6"/>
-              </svg>
-            </span>
-          </button>
-
-          <button class="jc-bubble" type="button" data-question="2">
-            <span class="jc-bubble-text">ما المواقع التي تخدمها أمانة الطائف خلال موسم الحج؟</span>
-            <span class="jc-bubble-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="15 18 9 12 15 6"/>
-              </svg>
-            </span>
-          </button>
-
-          <button class="jc-bubble" type="button" data-question="3">
-            <span class="jc-bubble-text">كيف تتم أعمال الإصحاح البيئي ومكافحة الحشرات؟</span>
-            <span class="jc-bubble-icon">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="15 18 9 12 15 6"/>
-              </svg>
-            </span>
-          </button>
-        </div>
-
-      </section>
-
-      <section class="voice-section">
-        <button id="openVoiceModal" type="button" class="voice-link-btn">
-          <span class="vlb-bg"></span>
-          <svg class="vlb-decor vlb-decor-right" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
-          <svg class="vlb-decor vlb-decor-left" viewBox="0 0 100 100"><use href="#taif-rose"/></svg>
-
-          <span class="vlb-content">
-            <span class="vlb-icon-circle">
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <path d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3z"/>
-                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                <line x1="12" y1="19" x2="12" y2="22"/>
-              </svg>
-            </span>
-            <span class="vlb-text">
-              <span class="vlb-title">تحدث مع جوجو مباشرة</span>
-              <span class="vlb-sub">محادثة فورية بصوت طبيعي · تدعم 7 لغات</span>
-            </span>
-            <span class="vlb-arrow">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-                <polyline points="9 18 15 12 9 6"/>
-              </svg>
-            </span>
-          </span>
-        </button>
-      </section>
-
-    </div>
-
-    <footer class="bottom-info">
-      <svg class="footer-ornament" viewBox="0 0 100 20"><use href="#ornament"/></svg>
-      <p>جميع الحقوق محفوظة © الإعلام المؤسسي لأمانة محافظة الطائف</p>
-      <svg class="footer-ornament" viewBox="0 0 100 20"><use href="#ornament"/></svg>
-      <p class="designer-credit">Designed by Eng. Amal Alghmdi</p>
-    </footer>
-
-  </main>
-
-</div>
-
-<div id="voiceModal" class="voice-modal" style="display: none;" aria-hidden="true">
-  <div class="voice-modal-backdrop"></div>
-
-  <div class="voice-modal-content">
-    <button id="closeVoiceModal" class="voice-modal-close" type="button" aria-label="إغلاق">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <line x1="18" y1="6" x2="6" y2="18"/>
-        <line x1="6" y1="6" x2="18" y2="18"/>
-      </svg>
-    </button>
-
-    <!-- الترويسة -->
-    <div class="voice-modal-header">
-      <div class="vm-status">
-        <span class="vm-status-dot"></span>
-        <span>جوجو متاحة الآن</span>
-      </div>
-
-      <!-- صورة جوجو -->
-      <div class="vm-jojo-image">
-        <img src="jojo.png" alt="جوجو" />
-      </div>
-
-      <h2 class="voice-modal-title">تحدث مع جوجو</h2>
-      <p class="voice-modal-subtitle">اضغط على زر الهاتف 📞 لبدء المحادثة الصوتية</p>
-    </div>
-
-    <div class="voice-widget-wrapper">
-      <elevenlabs-convai agent-id="agent_5301kqcwsvhxfa7aqn1sjewpd30z"></elevenlabs-convai>
-    </div>
-
-    <div class="voice-modal-footer">
-      <p>محادثة فورية بصوت طبيعي · تدعم 7 لغات</p>
-    </div>
-  </div>
-</div>
-
-<script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
-
-<script>
-(function() {
-  'use strict';
-
-  const translations = {
-    'ar': { cardTitle: 'تحدث معي', cardSubtitle: 'اختاري سؤالاً من المقترحات', statusText: 'جوجو متاحة الآن', suggestionsLabel: 'اقتراحات:', q1: 'ما جهود أمانة الطائف في النظافة خلال موسم الحج؟', q2: 'ما المواقع التي تخدمها أمانة الطائف خلال موسم الحج؟', q3: 'كيف تتم أعمال الإصحاح البيئي ومكافحة الحشرات؟', voiceTitle: 'تحدث مع جوجو مباشرة', voiceSub: 'محادثة فورية بصوت طبيعي · تدعم 7 لغات', voiceTag: 'مدعوم بالذكاء الاصطناعي المتقدم', skipBtn: 'تخطّي', backBtn: 'رجوع', comingSoonTitle: 'قريباً', comingSoonText: 'هذه الإجابة باللغة المختارة قيد الإعداد', comingSoonSmall: 'جرّبي اللغة العربية لتشاهدي الفيديو', comingSoonBtn: 'العودة' },
-    'en': { cardTitle: 'Talk to me', cardSubtitle: 'Choose a question from the suggestions', statusText: 'Jojo is available now', suggestionsLabel: 'Suggestions:', q1: 'What are Taif Municipality\'s efforts in cleanliness during Hajj season?', q2: 'What locations does Taif Municipality serve during Hajj season?', q3: 'How are environmental health and pest control activities carried out?', voiceTitle: 'Talk to Jojo directly', voiceSub: 'Instant voice conversation · Supports 7 languages', voiceTag: 'Powered by advanced AI', skipBtn: 'Skip', backBtn: 'Back', comingSoonTitle: 'Coming Soon', comingSoonText: 'This answer in the selected language is being prepared', comingSoonSmall: 'Try Arabic to see the video', comingSoonBtn: 'Back' },
-    'fr': { cardTitle: 'Parlez avec moi', cardSubtitle: 'Choisissez une question parmi les suggestions', statusText: 'Jojo est disponible maintenant', suggestionsLabel: 'Suggestions :', q1: 'Quels sont les efforts de la municipalité de Taïf en matière de propreté pendant la saison du Hajj ?', q2: 'Quels sites sont desservis par la municipalité de Taïf pendant la saison du Hajj ?', q3: 'Comment se déroulent les activités d\'assainissement et de lutte antiparasitaire ?', voiceTitle: 'Parlez avec Jojo directement', voiceSub: 'Conversation vocale instantanée · 7 langues', voiceTag: 'Propulsé par l\'IA avancée', skipBtn: 'Passer', backBtn: 'Retour', comingSoonTitle: 'Bientôt disponible', comingSoonText: 'Cette réponse dans la langue sélectionnée est en préparation', comingSoonSmall: 'Essayez l\'arabe pour voir la vidéo', comingSoonBtn: 'Retour' },
-    'ur': { cardTitle: 'مجھ سے بات کریں', cardSubtitle: 'تجاویز میں سے ایک سوال منتخب کریں', statusText: 'جوجو ابھی دستیاب ہے', suggestionsLabel: 'تجاویز:', q1: 'حج کے موسم میں طائف میونسپلٹی کی صفائی کی کوششیں کیا ہیں؟', q2: 'حج کے موسم میں طائف میونسپلٹی کن مقامات کی خدمت کرتی ہے؟', q3: 'ماحولیاتی صفائی اور کیڑے مار سرگرمیاں کیسے انجام دی جاتی ہیں؟', voiceTitle: 'جوجو سے براہ راست بات کریں', voiceSub: 'فوری آواز کی گفتگو · 7 زبانوں کی حمایت', voiceTag: 'جدید AI سے چلتا ہے', skipBtn: 'چھوڑیں', backBtn: 'واپس', comingSoonTitle: 'جلد آرہا ہے', comingSoonText: 'منتخب زبان میں یہ جواب تیار کیا جا رہا ہے', comingSoonSmall: 'ویڈیو دیکھنے کے لیے عربی آزمائیں', comingSoonBtn: 'واپس' },
-    'tr': { cardTitle: 'Benimle konuş', cardSubtitle: 'Önerilerden bir soru seçin', statusText: 'Jojo şu anda müsait', suggestionsLabel: 'Öneriler:', q1: 'Taif Belediyesi\'nin Hac mevsiminde temizlik çabaları nelerdir?', q2: 'Taif Belediyesi Hac mevsiminde hangi bölgelere hizmet veriyor?', q3: 'Çevre sağlığı ve haşere kontrol faaliyetleri nasıl yürütülüyor?', voiceTitle: 'Jojo ile doğrudan konuş', voiceSub: 'Anında sesli sohbet · 7 dili destekler', voiceTag: 'Gelişmiş yapay zeka ile çalışır', skipBtn: 'Atla', backBtn: 'Geri', comingSoonTitle: 'Yakında', comingSoonText: 'Seçili dildeki bu cevap hazırlanıyor', comingSoonSmall: 'Videoyu görmek için Arapça deneyin', comingSoonBtn: 'Geri' }
-  };
-
-  let currentLang = 'ar';
-
-  function applyTranslation(lang) {
-    const t = translations[lang] || translations['ar'];
-    const setText = (sel, txt) => { const el = document.querySelector(sel); if (el) el.textContent = txt; };
-
-    setText('.jc-title', t.cardTitle);
-    setText('.jc-subtitle', t.cardSubtitle);
-    setText('.jc-status span:last-child', t.statusText);
-    setText('.jc-bubbles-label', t.suggestionsLabel);
-    setText('[data-question="1"] .jc-bubble-text', t.q1);
-    setText('[data-question="2"] .jc-bubble-text', t.q2);
-    setText('[data-question="3"] .jc-bubble-text', t.q3);
-    setText('.vlb-title', t.voiceTitle);
-    setText('.vlb-sub', t.voiceSub);
-
-    const heroHint = document.querySelector('.hero-hint');
-    if (heroHint && lang !== 'ar') heroHint.textContent = t.voiceTag;
-
-    setText('#skipIntro span', t.skipBtn);
-    setText('#skipAnswer span', t.skipBtn);
-    setText('#backFromIntro span', t.backBtn);
-    setText('#backFromAnswer span', t.backBtn);
-    setText('.coming-soon-title', t.comingSoonTitle);
-    setText('.coming-soon-text-small', t.comingSoonSmall);
-    setText('#comingSoonClose span', t.comingSoonBtn);
-
-    const comingTexts = document.querySelectorAll('.coming-soon-text');
-    if (comingTexts[0]) comingTexts[0].textContent = t.comingSoonText;
-
-    const html = document.documentElement;
-    if (lang === 'en' || lang === 'fr' || lang === 'tr') {
-      html.setAttribute('dir', 'ltr');
-      html.setAttribute('lang', lang);
-    } else {
-      html.setAttribute('dir', 'rtl');
-      html.setAttribute('lang', lang === 'ur' ? 'ur' : 'ar');
-    }
-  }
-
-  const langButtons = document.querySelectorAll('.lang-btn');
-  langButtons.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      langButtons.forEach(function(b) { b.classList.remove('active'); });
-      btn.classList.add('active');
-      currentLang = btn.getAttribute('data-lang') || 'ar';
-      applyTranslation(currentLang);
-    });
-  });
-
-  const intro = document.getElementById('introOverlay');
-  const video = document.getElementById('introVideo');
-  const skipBtn = document.getElementById('skipIntro');
-  const backBtn = document.getElementById('backFromIntro');
-  const startCheckbox = document.getElementById('appStarted');
-  const startButton = document.querySelector('label[for="appStarted"]');
-
-  function showIntro() {
-    if (!intro || !video) return;
-    intro.style.display = 'flex';
-    intro.classList.remove('intro-fade-out');
-    video.currentTime = 0;
-    video.play().catch(function(err) { console.warn('Intro video play failed:', err); });
-  }
-
-  function hideIntroAndContinue() {
-    if (!intro) return;
-    intro.classList.add('intro-fade-out');
-    setTimeout(function() {
-      intro.style.display = 'none';
-      if (video) video.pause();
-    }, 700);
-  }
-
-  function hideIntroAndBack() {
-    if (!intro) return;
-    intro.classList.add('intro-fade-out');
-    setTimeout(function() {
-      intro.style.display = 'none';
-      intro.classList.remove('intro-fade-out');
-      if (video) video.pause();
-      if (startCheckbox) startCheckbox.checked = false;
-    }, 700);
-  }
-
-  if (startButton && startCheckbox) {
-    startButton.addEventListener('click', function(e) {
-      e.preventDefault();
-      startCheckbox.checked = true;
-      showIntro();
-    });
-  }
-
-  if (video) {
-    video.addEventListener('ended', hideIntroAndContinue);
-    video.addEventListener('error', function() {
-      console.warn('Intro video failed to load');
-      hideIntroAndContinue();
-    });
-  }
-
-  if (skipBtn) skipBtn.addEventListener('click', hideIntroAndContinue);
-  if (backBtn) backBtn.addEventListener('click', hideIntroAndBack);
-
-  const muteToggle = document.getElementById('muteToggle');
-  const muteIcon = document.getElementById('muteIcon');
-  const unmuteIcon = document.getElementById('unmuteIcon');
-
-  if (muteToggle && video) {
-    muteToggle.addEventListener('click', function() {
-      video.muted = !video.muted;
-      if (video.muted) {
-        if (muteIcon) muteIcon.style.display = '';
-        if (unmuteIcon) unmuteIcon.style.display = 'none';
-        muteToggle.setAttribute('aria-label', 'تشغيل الصوت');
-      } else {
-        if (muteIcon) muteIcon.style.display = 'none';
-        if (unmuteIcon) unmuteIcon.style.display = '';
-        muteToggle.setAttribute('aria-label', 'كتم الصوت');
-      }
-    });
-  }
-
-  const answerOverlay = document.getElementById('answerOverlay');
-  const answerVideo = document.getElementById('answerVideo');
-  const answerSource = answerVideo ? answerVideo.querySelector('source') : null;
-  const skipAnswerBtn = document.getElementById('skipAnswer');
-  const backAnswerBtn = document.getElementById('backFromAnswer');
-  const comingSoon = document.getElementById('comingSoon');
-  const comingSoonClose = document.getElementById('comingSoonClose');
-
-  const availableVideos = { 'ar': [1, 2, 3], 'en': [1, 2, 3], 'fr': [1, 2, 3], 'ur': [1, 2, 3], 'tr': [1, 2, 3] };
-
-  function showAnswerVideo(questionNum) {
-    if (!answerOverlay) return;
-    const langVideos = availableVideos[currentLang] || [];
-    const questionNumInt = parseInt(questionNum);
-    if (langVideos.indexOf(questionNumInt) === -1) { showComingSoon(); return; }
-    const videoSrc = currentLang + '_q' + questionNum + '.mp4';
-    if (answerSource && answerVideo) {
-      answerSource.setAttribute('src', videoSrc);
-      answerVideo.load();
-      answerOverlay.style.display = 'flex';
-      answerOverlay.classList.remove('intro-fade-out');
-      if (comingSoon) comingSoon.style.display = 'none';
-      answerVideo.currentTime = 0;
-      answerVideo.play().catch(function(err) {
-        console.warn('Answer video play failed:', err);
-        showComingSoon();
-      });
-    }
-  }
-
-  function showComingSoon() {
-    if (!answerOverlay || !comingSoon) return;
-    answerOverlay.style.display = 'flex';
-    answerOverlay.classList.remove('intro-fade-out');
-    comingSoon.style.display = 'flex';
-    if (answerVideo) answerVideo.style.display = 'none';
-    if (skipAnswerBtn) skipAnswerBtn.style.display = 'none';
-  }
-
-  function hideAnswer() {
-    if (!answerOverlay) return;
-    answerOverlay.classList.add('intro-fade-out');
-    setTimeout(function() {
-      answerOverlay.style.display = 'none';
-      answerOverlay.classList.remove('intro-fade-out');
-      if (answerVideo) { answerVideo.pause(); answerVideo.style.display = ''; }
-      if (comingSoon) comingSoon.style.display = 'none';
-      if (skipAnswerBtn) skipAnswerBtn.style.display = '';
-    }, 700);
-  }
-
-  const questionButtons = document.querySelectorAll('.jc-bubble');
-  questionButtons.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      const questionNum = btn.getAttribute('data-question');
-      if (questionNum) showAnswerVideo(questionNum);
-    });
-  });
-
-  if (answerVideo) {
-    answerVideo.addEventListener('ended', hideAnswer);
-    answerVideo.addEventListener('error', function() {
-      console.warn('Answer video failed to load');
-      showComingSoon();
-    });
-  }
-
-  if (skipAnswerBtn) skipAnswerBtn.addEventListener('click', hideAnswer);
-  if (backAnswerBtn) backAnswerBtn.addEventListener('click', hideAnswer);
-  if (comingSoonClose) comingSoonClose.addEventListener('click', hideAnswer);
-
-  const voiceModal = document.getElementById('voiceModal');
-  const openVoiceModalBtn = document.getElementById('openVoiceModal');
-  const closeVoiceModalBtn = document.getElementById('closeVoiceModal');
-  const voiceModalBackdrop = voiceModal ? voiceModal.querySelector('.voice-modal-backdrop') : null;
-
-  function openVoiceModal() {
-    if (!voiceModal) return;
-    voiceModal.style.display = 'flex';
-    voiceModal.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    setTimeout(function() { voiceModal.classList.add('voice-modal-open'); }, 10);
-  }
-
-  function closeVoiceModal() {
-    if (!voiceModal) return;
-    voiceModal.classList.remove('voice-modal-open');
-    setTimeout(function() {
-      voiceModal.style.display = 'none';
-      voiceModal.setAttribute('aria-hidden', 'true');
-      document.body.style.overflow = '';
-    }, 400);
-  }
-
-  if (openVoiceModalBtn) openVoiceModalBtn.addEventListener('click', openVoiceModal);
-  if (closeVoiceModalBtn) closeVoiceModalBtn.addEventListener('click', closeVoiceModal);
-  if (voiceModalBackdrop) voiceModalBackdrop.addEventListener('click', closeVoiceModal);
-
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape' && voiceModal && voiceModal.style.display === 'flex') closeVoiceModal();
-  });
-})();
-</script>
-
 </body>
 </html>
