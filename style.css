@@ -1615,3 +1615,361 @@ svg { display: block; }
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(232, 192, 80, 0.3) !important;
 }
+
+/* ═══════════════════════════════════════════════════════════ */
+/* 🪧 شاشة المطار العمودية (Kiosk Display) */
+/* تفعّل تلقائياً للشاشات العمودية الكبيرة 1080x1920+ */
+/* لا تؤثر على الجوال أو iPad أو اللابتوب */
+/* ═══════════════════════════════════════════════════════════ */
+
+@media (min-width: 1000px) and (orientation: portrait) {
+  
+  /* عرض صورة جوجو الثابتة بدل الفيديو */
+  .jc-jojo-video {
+    display: none !important;
+  }
+  
+  .jc-jojo-mobile {
+    display: block !important;
+    position: relative;
+    width: 100% !important;
+    max-width: 600px !important;
+    height: auto !important;
+    margin: 0 auto !important;
+    object-fit: contain;
+    transform: none !important;
+    filter:
+      drop-shadow(0 20px 30px rgba(232, 192, 80, 0.35))
+      drop-shadow(0 8px 16px rgba(0, 0, 0, 0.3));
+    animation: jojo-float-kiosk 4s ease-in-out infinite;
+  }
+  
+  @keyframes jojo-float-kiosk {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(-12px); }
+  }
+  
+  /* تكبير الخط الأساسي */
+  body {
+    font-size: 22px !important;
+  }
+  
+  /* ═══ شاشة الترحيب (Splash) ═══ */
+  .splash {
+    padding: 80px 60px !important;
+  }
+  
+  .splash-logo {
+    width: 280px !important;
+    height: 280px !important;
+    margin-bottom: 40px !important;
+  }
+  
+  .splash-label {
+    font-size: 1.4em !important;
+    margin-bottom: 25px !important;
+  }
+  
+  .splash-poetry {
+    font-size: 2em !important;
+    gap: 20px !important;
+    margin-bottom: 30px !important;
+  }
+  
+  .poetry-rose {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  
+  .splash-title {
+    font-size: 5em !important;
+    line-height: 1.3 !important;
+    margin-bottom: 25px !important;
+  }
+  
+  .splash-sub {
+    font-size: 1.6em !important;
+  }
+  
+  .splash-button {
+    padding: 28px 70px !important;
+    font-size: 1.5em !important;
+    margin-bottom: 50px !important;
+  }
+  
+  .splash-button svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  
+  .splash-badge {
+    font-size: 1.2em !important;
+    padding: 12px 30px !important;
+  }
+  
+  /* ═══ الواجهة الرئيسية ═══ */
+  .main {
+    padding: 30px 40px !important;
+  }
+  
+  .top-bar {
+    padding: 25px 35px !important;
+    margin-bottom: 30px !important;
+  }
+  
+  .brand-icon {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  
+  .brand-text .brand-ar {
+    font-size: 1.5em !important;
+  }
+  
+  .brand-text .brand-en {
+    font-size: 1em !important;
+  }
+  
+  .rose-tagline {
+    padding: 12px 25px !important;
+  }
+  
+  .tagline-rose {
+    width: 35px !important;
+    height: 35px !important;
+  }
+  
+  .tagline-text {
+    font-size: 1.3em !important;
+  }
+  
+  /* ═══ المحتوى الرئيسي ═══ */
+  .content {
+    grid-template-columns: 1fr !important;
+    max-width: 950px !important;
+    gap: 30px !important;
+  }
+  
+  /* بطاقة الترحيب */
+  .hero-card {
+    grid-template-columns: 1fr !important;
+    text-align: center !important;
+    padding: 50px 40px !important;
+    gap: 30px !important;
+  }
+  
+  .hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .hero-right {
+    order: -1;
+  }
+  
+  .avatar-stage {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  
+  .avatar-orb {
+    width: 150px !important;
+    height: 150px !important;
+  }
+  
+  .hero-eyebrow {
+    font-size: 1.1em !important;
+    padding: 10px 22px !important;
+  }
+  
+  .hero-title {
+    font-size: 3em !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .hero-desc {
+    font-size: 1.4em !important;
+    margin-bottom: 10px !important;
+  }
+  
+  .hero-hint {
+    font-size: 1.1em !important;
+  }
+  
+  /* بطاقة اللغات */
+  .languages-card,
+  .jojo-conversation,
+  .voice-section {
+    grid-column: 1 / -1 !important;
+  }
+  
+  .languages-card {
+    padding: 35px 30px !important;
+  }
+  
+  .card-icon {
+    width: 55px !important;
+    height: 55px !important;
+  }
+  
+  .card-icon svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  
+  .card-header h3 {
+    font-size: 1.8em !important;
+  }
+  
+  .languages {
+    gap: 15px !important;
+  }
+  
+  .lang-btn {
+    padding: 16px 28px !important;
+    font-size: 1.2em !important;
+  }
+  
+  .lang-flag {
+    font-size: 1.5em !important;
+  }
+  
+  /* بطاقة جوجو */
+  .jojo-conversation {
+    padding: 40px 35px !important;
+  }
+  
+  .jc-title {
+    font-size: 2.5em !important;
+  }
+  
+  .jc-subtitle {
+    font-size: 1.3em !important;
+  }
+  
+  .jc-line {
+    width: 80px !important;
+  }
+  
+  .jc-jojo-stage {
+    max-width: 600px !important;
+    height: 500px !important;
+    margin: 30px auto !important;
+  }
+  
+  .jc-status {
+    font-size: 1.2em !important;
+    padding: 12px 28px !important;
+  }
+  
+  .jc-bubbles-label {
+    font-size: 1.1em !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .jc-bubble {
+    padding: 22px 30px !important;
+    font-size: 1.3em !important;
+  }
+  
+  .jc-bubble-icon {
+    width: 45px !important;
+    height: 45px !important;
+  }
+  
+  .jc-bubble-icon svg {
+    width: 22px !important;
+    height: 22px !important;
+  }
+  
+  /* زر المكالمة الصوتية */
+  .voice-link-btn {
+    padding: 28px 35px !important;
+  }
+  
+  .vlb-icon-circle {
+    width: 70px !important;
+    height: 70px !important;
+  }
+  
+  .vlb-icon-circle svg {
+    width: 38px !important;
+    height: 38px !important;
+  }
+  
+  .vlb-title {
+    font-size: 1.6em !important;
+  }
+  
+  .vlb-sub {
+    font-size: 1.1em !important;
+  }
+  
+  .vlb-arrow svg {
+    width: 32px !important;
+    height: 32px !important;
+  }
+  
+  /* الفوتر */
+  .bottom-info {
+    font-size: 1.1em !important;
+    margin-top: 30px !important;
+  }
+  
+  .footer-ornament {
+    width: 60px !important;
+  }
+  
+  /* ═══ الفيديوهات: تظهر كاملة بدون قص + خلفية خضراء ═══ */
+  .intro-overlay {
+    background: linear-gradient(135deg, 
+      #082821 0%, 
+      #0f3a2e 25%, 
+      #1a5d4a 50%, 
+      #0f3a2e 75%, 
+      #082821 100%) !important;
+  }
+  
+  .intro-overlay::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    background: radial-gradient(ellipse,
+      rgba(45, 134, 89, 0.3) 0%,
+      transparent 70%);
+    filter: blur(80px);
+    z-index: 0;
+    pointer-events: none;
+  }
+  
+  .intro-video {
+    object-fit: contain !important;
+    background: transparent !important;
+    max-width: 100% !important;
+    max-height: 90vh !important;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* أزرار التحكم في الفيديو */
+  .skip-intro-btn,
+  .back-intro-btn {
+    padding: 16px 28px !important;
+    font-size: 1.2em !important;
+  }
+  
+  .mute-toggle-btn {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  .mute-toggle-btn svg {
+    width: 28px !important;
+    height: 28px !important;
+  }
+}
