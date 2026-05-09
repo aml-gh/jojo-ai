@@ -1535,3 +1535,57 @@ svg { display: block; }
   .coming-soon-title { font-size: 28px; }
   .coming-soon-text { font-size: 14px; }
 }
+/* ═══════════════════════════════════════════════════════════ */
+/* iPad - عرض الصورة الثابتة بدل الفيديو المتحرك */
+/* ═══════════════════════════════════════════════════════════ */
+
+/* أجهزة iPad وتابلت */
+@media only screen and (min-width: 768px) and (max-width: 1366px) {
+  .jc-jojo-video {
+    display: none !important;
+  }
+  
+  .jc-jojo-mobile {
+    display: block !important;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    margin: 0 auto;
+    object-fit: contain;
+  }
+}
+
+/* iPad تحديداً - استهداف بأجهزة Apple */
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) {
+  .jc-jojo-video {
+    display: none !important;
+  }
+  
+  .jc-jojo-mobile {
+    display: block !important;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    margin: 0 auto;
+  }
+}
+
+/* iPad Pro */
+@media only screen 
+  and (min-device-width: 1024px) 
+  and (max-device-width: 1366px) 
+  and (-webkit-min-device-pixel-ratio: 2) {
+  .jc-jojo-video {
+    display: none !important;
+  }
+  
+  .jc-jojo-mobile {
+    display: block !important;
+    width: 100%;
+    max-width: 380px;
+    height: auto;
+    margin: 0 auto;
+  }
+}
