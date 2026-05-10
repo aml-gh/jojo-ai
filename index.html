@@ -733,6 +733,78 @@
     if (e.key === 'Escape' && voiceModal && voiceModal.style.display === 'flex') closeVoiceModal();
   });
 })();
+  // ═══════════════════════════════════════════════════════════
+  // إدارة ذكية للفيديوهات - إيقاف غير الظاهرة لتوفير الأداء
+  // ═══════════════════════════════════════════════════════════
+  
+  function pauseHiddenVideos() {
+    const allVideos = document.querySelectorAll('video');
+    allVideos.forEach(function(video) {
+      const rect = video.getBoundingClientRect();
+      const isVisible = (
+        rect.width > 0 && 
+        rect.height > 0 && 
+        video.offsetParent !== null
+      );
+      
+      // إيقاف الفيديو لو مخفي
+      if (!isVisible && !video.paused) {
+        video.pause();
+      }
+    });
+  }
+  
+  // إيقاف فيديو جوجو الخلفي لما المستخدم يشغّل فيديو إجابة
+  function pauseBackgroundVideo() {
+    const jojoIdle = document.querySelector('.jc-jojo-video');
+    if (jojoIdle && !jojoIdle.paused) {
+      jojoIdle.pause();
+    }
+  }
+  
+  // تشغيل فيديو جوجو الخلفي لما يرجع المستخدم للصفحة الرئيسية
+  function resumeBackgroundVideo() {
+    const jojoIdle = document.querySelector('.jc-jojo-video');
+    if (jojoIdle && jojoIdle.paused) {
+      // التأكد إن جوجو الخلفية ظاهرة قبل التشغيل
+      const rect = jojoIdle.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        jojoIdle.play().catch(function(err) {
+          console.warn('Background video resume failed:', err);
+        });
+      }
+    }
+  }
+  
+  // ربط الأحداث - لما يفتح فيديو الترحيب
+  if (video) {
+    video.addEventListener('play', pauseBackgroundVideo);
+  }
+  
+  // ربط الأحداث - لما يفتح فيديو الإجابات
+  if (answerVideo) {
+    answerVideo.addEventListener('play', pauseBackgroundVideo);
+    answerVideo.addEventListener('ended', resumeBackgroundVideo);
+    answerVideo.addEventListener('pause', function() {
+      // لو المستخدم رجع للصفحة الرئيسية
+      if (answerOverlay && answerOverlay.style.display === 'none') {
+        resumeBackgroundVideo();
+      }
+    });
+  }
+  
+  // ربط الحدث - لما ينتهي فيديو الترحيب أو يقفل
+  if (video) {
+    video.addEventListener('ended', resumeBackgroundVideo);
+    video.addEventListener('pause', function() {
+      if (intro && intro.style.display === 'none') {
+        resumeBackgroundVideo();
+      }
+    });
+  }
+  
+  // فحص دوري كل 2 ثانية للتأكد من إيقاف الفيديوهات المخفية
+  setInterval(pauseHiddenVideos, 2000);
 </script>
 
 </body>
