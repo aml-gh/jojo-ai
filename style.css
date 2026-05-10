@@ -288,31 +288,51 @@ svg { display: block; }
 .footer-ornament { width: 40px; height: 8px; opacity: 0.5; }
 .bottom-info p { margin: 0; }
 
+/* ═══════════════════════════════════════════════════════════ */
+/* بطاقة المصممة - أنيقة وراقية لكل الشاشات */
+/* ═══════════════════════════════════════════════════════════ */
+
 .designer-credit {
   display: inline-block;
-  margin-top: 12px;
-  padding: 10px 24px;
-  background: linear-gradient(135deg, rgba(232, 192, 80, 0.15), rgba(244, 168, 190, 0.1), rgba(232, 192, 80, 0.15));
-  border: 1.2px solid rgba(232, 192, 80, 0.4);
+  margin-top: 8px;
+  padding: 6px 18px;
+  background: transparent;
+  border: 1px solid rgba(232, 192, 80, 0.25);
   border-radius: 50px;
-  color: #f7e08a;
-  font-size: 12px;
-  font-weight: 600;
+  color: rgba(232, 192, 80, 0.7);
+  font-size: 10px;
+  font-weight: 400;
   letter-spacing: 0.5px;
   font-family: 'Cairo', 'IBM Plex Sans Arabic', sans-serif;
   text-align: center;
   direction: rtl;
-  box-shadow: 0 4px 16px rgba(232, 192, 80, 0.2);
   transition: all 0.3s ease;
 }
 
 .designer-credit:hover {
-  background: linear-gradient(135deg, rgba(232, 192, 80, 0.25), rgba(244, 168, 190, 0.18), rgba(232, 192, 80, 0.25));
-  border-color: rgba(232, 192, 80, 0.7);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(232, 192, 80, 0.3);
+  border-color: rgba(232, 192, 80, 0.5);
+  color: rgba(232, 192, 80, 0.9);
 }
 
+/* في الجوال - صغيرة جداً */
+@media (max-width: 768px) {
+  .designer-credit {
+    font-size: 9px;
+    padding: 5px 14px;
+    margin-top: 6px;
+  }
+}
+
+/* في شاشة المطار - أنيقة بدون مبالغة */
+@media (min-width: 1000px) and (orientation: portrait) {
+  .designer-credit {
+    font-size: 12px !important;
+    padding: 8px 22px !important;
+    margin-top: 12px !important;
+    letter-spacing: 0.8px !important;
+    border-color: rgba(232, 192, 80, 0.3) !important;
+  }
+}
 .petals-container { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 1; }
 .petal { position: absolute; width: 24px; height: 24px; top: -30px; filter: blur(0.3px); animation: petal-fall linear infinite; }
 .petal.p-1 { left: 8%; animation-duration: 18s; animation-delay: 0s; width: 22px; height: 22px; }
