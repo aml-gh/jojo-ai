@@ -98,14 +98,23 @@
       </symbol>
     </defs>
   </svg>
+  <!-- ═══════════════════════════════════════════════════════════ -->
+<!-- Preload الفيديوهات في الخلفية لتشغيل أسرع -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<link rel="preload" as="video" href="intro.mp4" type="video/mp4">
+<link rel="preload" as="video" href="ar_q1.mp4" type="video/mp4">
+<link rel="preload" as="video" href="ar_q2.mp4" type="video/mp4">
+<link rel="preload" as="video" href="ar_q3.mp4" type="video/mp4">
+<link rel="preload" as="image" href="jojo.png">
+<link rel="preload" as="image" href="logo.png">
 </head>
 <body>
 
 <div class="app">
 
   <div id="introOverlay" class="intro-overlay" style="display: none;">
-    <video id="introVideo" class="intro-video" muted playsinline>
-      <source src="intro.mp4" type="video/mp4" />
+<video id="introVideo" class="intro-video" muted playsinline preload="auto">
+  <source src="intro.mp4" type="video/mp4" />
     </video>
 
     <button id="muteToggle" class="mute-toggle-btn" type="button" aria-label="تشغيل الصوت">
@@ -136,8 +145,8 @@
   </div>
 
   <div id="answerOverlay" class="intro-overlay" style="display: none;">
-    <video id="answerVideo" class="intro-video" playsinline>
-      <source src="" type="video/mp4" />
+<video id="answerVideo" class="intro-video" playsinline preload="auto">
+  <source src="" type="video/mp4" />
     </video>
 
     <div id="comingSoon" class="coming-soon" style="display: none;">
